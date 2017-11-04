@@ -22,26 +22,26 @@ Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 
 #pragma endregion
 
-#pragma region Misc
+#pragma region MathFunctions
 
-float Vector3::Length() {
+float Vector3::Length() const {
 	return sqrtf(x * x + y * y + z * z);
 }
 
-float Vector3::LengthSquared() {
+float Vector3::LengthSquared() const {
 	return x * x + y * y + z * z;
 }
 
-float Vector3::LengthFast() {
+float Vector3::LengthFast() const {
 	return 1 / InvSqrt(x * x + y * y + z * z);
 }
 
-Vector3 Vector3::Normalized() {
+Vector3 Vector3::Normalized() const {
 	float scale = 1.0f / Length();
 	return Vector3(x / scale, y / scale, z / scale);
 }
 
-Vector3 Vector3::NormalizedFast() {
+Vector3 Vector3::NormalizedFast() const {
 	float scale = 1.0f / LengthFast();
 	return Vector3(x / scale, y / scale, z / scale);
 }
@@ -80,19 +80,19 @@ std::ostream& operator<<(std::ostream& ostream, const Vector3& vector) {
 #pragma region Operators
 
 Vector3 Vector3::operator+(const Vector3& other) const {
-	return Add(other);
+	return Vector3(x + other.x, y + other.y, z + other.z);
 }
 
 Vector3 Vector3::operator-(const Vector3& other) const {
-	return Subtact(other);
+	return Vector3(x - other.x, y - other.y, z - other.z);
 }
 
 Vector3 Vector3::operator*(const Vector3& other) const {
-	return Multiply(other);
+	return Vector3(x * other.x, y * other.y, z * other.z);
 }
 
 Vector3 Vector3::operator/(const Vector3& other) const {
-	return Divide(other);
+	return Vector3(x / other.x, y / other.y, z / other.z);
 }
 
 Vector3 Vector3::operator+=(const Vector3& other) {
@@ -123,36 +123,20 @@ Vector3 Vector3::operator/=(const Vector3& other) {
 	return *this;
 }
 
-Vector3 Vector3::Add(const Vector3& other) const {
-	return Vector3(x + other.x, y + other.y, z + other.z);
-}
-
-Vector3 Vector3::Subtact(const Vector3& other) const {
-	return Vector3(x - other.x, y - other.y, z - other.z);
-}
-
-Vector3 Vector3::Multiply(const Vector3& other) const {
-	return Vector3(x * other.x, y * other.y, z * other.z);
-}
-
-Vector3 Vector3::Divide(const Vector3& other) const {
-	return Vector3(x / other.x, y / other.y, z / other.z);
-}
-
 Vector3 Vector3::operator+(const float other) const {
-	return Add(other);
+	return Vector3(x + other, y + other, z + other);
 }
 
 Vector3 Vector3::operator-(const float other) const {
-	return Subtact(other);
+	return Vector3(x - other, y - other, z - other);
 }
 
 Vector3 Vector3::operator*(const float other) const {
-	return Multiply(other);
+	return Vector3(x * other, y * other, z * other);
 }
 
 Vector3 Vector3::operator/(const float other) const {
-	return Divide(other);
+	return Vector3(x / other, y / other, z / other);
 }
 
 Vector3 Vector3::operator+=(const float other) {
@@ -183,20 +167,24 @@ Vector3 Vector3::operator/=(const float other) {
 	return *this;
 }
 
-Vector3 Vector3::Add(const float other) const {
-	return Vector3(x + other, y + other, z + other);
+Vector3 Vector3::operator-() const {
+	return Vector3(-x, -y, -z);
 }
 
-Vector3 Vector3::Subtact(const float other) const {
-	return Vector3(x - other, y - other, z - other);
+Vector3 operator+(const float right, const Vector3& left) {
+	return left + right;
 }
 
-Vector3 Vector3::Multiply(const float other) const {
-	return Vector3(x * other, y * other, z * other);
+Vector3 operator-(const float right, const Vector3& left) {
+	return left - right;
 }
 
-Vector3 Vector3::Divide(const float other) const {
-	return Vector3(x / other, y / other, z / other);
+Vector3 operator*(const float right, const Vector3& left) {
+	return left + right;
+}
+
+Vector3 operator/(const float right, const Vector3& left) {
+	return left + right;
 }
 
 bool Vector3::operator==(const Vector3 & other) const {

@@ -21,34 +21,34 @@ Vector2::Vector2(float x, float y) : x(x), y(y) {}
 
 #pragma endregion
 
-#pragma region Misc
+#pragma region MathFunctions
 
-float Vector2::Length() {
+float Vector2::Length() const {
 	return sqrtf(x * x + y * y);
 }
 
-float Vector2::LengthSquared() {
+float Vector2::LengthSquared() const {
 	return x * x + y * y;
 }
 
-float Vector2::LengthFast() {
+float Vector2::LengthFast() const {
 	return 1 / InvSqrt(x * x + y * y);
 }
 
-Vector2 Vector2::NormalRight() {
+Vector2 Vector2::NormalRight() const {
 	return Vector2(x, -y);
 }
 
-Vector2 Vector2::NormalLeft() {
+Vector2 Vector2::NormalLeft() const {
 	return Vector2(-x, y);
 }
 
-Vector2 Vector2::Normalized() {
+Vector2 Vector2::Normalized() const {
 	float scale = 1.0f / Length();
 	return Vector2(x / scale, y / scale);
 }
 
-Vector2 Vector2::NormalizedFast() {
+Vector2 Vector2::NormalizedFast() const {
 	float scale = 1.0f / LengthFast();
 	return Vector2(x / scale, y / scale);
 }
@@ -82,19 +82,19 @@ std::ostream& operator<<(std::ostream& ostream, const Vector2& vector) {
 #pragma region Operators
 
 Vector2 Vector2::operator+(const Vector2& other) const {
-	return Add(other);
+	return Vector2(x + other.x, y + other.y);
 }
 
 Vector2 Vector2::operator-(const Vector2& other) const {
-	return Subtact(other);
+	return Vector2(x - other.x, y - other.y);
 }
 
 Vector2 Vector2::operator*(const Vector2& other) const {
-	return Multiply(other);
+	return Vector2(x * other.x, y * other.y);
 }
 
 Vector2 Vector2::operator/(const Vector2& other) const {
-	return Divide(other);
+	return Vector2(x / other.x, y / other.y);
 }
 
 Vector2 Vector2::operator+=(const Vector2& other) {
@@ -121,36 +121,20 @@ Vector2 Vector2::operator/=(const Vector2& other) {
 	return *this;
 }
 
-Vector2 Vector2::Add(const Vector2& other) const {
-	return Vector2(x + other.x, y + other.y);
-}
-
-Vector2 Vector2::Subtact(const Vector2& other) const {
-	return Vector2(x - other.x, y - other.y);
-}
-
-Vector2 Vector2::Multiply(const Vector2& other) const {
-	return Vector2(x * other.x, y * other.y);
-}
-
-Vector2 Vector2::Divide(const Vector2& other) const {
-	return Vector2(x / other.x, y / other.y);
-}
-
 Vector2 Vector2::operator+(const float other) const {
-	return Add(other);
+	return Vector2(x + other, y + other);
 }
 
 Vector2 Vector2::operator-(const float other) const {
-	return Subtact(other);
+	return Vector2(x - other, y - other);
 }
 
 Vector2 Vector2::operator*(const float other) const {
-	return Multiply(other);
+	return Vector2(x * other, y * other);
 }
 
 Vector2 Vector2::operator/(const float other) const {
-	return Divide(other);
+	return Vector2(x / other, y / other);
 }
 
 Vector2 Vector2::operator+=(const float other) {
@@ -177,20 +161,24 @@ Vector2 Vector2::operator/=(const float other) {
 	return *this;
 }
 
-Vector2 Vector2::Add(const float other) const {
-	return Vector2(x + other, y + other);
+Vector2 Vector2::operator-() const {
+	return Vector2(-x, -y);
 }
 
-Vector2 Vector2::Subtact(const float other) const {
-	return Vector2(x - other, y - other);
+Vector2 operator+(const float right, const Vector2& left) {
+	return left + right;
 }
 
-Vector2 Vector2::Multiply(const float other) const {
-	return Vector2(x * other, y * other);
+Vector2 operator-(const float right, const Vector2& left) {
+	return left - right;
 }
 
-Vector2 Vector2::Divide(const float other) const {
-	return Vector2(x / other, y / other);
+Vector2 operator*(const float right, const Vector2& left) {
+	return left + right;
+}
+
+Vector2 operator/(const float right, const Vector2& left) {
+	return left + right;
 }
 
 bool Vector2::operator==(const Vector2 & other) const {
