@@ -9,83 +9,113 @@ const Quaternion Quaternion::Identity = Vector4(0, 0, 0, 1);
 
 #pragma region Constructors
 
-Quaternion::Quaternion(float x, float y, float z, float w) : xyz(Vector3(x, y, z)), w(w) {}
+Quaternion::Quaternion(float x, float y, float z, float w) : xyzw(Vector4(x, y, z, w)) {}
 
-Quaternion::Quaternion(Vector3 xyz, float w) : xyz(xyz), w(w) {}
+Quaternion::Quaternion(Vector3 xyz, float w) : xyzw(Vector4(xyz.x, xyz.y, xyz.z, w)) {}
 
-Quaternion::Quaternion(Vector4 xyzw) : xyz(Vector3(xyzw.x, xyzw.y, xyzw.z)), w(xyzw.w) {}
+Quaternion::Quaternion(Vector4 xyzw) : xyzw(xyzw) {}
 
 #pragma endregion
 
 #pragma region Misc
 
+float& Quaternion::x() {
+	return xyzw.x;
+}
+
+float& Quaternion::y() {
+	return xyzw.y;
+}
+
+float& Quaternion::z() {
+	return xyzw.z;
+}
+
+float& Quaternion::w() {
+	return xyzw.w;
+}
+
+const float& Quaternion::x() const {
+	return xyzw.x;
+}
+
+const float& Quaternion::y() const {
+	return xyzw.y;
+}
+
+const float& Quaternion::z() const {
+	return xyzw.z;
+}
+
+const float& Quaternion::w() const {
+	return xyzw.w;
+}
+
+Vector3& Quaternion::Xyz() {
+	return xyzw.Xyz();
+}
+
+const Vector3& Quaternion::Xyz() const {
+	return xyzw.Xyz();
+}
+
 float Quaternion::Length() const {
-	return sqrtf(w * w + xyz.LengthSquared());
+	return xyzw.Length();
 }
 
 float Quaternion::LengthSquared() const {
-	return w * w + xyz.LengthSquared();
+	return xyzw.LengthSquared();
 }
 
 float Quaternion::LengthFast() const {
-	return 1 / InvSqrt(w * w + xyz.LengthSquared());
+	return xyzw.LengthFast();
 }
 
 Quaternion Quaternion::Normalized() const {
-	float scale = 1.0f / Length();
-	return Quaternion(xyz / scale, w / scale);
+	return Quaternion(xyzw.Normalized());
 }
 
 Quaternion Quaternion::NormalizedFast() const {
-	float scale = 1.0f / LengthFast();
-	return Quaternion(xyz / scale, w / scale);
+	return Quaternion(xyzw.NormalizedFast());
 }
 
 void Quaternion::Normalize() {
-	float scale = 1.0f / Length();
-	xyz /= scale;
-	w /= scale;
+	xyzw.Normalize();
 }
 
 void Quaternion::NormalizeFast() {
-	float scale = 1.0f / LengthFast();
-	xyz /= scale;
-	w /= scale;
-}
-
-void Quaternion::Invert() {
-	w = -w;
+	xyzw.NormalizeFast();
 }
 
 Quaternion Quaternion::Inverted() const {
-	return Quaternion(xyz, -w);
+	return Quaternion(x(), y(), z(), -w());
 }
 
-void Quaternion::Conjugate() {
-	xyz = -xyz;
+void Quaternion::Invert() {
+	w() = -w();
 }
 
 Quaternion Quaternion::Conjugated() const {
-	return Quaternion(-xyz, w);
+	return Quaternion(-x(), -y(), -z(), w());
+}
+
+void Quaternion::Conjugate() {
+	xyzw.Xyz() = -xyzw.Xyz(); //TODO: No ref
 }
 
 Vector4 Quaternion::ToAxisAngle() const {
 	Quaternion q = *this;
-	if (q.w > 1) {
+	if (q.w() > 1) {
 		q.Normalize();
 	}
 
 	Vector4 result;
-	result.w = 2 * acos(q.w);
-	float den = sqrt(1 - q.w * q.w);
+	result.w = 2 * acos(q.w());
+	float den = sqrt(1 - q.w() * q.w());
 	if (den > 0.0001f) {
-		result.x = q.xyz.x / den;
-		result.y = q.xyz.y / den;
-		result.z = q.xyz.z / den;
+		result.Xyz() = q.Xyz() / den; //TODO: No ref
 	} else {
-		result.x = 1;
-		result.y = 0;
-		result.z = 0;
+		result.Xyz() = Vector3::UnitX; //TODO: No ref
 	}
 
 	return result;
@@ -95,71 +125,74 @@ Vector4 Quaternion::ToAxisAngle() const {
 
 #pragma region Operators
 
-Quaternion Quaternion::operator+(const Quaternion & other) const {
-	return Quaternion(xyz + other.xyz, w + other.w);
+Quaternion Quaternion::operator+(const Quaternion& other) const {
+	return Quaternion(xyzw + other.xyzw);
 }
 
-Quaternion Quaternion::operator-(const Quaternion & other) const {
-	return Quaternion(xyz - other.xyz, w - other.w);
+Quaternion Quaternion::operator-(const Quaternion& other) const {
+	return Quaternion(xyzw - other.xyzw);
 }
 
-Quaternion Quaternion::operator*(const Quaternion & other) const {
-	return Quaternion(other.w * xyz + w * other.xyz + xyz.Cross(other.xyz), w * other.w - xyz.Dot(other.xyz));
+Quaternion Quaternion::operator*(const Quaternion& other) const {
+	Vector3 xyz = Vector3(xyzw.x, xyzw.y, xyzw.z);
+	Vector3 otherXyz = Vector3(other.xyzw.x, other.xyzw.y, other.xyzw.z);
+
+	return Quaternion(other.w() * xyz + w() * otherXyz + xyz.Cross(otherXyz), w() * other.w() - xyz.Dot(otherXyz));
 }
 
-Quaternion Quaternion::operator+=(const Quaternion & other) {
-	xyz += other.xyz;
-	w += other.w;
+Quaternion Quaternion::operator+=(const Quaternion& other) {
+	xyzw += other.xyzw;
 	return *this;
 }
 
-Quaternion Quaternion::operator-=(const Quaternion & other) {
-	xyz -= other.xyz;
-	w -= other.w;
+Quaternion Quaternion::operator-=(const Quaternion& other) {
+	xyzw -= xyzw;
 	return *this;
 }
 
-Quaternion Quaternion::operator*=(const Quaternion & other) {
-	xyz = other.w * xyz + w * other.xyz + xyz.Cross(other.xyz);
-	w = w * other.w - xyz.Dot(other.xyz);
+Quaternion Quaternion::operator*=(const Quaternion& other) {
+	Vector3 xyz = Vector3(xyzw.x, xyzw.y, xyzw.z);
+	Vector3 otherXyz = Vector3(other.xyzw.x, other.xyzw.y, other.xyzw.z);
+
+	Xyz() = other.w() * xyz + w() * otherXyz + xyz.Cross(otherXyz); //TODO: No ref
+	w() = w() * other.w() - xyz.Dot(otherXyz);
 	return *this;
 }
 
 Quaternion Quaternion::operator*(const float other) {
-	return Quaternion(xyz * other, w * other);
+	return Quaternion(xyzw * other);
 }
 
 Quaternion Quaternion::operator*=(const float other) {
-	xyz *= other;
-	w *= other;
+	xyzw *= other;
 	return *this;
 }
 
-bool Quaternion::operator==(const Quaternion & other) const {
+bool Quaternion::operator==(const Quaternion& other) const {
 	return Equals(other);
 }
 
-bool Quaternion::operator!=(const Quaternion & other) const {
+bool Quaternion::operator!=(const Quaternion& other) const {
 	return !Equals(other);
 }
 
-bool Quaternion::Equals(const Quaternion & other) const {
-	return xyz == other.xyz && w == other.w;
+bool Quaternion::Equals(const Quaternion& other) const {
+	return xyzw == other.xyzw;
 }
 
 #pragma endregion
 
 #pragma region Static
 
-Quaternion Quaternion::FromAxisAngle(const Vector3 & axis, const float angle) {
-	if (axis.LengthSquared == 0) {
+Quaternion Quaternion::FromAxisAngle(const Vector3& axis, const float angle) {
+	if (axis.LengthSquared() == 0) {
 		return Identity;
 	}
 
 	return Quaternion(axis.Normalized() * sin(angle / 2), cos(angle / 2));
 }
 
-Quaternion Quaternion::FromAxisAngle(const Vector4 & axisAngle) {
+Quaternion Quaternion::FromAxisAngle(const Vector4& axisAngle) {
 	return FromAxisAngle(Vector3(axisAngle.x, axisAngle.y, axisAngle.z), axisAngle.w);
 }
 
@@ -178,8 +211,18 @@ Quaternion Quaternion::FromEulerAngles(const float pitch, const float yaw, const
 		c1 * c2 * c3 - s1 * s2 * s3);
 }
 
-Quaternion Quaternion::FromEulerAngles(const Vector3 & eulerAngles) {
+Quaternion Quaternion::FromEulerAngles(const Vector3& eulerAngles) {
 	return FromEulerAngles(eulerAngles.x, eulerAngles.y, eulerAngles.z);
 }
 
 #pragma endregion
+
+int main() {
+	Quaternion q = Quaternion::FromEulerAngles(45, 45, 0);
+	Quaternion q2 = Quaternion::FromEulerAngles(5, 5, 0);
+
+	q.Xyz().x = 1;
+	//q *= q2;
+
+	system("PAUSE");
+}

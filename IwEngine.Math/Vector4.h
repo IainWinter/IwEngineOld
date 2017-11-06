@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "Vector3.h"
 
 struct Vector4 {
 	float x, y, z, w;
@@ -9,6 +10,7 @@ struct Vector4 {
 	Vector4();
 	Vector4(float xyzw);
 	Vector4(float x, float y, float z, float w);
+	Vector3 Xyz() const;
 	float Length() const;
 	float LengthSquared() const;
 	float LengthFast() const;
