@@ -25,10 +25,6 @@ Vector4::Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
 #pragma region MathFunctions
 
-Vector3 Vector4::Xyz() const {
-	return Vector3(x, y, z);
-}
-
 float Vector4::Length() const {
 	return sqrtf(x * x + y * y + z * z + w * w);
 }

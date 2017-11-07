@@ -4,22 +4,13 @@
 #include "Vector4.h"
 
 struct Quaternion {
-	Vector4 xyzw;
+	float x, y, z, w;
 	static const Quaternion Identity;
 
 	Quaternion(float x, float y, float z, float w);
 	Quaternion(Vector3 xyz, float w);
 	Quaternion(Vector4 xyzw);
-	float& x();
-	float& y();
-	float& z();
-	float& w();
-	const float& x() const;
-	const float& y() const;
-	const float& z() const;
-	const float& w() const;
-	Vector3& Xyz();
-	const Vector3& Xyz() const;
+	Vector4 Xyzw() const;
 	float Length() const;
 	float LengthSquared() const;
 	float LengthFast() const;
@@ -32,6 +23,7 @@ struct Quaternion {
 	Quaternion Conjugated() const;
 	void Conjugate();
 	Vector4 ToAxisAngle() const;
+	Vector3 ToEulerAngles() const;
 	Quaternion operator+(const Quaternion& other) const;
 	Quaternion operator-(const Quaternion& other) const;
 	Quaternion operator*(const Quaternion& other) const;
@@ -49,3 +41,4 @@ struct Quaternion {
 	static Quaternion FromEulerAngles(const Vector3& eulerAngles);
 };
 
+Quaternion operator*(const float left, const Quaternion& right);
