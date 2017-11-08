@@ -20,7 +20,7 @@ Quaternion::Quaternion(Vector4 xyzw) : x(xyzw.x), y(xyzw.y), z(xyzw.z), w(xyzw.w
 
 #pragma endregion
 
-#pragma region Misc
+#pragma region MathFunctions
 
 Vector4 Quaternion::Xyzw() const {
 	return Vector4(x, y, z, w);
@@ -220,6 +220,10 @@ Quaternion Quaternion::FromEulerAngles(const Vector3& eulerAngles) {
 }
 
 #pragma endregion
+
+std::ostream & operator<<(std::ostream & ostream, const Quaternion & quaternion) {
+	return ostream << "(" << quaternion.x << ", " << quaternion.y << ", " << quaternion.z << ", " << quaternion.w << ")";
+}
 
 Quaternion operator*(const float left, const Quaternion& right) {
 	return right * left;

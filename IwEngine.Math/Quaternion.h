@@ -41,4 +41,5 @@ struct Quaternion {
 	static Quaternion FromEulerAngles(const Vector3& eulerAngles);
 };
 
+std::ostream& operator<<(std::ostream &strm, const Quaternion &a);
 Quaternion operator*(const float left, const Quaternion& right);
