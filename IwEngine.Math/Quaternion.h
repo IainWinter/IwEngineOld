@@ -30,7 +30,7 @@ struct Quaternion {
 	Quaternion operator+=(const Quaternion& other);
 	Quaternion operator-=(const Quaternion& other);
 	Quaternion operator*=(const Quaternion& other);
-	Quaternion operator*(const float other);
+	Quaternion operator*(const float other) const;
 	Quaternion operator*=(const float other);
 	bool operator==(const Quaternion& other) const;
 	bool operator!=(const Quaternion& other) const;

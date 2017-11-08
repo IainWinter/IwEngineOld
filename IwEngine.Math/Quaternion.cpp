@@ -1,6 +1,9 @@
 #include "Quaternion.h"
 #include "MathHelper.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 #pragma region Constants
 
 const Quaternion Quaternion::Identity = Vector4(0, 0, 0, 1);
@@ -102,21 +105,19 @@ Vector4 Quaternion::ToAxisAngle() const {
 Vector3 Quaternion::ToEulerAngles() const {
 	Vector3 out;
 
-	// roll (x-axis rotation)
-	double sinr = +2.0 * (w * x + y * z);
-	double cosr = +1.0 - 2.0 * (x * x + y * y);
+	float sinr = 2.0f * (w * x + y * z);
+	float cosr = 1.0f - 2.0f * (x * x + y * y);
 	out.x = atan2(sinr, cosr);
 
-	// pitch (y-axis rotation)
-	double sinp = +2.0 * (w * y - z * x);
-	if (fabs(sinp) >= 1)
-		out.y = copysign(3.14159 / 2, sinp); // use 90 degrees if out of range
-	else
+	float sinp = 2.0f * (w * y - z * x);
+	if (fabs(sinp) >= 1) {
+		out.y = copysignf(M_PI / 2, sinp);
+	} else {
 		out.y = asin(sinp);
+	}
 
-	// yaw (z-axis rotation)
-	double siny = +2.0 * (w * z + x * y);
-	double cosy = +1.0 - 2.0 * (y * y + z * z);
+	float siny = 2.0f * (w * z + x * y);
+	float cosy = 1.0f - 2.0f * (y * y + z * z);
 	out.z = atan2(siny, cosy);
 
 	return out;
@@ -154,7 +155,7 @@ Quaternion Quaternion::operator*=(const Quaternion& other) {
 	return *this = other * (*this);
 }
 
-Quaternion Quaternion::operator*(const float other) {
+Quaternion Quaternion::operator*(const float other) const {
 	return Quaternion(x * other, y * other, z * other, w * other);
 }
 
@@ -171,9 +172,9 @@ bool Quaternion::operator!=(const Quaternion& other) const {
 }
 
 bool Quaternion::Equals(const Quaternion& other) const {
-	return x == other.x 
-		&& y == other.y 
-		&& z == other.z 
+	return x == other.x
+		&& y == other.y
+		&& z == other.z
 		&& w == other.w;
 }
 
@@ -186,7 +187,9 @@ Quaternion Quaternion::FromAxisAngle(const Vector3& axis, const float angle) {
 		return Identity;
 	}
 
-	return Quaternion(axis.Normalized() * sin(angle / 2), cos(angle / 2));
+	float a = angle / 2;
+
+	return Quaternion(axis.Normalized() * sin(a), cos(a));
 }
 
 Quaternion Quaternion::FromAxisAngle(const Vector4& axisAngle) {
@@ -194,21 +197,22 @@ Quaternion Quaternion::FromAxisAngle(const Vector4& axisAngle) {
 }
 
 Quaternion Quaternion::FromEulerAngles(const float pitch, const float yaw, const float roll) {
-	Quaternion q(0, 0, 0, 0);
-	// Abbreviations for the various angular functions
-	float cy = cos(yaw * 0.5);
-	float sy = sin(yaw * 0.5);
-	float cr = cos(roll * 0.5);
-	float sr = sin(roll * 0.5);
-	float cp = cos(pitch * 0.5);
-	float sp = sin(pitch * 0.5);
+	float p = pitch / 2;
+	float y = yaw / 2;
+	float r = roll / 2;
 
-	q.w = cy * cr * cp + sy * sr * sp;
-	q.x = cy * sr * cp - sy * cr * sp;
-	q.y = cy * cr * sp + sy * sr * cp;
-	q.z = sy * cr * cp - cy * sr * sp;
+	float cr = cos(r);
+	float sr = sin(r);
+	float cp = cos(p);
+	float sp = sin(p);
+	float cy = cos(y);
+	float sy = sin(y);
 
-	return q;
+	return Quaternion(
+		cr * sp * cy - sr * cp * sy,
+		cr * cp * sy + sr * sp * cy,
+		sr * cp * cy - cr * sp * sy,
+		cr * cp * cy + sr * sp * sy);
 }
 
 Quaternion Quaternion::FromEulerAngles(const Vector3& eulerAngles) {
@@ -217,11 +221,6 @@ Quaternion Quaternion::FromEulerAngles(const Vector3& eulerAngles) {
 
 #pragma endregion
 
-int main() {
-	Quaternion q = Quaternion::FromEulerAngles(0.3f, 0, 0.9f);
-	Vector3 v = q.ToEulerAngles();
-}
-
-Quaternion operator*(const float left, const Quaternion & right) {
-	return left * right;
+Quaternion operator*(const float left, const Quaternion& right) {
+	return right * left;
 }

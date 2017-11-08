@@ -67,10 +67,6 @@ float Vector4::Dot(const Vector4 & other) const {
 	return x * other.x + y * other.y + z * other.z + w * other.w;
 }
 
-std::ostream& operator<<(std::ostream& ostream, const Vector4& vector) {
-	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ")";
-}
-
 #pragma endregion
 
 #pragma region Operators
@@ -175,6 +171,25 @@ Vector4 Vector4::operator-() const {
 	return Vector4(-x, -y, -z, -w);
 }
 
+bool Vector4::operator==(const Vector4 & other) const {
+	return Equals(other);
+}
+
+bool Vector4::operator!=(const Vector4 & other) const {
+	return !Equals(other);
+}
+
+bool Vector4::Equals(const Vector4 & other) const {
+	return x == other.x && y == other.y && z == other.z && w == other.w;
+}
+
+#pragma endregion
+
+
+std::ostream& operator<<(std::ostream& ostream, const Vector4& vector) {
+	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ")";
+}
+
 Vector4 operator+(const float right, const Vector4& left) {
 	return left + right;
 }
@@ -190,17 +205,3 @@ Vector4 operator*(const float right, const Vector4& left) {
 Vector4 operator/(const float right, const Vector4& left) {
 	return left + right;
 }
-
-bool Vector4::operator==(const Vector4 & other) const {
-	return Equals(other);
-}
-
-bool Vector4::operator!=(const Vector4 & other) const {
-	return !Equals(other);
-}
-
-bool Vector4::Equals(const Vector4 & other) const {
-	return x == other.x && y == other.y && z == other.z && w == other.w;
-}
-
-#pragma endregion
