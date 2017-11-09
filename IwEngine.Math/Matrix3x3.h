@@ -24,6 +24,7 @@ struct Matrix3x3 {
 	Matrix3x3 ClearedRotation() const;
 	Vector3 ExtractScale() const;
 	Quaternion ExtractRotation() const;
+	float& operator()(int row, int col);
 	float& m000();
 	float& m001();
 	float& m002();

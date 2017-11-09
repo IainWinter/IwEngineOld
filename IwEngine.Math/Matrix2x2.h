@@ -18,6 +18,7 @@ struct Matrix2x2 {
 	Matrix2x2 Inverted() const;
 	void Normalize();
 	Matrix2x2 Normalized() const;
+	float& operator()(int row, int col);
 	float& m00();
 	float& m01();
 	float& m10();

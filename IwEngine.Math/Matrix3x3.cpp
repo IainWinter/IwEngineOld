@@ -1,4 +1,5 @@
 #include "Matrix3x3.h"
+#include "Matrix2x2.h"
 
 #pragma region Constants
 
@@ -58,28 +59,147 @@ Matrix3x3 Matrix3x3::Transposed() const {
 }
 
 void Matrix3x3::Invert() {
+	Matrix3x3 tmp = Matrix3x3::Zero;
+
+	for (short i = 0; i < 3; i++) {
+		for (short j = 0; j < 3; j++) {
+			short t1c = (j + 1) % 3;
+			short t1r = (i + 1) % 3;
+			short t2c = (j + 2) % 3;
+			short t2r = (i + 2) % 3;
+
+			float m11 = operator()(t1r, t1c);
+			float m21 = operator()(t2r, t1c);
+			float m12 = operator()(t1r, t2c);
+			float m22 = operator()(t2r, t2c);
+
+			t1c = t1c == 0 ? 0 : t1c - 1;
+			t1r = t1r == 0 ? 0 : t1r - 1;
+			if (t2c - 1 != t1c) {
+				t2c = t2c == 0 ? 0 : t2c - 1;
+			}
+
+			if (t2r - 1 != t1r) {
+				t2r = t2r == 0 ? 0 : t2r - 1;
+			}
+
+			Matrix2x2 m = Matrix2x2::Zero;
+
+			m(t1r, t1c) = m11;
+			m(t2r, t1c) = m21;
+			m(t1r, t2c) = m12;
+			m(t2r, t2c) = m22;
+
+			float det = m.Determinant();
+
+			tmp(i, j) = det;
+		}
+	}
+
+	tmp(0, 1) *= -1;
+	tmp(1, 0) *= -1;
+	tmp(1, 2) *= -1;
+	tmp(2, 1) *= -1;
+
+	tmp.Transpose();
+	tmp.Normalize();
+
+	*this = tmp;
+}
+
+int main() {
+	Matrix3x3 m(
+		3, 0,  2,
+		2, 0, -2,
+		0, 1,  1
+	);
+
+	m.Invert();
 }
 
 Matrix3x3 Matrix3x3::Inverted() const {
-	return Matrix3x3();
+	Matrix3x3 tmp = *this;
+	tmp.Invert();
+
+	return tmp;
 }
 
 void Matrix3x3::Normalize() {
+	float det = Determinant();
+	*this /= det;
 }
 
 Matrix3x3 Matrix3x3::Normalized() const {
-	return Matrix3x3();
+	float det = Determinant();
+	return *this / det;
 }
 
 void Matrix3x3::ClearRotation() {
 }
 
+float& Matrix3x3::operator()(int row, int col) {
+	if (row == 0) {
+		if (col == 0) return row0.x;
+		if (col == 1) return row0.y;
+		if (col == 2) return row0.z;
+	}
+
+	if (row == 1) {
+		if (col == 0) return row1.x;
+		if (col == 1) return row1.y;
+		if (col == 2) return row1.z;
+	}
+
+	if (row == 2) {
+		if (col == 0) return row2.x;
+		if (col == 1) return row2.y;
+		if (col == 2) return row2.z;
+	}
+
+	throw std::out_of_range("Row/Col is outside the bounds of this maxtrix.");
+}
+
+
 #pragma endregion
 
 #pragma region Operators
+
+Matrix3x3 Matrix3x3::operator/(const float other) const {
+	return Matrix3x3(
+		row0 / other,
+		row1 / other,
+		row2 / other
+	);
+}
+
+Matrix3x3 Matrix3x3::operator/=(const float other) {
+	return *this = other / (*this);
+}
+
+
 
 #pragma endregion
 
 #pragma region Static
 
 #pragma endregion
+
+std::ostream& operator<<(std::ostream & ostream, const Matrix3x3 & a) {
+	return ostream << a.row0 << std::endl << a.row1 << std::endl << a.row2;
+}
+
+//Matrix3x3 operator+(const float left, const Matrix3x3 & right) {
+//	return right + left;
+//}
+//
+//Matrix3x3 operator-(const float left, const Matrix3x3 & right) {
+//	return right - left;
+//}
+//
+//Matrix3x3 operator*(const float left, const Matrix3x3 & right) {
+//	return right * left;
+//}
+
+Matrix3x3 operator/(const float left, const Matrix3x3 & right) {
+	return right / left;
+}

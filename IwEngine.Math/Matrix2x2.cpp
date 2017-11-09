@@ -69,6 +69,20 @@ Matrix2x2 Matrix2x2::Normalized() const {
 	return *this / det;
 }
 
+float& Matrix2x2::operator()(int row, int col) {
+	if (row == 0) {
+		if (col == 0) return row0.x;
+		if (col == 1) return row0.y;
+	}
+
+	if (row == 1) {
+		if (col == 0) return row1.x;
+		if (col == 1) return row1.y;
+	}
+
+	throw std::out_of_range("Row/Col is outside the bounds of this maxtrix.");
+}
+
 float& Matrix2x2::m00() {
 	return row0.x;
 }
