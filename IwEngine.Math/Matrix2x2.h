@@ -6,12 +6,18 @@ struct Matrix2x2 {
 	Vector2 row0, row1;
 	static const Matrix2x2 Zero, Identity;
 
-	Matrix2x2(float m00, float m01, float m10, float m11);
+	Matrix2x2(
+		float m00, float m01, 
+		float m10, float m11);
 	Matrix2x2(Vector2 row0, Vector2 row1);
 	float Determinant() const;
 	float Trace() const;
 	void Transpose();
+	Matrix2x2 Transposed() const;
 	void Invert();
+	Matrix2x2 Inverted() const;
+	void Normalize();
+	Matrix2x2 Normalized() const;
 	float& m00();
 	float& m01();
 	float& m10();
@@ -25,9 +31,11 @@ struct Matrix2x2 {
 	Matrix2x2 operator+(const float other) const;
 	Matrix2x2 operator-(const float other) const;
 	Matrix2x2 operator*(const float other) const;
+	Matrix2x2 operator/(const float other) const;
 	Matrix2x2 operator+=(const float other);
 	Matrix2x2 operator-=(const float other);
 	Matrix2x2 operator*=(const float other);
+	Matrix2x2 operator/=(const float other);
 	Matrix2x2 operator-() const;
 	bool operator==(const Matrix2x2& other) const;
 	bool operator!=(const Matrix2x2& other) const;

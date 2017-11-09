@@ -26,48 +26,68 @@ float Matrix2x2::Trace() const {
 }
 
 void Matrix2x2::Transpose() {
-	row0.y = row1.x;
-	row1.x = row0.y;
+	Matrix2x2 tmp = *this;
+	row0.y = tmp.row1.x;
+	row1.x = tmp.row0.y;
+}
+
+Matrix2x2 Matrix2x2::Transposed() const {
+	return Matrix2x2(
+		row0.x, row1.x,
+		row0.y, row1.y);
 }
 
 void Matrix2x2::Invert() {
 	float det = Determinant();
 	if (det == 0) {
-
+		throw "Matrix cannot be inverted because it is singular.";
 	}
 
 	float invDet = 1.0f / det;
 
-	row0.x = row1.y * invDet;
-	row0.y = -row0.y * invDet;
-	row1.x = -row1.x * invDet;
-	row1.y = row0.x * invDet;
+	Matrix2x2 tmp = *this;
+	row0.x = tmp.row1.y * invDet;
+	row0.y = -tmp.row0.y * invDet;
+	row1.x = -tmp.row1.x * invDet;
+	row1.y = tmp.row0.x * invDet;
+}
+
+Matrix2x2 Matrix2x2::Inverted() const {
+	Matrix2x2 m = *this;
+	m.Invert();
+
+	return m;
+}
+
+void Matrix2x2::Normalize() {
+	float det = Determinant();
+	*this /= det;
+}
+
+Matrix2x2 Matrix2x2::Normalized() const {
+	float det = Determinant();
+	return *this / det;
 }
 
 float& Matrix2x2::m00() {
-	float& ref = row0.x;
-	return ref;
+	return row0.x;
 }
 
 float& Matrix2x2::m01() {
-	float& ref = row0.y;
-	return ref;
+	return row0.y;
 }
 
 float& Matrix2x2::m10() {
-	float& ref = row1.x;
-	return ref;
+	return row1.x;
 }
 
 float& Matrix2x2::m11() {
-	float& ref = row1.y;
-	return ref;
+	return row1.y;
 }
 
 #pragma endregion
 
 #pragma region Operators
-
 
 Matrix2x2 Matrix2x2::operator+(const Matrix2x2 & other) const {
 	return Matrix2x2(
@@ -141,6 +161,15 @@ Matrix2x2 Matrix2x2::operator*(const float other) const {
 	);
 }
 
+Matrix2x2 Matrix2x2::operator/(const float other) const {
+	return Matrix2x2(
+		row0.x / other,
+		row0.y / other,
+		row1.x / other,
+		row1.y / other
+	);
+}
+
 Matrix2x2 Matrix2x2::operator+=(const float other) {
 	return *this = other + (*this);
 }
@@ -151,6 +180,10 @@ Matrix2x2 Matrix2x2::operator-=(const float other) {
 
 Matrix2x2 Matrix2x2::operator*=(const float other) {
 	return *this = other * (*this);
+}
+
+Matrix2x2 Matrix2x2::operator/=(const float other) {
+	return *this = other / (*this);
 }
 
 Matrix2x2 Matrix2x2::operator-() const {
@@ -170,3 +203,50 @@ bool Matrix2x2::Equals(const Matrix2x2 & other) const {
 }
 
 #pragma endregion
+
+#pragma region Static
+
+Matrix2x2 Matrix2x2::CreateRoatation(float angle) {
+	float cos = cosf(angle);
+	float sin = sinf(angle);
+
+	return Matrix2x2(
+		cos, sin, 
+	   -sin, cos);
+}
+
+Matrix2x2 Matrix2x2::CreateScale(float scale) {
+	return CreateScale(scale, scale);
+}
+
+Matrix2x2 Matrix2x2::CreateScale(float x, float y) {
+	return Matrix2x2(
+		x, 0,
+		0, y);
+}
+
+Matrix2x2 Matrix2x2::CreateScale(Vector2 scale) {
+	return CreateScale(scale.x, scale.y);
+}
+
+#pragma endregion
+
+std::ostream& operator<<(std::ostream & ostream, const Matrix2x2 & a) {
+	return ostream << a.row0 << std::endl << a.row1;
+}
+
+Matrix2x2 operator+(const float left, const Matrix2x2 & right) {
+	return right + left;
+}
+
+Matrix2x2 operator-(const float left, const Matrix2x2 & right) {
+	return right - left;
+}
+
+Matrix2x2 operator*(const float left, const Matrix2x2 & right) {
+	return right * left;
+}
+
+Matrix2x2 operator/(const float left, const Matrix2x2 & right) {
+	return right / left;
+}
