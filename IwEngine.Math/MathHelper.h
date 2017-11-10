@@ -1,3 +1,4 @@
 #pragma once
-
-float InvSqrt(float x);
+namespace IwMath {
+	float InvSqrt(float x);
+}

@@ -1,5 +1,7 @@
 #include "Matrix2x2.h"
 
+using namespace IwMath;
+
 #pragma region Constants
 
 const Matrix2x2 Matrix2x2::Zero = Matrix2x2(Vector2::Zero, Vector2::Zero);
@@ -230,22 +232,22 @@ Matrix2x2 Matrix2x2::CreateScale(float x, float y) {
 
 #pragma endregion
 
-std::ostream& operator<<(std::ostream & ostream, const Matrix2x2 & a) {
+std::ostream& IwMath::operator<<(std::ostream & ostream, const Matrix2x2 & a) {
 	return ostream << a.row0 << std::endl << a.row1;
 }
 
-Matrix2x2 operator+(const float left, const Matrix2x2 & right) {
+Matrix2x2 IwMath::operator+(const float left, const Matrix2x2 & right) {
 	return right + left;
 }
 
-Matrix2x2 operator-(const float left, const Matrix2x2 & right) {
+Matrix2x2 IwMath::operator-(const float left, const Matrix2x2 & right) {
 	return right - left;
 }
 
-Matrix2x2 operator*(const float left, const Matrix2x2 & right) {
+Matrix2x2 IwMath::operator*(const float left, const Matrix2x2 & right) {
 	return right * left;
 }
 
-Matrix2x2 operator/(const float left, const Matrix2x2 & right) {
+Matrix2x2 IwMath::operator/(const float left, const Matrix2x2 & right) {
 	return right / left;
 }

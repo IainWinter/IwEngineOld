@@ -1,8 +1,9 @@
 #include "Quaternion.h"
 #include "MathHelper.h"
-
 #define _USE_MATH_DEFINES
 #include <math.h>
+
+using namespace IwMath;
 
 #pragma region Constants
 
@@ -221,10 +222,10 @@ Quaternion Quaternion::FromEulerAngles(const Vector3& eulerAngles) {
 
 #pragma endregion
 
-std::ostream & operator<<(std::ostream & ostream, const Quaternion & quaternion) {
+std::ostream & IwMath::operator<<(std::ostream & ostream, const Quaternion & quaternion) {
 	return ostream << "(" << quaternion.x << ", " << quaternion.y << ", " << quaternion.z << ", " << quaternion.w << ")";
 }
 
-Quaternion operator*(const float left, const Quaternion& right) {
+Quaternion IwMath::operator*(const float left, const Quaternion& right) {
 	return right * left;
 }

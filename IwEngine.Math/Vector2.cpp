@@ -2,6 +2,8 @@
 #include "MathHelper.h"
 #include <cmath>
 
+using namespace IwMath;
+
 #pragma region Constants
 
 const Vector2 Vector2::Zero = Vector2(0, 0);
@@ -71,10 +73,6 @@ float Vector2::Dot(const Vector2 & other) const {
 
 float Vector2::CrossLength(const Vector2 & other) const {
 	return x * other.y - y * other.x;
-}
-
-std::ostream& operator<<(std::ostream& ostream, const Vector2& vector) {
-	return ostream << "(" << vector.x << ", " << vector.y << ")";
 }
 
 #pragma endregion
@@ -165,22 +163,6 @@ Vector2 Vector2::operator-() const {
 	return Vector2(-x, -y);
 }
 
-Vector2 operator+(const float right, const Vector2& left) {
-	return left + right;
-}
-
-Vector2 operator-(const float right, const Vector2& left) {
-	return left - right;
-}
-
-Vector2 operator*(const float right, const Vector2& left) {
-	return left + right;
-}
-
-Vector2 operator/(const float right, const Vector2& left) {
-	return left + right;
-}
-
 bool Vector2::operator==(const Vector2 & other) const {
 	return Equals(other);
 }
@@ -194,3 +176,23 @@ bool Vector2::Equals(const Vector2 & other) const {
 }
 
 #pragma endregion
+
+std::ostream& IwMath::operator<<(std::ostream& ostream, const Vector2& vector) {
+	return ostream << "(" << vector.x << ", " << vector.y << ")";
+}
+
+Vector2 IwMath::operator+(const float right, const Vector2& left) {
+	return left + right;
+}
+
+Vector2 IwMath::operator-(const float right, const Vector2& left) {
+	return left - right;
+}
+
+Vector2 IwMath::operator*(const float right, const Vector2& left) {
+	return left + right;
+}
+
+Vector2 IwMath::operator/(const float right, const Vector2& left) {
+	return left + right;
+}

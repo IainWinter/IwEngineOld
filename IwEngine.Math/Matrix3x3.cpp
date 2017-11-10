@@ -1,6 +1,8 @@
 #include "Matrix3x3.h"
 #include "Matrix2x2.h"
 
+using namespace IwMath;
+
 #pragma region Constants
 
 const Matrix3x3 Matrix3x3::Zero = Matrix3x3(Vector3::Zero, Vector3::Zero, Vector3::Zero);
@@ -464,22 +466,22 @@ Matrix3x3 Matrix3x3::CreateScale(float x, float y, float z) {
 
 #pragma endregion
 
-std::ostream& operator<<(std::ostream & ostream, const Matrix3x3 & a) {
+std::ostream& IwMath::operator<<(std::ostream & ostream, const Matrix3x3 & a) {
 	return ostream << a.row0 << std::endl << a.row1 << std::endl << a.row2;
 }
 
-Matrix3x3 operator+(const float left, const Matrix3x3 & right) {
+Matrix3x3 IwMath::operator+(const float left, const Matrix3x3 & right) {
 	return right + left;
 }
 
-Matrix3x3 operator-(const float left, const Matrix3x3 & right) {
+Matrix3x3 IwMath::operator-(const float left, const Matrix3x3 & right) {
 	return right - left;
 }
 
-Matrix3x3 operator*(const float left, const Matrix3x3 & right) {
+Matrix3x3 IwMath::operator*(const float left, const Matrix3x3 & right) {
 	return right * left;
 }
 
-Matrix3x3 operator/(const float left, const Matrix3x3 & right) {
+Matrix3x3 IwMath::operator/(const float left, const Matrix3x3 & right) {
 	return right / left;
 }

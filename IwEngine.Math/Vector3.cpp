@@ -2,6 +2,8 @@
 #include "MathHelper.h"
 #include <cmath>
 
+using namespace IwMath;
+
 #pragma region Constants
 
 const Vector3 Vector3::Zero = Vector3(0, 0,  0);
@@ -69,10 +71,6 @@ Vector3 Vector3::Cross(const Vector3 & other) const {
 		y * other.z - z * other.y,
 		z * other.x - x * other.z,
 		x * other.y - y * other.x);
-}
-
-std::ostream& operator<<(std::ostream& ostream, const Vector3& vector) {
-	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")";
 }
 
 #pragma endregion
@@ -171,22 +169,6 @@ Vector3 Vector3::operator-() const {
 	return Vector3(-x, -y, -z);
 }
 
-Vector3 operator+(const float right, const Vector3& left) {
-	return left + right;
-}
-
-Vector3 operator-(const float right, const Vector3& left) {
-	return left - right;
-}
-
-Vector3 operator*(const float right, const Vector3& left) {
-	return left + right;
-}
-
-Vector3 operator/(const float right, const Vector3& left) {
-	return left + right;
-}
-
 bool Vector3::operator==(const Vector3 & other) const {
 	return Equals(other);
 }
@@ -200,3 +182,23 @@ bool Vector3::Equals(const Vector3 & other) const {
 }
 
 #pragma endregion
+
+std::ostream& IwMath::operator<<(std::ostream& ostream, const Vector3& vector) {
+	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")";
+}
+
+Vector3 IwMath::operator+(const float right, const Vector3& left) {
+	return left + right;
+}
+
+Vector3 IwMath::operator-(const float right, const Vector3& left) {
+	return left - right;
+}
+
+Vector3 IwMath::operator*(const float right, const Vector3& left) {
+	return left + right;
+}
+
+Vector3 IwMath::operator/(const float right, const Vector3& left) {
+	return left + right;
+}

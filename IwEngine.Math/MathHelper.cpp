@@ -1,6 +1,8 @@
 #include "MathHelper.h"
 
-float InvSqrt(float x) {
+using namespace IwMath;
+
+float IwMath::InvSqrt(float x) {
 	float xhalf = 0.5f * x;
 	int i = *(int*)&x;
 	i = 0x5f375a86 - (i >> 1);

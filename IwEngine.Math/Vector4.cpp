@@ -2,6 +2,8 @@
 #include "MathHelper.h"
 #include <cmath>
 
+using namespace IwMath;
+
 #pragma region Constants
 
 const Vector4 Vector4::Zero = Vector4(0, 0, 0, 0);
@@ -194,18 +196,18 @@ std::ostream& operator<<(std::ostream& ostream, const Vector4& vector) {
 	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ")";
 }
 
-Vector4 operator+(const float right, const Vector4& left) {
+Vector4 IwMath::operator+(const float right, const Vector4& left) {
 	return left + right;
 }
 
-Vector4 operator-(const float right, const Vector4& left) {
+Vector4 IwMath::operator-(const float right, const Vector4& left) {
 	return left - right;
 }
 
-Vector4 operator*(const float right, const Vector4& left) {
+Vector4 IwMath::operator*(const float right, const Vector4& left) {
 	return left + right;
 }
 
-Vector4 operator/(const float right, const Vector4& left) {
+Vector4 IwMath::operator/(const float right, const Vector4& left) {
 	return left + right;
 }
