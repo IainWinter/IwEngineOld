@@ -67,6 +67,10 @@ float Vector4::Dot(const Vector4 & other) const {
 	return x * other.x + y * other.y + z * other.z + w * other.w;
 }
 
+Vector3 Vector4::Xyz() const {
+	return Vector3(x, y, z);
+}
+
 #pragma endregion
 
 #pragma region Operators

@@ -56,6 +56,11 @@ Matrix3x3 Matrix3x3::Transposed() const {
 }
 
 void Matrix3x3::Invert() {
+	float aDet = Determinant();
+	if (aDet == 0) {
+		throw std::invalid_argument("Determinant is zero, therefore inverse matrix doesn't exist.");
+	}
+
 	Matrix3x3 tmp = Matrix3x3::Zero;
 
 	for (short i = 0; i < 3; i++) {
@@ -99,7 +104,7 @@ void Matrix3x3::Invert() {
 	tmp(2, 1) *= -1;
 
 	tmp.Transpose();
-	tmp /= Determinant(); //Divide by the determinant of the original matrix
+	tmp /= aDet;
 
 	*this = tmp;
 }
@@ -428,7 +433,7 @@ Matrix3x3 Matrix3x3::CreateRoatationZ(float angle) {
 	out.row0.x = cos;
 	out.row0.y = sin;
 	out.row1.x = -sin;
-	out.row2.y = cos;
+	out.row1.y = cos;
 
 	return out;
 }

@@ -18,6 +18,7 @@ struct Vector4 {
 	void Normalize();
 	void NormalizeFast();
 	float Dot(const Vector4& other) const;
+	Vector3 Xyz() const;
 	Vector4 operator+(const Vector4& other) const;
 	Vector4 operator-(const Vector4& other) const;
 	Vector4 operator*(const Vector4& other) const;
