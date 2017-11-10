@@ -43,8 +43,8 @@ struct Matrix2x2 {
 	bool Equals(const Matrix2x2& other) const;
 	static Matrix2x2 CreateRoatation(float angle);
 	static Matrix2x2 CreateScale(float scale);
+	static Matrix2x2 CreateScale(const Vector2& scale);
 	static Matrix2x2 CreateScale(float x, float y);
-	static Matrix2x2 CreateScale(Vector2 scale);
 };
 
 std::ostream& operator<<(std::ostream &strm, const Matrix2x2 &a);

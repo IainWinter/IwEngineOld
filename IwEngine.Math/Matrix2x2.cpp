@@ -34,7 +34,8 @@ void Matrix2x2::Transpose() {
 Matrix2x2 Matrix2x2::Transposed() const {
 	return Matrix2x2(
 		row0.x, row1.x,
-		row0.y, row1.y);
+		row0.y, row1.y
+	);
 }
 
 void Matrix2x2::Invert() {
@@ -105,34 +106,24 @@ float& Matrix2x2::m11() {
 
 Matrix2x2 Matrix2x2::operator+(const Matrix2x2 & other) const {
 	return Matrix2x2(
-		row0.x + other.row0.x,
-		row0.y + other.row0.y,
-		row1.x + other.row1.x,
-		row1.y + other.row1.y
+		row0 + other.row0,
+		row1 + other.row1
 	);
 }
 
 Matrix2x2 Matrix2x2::operator-(const Matrix2x2 & other) const {
 	return Matrix2x2(
-		row0.x - other.row0.x,
-		row0.y - other.row0.y,
-		row1.x - other.row1.x,
-		row1.y - other.row1.y
+		row0 - other.row0,
+		row1 - other.row1
 	);
 }
 
 Matrix2x2 Matrix2x2::operator*(const Matrix2x2 & other) const {
-	float 
-		lM11 = row0.x, lM12 = row0.y,
-		lM21 = row1.x, lM22 = row1.y,
-		rM11 = other.row0.x, rM12 = other.row0.y,
-		rM21 = other.row1.x, rM22 = other.row1.y;
-
 	return Matrix2x2(
-		lM11 * rM11 + lM12 * rM21,
-		lM11 * rM12 + lM12 * rM22,
-		lM21 * rM11 + lM22 * rM21,
-		lM21 * rM12 + lM22 * rM22
+		row0.x * other.row0.x + row0.y * other.row1.x,
+		row0.x * other.row0.y + row0.y * other.row1.y,
+		row1.x * other.row0.x + row1.y * other.row1.x,
+		row1.x * other.row0.y + row1.y * other.row1.y
 	);
 }
 
@@ -150,37 +141,29 @@ Matrix2x2 Matrix2x2::operator*=(const Matrix2x2 & other) {
 
 Matrix2x2 Matrix2x2::operator+(const float other) const {
 	return Matrix2x2(
-		row0.x + other,
-		row0.y + other,
-		row1.x + other,
-		row1.y + other
+		row0 + other, 
+		row1 + other
 	);
 }
 
 Matrix2x2 Matrix2x2::operator-(const float other) const {
 	return Matrix2x2(
-		row0.x - other,
-		row0.y - other,
-		row1.x - other,
-		row1.y - other
+		row0 - other,
+		row1 - other
 	);
 }
 
 Matrix2x2 Matrix2x2::operator*(const float other) const {
 	return Matrix2x2(
-		row0.x * other,
-		row0.y * other,
-		row1.x * other,
-		row1.y * other
+		row0 * other,
+		row1 * other
 	);
 }
 
 Matrix2x2 Matrix2x2::operator/(const float other) const {
 	return Matrix2x2(
-		row0.x / other,
-		row0.y / other,
-		row1.x / other,
-		row1.y / other
+		row0 / other,
+		row1 / other
 	);
 }
 
@@ -226,21 +209,23 @@ Matrix2x2 Matrix2x2::CreateRoatation(float angle) {
 
 	return Matrix2x2(
 		cos, sin, 
-	   -sin, cos);
+	   -sin, cos
+	);
 }
 
 Matrix2x2 Matrix2x2::CreateScale(float scale) {
 	return CreateScale(scale, scale);
 }
 
+Matrix2x2 Matrix2x2::CreateScale(const Vector2& scale) {
+	return CreateScale(scale.x, scale.y);
+}
+
 Matrix2x2 Matrix2x2::CreateScale(float x, float y) {
 	return Matrix2x2(
 		x, 0,
-		0, y);
-}
-
-Matrix2x2 Matrix2x2::CreateScale(Vector2 scale) {
-	return CreateScale(scale.x, scale.y);
+		0, y
+	);
 }
 
 #pragma endregion
