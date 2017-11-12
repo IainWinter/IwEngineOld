@@ -18,10 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ResourceLoader.h" />
+    <ClInclude Include="ResourceManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ResourceLoader.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{329940BA-4E0A-43E3-B2C5-DB0981C3EB18}</ProjectGuid>
-    <RootNamespace>IwEnginePhysics</RootNamespace>
+    <ProjectGuid>{001D7374-7DC4-4F19-93FE-DD38B7BE2956}</ProjectGuid>
+    <RootNamespace>IwEngineResourceManagement</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -110,8 +118,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,7 +1,5 @@
 #include "Quaternion.h"
 #include "MathHelper.h"
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 using namespace IwMath;
 
@@ -112,7 +110,7 @@ Vector3 Quaternion::ToEulerAngles() const {
 
 	float sinp = 2.0f * (w * y - z * x);
 	if (fabs(sinp) >= 1) {
-		out.y = copysignf(M_PI / 2, sinp);
+		out.y = copysignf(PI / 2, sinp);
 	} else {
 		out.y = asin(sinp);
 	}

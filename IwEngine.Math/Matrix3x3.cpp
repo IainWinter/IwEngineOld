@@ -129,9 +129,9 @@ Matrix3x3 Matrix3x3::Normalized() const {
 }
 
 void Matrix3x3::ClearRotation() {
-	row0 = Vector3(row0.Length, 0, 0);
-	row1 = Vector3(0, row1.Length, 0);
-	row2 = Vector3(0, 0, row2.Length);
+	row0 = Vector3(row0.Length(), 0, 0);
+	row1 = Vector3(0, row1.Length(), 0);
+	row2 = Vector3(0, 0, row2.Length());
 }
 
 Matrix3x3 Matrix3x3::ClearedRotation() const {
@@ -142,7 +142,7 @@ Matrix3x3 Matrix3x3::ClearedRotation() const {
 }
 
 Vector3 Matrix3x3::ExtractScale() const {
-	return Vector3(row0.Length, row1.Length, row2.Length);
+	return Vector3(row0.Length(), row1.Length(), row2.Length());
 }
 
 Quaternion Matrix3x3::ExtractRotation() const {

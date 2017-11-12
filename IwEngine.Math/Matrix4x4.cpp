@@ -169,10 +169,10 @@ Matrix4x4 Matrix4x4::Normalized() const {
 }
 
 void Matrix4x4::ClearRotation() {
-	row0 = Vector4(row0.Length, 0, 0, 0);
-	row1 = Vector4(0, row1.Length, 0, 0);
-	row2 = Vector4(0, 0, row2.Length, 0);
-	row3 = Vector4(0, 0, 0, row3.Length);
+	row0 = Vector4(row0.Length(), 0, 0, 0);
+	row1 = Vector4(0, row1.Length(), 0, 0);
+	row2 = Vector4(0, 0, row2.Length(), 0);
+	row3 = Vector4(0, 0, 0, row3.Length());
 }
 
 Matrix4x4 Matrix4x4::ClearedRotation() const {
@@ -187,7 +187,7 @@ Vector3 Matrix4x4::ExtractTranslation() const {
 }
 
 Vector4 Matrix4x4::ExtractScale() const {
-	return Vector4(row0.Length, row1.Length, row2.Length, row3.Length);
+	return Vector4(row0.Length(), row1.Length(), row2.Length(), row3.Length());
 }
 
 Vector4 Matrix4x4::ExtractProjection() const {
@@ -550,7 +550,7 @@ Matrix4x4 Matrix4x4::CreateRoatation(float x, float y, float z) {
 }
 
 Matrix4x4 Matrix4x4::CreateTranslation(const Vector3& translation) {
-	CreateTranslation(translation.x, translation.y, translation.z);
+	return CreateTranslation(translation.x, translation.y, translation.z);
 }
 
 Matrix4x4 Matrix4x4::CreateTranslation(float x, float y, float z) {
