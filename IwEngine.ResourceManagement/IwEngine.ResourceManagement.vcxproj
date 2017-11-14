@@ -26,6 +26,9 @@
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ResourceLoaderBase.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{001D7374-7DC4-4F19-93FE-DD38B7BE2956}</ProjectGuid>

@@ -1,19 +1,12 @@
 #pragma once
 
 #include <memory>
+#include "ResourceLoaderBase.h"
 
-template<class T>
-class ResourceLoader {
+template<typename T>
+class ResourceLoader : public ResourceLoaderBase {
 public:
-	ResourceLoader();
-	~ResourceLoader();
-	virtual void Load(std::shared_ptr<T> ptr) const = 0;
+	virtual ~ResourceLoader() {}
+
+	virtual void Load(std::string fileName, std::shared_ptr<T> ptr) const = 0;
 };
-
-template<class T>
-inline ResourceLoader<T>::ResourceLoader() {
-}
-
-template<class T>
-inline ResourceLoader<T>::~ResourceLoader() {
-}
