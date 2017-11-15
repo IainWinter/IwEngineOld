@@ -17,7 +17,7 @@ public:
 	void Unload(std::string fileName);
 	template<class T> std::shared_ptr<T> FindResource(std::string fileName);
 	template<class T> std::shared_ptr<T>* FindAllResourcesOfType();
-	template<class T> void RegisterLoader(ResourceLoaderBase resourceLoader);
+	template<class T> void RegisterLoader(ResourceLoader<T>* resourceLoader);
 	template<class T> void UnregisterLoader();
 	template<class T> bool HasLoader();
 };

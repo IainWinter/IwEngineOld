@@ -15,14 +15,14 @@ int main() {
 
 	StringLoader strLrd = StringLoader();
 
-	m.RegisterLoader<std::string>(strLrd);
+	m.RegisterLoader<std::string>(&strLrd);
 
 	std::shared_ptr<std::string> ptr = m.Load<std::string>(std::string("Hello"));
 
 }
 
 template<typename T>
-void ResourceManager::RegisterLoader(ResourceLoaderBase resourceLoader) {
+void ResourceManager::RegisterLoader(ResourceLoader<T>* resourceLoader) {
 	resourceLoaders.emplace(typeid(T), &resourceLoader);
 }
 
