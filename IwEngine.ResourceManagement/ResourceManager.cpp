@@ -1,11 +1,12 @@
 #include "ResourceManager.h"
 #include "ResourceLoader.h"
+#include <iostream>
 
 class StringLoader : public ResourceLoader<std::string> {
 public:
-	StringLoader() : ResourceLoader() { }
+	StringLoader() : ResourceLoader() {}
 
-	virtual std::string Load(std::string& fileName) const {
+	virtual std::string Load(const std::string& fileName) const {
 		return fileName;
 	}
 };
@@ -16,6 +17,10 @@ int main() {
 	m.RegisterLoader<std::string, StringLoader>();
 
 	std::shared_ptr<std::string> ptr = m.Load<std::string>(std::string("Hello"));
+
+	std::cout << *ptr << std::endl;
+
+	system("pause");
 }
 
 ResourceManager::ResourceManager() {
@@ -33,7 +38,7 @@ void ResourceManager::RegisterLoader(TArgs&&... args) {
 }
 
 template<typename TResource>
-std::shared_ptr<TResource> ResourceManager::Load(std::string fileName) {
+std::shared_ptr<TResource> ResourceManager::Load(const std::string& fileName) {
 	typedef ResourceLoader<TResource> TLoader;
 	TLoader* typeLoader = (TLoader*)resourceLoaders[typeid(TResource)].get();
 

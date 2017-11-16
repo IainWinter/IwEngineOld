@@ -14,11 +14,11 @@ private:
 public:
 	ResourceManager();
 	~ResourceManager();
-	template<typename TResource> std::shared_ptr<TResource> Load(std::string fileName);
-	void Unload(std::string fileName);
-	template<typename TResource> std::shared_ptr<TResource> FindResource(std::string fileName);
-	template<typename TResource> std::shared_ptr<TResource>* FindAllResourcesOfType();
+	template<typename TResource> std::shared_ptr<TResource> Load(const std::string& fileName);
+	void Unload(const std::string& fileName);
+	template<typename TResource> std::shared_ptr<TResource> FindResource(const std::string& fileName) const;
+	template<typename TResource> std::shared_ptr<TResource>* FindAllResourcesOfType() const;
 	template<typename TResource, typename TLoader, typename... TArgs> void RegisterLoader(TArgs&&... args);
 	template<typename TResource> void UnregisterLoader();
-	template<typename TResource> bool HasLoader();
+	template<typename TResource> bool HasLoader() const;
 };

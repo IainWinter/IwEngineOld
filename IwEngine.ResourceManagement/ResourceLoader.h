@@ -9,5 +9,5 @@ class ResourceLoader : public ResourceLoaderBase {
 public:
 	virtual ~ResourceLoader() {}
 
-	virtual TResource Load(std::string& fileName) const = 0;
+	virtual TResource Load(const std::string& fileName) const = 0;
 };
