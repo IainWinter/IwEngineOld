@@ -31,6 +31,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ResourceLoaderBase.h" />
+    <None Include="ResourceLoaderBase.h">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -2,11 +2,12 @@
 
 #include <memory>
 #include "ResourceLoaderBase.h"
+#include <string>
 
-template<typename T>
+template<typename TResource>
 class ResourceLoader : public ResourceLoaderBase {
 public:
 	virtual ~ResourceLoader() {}
 
-	virtual void Load(std::string fileName, std::shared_ptr<T> ptr) const = 0;
+	virtual TResource Load(std::string& fileName) const = 0;
 };

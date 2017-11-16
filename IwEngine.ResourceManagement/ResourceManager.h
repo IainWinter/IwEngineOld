@@ -5,19 +5,20 @@
 #include <typeindex>
 #include <memory>
 #include "ResourceLoader.h"
+#include <vector>
 
 class ResourceManager {
 private:
-	std::unordered_map<std::type_index, ResourceLoaderBase*> resourceLoaders;
+	std::unordered_map<std::type_index, std::unique_ptr<ResourceLoaderBase>> resourceLoaders;
 	std::unordered_map<std::string, std::weak_ptr<void>> loadedResources;
 public:
 	ResourceManager();
 	~ResourceManager();
-	template<class T> std::shared_ptr<T> Load(std::string fileName);
+	template<typename TResource> std::shared_ptr<TResource> Load(std::string fileName);
 	void Unload(std::string fileName);
-	template<class T> std::shared_ptr<T> FindResource(std::string fileName);
-	template<class T> std::shared_ptr<T>* FindAllResourcesOfType();
-	template<class T> void RegisterLoader(ResourceLoader<T>* resourceLoader);
-	template<class T> void UnregisterLoader();
-	template<class T> bool HasLoader();
+	template<typename TResource> std::shared_ptr<TResource> FindResource(std::string fileName);
+	template<typename TResource> std::shared_ptr<TResource>* FindAllResourcesOfType();
+	template<typename TResource, typename TLoader, typename... TArgs> void RegisterLoader(TArgs&&... args);
+	template<typename TResource> void UnregisterLoader();
+	template<typename TResource> bool HasLoader();
 };
