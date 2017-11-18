@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{38541447-22FB-4AD9-94A4-154859BAC432}</ProjectGuid>
-    <RootNamespace>IwEngineResourceManagement</RootNamespace>
+    <ProjectGuid>{DF4E85C4-4CE2-4914-AEAD-9596CEBF3A0B}</ProjectGuid>
+    <RootNamespace>IwEngineUtility</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,12 +111,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="ResourceInfo.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
+    <ClInclude Include="IO\Directory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ResourceManager.h" />
+    <ClCompile Include="IO\Directory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
