@@ -36,7 +36,3 @@ std::string Path::Name(const char * path) {
 	filesystem::path p = path;
 	return p.filename().string();
 }
-
-int main() {
-	std::string b = Path::Name("C:\\dev\\code\\c++\\IwEngine\\IwEngine.Utility\\IO\\Directory.txt");
-}

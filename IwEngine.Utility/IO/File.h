@@ -12,12 +12,12 @@ public:
 	static void WriteWithMode(const std::string& filePath, const std::string& text, int mode);
 	static void AppendAllLines(const char* filePath, const char** lines, int length);
 	static void AppendAllLines(const std::string& filePath, const std::string* lines, int length);
-	static void AppendAllText(const char* filePath, const char* text);
-	static void AppendAllText(const std::string& filePath, const std::string& text);
+	static void AppendText(const char* filePath, const char* text);
+	static void AppendText(const std::string& filePath, const std::string& text);
 	static void WriteAllLines(const char* filePath, const char** lines, int length);
 	static void WriteAllLines(const std::string& filePath, const std::string* lines, int length);
-	static void WriteAllText(const char* filePath, const char* text);
-	static void WriteAllText(const std::string& filePath, const std::string& text);
+	static void WriteText(const char* filePath, const char* text);
+	static void WriteText(const std::string& filePath, const std::string& text);
 	static std::ofstream Create(const char* filePath);
 	static std::ofstream Create(const std::string& filePath);
 	static void Delete(const char* filePath);
@@ -30,4 +30,3 @@ public:
 private:
 	File();
 };
-

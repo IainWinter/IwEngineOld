@@ -5,8 +5,17 @@ namespace filesystem = std::experimental::filesystem::v1;
 void File::WriteWithMode(const char* filePath, const char** lines, int length, int mode) {
 	std::ofstream file(filePath, mode);
 
-	for (size_t i = 0; i < length; i++) {
-		file << lines[i] << std::endl;
+	try {
+		if (!file) {
+			throw std::runtime_error("Bad path or permissions");
+		}
+
+		for (size_t i = 0; i < length; i++) {
+
+			file << lines[i] << std::endl;
+		}
+	} catch (std::exception ex) {
+		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
 	}
 
 	file.close();
@@ -15,8 +24,16 @@ void File::WriteWithMode(const char* filePath, const char** lines, int length, i
 void File::WriteWithMode(const std::string& filePath, const std::string* lines, int length, int mode) {
 	std::ofstream file(filePath, mode);
 
-	for (size_t i = 0; i < length; i++) {
-		file << lines[i].c_str() << std::endl;
+	try {
+		if (!file) {
+			throw std::runtime_error("Bad path or permissions");
+		}
+
+		for (size_t i = 0; i < length; i++) {
+			file << lines[i].c_str() << std::endl;
+		}
+	} catch (std::exception ex) {
+		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
 	}
 
 	file.close();
@@ -24,12 +41,34 @@ void File::WriteWithMode(const std::string& filePath, const std::string* lines, 
 
 void File::WriteWithMode(const char* filePath, const char* text, int mode) {
 	std::ofstream file(filePath, mode);
-	file << text;
+
+	try {
+		if (!file) {
+			throw std::runtime_error("Bad path or permissions");
+		}
+
+		file << text;
+	} catch (std::exception ex) {
+		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
+	}
+
+	file.close();
 }
 
 void File::WriteWithMode(const std::string & filePath, const std::string & text, int mode) {
 	std::ofstream file(filePath, mode);
-	file << text.c_str();
+
+	try {
+		if (!file) {
+			throw std::runtime_error("Bad path or permissions");
+		}
+
+		file << text.c_str();
+	} catch (std::exception ex) {
+		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
+	}
+	
+	file.close();
 }
 
 void File::AppendAllLines(const char* filePath, const char** lines, int length) {
@@ -40,12 +79,12 @@ void File::AppendAllLines(const std::string& filePath, const std::string* lines,
 	File::WriteWithMode(filePath, lines, length, std::ios_base::app);
 }
 
-void File::AppendAllText(const char* filePath, const char* text) {
-	File::WriteWithMode(filePath, text, 0);
+void File::AppendText(const char* filePath, const char* text) {
+	File::WriteWithMode(filePath, text, std::ios_base::app);
 }
 
-void File::AppendAllText(const std::string& filePath, const std::string& text) {
-	File::WriteWithMode(filePath, text, 0);
+void File::AppendText(const std::string& filePath, const std::string& text) {
+	File::WriteWithMode(filePath, text, std::ios_base::app);
 }
 
 void File::WriteAllLines(const char* filePath, const char** lines, int length) {
@@ -56,11 +95,11 @@ void File::WriteAllLines(const std::string & filePath, const std::string * lines
 	File::WriteWithMode(filePath, lines, length, 0);
 }
 
-void File::WriteAllText(const char* filePath, const char* text) {
+void File::WriteText(const char* filePath, const char* text) {
 	File::WriteWithMode(filePath, text, 0);
 }
 
-void File::WriteAllText(const std::string & filePath, const std::string & text) {
+void File::WriteText(const std::string & filePath, const std::string & text) {
 	File::WriteWithMode(filePath, text, 0);
 }
 
