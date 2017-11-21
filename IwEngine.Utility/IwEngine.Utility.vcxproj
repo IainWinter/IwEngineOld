@@ -111,12 +111,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="File.h" />
+    <ClInclude Include="IO\File.h" />
     <ClInclude Include="IO\Directory.h" />
     <ClInclude Include="IO\Path.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="File.cpp" />
+    <ClCompile Include="IO\File.cpp" />
     <ClCompile Include="IO\Directory.cpp" />
     <ClCompile Include="IO\Path.cpp" />
   </ItemGroup>

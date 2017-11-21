@@ -8,7 +8,7 @@ std::string* Directory::GetFiles(const char* directoryPath) {
 }
 
 std::string* Directory::GetFiles(const char* directoryPath, std::error_code& errorCode) {
-	typedef  filesystem::directory_iterator DirItr;
+	typedef filesystem::directory_iterator DirItr;
 	typedef filesystem::path Path;
 
 	DirItr itr = DirItr(directoryPath, errorCode);
