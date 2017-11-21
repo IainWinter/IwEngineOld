@@ -8,18 +8,18 @@ std::string* Directory::GetFiles(const char* directoryPath) {
 }
 
 std::string* Directory::GetFiles(const char* directoryPath, std::error_code& errorCode) {
-	typedef  filesystem::directory_iterator DirIttr;
+	typedef  filesystem::directory_iterator DirItr;
 	typedef filesystem::path Path;
 
-	DirIttr ittr = DirIttr(directoryPath, errorCode);
+	DirItr itr = DirItr(directoryPath, errorCode);
 	std::string* files = nullptr;
 
 	if (!errorCode) {
 		std::size_t fileCount = Directory::GetFileCount(directoryPath);
 		files = new std::string[fileCount];
 		for (std::size_t i = 0; i < fileCount; i++) {
-			files[i] = ittr->path().string();
-			ittr++;
+			files[i] = itr->path().string();
+			itr++;
 		}
 	}
 
