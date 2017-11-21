@@ -24,6 +24,8 @@ public:
 	static void Delete(const std::string& filePath);
 	static std::ifstream Open(const char* filePath);
 	static std::ifstream Open(const std::string& filePath);
+	static const char** ReadAllLines(const char* filePath);
+	static const std::string* *ReadAllLines(const std::string& filePath);
 	static bool Exists(const char* filePath);
 	static bool Exists(const char* filePath, std::error_code& errorCode);
 
