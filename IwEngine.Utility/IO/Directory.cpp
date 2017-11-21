@@ -1,39 +1,46 @@
-#ifdef _WIN32 || _WIN64
-#include <windows.h>
-#endif
-
 #include "Directory.h"
 
-static char** GetFiles(const char* directoryPath) {
-	int fileCount = GetFileCount(directoryPath);
+namespace filesystem = std::experimental::filesystem::v1;
 
-	char** fileNames = new char*[fileCount];
-
-	WIN32_FIND_DATA wfd;
-	HANDLE handle = FindFirstFile(directoryPath, &wfd);
-	if (handle == INVALID_HANDLE_VALUE) {
-		throw "Invalid directory path";
-	}
-
-	int currentFile = 0;
-	do {
-		fileCount[currentFile] = wfd.cFileName;
-	}
+std::string* Directory::GetFiles(const char* directoryPath) {
+	std::error_code errorCode;
+	return Directory::GetFiles(directoryPath, errorCode);
 }
 
-static int GetFileCount(const char* dircotryPath) {
-	int counter = 0;
-	WIN32_FIND_DATA wfd;
-	HANDLE handle = FindFirstFile(dircotryPath, &wfd);
-	if (handle == INVALID_HANDLE_VALUE) {
-		throw "Invalid directory path";
+std::string* Directory::GetFiles(const char* directoryPath, std::error_code& errorCode) {
+	typedef  filesystem::directory_iterator DirIttr;
+	typedef filesystem::path Path;
+
+	DirIttr ittr = DirIttr(directoryPath, errorCode);
+	std::string* files = nullptr;
+
+	if (!errorCode) {
+		std::size_t fileCount = Directory::GetFileCount(directoryPath);
+		files = new std::string[fileCount];
+		for (std::size_t i = 0; i < fileCount; i++) {
+			files[i] = ittr->path().string();
+			ittr++;
+		}
 	}
 
-	do {
-		counter++;
-	} while (FindNextFile(handle, &wfd));
+	return files;
+}
 
-	FindClose(handle);
+std::size_t Directory::GetFileCount(const char* directoryPath) {
+	std::error_code errorCode;
+	return Directory::GetFileCount(directoryPath, errorCode);
+}
 
-	return counter;
+std::size_t Directory::GetFileCount(const char* directoryPath, std::error_code& errorCode) {
+	typedef filesystem::directory_iterator DirIttr;
+	return std::distance(DirIttr(directoryPath, errorCode), DirIttr());
+}
+
+bool Directory::Exists(const char* directoryPath) {
+	std::error_code errorCode;
+	return Directory::Exists(directoryPath, errorCode);
+}
+
+bool Directory::Exists(const char* directoryPath, std::error_code& errorCode) {
+	return filesystem::is_directory(directoryPath, errorCode);
 }
