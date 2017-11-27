@@ -20,7 +20,6 @@ void ResourceManager::LoadSceneInfo(const char* sceneFolder) {
 	size_t resourceCount;
 	std::string* resourcePaths = Directory::GetFiles(sceneFolder, resourceCount);
 	for (size_t i = 0; i < resourceCount; i++) {
-		free.resize(free.size() + resourceCount);
 		if (Path::IsFile(resourcePaths[i])) {
 			ResourceInfo* info = LoadResourceInfo(resourcePaths[i]);
 			Resource* resource = new Resource(info);
@@ -40,5 +39,5 @@ ResourceInfo* ResourceManager::LoadResourceInfo(const std::string& resourcePath)
 
 int main() {
 	ResourceManager r = ResourceManager();
-	r.LoadSceneInfo("C:\\Users\\Iain\\Desktop\\test1\\");
+	r.LoadSceneInfo("C:\\Users\\iainw\\Desktop\\test1");
 }

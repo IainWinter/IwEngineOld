@@ -24,6 +24,7 @@ std::string* Directory::GetFiles(const char* directoryPath, std::error_code& err
 
 	DirItr itr = DirItr(directoryPath, errorCode);
 	std::string* files = nullptr;
+	fileCount = 0;
 
 	if (!errorCode) {
 		fileCount = Directory::GetFileCount(directoryPath);

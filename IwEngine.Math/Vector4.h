@@ -42,7 +42,7 @@ namespace IwMath {
 		bool Equals(const Vector4& other) const;
 	};
 
-	std::ostream& operator<<(std::ostream &strm, const Vector4 &a);
+	std::ostream& operator<<(std::ostream& strm, const Vector4& a);
 	Vector4 operator+(const float left, const Vector4& right);
 	Vector4 operator-(const float left, const Vector4& right);
 	Vector4 operator*(const float left, const Vector4& right);
