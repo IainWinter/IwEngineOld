@@ -113,6 +113,7 @@
   <ItemGroup>
     <ClInclude Include="IO\File.h" />
     <ClInclude Include="IO\Directory.h" />
+    <ClInclude Include="IO\IO.h" />
     <ClInclude Include="IO\Path.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,15 @@
-#pragma once
-
-#include "ResourceInfo.cpp"
+#include "ResourceInfo.h"
 
 struct Resource {
 public:
 	const ResourceInfo* const info;
 	//const RsrouceData* data;
 
-	Resource() : info() {
+	Resource() : info(nullptr) {
+
+	}
+
+	Resource(ResourceInfo* resourceInfo) : info(resourceInfo) {
 
 	}
 

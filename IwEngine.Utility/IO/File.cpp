@@ -3,7 +3,7 @@
 
 namespace filesystem = std::experimental::filesystem::v1;
 
-void File::WriteWithMode(const char* filePath, const char** lines, int length, int mode) {
+void File::WriteWithMode(const char* filePath, const char** lines, size_t length, int mode) {
 	std::ofstream file(filePath, mode);
 
 	try {
@@ -22,9 +22,8 @@ void File::WriteWithMode(const char* filePath, const char** lines, int length, i
 	file.close();
 }
 
-void File::WriteWithMode(const std::string& filePath, const std::string* lines, int length, int mode) {
+void File::WriteWithMode(const std::string& filePath, const std::string* lines, size_t length, int mode) {
 	std::ofstream file(filePath, mode);
-
 	try {
 		if (!file) {
 			throw std::runtime_error("Bad path or permissions");
@@ -42,7 +41,6 @@ void File::WriteWithMode(const std::string& filePath, const std::string* lines, 
 
 void File::WriteWithMode(const char* filePath, const char* text, int mode) {
 	std::ofstream file(filePath, mode);
-
 	try {
 		if (!file) {
 			throw std::runtime_error("Bad path or permissions");
@@ -58,7 +56,6 @@ void File::WriteWithMode(const char* filePath, const char* text, int mode) {
 
 void File::WriteWithMode(const std::string& filePath, const std::string& text, int mode) {
 	std::ofstream file(filePath, mode);
-
 	try {
 		if (!file) {
 			throw std::runtime_error("Bad path or permissions");
@@ -72,11 +69,11 @@ void File::WriteWithMode(const std::string& filePath, const std::string& text, i
 	file.close();
 }
 
-void File::AppendAllLines(const char* filePath, const char** lines, int length) {
+void File::AppendAllLines(const char* filePath, const char** lines, size_t length) {
 	File::WriteWithMode(filePath, lines, length, std::ios_base::app);
 }
 
-void File::AppendAllLines(const std::string& filePath, const std::string* lines, int length) {
+void File::AppendAllLines(const std::string& filePath, const std::string* lines, size_t length) {
 	File::WriteWithMode(filePath, lines, length, std::ios_base::app);
 }
 
@@ -88,11 +85,11 @@ void File::AppendText(const std::string& filePath, const std::string& text) {
 	File::WriteWithMode(filePath, text, std::ios_base::app);
 }
 
-void File::WriteAllLines(const char* filePath, const char** lines, int length) {
+void File::WriteAllLines(const char* filePath, const char** lines, size_t length) {
 	File::WriteWithMode(filePath, lines, length, 0);
 }
 
-void File::WriteAllLines(const std::string& filePath, const std::string* lines, int length) {
+void File::WriteAllLines(const std::string& filePath, const std::string* lines, size_t length) {
 	File::WriteWithMode(filePath, lines, length, 0);
 }
 
@@ -125,20 +122,18 @@ std::ifstream File::Open(const char* filePath) {
 }
 
 std::ifstream File::Open(const std::string& filePath) {
-	return std::ifstream(filePath);
+	return File::Open(filePath.c_str());
 }
 
-const char** File::ReadAllLines(const char * filePath) {
+std::string* File::ReadAllLines(const char * filePath) {
 	std::ifstream file = File::Open(filePath);
-
-	std::vector<const char*> lines;
-
+	std::vector<std::string> lines;
 	try {
 		if (!file) {
 			throw std::runtime_error("Bad path or premissions");
 		}
 
-		lines = std::vector<const char*>();
+		lines = std::vector<std::string>();
 
 		std::string line;
 		while (file >> line) {
@@ -152,6 +147,10 @@ const char** File::ReadAllLines(const char * filePath) {
 	return &lines[0];
 }
 
+std::string * File::ReadAllLines(const std::string & filePath) {
+	return File::ReadAllLines(filePath.c_str());
+}
+
 bool File::Exists(const char* filePath) {
 	std::error_code errorCode;
 	return File::Exists(filePath, errorCode);
@@ -161,7 +160,10 @@ bool File::Exists(const char* filePath, std::error_code& errorCode) {
 	return filesystem::is_regular_file(filePath, errorCode);
 }
 
-int main() {
-	const char** c = File::ReadAllLines("C:\\Users\\iainw\\Desktop\\text.txt");
+uintmax_t File::GetSize(const char * filePath) {
+	return filesystem::file_size(filePath);
+}
 
+uintmax_t File::GetSize(const std::string & filePath) {
+	return File::GetSize(filePath.c_str());
 }
