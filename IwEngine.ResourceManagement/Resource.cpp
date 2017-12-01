@@ -14,6 +14,7 @@ public:
 	}
 
 	~Resource() {
+		delete info;
 		//delete &data;
 	}
 };

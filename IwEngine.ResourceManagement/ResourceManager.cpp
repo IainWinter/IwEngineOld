@@ -1,41 +1,41 @@
 #include "ResourceManager.h"
-#include "..//IwEngine.Utility/IO/IO.h"
+#include "IO\Directory.h"
+#include "IO\File.h"
+#include "IO\Path.h"
+
+using namespace IwUtility::IO;
 
 ResourceManager::ResourceManager() {
-	free = std::vector<Resource>();
-	busy = std::vector<Resource>();
+	free = std::vector<Resource*>();
+	busy = std::vector<Resource*>();
 }
 
 ResourceManager::~ResourceManager() {
-	for (Resource& r : free) {
-		delete &r;
+	for (Resource* r : free) {
+		delete r;
 	}
 
-	for (Resource& r : busy) {
-		delete &r;
-	}
-}
-
-void ResourceManager::LoadSceneInfo(const char* sceneFolder) {
-	size_t resourceCount;
-	std::string* resourcePaths = Directory::GetFiles(sceneFolder, resourceCount);
-	for (size_t i = 0; i < resourceCount; i++) {
-		free.resize(free.size() + resourceCount);
-		if (Path::IsFile(resourcePaths[i])) {
-			ResourceInfo* info = LoadResourceInfo(resourcePaths[i]);
-			Resource* resource = new Resource(info);
-			free.push_back(*resource);
-		}
-
-		if (Path::IsDirectory(resourcePaths[i])) {
-			LoadSceneInfo(resourcePaths[i].c_str());
-		}
+	for (Resource* r : busy) {
+		delete r;
 	}
 }
 
 ResourceInfo* ResourceManager::LoadResourceInfo(const std::string& resourcePath) const {
 	uintmax_t fileSize = File::GetSize(resourcePath);
 	return new ResourceInfo(resourcePath.c_str(), fileSize);
+}
+
+void ResourceManager::LoadSceneInfo(const char* sceneFolder) {
+	size_t resourceCount;
+	std::string* resourcePaths = Directory::GetFiles(sceneFolder, true, resourceCount);
+
+	free.reserve(resourceCount);
+
+	for (size_t i = 0; i < resourceCount; i++) {
+		ResourceInfo* info = LoadResourceInfo(resourcePaths[i]);
+		Resource* resource = new Resource(info);
+		free.push_back(resource);
+	}
 }
 
 int main() {

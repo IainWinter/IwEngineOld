@@ -192,7 +192,7 @@ bool Vector4::Equals(const Vector4 & other) const {
 #pragma endregion
 
 
-std::ostream& operator<<(std::ostream& ostream, const Vector4& vector) {
+std::ostream& IwMath::operator<<(std::ostream& ostream, const Vector4& vector) {
 	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ")";
 }
 

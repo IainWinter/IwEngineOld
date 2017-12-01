@@ -2,6 +2,7 @@
 #include <experimental/filesystem>
 
 namespace filesystem = std::experimental::filesystem::v1;
+using namespace IwUtility::IO;
 
 bool Path::IsDirectory(std::string path) {
 	return Path::IsDirectory(path.c_str());

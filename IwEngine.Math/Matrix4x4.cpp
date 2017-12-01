@@ -666,22 +666,22 @@ Matrix4x4 Matrix4x4::LookAt(Vector3 eye, Vector3 target, Vector3 up) {
 
 #pragma endregion
 
-std::ostream& IwMath::operator<<(std::ostream & ostream, const Matrix4x4& a) {
+std::ostream& IwMath::operator<<(std::ostream& ostream, const Matrix4x4& a) {
 	return ostream << a.row0 << std::endl << a.row1 << std::endl << a.row2 << std::endl << a.row3;
 }
 
-Matrix4x4 IwMath::operator+(const float left, const Matrix4x4 & right) {
+Matrix4x4 IwMath::operator+(const float left, const Matrix4x4& right) {
 	return right + left;
 }
 
-Matrix4x4 IwMath::operator-(const float left, const Matrix4x4 & right) {
+Matrix4x4 IwMath::operator-(const float left, const Matrix4x4& right) {
 	return right - left;
 }
 
-Matrix4x4 IwMath::operator*(const float left, const Matrix4x4 & right) {
+Matrix4x4 IwMath::operator*(const float left, const Matrix4x4& right) {
 	return right * left;
 }
 
-Matrix4x4 IwMath::operator/(const float left, const Matrix4x4 & right) {
+Matrix4x4 IwMath::operator/(const float left, const Matrix4x4& right) {
 	return right / left;
 }

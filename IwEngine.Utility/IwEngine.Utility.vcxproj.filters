@@ -35,8 +35,5 @@
     <ClInclude Include="IO\File.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IO\IO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

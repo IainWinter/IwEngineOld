@@ -2,6 +2,7 @@
 #include <vector>
 
 namespace filesystem = std::experimental::filesystem::v1;
+using namespace IwUtility::IO;
 
 void File::WriteWithMode(const char* filePath, const char** lines, size_t length, int mode) {
 	std::ofstream file(filePath, mode);
