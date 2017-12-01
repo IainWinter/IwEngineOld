@@ -126,7 +126,7 @@ std::ifstream File::Open(const std::string& filePath) {
 	return File::Open(filePath.c_str());
 }
 
-std::string* File::ReadAllLines(const char * filePath) {
+std::string* File::ReadAllLines(const char* filePath) {
 	std::ifstream file = File::Open(filePath);
 	std::vector<std::string> lines;
 	try {
@@ -148,7 +148,7 @@ std::string* File::ReadAllLines(const char * filePath) {
 	return &lines[0];
 }
 
-std::string * File::ReadAllLines(const std::string & filePath) {
+std::string* File::ReadAllLines(const std::string & filePath) {
 	return File::ReadAllLines(filePath.c_str());
 }
 
