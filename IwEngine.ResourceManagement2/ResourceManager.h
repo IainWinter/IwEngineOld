@@ -4,11 +4,13 @@
 
 class ResourceManager {
 private:
-	std::vector<Resource*> free;
+	std::vector<ResourceInfo*> info;
 	std::vector<Resource*> busy;
 	ResourceInfo* LoadResourceInfo(const std::string& resourcePath) const;
+	int LoadResourceIntoBusy(ResourceInfo* recource);
 public:
 	ResourceManager();
 	~ResourceManager();
 	void LoadSceneInfo(const char* sceneFolder);
+	Resource* LoadResource(const char* resourcePath);
 };
