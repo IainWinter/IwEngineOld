@@ -20,13 +20,13 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{369AE9F9-8A7A-42C5-BBB7-9282B02D7F79}</ProjectGuid>
-    <RootNamespace>IwEngine</RootNamespace>
+    <ProjectGuid>{8AE077B1-37DA-4864-B217-C91CFDCDA513}</ProjectGuid>
+    <RootNamespace>IwGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -75,6 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)IwEngine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -111,30 +112,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Math\MathHelper.cpp" />
-    <ClCompile Include="src\Math\Matrix2x2.cpp" />
-    <ClCompile Include="src\Math\Matrix3x3.cpp" />
-    <ClCompile Include="src\Math\Matrix4x4.cpp" />
-    <ClCompile Include="src\Math\Quaternion.cpp" />
-    <ClCompile Include="src\Math\Vector2.cpp" />
-    <ClCompile Include="src\Math\Vector3.cpp" />
-    <ClCompile Include="src\Math\Vector4.cpp" />
-    <ClCompile Include="src\Utility\IO\Directory.cpp" />
-    <ClCompile Include="src\Utility\IO\File.cpp" />
-    <ClCompile Include="src\Utility\IO\Path.cpp" />
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Math\MathHelper.h" />
-    <ClInclude Include="src\Math\Matrix2x2.h" />
-    <ClInclude Include="src\Math\Matrix3x3.h" />
-    <ClInclude Include="src\Math\Matrix4x4.h" />
-    <ClInclude Include="src\Math\Quaternion.h" />
-    <ClInclude Include="src\Math\Vector2.h" />
-    <ClInclude Include="src\Math\Vector3.h" />
-    <ClInclude Include="src\Math\Vector4.h" />
-    <ClInclude Include="src\Utility\IO\Directory.h" />
-    <ClInclude Include="src\Utility\IO\File.h" />
-    <ClInclude Include="src\Utility\IO\Path.h" />
+    <ProjectReference Include="..\IwEngine\IwEngine.vcxproj">
+      <Project>{369ae9f9-8a7a-42c5-bbb7-9282b02d7f79}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
