@@ -78,7 +78,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)IwEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\dev\code\c++\IwEngine\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Debug</AdditionalLibraryDirectories>
       <AdditionalDependencies>IwEngine.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
