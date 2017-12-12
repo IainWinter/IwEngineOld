@@ -94,7 +94,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>IwEngine.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\dev\code\c++\IwEngine\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Debug</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference />
   </ItemDefinitionGroup>
@@ -130,7 +130,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>IwEngine.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\dev\code\c++\IwEngine\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Debug</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference />
   </ItemDefinitionGroup>

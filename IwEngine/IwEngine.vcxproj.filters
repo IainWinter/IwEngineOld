@@ -95,5 +95,8 @@
     <ClInclude Include="include\IwEngine\Graphics\Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
