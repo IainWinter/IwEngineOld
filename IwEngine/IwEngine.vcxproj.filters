@@ -48,39 +48,51 @@
     <ClCompile Include="src\Utility\IO\Path.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\IwEngine\Utility\IO.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Display.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Math\MathHelper.h">
+    <ClInclude Include="include\IwEngine\Math\MathHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Matrix2x2.h">
+    <ClInclude Include="include\IwEngine\Math\Matrix2x2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Matrix3x3.h">
+    <ClInclude Include="include\IwEngine\Math\Matrix3x3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Matrix4x4.h">
+    <ClInclude Include="include\IwEngine\Math\Matrix4x4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Quaternion.h">
+    <ClInclude Include="include\IwEngine\Math\Quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Vector2.h">
+    <ClInclude Include="include\IwEngine\Math\Vector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Vector3.h">
+    <ClInclude Include="include\IwEngine\Math\Vector3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Vector4.h">
+    <ClInclude Include="include\IwEngine\Math\Vector4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utility\IO\Directory.h">
+    <ClInclude Include="include\IwEngine\Utility\IO\Directory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utility\IO\File.h">
+    <ClInclude Include="include\IwEngine\Utility\IO\File.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utility\IO\Path.h">
+    <ClInclude Include="include\IwEngine\Utility\IO\Path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IwEngine\Math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IwEngine\Graphics\Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

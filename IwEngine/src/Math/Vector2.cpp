@@ -1,5 +1,5 @@
-#include "Vector2.h"
-#include "MathHelper.h"
+#include "IwEngine\Math\Vector2.h"
+#include "IwEngine\Math\MathHelper.h"
 #include <cmath>
 
 using namespace Math;

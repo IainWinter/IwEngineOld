@@ -1,5 +1,5 @@
-#include "Quaternion.h"
-#include "MathHelper.h"
+#include "IwEngine\Math\Quaternion.h"
+#include "IwEngine\Math\MathHelper.h"
 
 using namespace Math;
 
