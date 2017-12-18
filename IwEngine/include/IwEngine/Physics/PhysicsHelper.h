@@ -3,7 +3,6 @@
 class Physics {
 public:
 	static float gravity;
-
 };
 
-static float gravity = 9.81f;
+float Physics::gravity = 9.81f;
