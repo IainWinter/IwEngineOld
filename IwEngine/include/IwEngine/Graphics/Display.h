@@ -1,13 +1,9 @@
 #pragma once
 
-#ifdef IWENGINE_EXPORTS
-#define IWENGINE_API __declspec(dllexport)
-#else
-#define IWENGINE_API __declspec(dllimport)
-#endif
+#include "IwEngine\Common.h"
 
-class Display {
+class IWENGINE_API Display {
 public: 
-	IWENGINE_API Display();
-	IWENGINE_API int Start();
+	 Display();
+	 int Start();
 };

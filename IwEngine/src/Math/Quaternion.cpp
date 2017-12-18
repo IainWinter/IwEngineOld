@@ -3,26 +3,25 @@
 
 using namespace Math;
 
-#pragma region Constants
-
 const Quaternion Quaternion::Identity = Vector4(0, 0, 0, 1);
 
-#pragma endregion
-
-#pragma region Constructors
+Quaternion::Quaternion() : x(0), y(0), z(0), w(1) {}
 
 Quaternion::Quaternion(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
-Quaternion::Quaternion(Vector3 xyz, float w) : x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
+Quaternion::Quaternion(const Vector3& xyz, float w) : x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
 
-Quaternion::Quaternion(Vector4 xyzw) : x(xyzw.x), y(xyzw.y), z(xyzw.z), w(xyzw.w) {}
+Quaternion::Quaternion(const Vector4& xyzw) : x(xyzw.x), y(xyzw.y), z(xyzw.z), w(xyzw.w) {}
 
-#pragma endregion
+Quaternion& Quaternion::SetXYZ(const Vector3& xyz) {
+	x = xyz.x;
+	y = xyz.y;
+	z = xyz.z;
+	return *this;
+}
 
-#pragma region MathFunctions
-
-Vector4 Quaternion::Xyzw() const {
-	return Vector4(x, y, z, w);
+const Vector3 Quaternion::GetXYZ() const {
+	return Vector3(x, y, z);
 }
 
 float Quaternion::Length() const {
@@ -81,50 +80,32 @@ void Quaternion::Conjugate() {
 	z = -z;
 }
 
+Vector3 Math::Quaternion::GetAxis() const {
+	float x = 1.0f - w * w;
+	if (x < 0.000001f) {
+		return Vector3::UnitX;
+	}
+
+	float x2 = x * x;
+	return GetXYZ() / x2;
+}
+
 Vector4 Quaternion::ToAxisAngle() const {
 	Quaternion q = *this;
 	if (q.w > 1) {
 		q.Normalize();
 	}
 
-	Vector4 result = Vector4::UnitX;
-
-	float den = sqrt(1 - q.w * q.w);
-	if (den > 0.0001f) {
-		result.x = q.x / den;
-		result.y = q.y / den;
-		result.z = q.z / den;
-	}
-
-	result.w = 2 * acos(q.w);
-
-	return result;
+	Vector3 axis = GetAxis();
+	return Vector4(axis, 2 * acos(q.w));
 }
 
 Vector3 Quaternion::ToEulerAngles() const {
-	Vector3 out;
-
-	float sinr = 2.0f * (w * x + y * z);
-	float cosr = 1.0f - 2.0f * (x * x + y * y);
-	out.x = atan2(sinr, cosr);
-
-	float sinp = 2.0f * (w * y - z * x);
-	if (fabs(sinp) >= 1) {
-		out.y = copysignf(PI / 2, sinp);
-	} else {
-		out.y = asin(sinp);
-	}
-
-	float siny = 2.0f * (w * z + x * y);
-	float cosy = 1.0f - 2.0f * (y * y + z * z);
-	out.z = atan2(siny, cosy);
-
-	return out;
+	return Vector3(
+		atan2(2 * x * w - 2 * y * z, 1 - 2 * x * x - 2 * z * z),
+		atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z),
+		asin(2 * x * y + 2 * z * w));
 }
-
-#pragma endregion
-
-#pragma region Operators
 
 Quaternion Quaternion::operator+(const Quaternion& other) const {
 	return Quaternion(x + other.x, y + other.y, z + other.z, w + other.w);
@@ -177,10 +158,6 @@ bool Quaternion::Equals(const Quaternion& other) const {
 		&& w == other.w;
 }
 
-#pragma endregion
-
-#pragma region Static
-
 Quaternion Quaternion::FromAxisAngle(const Vector3& axis, const float angle) {
 	if (axis.LengthSquared() == 0) {
 		return Identity;
@@ -217,8 +194,6 @@ Quaternion Quaternion::FromEulerAngles(const float pitch, const float yaw, const
 Quaternion Quaternion::FromEulerAngles(const Vector3& eulerAngles) {
 	return FromEulerAngles(eulerAngles.x, eulerAngles.y, eulerAngles.z);
 }
-
-#pragma endregion
 
 std::ostream & Math::operator<<(std::ostream & ostream, const Quaternion & quaternion) {
 	return ostream << "(" << quaternion.x << ", " << quaternion.y << ", " << quaternion.z << ", " << quaternion.w << ")";

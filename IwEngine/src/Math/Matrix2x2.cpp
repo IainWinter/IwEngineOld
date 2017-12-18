@@ -2,41 +2,52 @@
 
 using namespace Math;
 
-#pragma region Constants
+const Matrix2x2 Matrix2x2::Identity = Matrix2x2(1.0f);
 
-const Matrix2x2 Matrix2x2::Zero = Matrix2x2(Vector2::Zero, Vector2::Zero);
-const Matrix2x2 Matrix2x2::Identity = Matrix2x2(Vector2::UnitX, Vector2::UnitY);
+Matrix2x2::Matrix2x2() {
+	memset(elements, 0, 2 * 2 * sizeof(float));
+}
 
-#pragma endregion
+Matrix2x2::Matrix2x2(float diagonal) {
+	memset(elements, 0, 2 * 2 * sizeof(float));
+	elements[0 + 0 * 2] = diagonal;
+	elements[1 + 1 * 2] = diagonal;
+}
 
-#pragma region Constructors
+Matrix2x2::Matrix2x2(float* elements) {
+	memcpy(this->elements, elements, 2 * 2 * sizeof(float));
+}
 
-Matrix2x2::Matrix2x2(float m00, float m01, float m10, float m11) : row0(Vector2(m00, m01)), row1(Vector2(m10, m11)) {}
+Matrix2x2::Matrix2x2(Vector2& row0, Vector2& row1) {
+	rows[0] = row0;
+	rows[1] = row1;
+}
 
-Matrix2x2::Matrix2x2(Vector2 row0, Vector2 row1) : row0(row0), row1(row1) {}
-
-#pragma endregion
-
-#pragma region MathFunctions
+Matrix2x2::Matrix2x2(float m00, float m01, float m10, float m11) {
+	elements[0] = m00;
+	elements[1] = m01;
+	elements[2] = m10;
+	elements[3] = m11;
+}
 
 float Matrix2x2::Determinant() const {
-	return row0.x * row1.y - row0.y * row1.x;
+	return rows[0].x * rows[1].y - rows[0].y * rows[1].x;
 }
 
 float Matrix2x2::Trace() const {
-	return row0.x + row1.y;
+	return rows[0].x + rows[1].y;
 }
 
 void Matrix2x2::Transpose() {
 	Matrix2x2 tmp = *this;
-	row0.y = tmp.row1.x;
-	row1.x = tmp.row0.y;
+	rows[0].y = tmp.rows[1].x;
+	rows[1].x = tmp.rows[0].y;
 }
 
 Matrix2x2 Matrix2x2::Transposed() const {
 	return Matrix2x2(
-		row0.x, row1.x,
-		row0.y, row1.y
+		rows[0].x, rows[1].x,
+		rows[0].y, rows[1].y
 	);
 }
 
@@ -49,10 +60,10 @@ void Matrix2x2::Invert() {
 	float invDet = 1.0f / det;
 
 	Matrix2x2 tmp = *this;
-	row0.x = tmp.row1.y * invDet;
-	row0.y = -tmp.row0.y * invDet;
-	row1.x = -tmp.row1.x * invDet;
-	row1.y = tmp.row0.x * invDet;
+	rows[0].x = tmp.rows[1].y * invDet;
+	rows[0].y = -tmp.rows[0].y * invDet;
+	rows[1].x = -tmp.rows[1].x * invDet;
+	rows[1].y = tmp.rows[0].x * invDet;
 }
 
 Matrix2x2 Matrix2x2::Inverted() const {
@@ -73,59 +84,33 @@ Matrix2x2 Matrix2x2::Normalized() const {
 }
 
 float& Matrix2x2::operator()(int row, int col) {
-	if (row == 0) {
-		if (col == 0) return row0.x;
-		if (col == 1) return row0.y;
+	if (row > 2 || col > 2 || 0 > row || 0 > col) {
+		throw std::out_of_range("Row/Col is outside the bounds of this maxtrix.");
 	}
 
-	if (row == 1) {
-		if (col == 0) return row1.x;
-		if (col == 1) return row1.y;
-	}
-
-	throw std::out_of_range("Row/Col is outside the bounds of this maxtrix.");
+	return elements[col + row * 2];
 }
-
-float& Matrix2x2::m00() {
-	return row0.x;
-}
-
-float& Matrix2x2::m01() {
-	return row0.y;
-}
-
-float& Matrix2x2::m10() {
-	return row1.x;
-}
-
-float& Matrix2x2::m11() {
-	return row1.y;
-}
-
-#pragma endregion
-
-#pragma region Operators
 
 Matrix2x2 Matrix2x2::operator+(const Matrix2x2 & other) const {
 	return Matrix2x2(
-		row0 + other.row0,
-		row1 + other.row1
+		rows[0] + other.rows[0],
+		rows[1] + other.rows[1]
 	);
 }
 
 Matrix2x2 Matrix2x2::operator-(const Matrix2x2 & other) const {
 	return Matrix2x2(
-		row0 - other.row0,
-		row1 - other.row1
+		rows[0] - other.rows[0],
+		rows[1] - other.rows[1]
 	);
 }
 
 Matrix2x2 Matrix2x2::operator*(const Matrix2x2 & other) const {
 	return Matrix2x2(
-		row0.x * other.row0.x + row0.y * other.row1.x,
-		row0.x * other.row0.y + row0.y * other.row1.y,
-		row1.x * other.row0.x + row1.y * other.row1.x,
-		row1.x * other.row0.y + row1.y * other.row1.y
+		rows[0].x * other.rows[0].x + rows[0].y * other.rows[1].x,
+		rows[0].x * other.rows[0].y + rows[0].y * other.rows[1].y,
+		rows[1].x * other.rows[0].x + rows[1].y * other.rows[1].x,
+		rows[1].x * other.rows[0].y + rows[1].y * other.rows[1].y
 	);
 }
 
@@ -143,29 +128,29 @@ Matrix2x2 Matrix2x2::operator*=(const Matrix2x2 & other) {
 
 Matrix2x2 Matrix2x2::operator+(const float other) const {
 	return Matrix2x2(
-		row0 + other, 
-		row1 + other
+		rows[0] + other, 
+		rows[1] + other
 	);
 }
 
 Matrix2x2 Matrix2x2::operator-(const float other) const {
 	return Matrix2x2(
-		row0 - other,
-		row1 - other
+		rows[0] - other,
+		rows[1] - other
 	);
 }
 
 Matrix2x2 Matrix2x2::operator*(const float other) const {
 	return Matrix2x2(
-		row0 * other,
-		row1 * other
+		rows[0] * other,
+		rows[1] * other
 	);
 }
 
 Matrix2x2 Matrix2x2::operator/(const float other) const {
 	return Matrix2x2(
-		row0 / other,
-		row1 / other
+		rows[0] / other,
+		rows[1] / other
 	);
 }
 
@@ -186,7 +171,7 @@ Matrix2x2 Matrix2x2::operator/=(const float other) {
 }
 
 Matrix2x2 Matrix2x2::operator-() const {
-	return Matrix2x2(-row0, -row1);
+	return Matrix2x2(-rows[0], -rows[1]);
 }
 
 bool Matrix2x2::operator==(const Matrix2x2 & other) const {
@@ -198,12 +183,8 @@ bool Matrix2x2::operator!=(const Matrix2x2 & other) const {
 }
 
 bool Matrix2x2::Equals(const Matrix2x2 & other) const {
-	return row0 == other.row0 && row1 == other.row1;
+	return rows[0] == other.rows[0] && rows[1] == other.rows[1];
 }
-
-#pragma endregion
-
-#pragma region Static
 
 Matrix2x2 Matrix2x2::CreateRoatation(float angle) {
 	float cos = cosf(angle);
@@ -230,10 +211,8 @@ Matrix2x2 Matrix2x2::CreateScale(float x, float y) {
 	);
 }
 
-#pragma endregion
-
 std::ostream& Math::operator<<(std::ostream & ostream, const Matrix2x2 & a) {
-	return ostream << a.row0 << std::endl << a.row1;
+	return ostream << a.rows[0] << std::endl << a.rows[1];
 }
 
 Matrix2x2 Math::operator+(const float left, const Matrix2x2 & right) {

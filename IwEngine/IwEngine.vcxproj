@@ -160,7 +160,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\IwEngine\Utility\IO.h" />
+    <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
     <ClCompile Include="src\Graphics\Display.cpp" />
     <ClCompile Include="src\Math\MathHelper.cpp" />
     <ClCompile Include="src\Math\Matrix2x2.cpp" />
@@ -175,8 +175,9 @@
     <ClCompile Include="src\Utility\IO\Path.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IwEngine\Common.h" />
     <ClInclude Include="include\IwEngine\Graphics\Display.h" />
-    <ClInclude Include="include\IwEngine\Math.h" />
+    <ClInclude Include="include\IwEngine\Math\Math.h" />
     <ClInclude Include="include\IwEngine\Math\MathHelper.h" />
     <ClInclude Include="include\IwEngine\Math\Matrix2x2.h" />
     <ClInclude Include="include\IwEngine\Math\Matrix3x3.h" />

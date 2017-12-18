@@ -21,6 +21,8 @@ Vector4::Vector4() {}
 
 Vector4::Vector4(float xyzw) : x(xyzw), y(xyzw), z(xyzw), w(xyzw) {}
 
+Math::Vector4::Vector4(const Vector3 & xyz, float w) :x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
+
 Vector4::Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
 #pragma endregion

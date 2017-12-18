@@ -3,51 +3,61 @@
 
 using namespace Math;
 
-#pragma region Constants
+const Matrix3x3 Matrix3x3::Identity = Matrix3x3(1.0f);
 
-const Matrix3x3 Matrix3x3::Zero = Matrix3x3(Vector3::Zero, Vector3::Zero, Vector3::Zero);
-const Matrix3x3 Matrix3x3::Identity = Matrix3x3(Vector3::UnitX, Vector3::UnitY, Vector3::UnitZ);
+Matrix3x3::Matrix3x3() {
+	memset(elements, 0, 3 * 3 * sizeof(float));
+}
 
-#pragma endregion
+Matrix3x3::Matrix3x3(float diagonal) {
+	memset(elements, 0, 3 * 3 * sizeof(float));
+	elements[0 + 0 * 3] = diagonal;
+	elements[1 + 1 * 3] = diagonal;
+	elements[2 + 2 * 3] = diagonal;
+}
 
-#pragma region Constructors
+Matrix3x3::Matrix3x3(float* elements) {
+	memcpy(this->elements, elements, 3 * 3 * sizeof(float));
+}
+
+Matrix3x3::Matrix3x3(Vector3 row0, Vector3 row1, Vector3 row2) {
+	rows[0] = row0;
+	rows[1] = row1;
+	rows[2] = row2;
+}
 
 Matrix3x3::Matrix3x3(
 	float m00, float m01, float m02,
 	float m10, float m11, float m12,
-	float m20, float m21, float m22) :
-	row0(Vector3(m00, m01, m02)),
-	row1(Vector3(m10, m11, m12)),
-	row2(Vector3(m20, m21, m22)) {
+	float m20, float m21, float m22) 
+{
+	elements[0] = m00; elements[1] = m01; elements[2] = m02;
+	elements[3] = m10; elements[4] = m11; elements[5] = m12;
+	elements[6] = m20; elements[7] = m21; elements[8] = m22;
 }
 
-Matrix3x3::Matrix3x3(Vector3 row0, Vector3 row1, Vector3 row2) : row0(row0), row1(row1), row2(row2) {}
-
-#pragma endregion
-
-#pragma region MathFunctions
-
 float Matrix3x3::Determinant() const {
-	return row0.x * (row1.y * row2.z - row1.z * row2.y)
-		- row0.y * (row1.x * row2.z - row1.z * row2.x)
-		+ row0.z * (row1.x * row2.y - row1.y * row2.x);
+	return 
+		  rows[0].x * (rows[1].y * rows[2].z - rows[1].z * rows[2].y)
+		- rows[0].y * (rows[1].x * rows[2].z - rows[1].z * rows[2].x)
+		+ rows[0].z * (rows[1].x * rows[2].y - rows[1].y * rows[2].x);
 }
 
 float Matrix3x3::Trace() const {
-	return row0.x + row1.y + row2.z;
+	return rows[0].x + rows[1].y + rows[2].z;
 }
 
 void Matrix3x3::Transpose() {
 	Matrix3x3 tmp = *this;
-	row0.x = tmp.row0.x;
-	row0.y = tmp.row1.x;
-	row0.z = tmp.row2.x;
-	row1.x = tmp.row0.y;
-	row1.y = tmp.row1.y;
-	row1.z = tmp.row2.y;
-	row2.x = tmp.row0.z;
-	row2.y = tmp.row1.z;
-	row2.z = tmp.row2.z;
+	rows[0].x = tmp.rows[0].x;
+	rows[0].y = tmp.rows[1].x;
+	rows[0].z = tmp.rows[2].x;
+	rows[1].x = tmp.rows[0].y;
+	rows[1].y = tmp.rows[1].y;
+	rows[1].z = tmp.rows[2].y;
+	rows[2].x = tmp.rows[0].z;
+	rows[2].y = tmp.rows[1].z;
+	rows[2].z = tmp.rows[2].z;
 }
 
 Matrix3x3 Matrix3x3::Transposed() const {
@@ -63,7 +73,7 @@ void Matrix3x3::Invert() {
 		throw std::invalid_argument("Determinant is zero, therefore inverse matrix doesn't exist.");
 	}
 
-	Matrix3x3 tmp = Matrix3x3::Zero;
+	Matrix3x3 tmp = Matrix3x3();
 
 	for (short i = 0; i < 3; i++) {
 		for (short j = 0; j < 3; j++) {
@@ -87,7 +97,7 @@ void Matrix3x3::Invert() {
 				t2r = t2r == 0 ? 0 : t2r - 1;
 			}
 
-			Matrix2x2 m = Matrix2x2::Zero;
+			Matrix2x2 m = Matrix2x2();
 
 			m(t1r, t1c) = m11;
 			m(t2r, t1c) = m21;
@@ -129,9 +139,9 @@ Matrix3x3 Matrix3x3::Normalized() const {
 }
 
 void Matrix3x3::ClearRotation() {
-	row0 = Vector3(row0.Length(), 0, 0);
-	row1 = Vector3(0, row1.Length(), 0);
-	row2 = Vector3(0, 0, row2.Length());
+	rows[0] = Vector3(rows[0].Length(), 0, 0);
+	rows[1] = Vector3(0, rows[1].Length(), 0);
+	rows[2] = Vector3(0, 0, rows[2].Length());
 }
 
 Matrix3x3 Matrix3x3::ClearedRotation() const {
@@ -142,13 +152,13 @@ Matrix3x3 Matrix3x3::ClearedRotation() const {
 }
 
 Vector3 Matrix3x3::ExtractScale() const {
-	return Vector3(row0.Length(), row1.Length(), row2.Length());
+	return Vector3(rows[0].Length(), rows[1].Length(), rows[2].Length());
 }
 
 Quaternion Matrix3x3::ExtractRotation() const {
-	Vector3 r0 = row0.Normalized();
-	Vector3 r1 = row1.Normalized();
-	Vector3 r2 = row2.Normalized();
+	Vector3 r0 = rows[0].Normalized();
+	Vector3 r1 = rows[1].Normalized();
+	Vector3 r2 = rows[2].Normalized();
 
 	Quaternion q = Quaternion::Identity;
 
@@ -192,94 +202,40 @@ Quaternion Matrix3x3::ExtractRotation() const {
 }
 
 float& Matrix3x3::operator()(int row, int col) {
-	if (row == 0) {
-		if (col == 0) return row0.x;
-		if (col == 1) return row0.y;
-		if (col == 2) return row0.z;
+	if (row > 3 || col > 3 || 0 > row || 0 > col) {
+		throw std::out_of_range("Row/Col is outside the bounds of this maxtrix.");
 	}
 
-	if (row == 1) {
-		if (col == 0) return row1.x;
-		if (col == 1) return row1.y;
-		if (col == 2) return row1.z;
-	}
-
-	if (row == 2) {
-		if (col == 0) return row2.x;
-		if (col == 1) return row2.y;
-		if (col == 2) return row2.z;
-	}
-
-	throw std::out_of_range("Row/Col is outside the bounds of this maxtrix.");
+	return elements[col + row * 3];
 }
-
-float& Matrix3x3::m00() {
-	return row0.x;
-}
-
-float& Matrix3x3::m01() {
-	return row0.y;
-}
-
-float& Matrix3x3::m02() {
-	return row0.z;
-}
-
-float& Matrix3x3::m10() {
-	return row1.x;
-}
-
-float& Matrix3x3::m11() {
-	return row1.y;
-}
-
-float& Matrix3x3::m12() {
-	return row1.z;
-}
-
-float& Matrix3x3::m20() {
-	return row2.x;
-}
-
-float& Matrix3x3::m21() {
-	return row2.y;
-}
-
-float& Matrix3x3::m22() {
-	return row2.z;
-}
-
-#pragma endregion
-
-#pragma region Operators
 
 Matrix3x3 Matrix3x3::operator+(const Matrix3x3 & other) const {
 	return Matrix3x3(
-		row0 + other.row0,
-		row1 + other.row1,
-		row2 + other.row2
+		rows[0] + other.rows[0],
+		rows[1] + other.rows[1],
+		rows[2] + other.rows[2]
 	);
 }
 
 Matrix3x3 Matrix3x3::operator-(const Matrix3x3 & other) const {
 	return Matrix3x3(
-		row0 - other.row0,
-		row1 - other.row1,
-		row2 - other.row2
+		rows[0] - other.rows[0],
+		rows[1] - other.rows[1],
+		rows[2] - other.rows[2]
 	);
 }
 
 Matrix3x3 Matrix3x3::operator*(const Matrix3x3 & other) const {
 	return Matrix3x3(
-		(row0.x * other.row0.x) + (row0.y * other.row1.x) + (row0.z * other.row2.x),
-		(row0.x * other.row0.y) + (row0.y * other.row1.y) + (row0.z * other.row2.y),
-		(row0.x * other.row0.z) + (row0.y * other.row1.z) + (row0.z * other.row2.z),
-		(row1.x * other.row0.x) + (row1.y * other.row1.x) + (row1.z * other.row2.x),
-		(row1.x * other.row0.y) + (row1.y * other.row1.y) + (row1.z * other.row2.y),
-		(row1.x * other.row0.z) + (row1.y * other.row1.z) + (row1.z * other.row2.z),
-		(row2.x * other.row0.x) + (row2.y * other.row1.x) + (row2.z * other.row2.x),
-		(row2.x * other.row0.y) + (row2.y * other.row1.y) + (row2.z * other.row2.y),
-		(row2.x * other.row0.z) + (row2.y * other.row1.z) + (row2.z * other.row2.z)
+		(rows[0].x * other.rows[0].x) + (rows[0].y * other.rows[1].x) + (rows[0].z * other.rows[2].x),
+		(rows[0].x * other.rows[0].y) + (rows[0].y * other.rows[1].y) + (rows[0].z * other.rows[2].y),
+		(rows[0].x * other.rows[0].z) + (rows[0].y * other.rows[1].z) + (rows[0].z * other.rows[2].z),
+		(rows[1].x * other.rows[0].x) + (rows[1].y * other.rows[1].x) + (rows[1].z * other.rows[2].x),
+		(rows[1].x * other.rows[0].y) + (rows[1].y * other.rows[1].y) + (rows[1].z * other.rows[2].y),
+		(rows[1].x * other.rows[0].z) + (rows[1].y * other.rows[1].z) + (rows[1].z * other.rows[2].z),
+		(rows[2].x * other.rows[0].x) + (rows[2].y * other.rows[1].x) + (rows[2].z * other.rows[2].x),
+		(rows[2].x * other.rows[0].y) + (rows[2].y * other.rows[1].y) + (rows[2].z * other.rows[2].y),
+		(rows[2].x * other.rows[0].z) + (rows[2].y * other.rows[1].z) + (rows[2].z * other.rows[2].z)
 	);
 }
 
@@ -297,34 +253,34 @@ Matrix3x3 Matrix3x3::operator*=(const Matrix3x3 & other) {
 
 Matrix3x3 Matrix3x3::operator+(const float other) const {
 	return Matrix3x3(
-		row0 + other,
-		row1 + other,
-		row2 + other
+		rows[0] + other,
+		rows[1] + other,
+		rows[2] + other
 	);
 }
 
 Matrix3x3 Matrix3x3::operator-(const float other) const {
 	return Matrix3x3(
-		row0 - other,
-		row1 - other,
-		row2 - other
+		rows[0] - other,
+		rows[1] - other,
+		rows[2] - other
 	);
 }
 
 Matrix3x3 Matrix3x3::operator*(const float other) const {
 	return Matrix3x3(
-		row0 * other,
-		row1 * other,
-		row2 * other
+		rows[0] * other,
+		rows[1] * other,
+		rows[2] * other
 	);
 }
 
 
 Matrix3x3 Matrix3x3::operator/(const float other) const {
 	return Matrix3x3(
-		row0 / other,
-		row1 / other,
-		row2 / other
+		rows[0] / other,
+		rows[1] / other,
+		rows[2] / other
 	);
 }
 
@@ -345,7 +301,7 @@ Matrix3x3 Matrix3x3::operator/=(const float other) {
 }
 
 Matrix3x3 Matrix3x3::operator-() const {
-	return Matrix3x3(-row0, -row1, -row2);
+	return Matrix3x3(-rows[0], -rows[1], -rows[2]);
 }
 
 bool Matrix3x3::operator==(const Matrix3x3& other) const {
@@ -357,12 +313,8 @@ bool Matrix3x3::operator!=(const Matrix3x3& other) const {
 }
 
 bool Matrix3x3::Equals(const Matrix3x3& other) const {
-	return row0 == other.row0 && row1 == other.row1 && row2 == other.row2;
+	return rows[0] == other.rows[0] && rows[1] == other.rows[1] && rows[2] == other.rows[2];
 }
-
-#pragma endregion
-
-#pragma region Static
 
 Matrix3x3 Matrix3x3::CreateFromAxisAngle(float x, float y, float z, float angle) {
 	return CreateFromAxisAngle(Vector3(x, y, z), angle);
@@ -406,10 +358,10 @@ Matrix3x3 Matrix3x3::CreateRoatationX(float angle) {
 	float sin = sinf(angle);
 
 	Matrix3x3 out = Matrix3x3::Identity;
-	out.row1.y = cos;
-	out.row1.z = sin;
-	out.row2.y = -sin;
-	out.row2.z = cos;
+	out.rows[1].y = cos;
+	out.rows[1].z = sin;
+	out.rows[2].y = -sin;
+	out.rows[2].z = cos;
 
 	return out;
 }
@@ -419,10 +371,10 @@ Matrix3x3 Matrix3x3::CreateRoatationY(float angle) {
 	float sin = sinf(angle);
 
 	Matrix3x3 out = Matrix3x3::Identity;
-	out.row0.x = cos;
-	out.row0.z = -sin;
-	out.row2.x = sin;
-	out.row2.z = cos;
+	out.rows[0].x = cos;
+	out.rows[0].z = -sin;
+	out.rows[2].x = sin;
+	out.rows[2].z = cos;
 
 	return out;
 }
@@ -432,10 +384,10 @@ Matrix3x3 Matrix3x3::CreateRoatationZ(float angle) {
 	float sin = sinf(angle);
 
 	Matrix3x3 out = Matrix3x3::Identity;
-	out.row0.x = cos;
-	out.row0.y = sin;
-	out.row1.x = -sin;
-	out.row1.y = cos;
+	out.rows[0].x = cos;
+	out.rows[0].y = sin;
+	out.rows[1].x = -sin;
+	out.rows[1].y = cos;
 
 	return out;
 }
@@ -464,10 +416,8 @@ Matrix3x3 Matrix3x3::CreateScale(float x, float y, float z) {
 	);
 }
 
-#pragma endregion
-
 std::ostream& Math::operator<<(std::ostream & ostream, const Matrix3x3 & a) {
-	return ostream << a.row0 << std::endl << a.row1 << std::endl << a.row2;
+	return ostream << a.rows[0] << std::endl << a.rows[1] << std::endl << a.rows[2];
 }
 
 Matrix3x3 Math::operator+(const float left, const Matrix3x3 & right) {

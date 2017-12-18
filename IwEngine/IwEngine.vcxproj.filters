@@ -48,10 +48,10 @@
     <ClCompile Include="src\Utility\IO\Path.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\IwEngine\Utility\IO.h">
+    <ClCompile Include="src\Graphics\Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Graphics\Display.cpp">
+    <ClCompile Include="include\IwEngine\Utility\IO\IO.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,13 +89,16 @@
     <ClInclude Include="include\IwEngine\Utility\IO\Path.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwEngine\Math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\IwEngine\Graphics\Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IwEngine\Math\Math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IwEngine\Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

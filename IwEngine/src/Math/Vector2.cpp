@@ -4,26 +4,16 @@
 
 using namespace Math;
 
-#pragma region Constants
-
 const Vector2 Vector2::Zero = Vector2(0, 0);
 const Vector2 Vector2::One = Vector2(1, 1);
 const Vector2 Vector2::UnitX = Vector2(1, 0);
 const Vector2 Vector2::UnitY = Vector2(0, 1);
-
-#pragma endregion
-
-#pragma region Constructors
 
 Vector2::Vector2() {}
 
 Vector2::Vector2(float xy) : x(xy), y(xy) {}
 
 Vector2::Vector2(float x, float y) : x(x), y(y) {}
-
-#pragma endregion
-
-#pragma region MathFunctions
 
 float Vector2::Length() const {
 	return sqrtf(x * x + y * y);
@@ -74,10 +64,6 @@ float Vector2::Dot(const Vector2 & other) const {
 float Vector2::CrossLength(const Vector2 & other) const {
 	return x * other.y - y * other.x;
 }
-
-#pragma endregion
-
-#pragma region Operators
 
 Vector2 Vector2::operator+(const Vector2& other) const {
 	return Vector2(x + other.x, y + other.y);
@@ -174,8 +160,6 @@ bool Vector2::operator!=(const Vector2 & other) const {
 bool Vector2::Equals(const Vector2 & other) const {
 	return x == other.x && y == other.y;
 }
-
-#pragma endregion
 
 std::ostream& Math::operator<<(std::ostream& ostream, const Vector2& vector) {
 	return ostream << "(" << vector.x << ", " << vector.y << ")";

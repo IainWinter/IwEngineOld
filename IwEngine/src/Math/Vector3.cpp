@@ -4,27 +4,17 @@
 
 using namespace Math;
 
-#pragma region Constants
-
 const Vector3 Vector3::Zero = Vector3(0, 0,  0);
 const Vector3 Vector3::One = Vector3(1, 1, 1);
 const Vector3 Vector3::UnitX = Vector3(1, 0, 0);
 const Vector3 Vector3::UnitY = Vector3(0, 1,  0);
 const Vector3 Vector3::UnitZ = Vector3(0, 0, 1);
 
-#pragma endregion
-
-#pragma region Constructors
-
 Vector3::Vector3() {}
 
 Vector3::Vector3(float xyz) : x(xyz), y(xyz), z(xyz) {}
 
 Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
-
-#pragma endregion
-
-#pragma region MathFunctions
 
 float Vector3::Length() const {
 	return sqrtf(x * x + y * y + z * z);
@@ -72,10 +62,6 @@ Vector3 Vector3::Cross(const Vector3 & other) const {
 		z * other.x - x * other.z,
 		x * other.y - y * other.x);
 }
-
-#pragma endregion
-
-#pragma region Operators
 
 Vector3 Vector3::operator+(const Vector3& other) const {
 	return Vector3(x + other.x, y + other.y, z + other.z);
@@ -180,8 +166,6 @@ bool Vector3::operator!=(const Vector3 & other) const {
 bool Vector3::Equals(const Vector3 & other) const {
 	return x == other.x && y == other.y && z == other.z;
 }
-
-#pragma endregion
 
 std::ostream& Math::operator<<(std::ostream& ostream, const Vector3& vector) {
 	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")";

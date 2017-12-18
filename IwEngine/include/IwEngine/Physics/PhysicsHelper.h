@@ -1,9 +1,9 @@
 #pragma once
 
-#define g 9.81f
-
-
 class Physics {
 public:
-	const float gravity = 9.81f;
+	static float gravity;
+
 };
+
+static float gravity = 9.81f;

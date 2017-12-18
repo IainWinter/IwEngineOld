@@ -1,53 +1,55 @@
 #pragma once
 
-#ifdef IWENGINE_EXPORTS
-#define IWENGINE_API __declspec(dllexport)
-#else
-#define IWENGINE_API __declspec(dllimport)
-#endif
+#include "IwEngine\Common.h"
 
 #include "Vector3.h"
 #include "Vector4.h"
 
 namespace Math {
-	struct Quaternion {
+	struct IWENGINE_API Quaternion {
 		float x, y, z, w;
-		IWENGINE_API static const Quaternion Identity;
+		static const Quaternion Identity;
 
-		IWENGINE_API Quaternion(float x, float y, float z, float w);
-		IWENGINE_API Quaternion(Vector3 xyz, float w);
-		IWENGINE_API Quaternion(Vector4 xyzw);
-		IWENGINE_API Vector4 Xyzw() const;
-		IWENGINE_API float Length() const;
-		IWENGINE_API float LengthSquared() const;
-		IWENGINE_API float LengthFast() const;
-		IWENGINE_API Quaternion Normalized() const;
-		IWENGINE_API Quaternion NormalizedFast() const;
-		IWENGINE_API void Normalize();
-		IWENGINE_API void NormalizeFast();
-		IWENGINE_API Quaternion Inverted() const;
-		IWENGINE_API void Invert();
-		IWENGINE_API Quaternion Conjugated() const;
-		IWENGINE_API void Conjugate();
-		IWENGINE_API Vector4 ToAxisAngle() const;
-		IWENGINE_API Vector3 ToEulerAngles() const;
-		IWENGINE_API Quaternion operator+(const Quaternion& other) const;
-		IWENGINE_API Quaternion operator-(const Quaternion& other) const;
-		IWENGINE_API Quaternion operator*(const Quaternion& other) const;
-		IWENGINE_API Quaternion operator+=(const Quaternion& other);
-		IWENGINE_API Quaternion operator-=(const Quaternion& other);
-		IWENGINE_API Quaternion operator*=(const Quaternion& other);
-		IWENGINE_API Quaternion operator*(const float other) const;
-		IWENGINE_API Quaternion operator*=(const float other);
-		IWENGINE_API bool operator==(const Quaternion& other) const;
-		IWENGINE_API bool operator!=(const Quaternion& other) const;
-		IWENGINE_API bool Equals(const Quaternion& other) const;
-		IWENGINE_API static Quaternion FromAxisAngle(const Vector3& axis, const float angle);
-		IWENGINE_API static Quaternion FromAxisAngle(const Vector4& axisAngle);
-		IWENGINE_API static Quaternion FromEulerAngles(const float pitch, const float yaw, const float roll);
-		IWENGINE_API static Quaternion FromEulerAngles(const Vector3& eulerAngles);
+		Quaternion();
+		Quaternion(float x, float y, float z, float w);
+		Quaternion(const Vector3& xyz, float w);
+		Quaternion(const Vector4& xyzw);
+
+		Quaternion& SetXYZ(const Vector3& xyz);
+		const Vector3 GetXYZ() const;
+		float Length() const;
+		float LengthSquared() const;
+		float LengthFast() const;
+		Quaternion Normalized() const;
+		Quaternion NormalizedFast() const;
+		void Normalize();
+		void NormalizeFast();
+		Quaternion Inverted() const;
+		void Invert();
+		Quaternion Conjugated() const;
+		void Conjugate();
+		Vector3 GetAxis() const;
+		Vector4 ToAxisAngle() const;
+		Vector3 ToEulerAngles() const;
+
+		Quaternion operator+(const Quaternion& other) const;
+		Quaternion operator-(const Quaternion& other) const;
+		Quaternion operator*(const Quaternion& other) const;
+		Quaternion operator+=(const Quaternion& other);
+		Quaternion operator-=(const Quaternion& other);
+		Quaternion operator*=(const Quaternion& other);
+		Quaternion operator*(const float other) const;
+		Quaternion operator*=(const float other);
+		bool operator==(const Quaternion& other) const;
+		bool operator!=(const Quaternion& other) const;
+		bool Equals(const Quaternion& other) const;
+
+		static Quaternion FromAxisAngle(const Vector3& axis, const float angle);
+		static Quaternion FromAxisAngle(const Vector4& axisAngle);
+		static Quaternion FromEulerAngles(const float pitch, const float yaw, const float roll);
+		static Quaternion FromEulerAngles(const Vector3& eulerAngles);
+
+		friend IWENGINE_API std::ostream& operator<<(std::ostream &strm, const Quaternion &a);
+		friend IWENGINE_API Quaternion operator*(const float left, const Quaternion& right);
 	};
-
-	IWENGINE_API std::ostream& operator<<(std::ostream &strm, const Quaternion &a);
-	IWENGINE_API Quaternion operator*(const float left, const Quaternion& right);
 }

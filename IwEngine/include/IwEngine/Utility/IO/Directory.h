@@ -1,10 +1,6 @@
 #pragma once
 
-#ifdef IWENGINE_EXPORTS
-#define IWENGINE_API __declspec(dllexport)
-#else
-#define IWENGINE_API __declspec(dllimport)
-#endif
+#include "IwEngine\Common.h"
 
 #include <cstddef>
 #include <system_error>
@@ -12,12 +8,12 @@
 
 namespace Utility {
 	namespace IO {
-		class Directory {
+		class IWENGINE_API Directory {
 		public:
-			IWENGINE_API static std::string* GetFiles(const char* directoryPath, bool recurse);
-			IWENGINE_API static std::string* GetFiles(const char* directoryPath, bool recurse, size_t& fileCount);
-			IWENGINE_API static size_t GetFileCount(const char* directoryPath, bool recurse);
-			IWENGINE_API static bool Exists(const char* directoryPath);
+			static std::string* GetFiles(const char* directoryPath, bool recurse);
+			static std::string* GetFiles(const char* directoryPath, bool recurse, size_t& fileCount);
+			static size_t GetFileCount(const char* directoryPath, bool recurse);
+			static bool Exists(const char* directoryPath);
 		private:
 			Directory();
 		};
