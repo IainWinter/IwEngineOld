@@ -5,8 +5,6 @@
 
 using namespace Math;
 
-const Matrix4x4 Matrix4x4::Identity = Matrix4x4(1.0f);
-
 Matrix4x4::Matrix4x4() {
 	memset(elements, 0, 4 * 4 * sizeof(float));
 }

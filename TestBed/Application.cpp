@@ -1,11 +1,6 @@
-#include "IwEngine\Graphics\Display.h"
-#include "IwEngine\Physics\PhysicsHelper.h"
-#include "IwEngine\Math\Math.h"
+#include "IwEngine\Object.h"
 
 int main() {
-	Display d = Display();
-
-	d.Start();
-
-	return 0;
+	Object o = Object();
+	Object o2 = Object();
 }

@@ -3,8 +3,6 @@
 
 using namespace Math;
 
-const Matrix3x3 Matrix3x3::Identity = Matrix3x3(1.0f);
-
 Matrix3x3::Matrix3x3() {
 	memset(elements, 0, 3 * 3 * sizeof(float));
 }

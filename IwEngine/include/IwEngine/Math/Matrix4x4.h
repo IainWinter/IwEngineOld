@@ -85,4 +85,6 @@ namespace Math {
 		friend IWENGINE_API Matrix4x4 operator*(const float left, const Matrix4x4& right);
 		friend IWENGINE_API Matrix4x4 operator/(const float left, const Matrix4x4& right);
 	};
+
+	const Matrix4x4 Matrix4x4::Identity = Matrix4x4(1.0f);
 }

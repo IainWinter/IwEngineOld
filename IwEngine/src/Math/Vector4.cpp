@@ -4,30 +4,13 @@
 
 using namespace Math;
 
-#pragma region Constants
-
-const Vector4 Vector4::Zero = Vector4(0, 0, 0, 0);
-const Vector4 Vector4::One = Vector4(1, 1, 1, 1);
-const Vector4 Vector4::UnitX = Vector4(1, 0, 0, 0);
-const Vector4 Vector4::UnitY = Vector4(0, 1, 0, 0);
-const Vector4 Vector4::UnitZ = Vector4(0, 0, 1, 0);
-const Vector4 Vector4::UnitW = Vector4(0, 0, 0, 1);
-
-#pragma endregion
-
-#pragma region Constructors
-
 Vector4::Vector4() {}
 
 Vector4::Vector4(float xyzw) : x(xyzw), y(xyzw), z(xyzw), w(xyzw) {}
 
-Math::Vector4::Vector4(const Vector3 & xyz, float w) :x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
+Vector4::Vector4(const Vector3 & xyz, float w) :x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
 
 Vector4::Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
-
-#pragma endregion
-
-#pragma region MathFunctions
 
 float Vector4::Length() const {
 	return sqrtf(x * x + y * y + z * z + w * w);
@@ -74,10 +57,6 @@ float Vector4::Dot(const Vector4 & other) const {
 Vector3 Vector4::Xyz() const {
 	return Vector3(x, y, z);
 }
-
-#pragma endregion
-
-#pragma region Operators
 
 Vector4 Vector4::operator+(const Vector4& other) const {
 	return Vector4(x + other.x, y + other.y, z + other.z, w + other.w);
@@ -190,9 +169,6 @@ bool Vector4::operator!=(const Vector4 & other) const {
 bool Vector4::Equals(const Vector4 & other) const {
 	return x == other.x && y == other.y && z == other.z && w == other.w;
 }
-
-#pragma endregion
-
 
 std::ostream& Math::operator<<(std::ostream& ostream, const Vector4& vector) {
 	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ")";

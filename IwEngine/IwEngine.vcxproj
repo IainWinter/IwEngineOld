@@ -170,6 +170,7 @@
     <ClCompile Include="src\Math\Vector2.cpp" />
     <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Math\Vector4.cpp" />
+    <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\Utility\IO\Directory.cpp" />
     <ClCompile Include="src\Utility\IO\File.cpp" />
     <ClCompile Include="src\Utility\IO\Path.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="include\IwEngine\Math\Vector2.h" />
     <ClInclude Include="include\IwEngine\Math\Vector3.h" />
     <ClInclude Include="include\IwEngine\Math\Vector4.h" />
+    <ClInclude Include="include\IwEngine\Object.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\Directory.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\File.h" />

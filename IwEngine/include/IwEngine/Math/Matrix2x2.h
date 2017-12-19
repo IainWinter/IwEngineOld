@@ -62,4 +62,6 @@ namespace Math {
 		friend IWENGINE_API Matrix2x2 operator*(const float left, const Matrix2x2& right);
 		friend IWENGINE_API Matrix2x2 operator/(const float left, const Matrix2x2& right);
 	};
+
+	const Matrix2x2 Matrix2x2::Identity = Matrix2x2(1.0f);
 }

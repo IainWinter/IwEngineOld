@@ -54,6 +54,9 @@
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\Math\MathHelper.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\IwEngine\Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IwEngine\Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
