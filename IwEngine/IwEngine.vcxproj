@@ -189,6 +189,7 @@
     <ClInclude Include="include\IwEngine\Math\Vector4.h" />
     <ClInclude Include="include\IwEngine\Object.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h" />
+    <ClInclude Include="include\IwEngine\Physics\RigidBody.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\Directory.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\File.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\Path.h" />

@@ -107,5 +107,8 @@
     <ClInclude Include="include\IwEngine\Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\IwEngine\Physics\RigidBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
