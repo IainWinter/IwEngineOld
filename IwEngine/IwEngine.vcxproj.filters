@@ -1,135 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="include\IwEngine\Physics\GameObject.cpp" />
+    <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
+    <ClCompile Include="src\Graphics\Display.cpp" />
+    <ClCompile Include="src\Math\MathHelper.cpp" />
+    <ClCompile Include="src\Math\Matrix2x2.cpp" />
+    <ClCompile Include="src\Math\Matrix3x3.cpp" />
+    <ClCompile Include="src\Math\Matrix4x4.cpp" />
+    <ClCompile Include="src\Math\Quaternion.cpp" />
+    <ClCompile Include="src\Math\Vector2.cpp" />
+    <ClCompile Include="src\Math\Vector3.cpp" />
+    <ClCompile Include="src\Math\Vector4.cpp" />
+    <ClCompile Include="src\Object.cpp" />
+    <ClCompile Include="src\Utility\IO\Directory.cpp" />
+    <ClCompile Include="src\Utility\IO\File.cpp" />
+    <ClCompile Include="src\Utility\IO\Path.cpp" />
+    <ClCompile Include="src\Utility\Logger.cpp" />
+    <ClCompile Include="src\Events\Observer.cpp" />
+    <ClCompile Include="src\Events\Observable.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Math\MathHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Matrix2x2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Matrix3x3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Matrix4x4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Quaternion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Vector4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Utility\IO\Directory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Utility\IO\File.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Utility\IO\Path.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Graphics\Display.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\IwEngine\Utility\IO\IO.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\IwEngine\Physics\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\IwEngine\Math\MathHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Math\Matrix2x2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Math\Matrix3x3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Math\Matrix4x4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Math\Quaternion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Math\Vector2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Math\Vector3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Math\Vector4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Utility\IO\Directory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Utility\IO\File.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Utility\IO\Path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Graphics\Display.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Math\Math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Physics\RigidBody.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Physics\CollisionDetectionMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Physics\PhysicsMaterial.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Physics\FrictionCombine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Physics\BounceCombine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Physics\Collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwEngine\Physics\GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="include\IwEngine\Common.h" />
+    <ClInclude Include="include\IwEngine\Graphics\Display.h" />
+    <ClInclude Include="include\IwEngine\Math\Math.h" />
+    <ClInclude Include="include\IwEngine\Math\MathHelper.h" />
+    <ClInclude Include="include\IwEngine\Math\Matrix2x2.h" />
+    <ClInclude Include="include\IwEngine\Math\Matrix3x3.h" />
+    <ClInclude Include="include\IwEngine\Math\Matrix4x4.h" />
+    <ClInclude Include="include\IwEngine\Math\Quaternion.h" />
+    <ClInclude Include="include\IwEngine\Math\Vector2.h" />
+    <ClInclude Include="include\IwEngine\Math\Vector3.h" />
+    <ClInclude Include="include\IwEngine\Math\Vector4.h" />
+    <ClInclude Include="include\IwEngine\Object.h" />
+    <ClInclude Include="include\IwEngine\Physics\BounceCombine.h" />
+    <ClInclude Include="include\IwEngine\Physics\Collider.h" />
+    <ClInclude Include="include\IwEngine\Physics\CollisionDetectionMode.h" />
+    <ClInclude Include="include\IwEngine\Physics\FrictionCombine.h" />
+    <ClInclude Include="include\IwEngine\Physics\GameObject.h" />
+    <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h" />
+    <ClInclude Include="include\IwEngine\Physics\PhysicsMaterial.h" />
+    <ClInclude Include="include\IwEngine\Physics\RigidBody.h" />
+    <ClInclude Include="include\IwEngine\Utility\IO\Directory.h" />
+    <ClInclude Include="include\IwEngine\Utility\IO\File.h" />
+    <ClInclude Include="include\IwEngine\Utility\IO\Path.h" />
+    <ClInclude Include="include\IwEngine\Utility\Logger.h" />
+    <ClInclude Include="include\IwEngine\Utility\Color.h" />
+    <ClInclude Include="include\IwEngine\Events\Observable.h" />
+    <ClInclude Include="include\IwEngine\Events\Observer.h" />
   </ItemGroup>
 </Project>

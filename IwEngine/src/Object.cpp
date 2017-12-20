@@ -1,19 +1,19 @@
 #include "IwEngine\Object.h"
 
 inline int Object::GetInstanceID() const {
-	return instance_id_;
+	return m_instanceId;
 }
 
 inline const std::string& Object::GetName() const {
-	return name_;
+	return m_name;
 }
 
 inline Object& Object::SetName(const std::string& name) {
-	name_ = name;
+	m_name = name;
 	return *this;
 }
 
 inline Object& Object::SetName(const char* name) {
-	name_ = name;
+	m_name = name;
 	return *this;
 }

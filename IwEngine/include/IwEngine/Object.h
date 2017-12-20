@@ -6,9 +6,9 @@
 
 class Object {
 private:
-	static std::atomic<int> static_id_;
-	int instance_id_ = ++static_id_;
-	std::string name_;
+	static std::atomic<int> m_staticId;
+	int m_instanceId = ++m_staticId;
+	std::string m_name;
 public:
 	IWENGINE_API inline int GetInstanceID() const;
 	IWENGINE_API inline const std::string& GetName() const;
@@ -21,4 +21,4 @@ public:
 	//template<typename T> static Object&??? FindObjectOfType();
 };
 
-std::atomic<int> Object::static_id_;
+std::atomic<int> Object::m_staticId;

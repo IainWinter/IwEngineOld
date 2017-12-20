@@ -1,13 +1,18 @@
-#include "IwEngine\Math\MathHelper.h"
-#include "IwEngine\Utility\Logger.h"
+#include "IwEngine\Events\Observable.h"
+#include "IwEngine\Events\Observer.h"
+#include <iostream>
 
 int main() {
+	Observable obs = Observable();
+	Observer* o = new Observer();
 
-	Utility::Info("Info info info");
-	Utility::Debug("Debug debug debug");
-	Utility::Warn("Warn warn warn");
-	Utility::Error("Error error error");
-	Utility::Exception("Exception exception exception");
+	obs.Hook(o);
+
+	obs.Fire<int>(5);
 
 	std::cin.get();
 }
+
+class ObserverTest : Observer {
+
+};
