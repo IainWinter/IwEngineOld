@@ -160,6 +160,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\IwEngine\Physics\GameObject.cpp" />
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
     <ClCompile Include="src\Graphics\Display.cpp" />
     <ClCompile Include="src\Math\MathHelper.cpp" />
@@ -189,8 +190,13 @@
     <ClInclude Include="include\IwEngine\Math\Vector3.h" />
     <ClInclude Include="include\IwEngine\Math\Vector4.h" />
     <ClInclude Include="include\IwEngine\Object.h" />
+    <ClInclude Include="include\IwEngine\Physics\BounceCombine.h" />
+    <ClInclude Include="include\IwEngine\Physics\Collider.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionDetectionMode.h" />
+    <ClInclude Include="include\IwEngine\Physics\FrictionCombine.h" />
+    <ClInclude Include="include\IwEngine\Physics\GameObject.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h" />
+    <ClInclude Include="include\IwEngine\Physics\PhysicsMaterial.h" />
     <ClInclude Include="include\IwEngine\Physics\RigidBody.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\Directory.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\File.h" />

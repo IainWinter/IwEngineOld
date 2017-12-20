@@ -1,6 +1,7 @@
 #pragma once
+#include "IwEngine\Common.h"
 
-class Physics {
+class IWENGINE_API Physics {
 public:
 	static float gravity;
 };
