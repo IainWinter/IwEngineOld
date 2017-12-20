@@ -1,4 +1,5 @@
 #pragma once
 enum CollisionDetectionMode {
-	Continuous, Discrete
+	Continuous, 
+	Discrete
 };

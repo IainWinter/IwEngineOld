@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IwEngine\Common.h"
-
 #include "Vector3.h"
 #include "Vector4.h"
 
@@ -52,6 +51,4 @@ namespace Math {
 		friend IWENGINE_API std::ostream& operator<<(std::ostream &strm, const Quaternion &a);
 		friend IWENGINE_API Quaternion operator*(const float left, const Quaternion& right);
 	};
-
-	const Quaternion Quaternion::Identity = Vector4(0, 0, 0, 1);
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IwEngine\Common.h"
-
 #include "Vector3.h"
 #include "Quaternion.h"
 
@@ -75,6 +74,4 @@ namespace Math {
 		friend IWENGINE_API Matrix3x3 operator*(const float left, const Matrix3x3& right);
 		friend IWENGINE_API Matrix3x3 operator/(const float left, const Matrix3x3& right);
 	};
-
-	const Matrix3x3 Matrix3x3::Identity = Matrix3x3(1.0f);
 }

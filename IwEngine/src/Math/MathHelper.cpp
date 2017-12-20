@@ -1,7 +1,5 @@
 #include "IwEngine\Math\MathHelper.h"
 
-using namespace Math;
-
 float Math::InvSqrt(float x) {
 	float xhalf = 0.5f * x;
 	int i = *(int*)&x;

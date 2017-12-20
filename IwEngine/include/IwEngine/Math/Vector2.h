@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IwEngine\Common.h"
-
 #include <iostream>
 
 namespace Math {
@@ -55,9 +54,4 @@ namespace Math {
 		friend IWENGINE_API Vector2 operator*(const float left, const Vector2& right);
 		friend IWENGINE_API Vector2 operator/(const float left, const Vector2& right);
 	};
-
-	const Vector2 Vector2::Zero = Vector2(0, 0);
-	const Vector2 Vector2::One = Vector2(1, 1);
-	const Vector2 Vector2::UnitX = Vector2(1, 0);
-	const Vector2 Vector2::UnitY = Vector2(0, 1);
 }

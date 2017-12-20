@@ -2,6 +2,8 @@
 
 using namespace Math;
 
+const Matrix2x2 Matrix2x2::Identity = Matrix2x2(1.0f);
+
 Matrix2x2::Matrix2x2() {
 	memset(elements, 0, 2 * 2 * sizeof(float));
 }
