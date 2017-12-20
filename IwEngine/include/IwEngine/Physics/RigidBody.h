@@ -1,8 +1,9 @@
 #pragma once
 #include "CollisionDetectionMode.h"
 #include <tuple>
+#include "IwEngine\Common.h"
 
-class RigidBody {
+class IWENGINE_API RigidBody {
 public:
 	float mass;
 	float drag;
