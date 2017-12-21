@@ -1,18 +1,7 @@
-#include "IwEngine\Events\Observable.h"
-#include "IwEngine\Events\Observer.h"
-#include <iostream>
-
+#include "IwEngine\Graphics\Display.h"
 int main() {
-	Observable obs = Observable();
-	Observer* o = new Observer();
+	Display d = Display();
+	d.Start();
 
-	obs.Hook(o);
 
-	obs.Fire<int>(5);
-
-	std::cin.get();
 }
-
-class ObserverTest : Observer {
-
-};
