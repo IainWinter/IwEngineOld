@@ -2,38 +2,21 @@
 #include <experimental/filesystem>
 
 namespace filesystem = std::experimental::filesystem::v1;
-using namespace Utility::IO;
 
-bool Path::IsDirectory(std::string path) {
-	return Path::IsDirectory(path.c_str());
-}
-
-bool Path::IsDirectory(const char* path) {
+IWENGINE_API bool Utility::IO::IsDirectory(const char * path) {
 	return filesystem::is_directory(path);
 }
 
-bool Path::IsFile(std::string path) {
-	return Path::IsFile(path.c_str());
-}
-
-bool Path::IsFile(const char* path) {
+IWENGINE_API bool Utility::IO::IsFile(const char * path) {
 	return filesystem::is_regular_file(path);
 }
 
-std::string Path::Extension(std::string path) {
-	return Path::Extension(path.c_str());
-}
-
-std::string Path::Extension(const char* path) {
+IWENGINE_API const char* Utility::IO::GetFileExtension(const char* path) {
 	filesystem::path p = path;
-	return p.extension().string();
+	return p.extension().string().c_str();
 }
 
-std::string Path::Name(std::string path) {
-	return Path::Name(path.c_str());
-}
-
-std::string Path::Name(const char * path) {
+IWENGINE_API const char* Utility::IO::GetFileName(const char* path) {
 	filesystem::path p = path;
-	return p.filename().string();
+	return p.filename().string().c_str();
 }

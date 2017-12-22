@@ -1,23 +1,13 @@
 #pragma once
 
 #include "IwEngine\Common.h"
-
 #include <string>
 
 namespace Utility {
 	namespace IO {
-		class IWENGINE_API Path {
-		public:
-			static bool IsDirectory(std::string path);
-			static bool IsDirectory(const char* path);
-			static bool IsFile(std::string path);
-			static bool IsFile(const char* path);
-			static std::string Extension(std::string path);
-			static std::string Extension(const char* path);
-			static std::string Name(std::string path);
-			static std::string Name(const char* path);
-		private:
-			Path();
-		};
+		IWENGINE_API bool IsDirectory(const char* path);
+		IWENGINE_API bool IsFile(const char* path);
+		IWENGINE_API const char* GetFileExtension(const char* path);
+		IWENGINE_API const char* GetFileName(const char* path);
 	}
 }

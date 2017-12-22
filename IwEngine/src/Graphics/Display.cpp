@@ -2,8 +2,13 @@
 #include "GLFW\glfw3.h"
 #include "IwEngine\Graphics\Display.h"
 #include "IwEngine\Utility\Logger.h"
+#include "IwEngine\Utility\IO\File.h"
 
 Display::Display() {
+
+}
+
+static void ParseShader(const std::string& fileName) {
 
 }
 
@@ -82,25 +87,9 @@ int Display::Start() {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 
-	std::string vs =
-		"#version 330 core\n"
-		"\n"
-		"layout(location = 0) in vec4 position;\n"
-		"\n"
-		"void main() {\n"
-		"	gl_Position = position;\n"
-		"}\n";
+	std::string str = Utility::IO::ReadFile("/res/default.shader");
 
-	std::string fs =
-		"#version 330 core\n"
-		"\n"
-		"out vec4 color;\n"
-		"\n"
-		"void main() {\n"
-		"	color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-		"}\n";
-
-	unsigned int shader = CreateShader(vs, fs);
+	unsigned int shader = CreateShader(str, str);
 
 	glUseProgram(shader);
 
