@@ -17,7 +17,6 @@
     <ClCompile Include="src\Utility\IO\File.cpp" />
     <ClCompile Include="src\Utility\IO\Path.cpp" />
     <ClCompile Include="src\Utility\Logger.cpp" />
-    <ClCompile Include="src\Events\Observer.cpp" />
     <ClCompile Include="src\Events\Observable.cpp" />
   </ItemGroup>
   <ItemGroup>

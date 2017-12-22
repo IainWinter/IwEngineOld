@@ -1,8 +1,9 @@
 #pragma once
 
-
-
+template<typename TEventArg>
 class Observer {
-protected:
-	template<typename TEventType> void On(TEventType event); //find fix
+public:
+	Observer() {};
+	virtual ~Observable() {};
+	virtual void Update(const TEventArg& args) = 0;
 };

@@ -2,11 +2,16 @@
 #include <vector>
 #include "Observer.h"
 
+template<typename TEventArg>
 class Observable {
 private:
-	std::vector<Observer*> m_hookedObservers;
+	std::vector<Observer<TEventArg>*> _observers;
+protected:
+	void Notify(TEventArg& eventArgs);
 public:
-	void Hook(Observer* observer);
-	void DeHook(Observer* observer);
-	template<typename TEventType> void Fire(TEventType event);
+	Observable() {};
+	virtual ~Observable() {};
+	void Attach(Observer<TEventArg>* observer);
+	void Detach(Observer<TEventArg>* observer);
 };
+
