@@ -1,170 +1,65 @@
 #include "IwEngine\Utility\IO\File.h"
+#include "IwEngine\Utility\Logger.h"
 #include <vector>
+#include <cstdio>
+#include <cerrno>
 
-namespace filesystem = std::experimental::filesystem::v1;
-using namespace Utility::IO;
 
-void File::WriteWithMode(const char* filePath, const char** lines, size_t length, int mode) {
-	std::ofstream file(filePath, mode);
+static void ReportError(int errerno, const std::string& addInfo) {
+	std::string error; 
 
-	try {
-		if (!file) {
-			throw std::runtime_error("Bad path or permissions");
-		}
+	error.resize(256);
 
-		for (size_t i = 0; i < length; i++) {
+	strerror_s(&error[0], 100, errerno);
 
-			file << lines[i] << std::endl;
-		}
-	} catch (std::exception ex) {
-		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
+	int i = error.find('\0');
+	error = error.substr(0, i);
+
+	error.append(" (");
+	error.append(std::to_string(errerno));
+	error.append("): ");
+	error.append(addInfo);
+	Utility::Error(error);
+}
+
+IWENGINE_API std::string Utility::IO::ReadFile(const char* filePath) {
+	std::string contents;
+	FILE* file;
+	errno_t errorCode = fopen_s(&file, filePath, "rb");
+	if (file) {
+		fseek(file, 0, SEEK_END);
+		contents.resize(ftell(file));
+		rewind(file);
+		fread(&contents[0], 1, contents.size(), file);
+		fclose(file);
+	} else {
+		ReportError(errorCode, filePath);
 	}
 
-	file.close();
+	return contents;
 }
 
-void File::WriteWithMode(const std::string& filePath, const std::string* lines, size_t length, int mode) {
-	std::ofstream file(filePath, mode);
-	try {
-		if (!file) {
-			throw std::runtime_error("Bad path or permissions");
-		}
-
-		for (size_t i = 0; i < length; i++) {
-			file << lines[i].c_str() << std::endl;
-		}
-	} catch (std::exception ex) {
-		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
+IWENGINE_API bool Utility::IO::FileExists(const char* filePath) {
+	FILE* file;
+	fopen_s(&file, filePath, "rb");
+	if (file) {
+		fclose(file);
 	}
 
-	file.close();
+	return file;
 }
 
-void File::WriteWithMode(const char* filePath, const char* text, int mode) {
-	std::ofstream file(filePath, mode);
-	try {
-		if (!file) {
-			throw std::runtime_error("Bad path or permissions");
-		}
-
-		file << text;
-	} catch (std::exception ex) {
-		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
+IWENGINE_API uintmax_t Utility::IO::GetFileSize(const char* filePath) {
+	uintmax_t bytes;
+	FILE* file;
+	errno_t errorCode = fopen_s(&file, filePath, "rb");
+	if (file) {
+		fseek(file, 0, SEEK_END);
+		bytes = ftell(file);
+		fclose(file);
+	} else {
+		ReportError(errorCode, filePath);
 	}
 
-	file.close();
-}
-
-void File::WriteWithMode(const std::string& filePath, const std::string& text, int mode) {
-	std::ofstream file(filePath, mode);
-	try {
-		if (!file) {
-			throw std::runtime_error("Bad path or permissions");
-		}
-
-		file << text.c_str();
-	} catch (std::exception ex) {
-		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
-	}
-
-	file.close();
-}
-
-void File::AppendAllLines(const char* filePath, const char** lines, size_t length) {
-	File::WriteWithMode(filePath, lines, length, std::ios_base::app);
-}
-
-void File::AppendAllLines(const std::string& filePath, const std::string* lines, size_t length) {
-	File::WriteWithMode(filePath, lines, length, std::ios_base::app);
-}
-
-void File::AppendText(const char* filePath, const char* text) {
-	File::WriteWithMode(filePath, text, std::ios_base::app);
-}
-
-void File::AppendText(const std::string& filePath, const std::string& text) {
-	File::WriteWithMode(filePath, text, std::ios_base::app);
-}
-
-void File::WriteAllLines(const char* filePath, const char** lines, size_t length) {
-	File::WriteWithMode(filePath, lines, length, 0);
-}
-
-void File::WriteAllLines(const std::string& filePath, const std::string* lines, size_t length) {
-	File::WriteWithMode(filePath, lines, length, 0);
-}
-
-void File::WriteText(const char* filePath, const char* text) {
-	File::WriteWithMode(filePath, text, 0);
-}
-
-void File::WriteText(const std::string& filePath, const std::string& text) {
-	File::WriteWithMode(filePath, text, 0);
-}
-
-std::ofstream File::Create(const char* filePath) {
-	return std::ofstream(filePath);
-}
-
-std::ofstream File::Create(const std::string& filePath) {
-	return File::Create(filePath.c_str());
-}
-
-void File::Delete(const char* filePath) {
-	remove(filePath);
-}
-
-void File::Delete(const std::string& filePath) {
-	File::Delete(filePath.c_str());
-}
-
-std::ifstream File::Open(const char* filePath) {
-	return std::ifstream(filePath);
-}
-
-std::ifstream File::Open(const std::string& filePath) {
-	return File::Open(filePath.c_str());
-}
-
-std::string* File::ReadAllLines(const char* filePath) {
-	std::ifstream file = File::Open(filePath);
-	std::vector<std::string> lines;
-	try {
-		if (!file) {
-			throw std::runtime_error("Bad path or premissions");
-		}
-
-		lines = std::vector<std::string>();
-
-		std::string line;
-		while (file >> line) {
-			lines.push_back(std::string(line).c_str());
-		}
-	} catch (std::exception ex) {
-		std::cout << ex.what() << std::endl << "Path: " << filePath << std::endl;
-
-	}
-
-	return &lines[0];
-}
-
-std::string* File::ReadAllLines(const std::string & filePath) {
-	return File::ReadAllLines(filePath.c_str());
-}
-
-bool File::Exists(const char* filePath) {
-	std::error_code errorCode;
-	return File::Exists(filePath, errorCode);
-}
-
-bool File::Exists(const char* filePath, std::error_code& errorCode) {
-	return filesystem::is_regular_file(filePath, errorCode);
-}
-
-uintmax_t File::GetSize(const char * filePath) {
-	return filesystem::file_size(filePath);
-}
-
-uintmax_t File::GetSize(const std::string & filePath) {
-	return File::GetSize(filePath.c_str());
+	return bytes;
 }

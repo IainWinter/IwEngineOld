@@ -2,14 +2,13 @@
 #include "IwEngine\Utility\IO\Path.h"
 
 namespace filesystem = std::experimental::filesystem::v1;
-using namespace Utility::IO;
 
-std::string* Utility::IO::Directory::GetFiles(const char* directoryPath, bool recurse) {
-	size_t throwAwayErrorCode;
-	return GetFiles(directoryPath, recurse, throwAwayErrorCode);
+IWENGINE_API std::string* Utility::IO::GetFiles(const char* directoryPath, bool recurse) {
+	size_t fileCount;
+	return GetFiles(directoryPath, recurse, fileCount);
 }
 
-std::string* Utility::IO::Directory::GetFiles(const char* directoryPath, bool recurse, size_t& fileCount) {
+IWENGINE_API std::string* Utility::IO::GetFiles(const char* directoryPath, bool recurse, size_t& fileCount) {
 	typedef filesystem::recursive_directory_iterator RDI;
 	typedef filesystem::directory_iterator DI;
 
@@ -20,7 +19,7 @@ std::string* Utility::IO::Directory::GetFiles(const char* directoryPath, bool re
 		RDI rdi = RDI(directoryPath);
 		for (size_t i = 0; i < fileCount; i++) {
 			std::string str = rdi->path().string();
-			if (Path::IsFile(str)) {
+			if (IsFile(str.c_str())) {
 				filePaths[i] = str;
 			} else {
 				i--;
@@ -39,7 +38,7 @@ std::string* Utility::IO::Directory::GetFiles(const char* directoryPath, bool re
 	return filePaths;
 }
 
-size_t Utility::IO::Directory::GetFileCount(const char * directoryPath, bool recurse) {
+IWENGINE_API size_t Utility::IO::GetFileCount(const char * directoryPath, bool recurse) {
 	typedef filesystem::recursive_directory_iterator RDI;
 	typedef filesystem::directory_iterator DI;
 
@@ -47,7 +46,7 @@ size_t Utility::IO::Directory::GetFileCount(const char * directoryPath, bool rec
 		RDI rdi = RDI(directoryPath);
 		size_t i = 0;
 		for (auto& file : rdi) {
-			if (Path::IsFile(file.path().string())) {
+			if (IsFile(file.path().string().c_str())) {
 				i++;
 			}
 		}
@@ -59,10 +58,9 @@ size_t Utility::IO::Directory::GetFileCount(const char * directoryPath, bool rec
 	}
 }
 
-bool Utility::IO::Directory::Exists(const char * directoryPath) {
+IWENGINE_API bool Utility::IO::Exists(const char * directoryPath) {
 	return filesystem::is_directory(directoryPath);
 }
-
 
 
 
