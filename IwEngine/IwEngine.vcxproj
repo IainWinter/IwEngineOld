@@ -162,7 +162,6 @@
   <ItemGroup>
     <ClCompile Include="include\IwEngine\Physics\GameObject.cpp" />
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
-    <ClCompile Include="src\Events\Observable.cpp" />
     <ClCompile Include="src\Graphics\Display.cpp" />
     <ClCompile Include="src\Math\MathHelper.cpp" />
     <ClCompile Include="src\Math\Matrix2x2.cpp" />

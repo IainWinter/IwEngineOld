@@ -8,8 +8,22 @@ Display::Display() {
 
 }
 
-static void ParseShader(const std::string& fileName) {
+static void ParseShader(const char* fileName) {
+	std::string str = Utility::IO::ReadFile(fileName);
 
+	size_t beginning = 0;
+	while (beginning > 0) {
+
+	}
+
+	size_t beg = str.find("#shader");
+	if (beg != -1) {
+		size_t end = str.find_first_of('\r', 6) + 1;
+		str = str.substr(end);
+		size_t endShader = str.find("#shader");
+		std::string shader = str.substr(0, endShader);
+		str = str.substr(endShader);
+	}
 }
 
 static unsigned int CompileShader(unsigned int type, const std::string src) {
@@ -87,9 +101,10 @@ int Display::Start() {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 
-	std::string str = Utility::IO::ReadFile("/res/default.shader");
 
-	unsigned int shader = CreateShader(str, str);
+	
+
+	unsigned int shader = CreateShader("", "");
 
 	glUseProgram(shader);
 
