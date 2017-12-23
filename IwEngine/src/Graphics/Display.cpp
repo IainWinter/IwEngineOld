@@ -8,22 +8,16 @@ Display::Display() {
 
 }
 
-static void ParseShader(const char* fileName) {
-	std::string str = Utility::IO::ReadFile(fileName);
+struct ShaderProgramSource {
+	std::string vertex;
+	std::string fragment;
+};
 
-	size_t beginning = 0;
-	while (beginning > 0) {
-
+static ShaderProgramSource ParseShader(std::string* code) {
+	for (size_t i = 0; i < 17; i++) {
+		Utility::Info(code[i]);
 	}
-
-	size_t beg = str.find("#shader");
-	if (beg != -1) {
-		size_t end = str.find_first_of('\r', 6) + 1;
-		str = str.substr(end);
-		size_t endShader = str.find("#shader");
-		std::string shader = str.substr(0, endShader);
-		str = str.substr(endShader);
-	}
+	return ShaderProgramSource();
 }
 
 static unsigned int CompileShader(unsigned int type, const std::string src) {
@@ -88,7 +82,7 @@ int Display::Start() {
 	}
 
 	float pos[6] = {
-	    -0.5f, -0.5f,
+		-0.5f, -0.5f,
 		 0.0f,  0.5f,
 		 0.5f, -0.5f
 	};
@@ -97,12 +91,11 @@ int Display::Start() {
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), pos, GL_STATIC_DRAW);
-	
+
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 
-
-	
+	ShaderProgramSource source = ParseShader(Utility::IO::ReadFileLines("C:/dev/code/c++/IwEngine/TestBed/res/shaders/default.shader"));
 
 	unsigned int shader = CreateShader("", "");
 
