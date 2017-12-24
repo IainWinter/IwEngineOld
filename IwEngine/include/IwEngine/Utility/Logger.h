@@ -2,7 +2,7 @@
 
 #include "IwEngine\Common.h"
 #include "Color.h"
-#include <iostream>
+#include <string>
 
 namespace Utility {
 	IWENGINE_API void Info(const std::string& message);

@@ -1,17 +1,21 @@
 #shader vertex
-#version 330 core
+#version 440 core
 
 layout(location = 0) in vec4 position;
 
+layout(location = 0) uniform mat4 u_world;
+
 void main() {
-	gl_Position = position;
+	gl_Position = u_world * position;
 };
 
-#shader vertex
-#version 330 core
+#shader fragment
+#version 440 core
 
-out vec4 color;
+layout(location = 0) out vec4 color;
+
+layout(location = 1) uniform vec4 u_color;
 
 void main() {
-	color = vec4(1.0, 0.0, 0.0, 1.0);
+	color = u_color;
 };

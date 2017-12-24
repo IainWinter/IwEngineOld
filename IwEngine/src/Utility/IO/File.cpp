@@ -1,14 +1,12 @@
 #include "IwEngine\Utility\IO\File.h"
 #include "IwEngine\Utility\Logger.h"
-#include <vector>
 #include <cstdio>
 #include <cerrno>
 
 #define MAX_LINE_LENGTH 1000
 
-static void ReportError(int errerno, const std::string& addInfo) {
+static void ReportError(int errerno, const std::string& info) {
 	std::string error;
-
 	error.resize(256);
 
 	strerror_s(&error[0], 100, errerno);
@@ -18,7 +16,7 @@ static void ReportError(int errerno, const std::string& addInfo) {
 	error.append(" (");
 	error.append(std::to_string(errerno));
 	error.append("): ");
-	error.append(addInfo);
+	error.append(info);
 
 	Utility::Error(error);
 }
@@ -40,7 +38,7 @@ IWENGINE_API std::string Utility::IO::ReadFile(const char* filePath) {
 	return contents;
 }
 
-IWENGINE_API std::string* Utility::IO::ReadFileLines(const char* filePath) {
+IWENGINE_API std::vector<std::string> Utility::IO::ReadFileLines(const char* filePath) {
 	std::vector<std::string> lines;
 	FILE* file;
 	errno_t errorCode = fopen_s(&file, filePath, "rt");
@@ -66,13 +64,7 @@ IWENGINE_API std::string* Utility::IO::ReadFileLines(const char* filePath) {
 		ReportError(errorCode, filePath);
 	}
 
-	size_t size = lines.size();
-	std::string* aLines = new std::string[size];
-	for (size_t i = 0; i < size; i++) {
-		aLines[i] = lines[i];
-	}
-
-	return aLines;
+	return lines;
 }
 
 IWENGINE_API bool Utility::IO::FileExists(const char* filePath) {

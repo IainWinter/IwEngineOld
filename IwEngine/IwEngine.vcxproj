@@ -162,7 +162,9 @@
   <ItemGroup>
     <ClCompile Include="include\IwEngine\Physics\GameObject.cpp" />
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
+    <ClCompile Include="src\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Display.cpp" />
+    <ClCompile Include="src\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Math\MathHelper.cpp" />
     <ClCompile Include="src\Math\Matrix2x2.cpp" />
     <ClCompile Include="src\Math\Matrix3x3.cpp" />
@@ -176,12 +178,15 @@
     <ClCompile Include="src\Utility\IO\File.cpp" />
     <ClCompile Include="src\Utility\IO\Path.cpp" />
     <ClCompile Include="src\Utility\Logger.cpp" />
+    <ClCompile Include="src\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\Common.h" />
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Display.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexBuffer.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexBufferLayout.h" />
     <ClInclude Include="include\IwEngine\Math\Math.h" />
     <ClInclude Include="include\IwEngine\Math\MathHelper.h" />
     <ClInclude Include="include\IwEngine\Math\Matrix2x2.h" />
@@ -200,11 +205,15 @@
     <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsMaterial.h" />
     <ClInclude Include="include\IwEngine\Physics\RigidBody.h" />
+    <ClInclude Include="include\IwEngine\Utility\Debug.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\Directory.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\File.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\Path.h" />
     <ClInclude Include="include\IwEngine\Utility\Logger.h" />
     <ClInclude Include="include\IwEngine\Utility\Color.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
+    <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
+    <ClInclude Include="src\Graphics\VertexBufferLayout.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

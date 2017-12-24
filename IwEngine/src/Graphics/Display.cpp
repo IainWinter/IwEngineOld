@@ -3,6 +3,12 @@
 #include "IwEngine\Graphics\Display.h"
 #include "IwEngine\Utility\Logger.h"
 #include "IwEngine\Utility\IO\File.h"
+#include <sstream>
+
+#include "IwEngine\Graphics\VertexBuffer.h"
+#include "IwEngine\Graphics\VertexArray.h"
+#include "IwEngine\Graphics\IndexBuffer.h"
+#include "IwEngine\Math\Matrix4x4.h"
 
 Display::Display() {
 
@@ -13,14 +19,30 @@ struct ShaderProgramSource {
 	std::string fragment;
 };
 
-static ShaderProgramSource ParseShader(std::string* code) {
-	for (size_t i = 0; i < 17; i++) {
-		Utility::Info(code[i]);
+static ShaderProgramSource ParseShader(std::vector<std::string> code) {
+	Utility::Debug("Reading shaders...");
+	std::stringstream ss[2];
+	enum ShaderMode {
+		NONE = -1,
+		VERTEX,
+		FRAGMENT
+	};
+
+	ShaderMode mode;
+	for (std::string& line : code) {
+		if (line.find("#shader") != std::string::npos) {
+			if (line.find("vertex") != std::string::npos)  mode = VERTEX;
+			else if (line.find("fragment") != std::string::npos)  mode = FRAGMENT;
+		} else {
+			ss[mode] << line << std::endl;
+		}
 	}
-	return ShaderProgramSource();
+
+	return ShaderProgramSource{ ss[VERTEX].str(), ss[FRAGMENT].str() };
 }
 
 static unsigned int CompileShader(unsigned int type, const std::string src) {
+	Utility::Debug("Compiling shader...");
 	unsigned int id = glCreateShader(type);
 	const char* source = src.c_str();
 	glShaderSource(id, 1, &source, nullptr);
@@ -81,42 +103,106 @@ int Display::Start() {
 		Utility::Error("GLEW init not ok");
 	}
 
-	float pos[6] = {
-		-0.5f, -0.5f,
-		 0.0f,  0.5f,
-		 0.5f, -0.5f
+	float pos[] = {
+		//left
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, +0.5f, +0.5f,
+		-0.5f, +0.5f, -0.5f,
+		-0.5f, -0.5f, +0.5f,
+		//right
+		+0.5f, -0.5f, +0.5f,
+		+0.5f, +0.5f, -0.5f,
+		+0.5f, +0.5f, +0.5f,
+		+0.5f, -0.5f, -0.5f,
+		//bottom
+		-0.5f, -0.5f, -0.5f,
+		+0.5f, -0.5f, +0.5f,
+		-0.5f, -0.5f, +0.5f,
+		+0.5f, -0.5f, -0.5f,
+		//top
+		 -0.5f, +0.5f, +0.5f,
+		+0.5f, +0.5f, -0.5f,
+		-0.5f, +0.5f, -0.5f,
+		+0.5f, +0.5f, +0.5f,
+		//back
+		 +0.5f, -0.5f, -0.5f,
+		-0.5f, +0.5f, -0.5f,
+		+0.5f, +0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+		//front
+		-0.5f, -0.5f, +0.5f,
+		+0.5f, +0.5f, +0.5f,
+		-0.5f, +0.5f, +0.5f,
+		+0.5f, -0.5f, +0.5f
 	};
 
-	unsigned int vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), pos, GL_STATIC_DRAW);
+	unsigned int indices[] = {
+		0, 1, 2,
+		2, 3, 0,
+		4, 5, 6,
+		6, 7, 4,
+		8, 9, 10,
+		10, 11, 8,
+		12, 13, 14,
+		14, 15, 12,
+		16, 17, 18,
+		18, 19, 16,
+		20, 21, 22,
+		22, 23, 20
+	};
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	VertexArray va;
+	VertexBuffer vb(pos, 3 * 24 * sizeof(float));
+	VertexBufferLayout layout;
+	layout.Push<float>(3);
+	va.AddBuffer(vb, layout);
 
-	ShaderProgramSource source = ParseShader(Utility::IO::ReadFileLines("C:/dev/code/c++/IwEngine/TestBed/res/shaders/default.shader"));
+	IndexBuffer ib(indices, 36);
 
-	unsigned int shader = CreateShader("", "");
-
+	ShaderProgramSource source = ParseShader(Utility::IO::ReadFileLines("res/shaders/default.shader"));
+	unsigned int shader = CreateShader(source.vertex, source.fragment);
 	glUseProgram(shader);
+	glUniform4f(1, .4f, 1.0f, .2f, 1.0f);
 
-	/* Loop until the user closes the window */
+	glBindVertexArray(0);
+	glUseProgram(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	Math::Vector3 position = Math::Vector3(0, 0, 0);
+	Math::Matrix4x4 perp = Math::Matrix4x4::CreatePerspectiveFieldOfView(1.7f, 640.0f / 480, 0.01f, 100.0f);
+		/*Math::Matrix4x4(
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 0, 0, 
+		0, 0, 0, 1
+	);*/
+
 	while (!glfwWindowShouldClose(window)) {
-		/* Render here */
+		position.z += 0.001f;
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glUseProgram(shader);
+		glUniform4f(1, .4f, 1.0f, .2f, 1.0f);
 
-		/* Swap front and back buffers */
+		Math::Matrix4x4 p = Math::Matrix4x4::CreateTranslation(position);
+
+		std::cout << (perp * p) << std::endl;
+
+		glUniformMatrix4fv(0, 1, GL_FALSE, (perp * p).elements);
+
+		va.Bind();
+		ib.Bind();
+
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+
 		glfwSwapBuffers(window);
 
-		/* Poll for and process events */
 		glfwPollEvents();
 	}
 
 	glDeleteProgram(shader);
-
 	glfwTerminate();
 	return 0;
 }

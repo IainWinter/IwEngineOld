@@ -17,6 +17,9 @@
     <ClCompile Include="src\Utility\IO\File.cpp" />
     <ClCompile Include="src\Utility\IO\Path.cpp" />
     <ClCompile Include="src\Utility\Logger.cpp" />
+    <ClCompile Include="src\Graphics\VertexBuffer.cpp" />
+    <ClCompile Include="src\Graphics\VertexArray.cpp" />
+    <ClCompile Include="src\Graphics\IndexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\Common.h" />
@@ -46,5 +49,11 @@
     <ClInclude Include="include\IwEngine\Utility\Color.h" />
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexBuffer.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
+    <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexBufferLayout.h" />
+    <ClInclude Include="src\Graphics\VertexBufferLayout.cpp" />
+    <ClInclude Include="include\IwEngine\Utility\Debug.h" />
   </ItemGroup>
 </Project>
