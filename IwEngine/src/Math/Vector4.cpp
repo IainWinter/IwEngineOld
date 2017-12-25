@@ -32,17 +32,17 @@ float Vector4::LengthFast() const {
 }
 
 Vector4 Vector4::Normalized() const {
-	float scale = 1.0f / Length();
+	float scale = Length();
 	return Vector4(x / scale, y / scale, z / scale, w / scale);
 }
 
 Vector4 Vector4::NormalizedFast() const {
-	float scale = 1.0f / LengthFast();
+	float scale = LengthFast();
 	return Vector4(x / scale, y / scale, z / scale, w / scale);
 }
 
 void Vector4::Normalize() {
-	float scale = 1.0f / Length();
+	float scale = Length();
 	x /= scale;
 	y /= scale;
 	z /= scale;
@@ -50,7 +50,7 @@ void Vector4::Normalize() {
 }
 
 void Vector4::NormalizeFast() {
-	float scale = 1.0f / LengthFast();
+	float scale = LengthFast();
 	x /= scale;
 	y /= scale;
 	z /= scale;

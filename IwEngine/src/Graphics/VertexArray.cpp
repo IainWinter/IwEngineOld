@@ -1,4 +1,4 @@
-#include "IwEngine\Graphics\VertexArray.h"
+#include "VertexArray.h"
 
 VertexArray::VertexArray() {
 	glGenVertexArrays(1, &_renderId);

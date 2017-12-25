@@ -1,32 +1,32 @@
-#include "IwEngine\Math\Matrix3x3.h"
-#include "IwEngine\Math\Matrix2x2.h"
+#include "IwEngine\Math\Matrix3.h"
+#include "IwEngine\Math\Matrix2.h"
 
 using namespace Math;
 
-const Matrix3x3 Matrix3x3::Identity = Matrix3x3(1.0f);
+const Matrix3 Matrix3::Identity = Matrix3(1.0f);
 
-Matrix3x3::Matrix3x3() {
+Matrix3::Matrix3() {
 	memset(elements, 0, 3 * 3 * sizeof(float));
 }
 
-Matrix3x3::Matrix3x3(float diagonal) {
+Matrix3::Matrix3(float diagonal) {
 	memset(elements, 0, 3 * 3 * sizeof(float));
 	elements[0 + 0 * 3] = diagonal;
 	elements[1 + 1 * 3] = diagonal;
 	elements[2 + 2 * 3] = diagonal;
 }
 
-Matrix3x3::Matrix3x3(float* elements) {
+Matrix3::Matrix3(float* elements) {
 	memcpy(this->elements, elements, 3 * 3 * sizeof(float));
 }
 
-Matrix3x3::Matrix3x3(Vector3 row0, Vector3 row1, Vector3 row2) {
+Matrix3::Matrix3(Vector3 row0, Vector3 row1, Vector3 row2) {
 	rows[0] = row0;
 	rows[1] = row1;
 	rows[2] = row2;
 }
 
-Matrix3x3::Matrix3x3(
+Matrix3::Matrix3(
 	float m00, float m01, float m02,
 	float m10, float m11, float m12,
 	float m20, float m21, float m22) 
@@ -36,19 +36,19 @@ Matrix3x3::Matrix3x3(
 	elements[6] = m20; elements[7] = m21; elements[8] = m22;
 }
 
-float Matrix3x3::Determinant() const {
+float Matrix3::Determinant() const {
 	return 
 		  rows[0].x * (rows[1].y * rows[2].z - rows[1].z * rows[2].y)
 		- rows[0].y * (rows[1].x * rows[2].z - rows[1].z * rows[2].x)
 		+ rows[0].z * (rows[1].x * rows[2].y - rows[1].y * rows[2].x);
 }
 
-float Matrix3x3::Trace() const {
+float Matrix3::Trace() const {
 	return rows[0].x + rows[1].y + rows[2].z;
 }
 
-void Matrix3x3::Transpose() {
-	Matrix3x3 tmp = *this;
+void Matrix3::Transpose() {
+	Matrix3 tmp = *this;
 	rows[0].x = tmp.rows[0].x;
 	rows[0].y = tmp.rows[1].x;
 	rows[0].z = tmp.rows[2].x;
@@ -60,20 +60,20 @@ void Matrix3x3::Transpose() {
 	rows[2].z = tmp.rows[2].z;
 }
 
-Matrix3x3 Matrix3x3::Transposed() const {
-	Matrix3x3 tmp = *this;
+Matrix3 Matrix3::Transposed() const {
+	Matrix3 tmp = *this;
 	tmp.Transpose();
 
 	return tmp;
 }
 
-void Matrix3x3::Invert() {
+void Matrix3::Invert() {
 	float aDet = Determinant();
 	if (aDet == 0) {
 		throw std::invalid_argument("Determinant is zero, therefore inverse matrix doesn't exist.");
 	}
 
-	Matrix3x3 tmp = Matrix3x3();
+	Matrix3 tmp = Matrix3();
 
 	for (short i = 0; i < 3; i++) {
 		for (short j = 0; j < 3; j++) {
@@ -97,7 +97,7 @@ void Matrix3x3::Invert() {
 				t2r = t2r == 0 ? 0 : t2r - 1;
 			}
 
-			Matrix2x2 m = Matrix2x2();
+			Matrix2 m = Matrix2();
 
 			m(t1r, t1c) = m11;
 			m(t2r, t1c) = m21;
@@ -121,41 +121,41 @@ void Matrix3x3::Invert() {
 	*this = tmp;
 }
 
-Matrix3x3 Matrix3x3::Inverted() const {
-	Matrix3x3 tmp = *this;
+Matrix3 Matrix3::Inverted() const {
+	Matrix3 tmp = *this;
 	tmp.Invert();
 
 	return tmp;
 }
 
-void Matrix3x3::Normalize() {
+void Matrix3::Normalize() {
 	float det = Determinant();
 	*this /= det;
 }
 
-Matrix3x3 Matrix3x3::Normalized() const {
+Matrix3 Matrix3::Normalized() const {
 	float det = Determinant();
 	return *this / det;
 }
 
-void Matrix3x3::ClearRotation() {
+void Matrix3::ClearRotation() {
 	rows[0] = Vector3(rows[0].Length(), 0, 0);
 	rows[1] = Vector3(0, rows[1].Length(), 0);
 	rows[2] = Vector3(0, 0, rows[2].Length());
 }
 
-Matrix3x3 Matrix3x3::ClearedRotation() const {
-	Matrix3x3 tmp = *this;
+Matrix3 Matrix3::ClearedRotation() const {
+	Matrix3 tmp = *this;
 	tmp.ClearRotation();
 
 	return tmp;
 }
 
-Vector3 Matrix3x3::ExtractScale() const {
+Vector3 Matrix3::ExtractScale() const {
 	return Vector3(rows[0].Length(), rows[1].Length(), rows[2].Length());
 }
 
-Quaternion Matrix3x3::ExtractRotation() const {
+Quaternion Matrix3::ExtractRotation() const {
 	Vector3 r0 = rows[0].Normalized();
 	Vector3 r1 = rows[1].Normalized();
 	Vector3 r2 = rows[2].Normalized();
@@ -201,7 +201,7 @@ Quaternion Matrix3x3::ExtractRotation() const {
 	return q.Normalized();
 }
 
-float& Matrix3x3::operator()(int row, int col) {
+float& Matrix3::operator()(int row, int col) {
 	if (row > 3 || col > 3 || 0 > row || 0 > col) {
 		throw std::out_of_range("Row/Col is outside the bounds of this maxtrix.");
 	}
@@ -209,24 +209,24 @@ float& Matrix3x3::operator()(int row, int col) {
 	return elements[col + row * 3];
 }
 
-Matrix3x3 Matrix3x3::operator+(const Matrix3x3 & other) const {
-	return Matrix3x3(
+Matrix3 Matrix3::operator+(const Matrix3 & other) const {
+	return Matrix3(
 		rows[0] + other.rows[0],
 		rows[1] + other.rows[1],
 		rows[2] + other.rows[2]
 	);
 }
 
-Matrix3x3 Matrix3x3::operator-(const Matrix3x3 & other) const {
-	return Matrix3x3(
+Matrix3 Matrix3::operator-(const Matrix3 & other) const {
+	return Matrix3(
 		rows[0] - other.rows[0],
 		rows[1] - other.rows[1],
 		rows[2] - other.rows[2]
 	);
 }
 
-Matrix3x3 Matrix3x3::operator*(const Matrix3x3 & other) const {
-	return Matrix3x3(
+Matrix3 Matrix3::operator*(const Matrix3 & other) const {
+	return Matrix3(
 		(rows[0].x * other.rows[0].x) + (rows[0].y * other.rows[1].x) + (rows[0].z * other.rows[2].x),
 		(rows[0].x * other.rows[0].y) + (rows[0].y * other.rows[1].y) + (rows[0].z * other.rows[2].y),
 		(rows[0].x * other.rows[0].z) + (rows[0].y * other.rows[1].z) + (rows[0].z * other.rows[2].z),
@@ -239,36 +239,36 @@ Matrix3x3 Matrix3x3::operator*(const Matrix3x3 & other) const {
 	);
 }
 
-Matrix3x3 Matrix3x3::operator+=(const Matrix3x3 & other) {
+Matrix3 Matrix3::operator+=(const Matrix3 & other) {
 	return *this = other + (*this);
 }
 
-Matrix3x3 Matrix3x3::operator-=(const Matrix3x3 & other) {
+Matrix3 Matrix3::operator-=(const Matrix3 & other) {
 	return *this = other - (*this);
 }
 
-Matrix3x3 Matrix3x3::operator*=(const Matrix3x3 & other) {
+Matrix3 Matrix3::operator*=(const Matrix3 & other) {
 	return *this = other * (*this);
 }
 
-Matrix3x3 Matrix3x3::operator+(const float other) const {
-	return Matrix3x3(
+Matrix3 Matrix3::operator+(const float other) const {
+	return Matrix3(
 		rows[0] + other,
 		rows[1] + other,
 		rows[2] + other
 	);
 }
 
-Matrix3x3 Matrix3x3::operator-(const float other) const {
-	return Matrix3x3(
+Matrix3 Matrix3::operator-(const float other) const {
+	return Matrix3(
 		rows[0] - other,
 		rows[1] - other,
 		rows[2] - other
 	);
 }
 
-Matrix3x3 Matrix3x3::operator*(const float other) const {
-	return Matrix3x3(
+Matrix3 Matrix3::operator*(const float other) const {
+	return Matrix3(
 		rows[0] * other,
 		rows[1] * other,
 		rows[2] * other
@@ -276,51 +276,51 @@ Matrix3x3 Matrix3x3::operator*(const float other) const {
 }
 
 
-Matrix3x3 Matrix3x3::operator/(const float other) const {
-	return Matrix3x3(
+Matrix3 Matrix3::operator/(const float other) const {
+	return Matrix3(
 		rows[0] / other,
 		rows[1] / other,
 		rows[2] / other
 	);
 }
 
-Matrix3x3 Matrix3x3::operator+=(const float other) {
+Matrix3 Matrix3::operator+=(const float other) {
 	return *this = other * (*this);
 }
 
-Matrix3x3 Matrix3x3::operator-=(const float other) {
+Matrix3 Matrix3::operator-=(const float other) {
 	return *this = other * (*this);
 }
 
-Matrix3x3 Matrix3x3::operator*=(const float other) {
+Matrix3 Matrix3::operator*=(const float other) {
 	return *this = other * (*this);
 }
 
-Matrix3x3 Matrix3x3::operator/=(const float other) {
+Matrix3 Matrix3::operator/=(const float other) {
 	return *this = other / (*this);
 }
 
-Matrix3x3 Matrix3x3::operator-() const {
-	return Matrix3x3(-rows[0], -rows[1], -rows[2]);
+Matrix3 Matrix3::operator-() const {
+	return Matrix3(-rows[0], -rows[1], -rows[2]);
 }
 
-bool Matrix3x3::operator==(const Matrix3x3& other) const {
+bool Matrix3::operator==(const Matrix3& other) const {
 	return Equals(other);
 }
 
-bool Matrix3x3::operator!=(const Matrix3x3& other) const {
+bool Matrix3::operator!=(const Matrix3& other) const {
 	return !Equals(other);
 }
 
-bool Matrix3x3::Equals(const Matrix3x3& other) const {
+bool Matrix3::Equals(const Matrix3& other) const {
 	return rows[0] == other.rows[0] && rows[1] == other.rows[1] && rows[2] == other.rows[2];
 }
 
-Matrix3x3 Matrix3x3::CreateFromAxisAngle(float x, float y, float z, float angle) {
+Matrix3 Matrix3::CreateFromAxisAngle(float x, float y, float z, float angle) {
 	return CreateFromAxisAngle(Vector3(x, y, z), angle);
 }
 
-Matrix3x3 Matrix3x3::CreateFromAxisAngle(const Vector3& axis, float angle) {
+Matrix3 Matrix3::CreateFromAxisAngle(const Vector3& axis, float angle) {
 	Vector3 a = axis.Normalized();
 	float axisX = a.x;
 	float axisY = a.y;
@@ -341,23 +341,23 @@ Matrix3x3 Matrix3x3::CreateFromAxisAngle(const Vector3& axis, float angle) {
 	float sinY = sin * axisY;
 	float sinZ = sin * axisZ;
 
-	return Matrix3x3(
+	return Matrix3(
 		tXX + cos, tXY - sinZ, tXZ + sinY,
 		tXY + sinZ, tYY + cos, tYZ - sinX,
 		tXZ - sinY, tYZ + sinX, tZZ + cos
 	);
 }
 
-Matrix3x3 Matrix3x3::CreateFromQuaternion(const Quaternion& quaternion) {
+Matrix3 Matrix3::CreateFromQuaternion(const Quaternion& quaternion) {
 	Vector4 aa = quaternion.ToAxisAngle();
 	return CreateFromAxisAngle(aa.x, aa.y, aa.z, aa.w);
 }
 
-Matrix3x3 Matrix3x3::CreateRoatationX(float angle) {
+Matrix3 Matrix3::CreateRoatationX(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
-	Matrix3x3 out = Matrix3x3::Identity;
+	Matrix3 out = Matrix3::Identity;
 	out.rows[1].y = cos;
 	out.rows[1].z = sin;
 	out.rows[2].y = -sin;
@@ -366,11 +366,11 @@ Matrix3x3 Matrix3x3::CreateRoatationX(float angle) {
 	return out;
 }
 
-Matrix3x3 Matrix3x3::CreateRoatationY(float angle) {
+Matrix3 Matrix3::CreateRoatationY(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
-	Matrix3x3 out = Matrix3x3::Identity;
+	Matrix3 out = Matrix3::Identity;
 	out.rows[0].x = cos;
 	out.rows[0].z = -sin;
 	out.rows[2].x = sin;
@@ -379,11 +379,11 @@ Matrix3x3 Matrix3x3::CreateRoatationY(float angle) {
 	return out;
 }
 
-Matrix3x3 Matrix3x3::CreateRoatationZ(float angle) {
+Matrix3 Matrix3::CreateRoatationZ(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
-	Matrix3x3 out = Matrix3x3::Identity;
+	Matrix3 out = Matrix3::Identity;
 	out.rows[0].x = cos;
 	out.rows[0].y = sin;
 	out.rows[1].x = -sin;
@@ -392,46 +392,46 @@ Matrix3x3 Matrix3x3::CreateRoatationZ(float angle) {
 	return out;
 }
 
-Matrix3x3 Matrix3x3::CreateRoatation(const Vector3& angles) {
-	return Matrix3x3::CreateRoatation(angles.x, angles.y, angles.z);
+Matrix3 Matrix3::CreateRoatation(const Vector3& angles) {
+	return Matrix3::CreateRoatation(angles.x, angles.y, angles.z);
 }
 
-Matrix3x3 Matrix3x3::CreateRoatation(float x, float y, float z) {
-	return Matrix3x3::CreateRoatationX(x).CreateRoatationY(y).CreateRoatationZ(z);
+Matrix3 Matrix3::CreateRoatation(float x, float y, float z) {
+	return Matrix3::CreateRoatationX(x).CreateRoatationY(y).CreateRoatationZ(z);
 }
 
-Matrix3x3 Matrix3x3::CreateScale(float scale) {
+Matrix3 Matrix3::CreateScale(float scale) {
 	return CreateScale(scale, scale, scale);
 }
 
-Matrix3x3 Matrix3x3::CreateScale(const Vector3& scale) {
+Matrix3 Matrix3::CreateScale(const Vector3& scale) {
 	return CreateScale(scale.x, scale.y, scale.z);
 }
 
-Matrix3x3 Matrix3x3::CreateScale(float x, float y, float z) {
-	return Matrix3x3(
+Matrix3 Matrix3::CreateScale(float x, float y, float z) {
+	return Matrix3(
 		x, 0, 0,
 		0, y, 0,
 		0, 0, z
 	);
 }
 
-std::ostream& Math::operator<<(std::ostream & ostream, const Matrix3x3 & a) {
+std::ostream& Math::operator<<(std::ostream & ostream, const Matrix3 & a) {
 	return ostream << a.rows[0] << std::endl << a.rows[1] << std::endl << a.rows[2];
 }
 
-Matrix3x3 Math::operator+(const float left, const Matrix3x3 & right) {
+Matrix3 Math::operator+(const float left, const Matrix3 & right) {
 	return right + left;
 }
 
-Matrix3x3 Math::operator-(const float left, const Matrix3x3 & right) {
+Matrix3 Math::operator-(const float left, const Matrix3 & right) {
 	return right - left;
 }
 
-Matrix3x3 Math::operator*(const float left, const Matrix3x3 & right) {
+Matrix3 Math::operator*(const float left, const Matrix3 & right) {
 	return right * left;
 }
 
-Matrix3x3 Math::operator/(const float left, const Matrix3x3 & right) {
+Matrix3 Math::operator/(const float left, const Matrix3 & right) {
 	return right / left;
 }

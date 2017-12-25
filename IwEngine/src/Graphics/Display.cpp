@@ -5,81 +5,14 @@
 #include "IwEngine\Utility\IO\File.h"
 #include <sstream>
 
-#include "IwEngine\Graphics\VertexBuffer.h"
-#include "IwEngine\Graphics\VertexArray.h"
-#include "IwEngine\Graphics\IndexBuffer.h"
-#include "IwEngine\Math\Matrix4x4.h"
+#include "VertexBuffer.h"
+#include "VertexArray.h"
+#include "IndexBuffer.h"
+#include "ShaderProgram.h"
+#include "IwEngine\Math\Matrix4.h"
 
 Display::Display() {
 
-}
-
-struct ShaderProgramSource {
-	std::string vertex;
-	std::string fragment;
-};
-
-static ShaderProgramSource ParseShader(std::vector<std::string> code) {
-	Utility::Debug("Reading shaders...");
-	std::stringstream ss[2];
-	enum ShaderMode {
-		NONE = -1,
-		VERTEX,
-		FRAGMENT
-	};
-
-	ShaderMode mode;
-	for (std::string& line : code) {
-		if (line.find("#shader") != std::string::npos) {
-			if (line.find("vertex") != std::string::npos)  mode = VERTEX;
-			else if (line.find("fragment") != std::string::npos)  mode = FRAGMENT;
-		} else {
-			ss[mode] << line << std::endl;
-		}
-	}
-
-	return ShaderProgramSource{ ss[VERTEX].str(), ss[FRAGMENT].str() };
-}
-
-static unsigned int CompileShader(unsigned int type, const std::string src) {
-	Utility::Debug("Compiling shader...");
-	unsigned int id = glCreateShader(type);
-	const char* source = src.c_str();
-	glShaderSource(id, 1, &source, nullptr);
-	glCompileShader(id);
-
-	int result;
-	glGetShaderiv(id, GL_COMPILE_STATUS, &result);
-	if (!result) {
-		int length;
-		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-
-		char* message = (char*)alloca(length * sizeof(char));
-		glGetShaderInfoLog(id, length, &length, message);
-
-		glDeleteShader(id);
-
-		Utility::Error(message);
-		return 0;
-	}
-
-	return id;
-}
-
-static unsigned int CreateShader(const std::string& vs, const std::string& fs) {
-	unsigned int program = glCreateProgram();
-	unsigned int vsid = CompileShader(GL_VERTEX_SHADER, vs);
-	unsigned int fsid = CompileShader(GL_FRAGMENT_SHADER, fs);
-
-	glAttachShader(program, vsid);
-	glAttachShader(program, fsid);
-	glLinkProgram(program);
-	glValidateProgram(program);
-
-	glDeleteShader(vsid);
-	glDeleteShader(fsid);
-
-	return program;
 }
 
 int Display::Start() {
@@ -106,34 +39,35 @@ int Display::Start() {
 	float pos[] = {
 		//left
 		-0.5f, -0.5f, -0.5f,
-		-0.5f, +0.5f, +0.5f,
 		-0.5f, +0.5f, -0.5f,
+		-0.5f, +0.5f, +0.5f,
 		-0.5f, -0.5f, +0.5f,
 		//right
-		+0.5f, -0.5f, +0.5f,
+		+0.5f, -0.5f, -0.5f,
 		+0.5f, +0.5f, -0.5f,
 		+0.5f, +0.5f, +0.5f,
-		+0.5f, -0.5f, -0.5f,
+		+0.5f, -0.5f, +0.5f,
 		//bottom
 		-0.5f, -0.5f, -0.5f,
+		+0.5f, -0.5f, -0.5f,
 		+0.5f, -0.5f, +0.5f,
 		-0.5f, -0.5f, +0.5f,
-		+0.5f, -0.5f, -0.5f,
 		//top
-		 -0.5f, +0.5f, +0.5f,
-		+0.5f, +0.5f, -0.5f,
-		-0.5f, +0.5f, -0.5f,
-		+0.5f, +0.5f, +0.5f,
-		//back
-		 +0.5f, -0.5f, -0.5f,
 		-0.5f, +0.5f, -0.5f,
 		+0.5f, +0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		//front
-		-0.5f, -0.5f, +0.5f,
 		+0.5f, +0.5f, +0.5f,
 		-0.5f, +0.5f, +0.5f,
-		+0.5f, -0.5f, +0.5f
+		//back
+		-0.5f, -0.5f, -0.5f,
+		+0.5f, -0.5f, -0.5f,
+		+0.5f, +0.5f, -0.5f,
+		-0.5f, +0.5f, -0.5f,
+		//front
+		-0.5f, -0.5f, +0.5f,
+		+0.5f, -0.5f, +0.5f,
+		+0.5f, +0.5f, +0.5f,
+		-0.5f, +0.5f, +0.5f
+		
 	};
 
 	unsigned int indices[] = {
@@ -152,45 +86,41 @@ int Display::Start() {
 	};
 
 	VertexArray va;
-	VertexBuffer vb(pos, 3 * 24 * sizeof(float));
+	VertexBuffer vb(pos, 72 * sizeof(float));
 	VertexBufferLayout layout;
 	layout.Push<float>(3);
 	va.AddBuffer(vb, layout);
 
 	IndexBuffer ib(indices, 36);
 
-	ShaderProgramSource source = ParseShader(Utility::IO::ReadFileLines("res/shaders/default.shader"));
-	unsigned int shader = CreateShader(source.vertex, source.fragment);
-	glUseProgram(shader);
-	glUniform4f(1, .4f, 1.0f, .2f, 1.0f);
+	ShaderProgram shader("res/shaders/default.shader");
 
 	glBindVertexArray(0);
 	glUseProgram(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	Math::Vector3 position = Math::Vector3(0, 0, 0);
-	Math::Matrix4x4 perp = Math::Matrix4x4::CreatePerspectiveFieldOfView(1.7f, 640.0f / 480, 0.01f, 100.0f);
-		/*Math::Matrix4x4(
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 0, 0, 
-		0, 0, 0, 1
-	);*/
+	Math::Vector3 position = Math::Vector3(0, 0, 2);
+	Math::Matrix4 projection = Math::Matrix4::CreatePerspectiveFieldOfView(3.14f/2, 4.0f/3, 0.01f, 100.0f);
+	Math::Matrix4 view = Math::Matrix4::LookAt(position, position - Math::Vector3::UnitZ, Math::Vector3::UnitY);
+	Math::Matrix4 world = Math::Matrix4::Identity;
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	while (!glfwWindowShouldClose(window)) {
-		position.z += 0.001f;
-
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(shader);
+		shader.Use();
 		glUniform4f(1, .4f, 1.0f, .2f, 1.0f);
 
-		Math::Matrix4x4 p = Math::Matrix4x4::CreateTranslation(position);
+		glUniformMatrix4fv(0, 1, GL_FALSE, projection.elements);
+		glUniformMatrix4fv(4, 1, GL_FALSE, view.elements);
+		glUniformMatrix4fv(8, 1, GL_FALSE, world.elements);
 
-		std::cout << (perp * p) << std::endl;
-
-		glUniformMatrix4fv(0, 1, GL_FALSE, (perp * p).elements);
+		//position.y += 0.005f;
+		position.x -= 0.005f;
+		//position.z += 0.005f;
+		view = Math::Matrix4::LookAt(position, position - Math::Vector3::UnitZ, Math::Vector3::UnitY);
 
 		va.Bind();
 		ib.Bind();
@@ -202,7 +132,7 @@ int Display::Start() {
 		glfwPollEvents();
 	}
 
-	glDeleteProgram(shader);
+	shader.Delete();
 	glfwTerminate();
 	return 0;
 }

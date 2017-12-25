@@ -1,4 +1,4 @@
-#include "IwEngine\Graphics\IndexBuffer.h"
+#include "IndexBuffer.h"
 #include "GL\glew.h"
 
 IndexBuffer::IndexBuffer(const void* data, unsigned int count) : _count(count) {

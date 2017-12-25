@@ -36,23 +36,23 @@ Vector2 Vector2::NormalLeft() const {
 }
 
 Vector2 Vector2::Normalized() const {
-	float scale = 1.0f / Length();
+	float scale = Length();
 	return Vector2(x / scale, y / scale);
 }
 
 Vector2 Vector2::NormalizedFast() const {
-	float scale = 1.0f / LengthFast();
+	float scale = LengthFast();
 	return Vector2(x / scale, y / scale);
 }
 
 void Vector2::Normalize() {
-	float scale = 1.0f / Length();
+	float scale = Length();
 	x /= scale;
 	y /= scale;
 }
 
 void Vector2::NormalizeFast() {
-	float scale = 1.0f / LengthFast();
+	float scale = LengthFast();
 	x /= scale;
 	y /= scale;
 }

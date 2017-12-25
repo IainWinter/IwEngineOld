@@ -29,24 +29,24 @@ float Vector3::LengthFast() const {
 }
 
 Vector3 Vector3::Normalized() const {
-	float scale = 1.0f / Length();
+	float scale = Length();
 	return Vector3(x / scale, y / scale, z / scale);
 }
 
 Vector3 Vector3::NormalizedFast() const {
-	float scale = 1.0f / LengthFast();
+	float scale = LengthFast();
 	return Vector3(x / scale, y / scale, z / scale);
 }
 
 void Vector3::Normalize() {
-	float scale = 1.0f / Length();
+	float scale = Length();
 	x /= scale;
 	y /= scale;
 	z /= scale;
 }
 
 void Vector3::NormalizeFast() {
-	float scale = 1.0f / LengthFast();
+	float scale = LengthFast();
 	x /= scale;
 	y /= scale;
 	z /= scale;

@@ -1,46 +1,49 @@
-#include "IwEngine\Math\Matrix4x4.h"
-#include "IwEngine\Math\Matrix3x3.h"
+#include "IwEngine\Math\Matrix4.h"
+#include "IwEngine\Math\Matrix3.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 using namespace Math;
 
-const Matrix4x4 Matrix4x4::Identity = Matrix4x4(1.0f);
+const Matrix4 Matrix4::Identity = Matrix4(1.0f);
 
-Matrix4x4::Matrix4x4() {
+Matrix4::Matrix4() {
 	memset(elements, 0, 4 * 4 * sizeof(float));
 }
 
-Matrix4x4::Matrix4x4(float diagonal) {
+Matrix4::Matrix4(float diagonal) {
 	memset(elements, 0, 4 * 4 * sizeof(float));
+	elements[0 + 0 * 4] = diagonal;
+	elements[1 + 1 * 4] = diagonal;
+	elements[2 + 2 * 4] = diagonal;
+	elements[3 + 3 * 4] = diagonal;
 }
 
-Matrix4x4::Matrix4x4(float* elements) {
+Matrix4::Matrix4(float* elements) {
 	memcpy(this->elements, elements, 4 * 4 * sizeof(float));
 }
 
-Matrix4x4::Matrix4x4(Vector4 row0, Vector4 row1, Vector4 row2, Vector4 row3) {
+Matrix4::Matrix4(Vector4 row0, Vector4 row1, Vector4 row2, Vector4 row3) {
 	rows[0] = row0;
 	rows[1] = row1;
 	rows[2] = row2;
 	rows[3] = row3;
 }
 
-Matrix4x4::Matrix4x4(
+Matrix4::Matrix4(
 	float m00, float m01, float m02, float m03,
 	float m10, float m11, float m12, float m13,
 	float m20, float m21, float m22, float m23,
-	float m30, float m31, float m32, float m33) 
-{
-	elements[0]  = m00; elements[1]  = m01; elements[2]  = m02; elements[3]  = m03; 
-	elements[4]  = m10; elements[5]  = m11; elements[6]  = m12; elements[7]  = m13; 
-	elements[8]  = m20; elements[9]  = m21; elements[10] = m22; elements[11] = m23;
+	float m30, float m31, float m32, float m33) {
+	elements[0] = m00; elements[1] = m01; elements[2] = m02; elements[3] = m03;
+	elements[4] = m10; elements[5] = m11; elements[6] = m12; elements[7] = m13;
+	elements[8] = m20; elements[9] = m21; elements[10] = m22; elements[11] = m23;
 	elements[12] = m30; elements[13] = m31; elements[14] = m32; elements[15] = m33;
 }
 
-float Matrix4x4::Determinant() const {
+float Matrix4::Determinant() const {
 	return
-		  rows[0].x * rows[1].y * rows[2].z * rows[3].z - rows[0].x * rows[1].y * rows[2].w * rows[3].z
+		rows[0].x * rows[1].y * rows[2].z * rows[3].z - rows[0].x * rows[1].y * rows[2].w * rows[3].z
 		+ rows[0].x * rows[1].z * rows[2].w * rows[3].y - rows[0].x * rows[1].z * rows[2].y * rows[3].z
 		+ rows[0].x * rows[1].w * rows[2].y * rows[3].z - rows[0].x * rows[1].w * rows[2].z * rows[3].y
 		- rows[0].y * rows[1].z * rows[2].w * rows[3].x + rows[0].y * rows[1].z * rows[2].x * rows[3].z
@@ -54,12 +57,12 @@ float Matrix4x4::Determinant() const {
 		- rows[0].w * rows[1].z * rows[2].x * rows[3].y + rows[0].w * rows[1].z * rows[2].y * rows[3].x;
 }
 
-float Matrix4x4::Trace() const {
+float Matrix4::Trace() const {
 	return rows[0].x + rows[1].y + rows[2].z + rows[3].w;
 }
 
-void Matrix4x4::Transpose() {
-	Matrix4x4 tmp = *this;
+void Matrix4::Transpose() {
+	Matrix4 tmp = *this;
 	rows[0].x = tmp.rows[0].x;
 	rows[0].y = tmp.rows[1].x;
 	rows[0].z = tmp.rows[2].x;
@@ -78,20 +81,20 @@ void Matrix4x4::Transpose() {
 	rows[3].w = tmp.rows[3].w;
 }
 
-Matrix4x4 Matrix4x4::Transposed() const {
-	Matrix4x4 tmp = *this;
+Matrix4 Matrix4::Transposed() const {
+	Matrix4 tmp = *this;
 	tmp.Transpose();
 
 	return tmp;
 }
 
-void Matrix4x4::Invert() {
+void Matrix4::Invert() {
 	float aDet = Determinant();
 	if (aDet == 0) {
 		throw std::invalid_argument("Determinant is zero, therefore inverse matrix doesn't exist.");
 	}
 
-	Matrix4x4 tmp = Matrix4x4();
+	Matrix4 tmp = Matrix4();
 
 	for (short i = 0; i < 3; i++) {
 		for (short j = 0; j < 3; j++) {
@@ -131,7 +134,7 @@ void Matrix4x4::Invert() {
 				t3r = t3r == 0 ? 0 : t3r - 1;
 			}
 
-			Matrix3x3 m = Matrix3x3();
+			Matrix3 m = Matrix3();
 
 			m(t1r, t1c) = m11;
 			m(t2r, t1c) = m21;
@@ -164,50 +167,50 @@ void Matrix4x4::Invert() {
 	*this = tmp;
 }
 
-Matrix4x4 Matrix4x4::Inverted() const {
-	Matrix4x4 tmp = *this;
+Matrix4 Matrix4::Inverted() const {
+	Matrix4 tmp = *this;
 	tmp.Invert();
 
 	return tmp;
 }
 
-void Matrix4x4::Normalize() {
+void Matrix4::Normalize() {
 	float det = Determinant();
 	*this /= det;
 }
 
-Matrix4x4 Matrix4x4::Normalized() const {
+Matrix4 Matrix4::Normalized() const {
 	float det = Determinant();
 	return *this / det;
 }
 
-void Matrix4x4::ClearRotation() {
+void Matrix4::ClearRotation() {
 	rows[0] = Vector4(rows[0].Length(), 0, 0, 0);
 	rows[1] = Vector4(0, rows[1].Length(), 0, 0);
 	rows[2] = Vector4(0, 0, rows[2].Length(), 0);
 	rows[3] = Vector4(0, 0, 0, rows[3].Length());
 }
 
-Matrix4x4 Matrix4x4::ClearedRotation() const {
-	Matrix4x4 tmp = *this;
+Matrix4 Matrix4::ClearedRotation() const {
+	Matrix4 tmp = *this;
 	tmp.ClearRotation();
 
 	return tmp;
 }
 
-Vector3 Matrix4x4::ExtractTranslation() const {
+Vector3 Matrix4::ExtractTranslation() const {
 	return rows[3].Xyz();
 }
 
-Vector4 Matrix4x4::ExtractScale() const {
+Vector4 Matrix4::ExtractScale() const {
 	return Vector4(rows[0].Length(), rows[1].Length(), rows[2].Length(), rows[3].Length());
 }
 
-Vector4 Matrix4x4::ExtractProjection() const {
+Vector4 Matrix4::ExtractProjection() const {
 	return Vector4(rows[0].w, rows[1].w, rows[2].w, rows[3].w);
 }
 
-Quaternion Matrix4x4::ExtractRotation() const {
+Quaternion Matrix4::ExtractRotation() const {
 	Vector3 r0 = rows[0].Normalized().Xyz();
 	Vector3 r1 = rows[1].Normalized().Xyz();
 	Vector3 r2 = rows[2].Normalized().Xyz();
@@ -253,7 +256,7 @@ Quaternion Matrix4x4::ExtractRotation() const {
 	return q.Normalized();
 }
 
-float& Matrix4x4::operator()(int row, int col) {
+float& Matrix4::operator()(int row, int col) {
 	if (row == 0) {
 		if (col == 0) return rows[0].x;
 		if (col == 1) return rows[0].y;
@@ -285,8 +288,8 @@ float& Matrix4x4::operator()(int row, int col) {
 	throw std::out_of_range("Row/Col is outside the bounds of this maxtrix.");
 }
 
-Matrix4x4 Matrix4x4::operator+(const Matrix4x4 & other) const {
-	return Matrix4x4(
+Matrix4 Matrix4::operator+(const Matrix4 & other) const {
+	return Matrix4(
 		rows[0] + other.rows[0],
 		rows[1] + other.rows[1],
 		rows[2] + other.rows[2],
@@ -294,8 +297,8 @@ Matrix4x4 Matrix4x4::operator+(const Matrix4x4 & other) const {
 	);
 }
 
-Matrix4x4 Matrix4x4::operator-(const Matrix4x4 & other) const {
-	return Matrix4x4(
+Matrix4 Matrix4::operator-(const Matrix4 & other) const {
+	return Matrix4(
 		rows[0] - other.rows[0],
 		rows[1] - other.rows[1],
 		rows[2] - other.rows[2],
@@ -303,41 +306,49 @@ Matrix4x4 Matrix4x4::operator-(const Matrix4x4 & other) const {
 	);
 }
 
-Matrix4x4 Matrix4x4::operator*(const Matrix4x4 & other) const {
-	return Matrix4x4(
-		(((rows[0].x * rows[0].x) + (rows[0].y * rows[1].x)) + (rows[0].z * rows[2].x)) + (rows[0].w * rows[3].x),
-		(((rows[0].x * rows[0].y) + (rows[0].y * rows[1].y)) + (rows[0].z * rows[2].y)) + (rows[0].w * rows[3].y),
-		(((rows[0].x * rows[0].z) + (rows[0].y * rows[1].z)) + (rows[0].z * rows[2].z)) + (rows[0].w * rows[3].z),
-		(((rows[0].x * rows[0].w) + (rows[0].y * rows[1].w)) + (rows[0].z * rows[2].w)) + (rows[0].w * rows[3].w),
-		(((rows[1].x * rows[0].x) + (rows[1].y * rows[1].x)) + (rows[1].z * rows[2].x)) + (rows[1].w * rows[3].x),
-		(((rows[1].x * rows[0].y) + (rows[1].y * rows[1].y)) + (rows[1].z * rows[2].y)) + (rows[1].w * rows[3].y),
-		(((rows[1].x * rows[0].z) + (rows[1].y * rows[1].z)) + (rows[1].z * rows[2].z)) + (rows[1].w * rows[3].z),
-		(((rows[1].x * rows[0].w) + (rows[1].y * rows[1].w)) + (rows[1].z * rows[2].w)) + (rows[1].w * rows[3].w),
-		(((rows[2].x * rows[0].x) + (rows[2].y * rows[1].x)) + (rows[2].z * rows[2].x)) + (rows[2].w * rows[3].x),
-		(((rows[2].x * rows[0].y) + (rows[2].y * rows[1].y)) + (rows[2].z * rows[2].y)) + (rows[2].w * rows[3].y),
-		(((rows[2].x * rows[0].z) + (rows[2].y * rows[1].z)) + (rows[2].z * rows[2].z)) + (rows[2].w * rows[3].z),
-		(((rows[2].x * rows[0].w) + (rows[2].y * rows[1].w)) + (rows[2].z * rows[2].w)) + (rows[2].w * rows[3].w),
-		(((rows[3].x * rows[0].x) + (rows[3].y * rows[1].x)) + (rows[3].z * rows[2].x)) + (rows[3].w * rows[3].x),
-		(((rows[3].x * rows[0].y) + (rows[3].y * rows[1].y)) + (rows[3].z * rows[2].y)) + (rows[3].w * rows[3].y),
-		(((rows[3].x * rows[0].z) + (rows[3].y * rows[1].z)) + (rows[3].z * rows[2].z)) + (rows[3].w * rows[3].z),
-		(((rows[3].x * rows[0].w) + (rows[3].y * rows[1].w)) + (rows[3].z * rows[2].w)) + (rows[3].w * rows[3].w)
-	);
+Matrix4 Matrix4::operator*(const Matrix4& other) const {
+	float lM11 = rows[0].x, lM12 = rows[0].y, lM13 = rows[0].z, lM14 = rows[0].w,
+		lM21 = rows[1].x, lM22 = rows[1].y, lM23 = rows[1].z, lM24 = rows[1].w,
+		lM31 = rows[2].x, lM32 = rows[2].y, lM33 = rows[2].z, lM34 = rows[2].w,
+		lM41 = rows[3].x, lM42 = rows[3].y, lM43 = rows[3].z, lM44 = rows[3].w,
+		rM11 = other.rows[0].x, rM12 = other.rows[0].y, rM13 = other.rows[0].z, rM14 = other.rows[0].w,
+		rM21 = other.rows[1].x, rM22 = other.rows[1].y, rM23 = other.rows[1].z, rM24 = other.rows[1].w,
+		rM31 = other.rows[2].x, rM32 = other.rows[2].y, rM33 = other.rows[2].z, rM34 = other.rows[2].w,
+		rM41 = other.rows[3].x, rM42 = other.rows[3].y, rM43 = other.rows[3].z, rM44 = other.rows[3].w;
+
+	return Matrix4(
+		(((lM11 * rM11) + (lM12 * rM21)) + (lM13 * rM31)) + (lM14 * rM41),
+		(((lM11 * rM12) + (lM12 * rM22)) + (lM13 * rM32)) + (lM14 * rM42),
+		(((lM11 * rM13) + (lM12 * rM23)) + (lM13 * rM33)) + (lM14 * rM43),
+		(((lM11 * rM14) + (lM12 * rM24)) + (lM13 * rM34)) + (lM14 * rM44),
+		(((lM21 * rM11) + (lM22 * rM21)) + (lM23 * rM31)) + (lM24 * rM41),
+		(((lM21 * rM12) + (lM22 * rM22)) + (lM23 * rM32)) + (lM24 * rM42),
+		(((lM21 * rM13) + (lM22 * rM23)) + (lM23 * rM33)) + (lM24 * rM43),
+		(((lM21 * rM14) + (lM22 * rM24)) + (lM23 * rM34)) + (lM24 * rM44),
+		(((lM31 * rM11) + (lM32 * rM21)) + (lM33 * rM31)) + (lM34 * rM41),
+		(((lM31 * rM12) + (lM32 * rM22)) + (lM33 * rM32)) + (lM34 * rM42),
+		(((lM31 * rM13) + (lM32 * rM23)) + (lM33 * rM33)) + (lM34 * rM43),
+		(((lM31 * rM14) + (lM32 * rM24)) + (lM33 * rM34)) + (lM34 * rM44),
+		(((lM41 * rM11) + (lM42 * rM21)) + (lM43 * rM31)) + (lM44 * rM41),
+		(((lM41 * rM12) + (lM42 * rM22)) + (lM43 * rM32)) + (lM44 * rM42),
+		(((lM41 * rM13) + (lM42 * rM23)) + (lM43 * rM33)) + (lM44 * rM43),
+		(((lM41 * rM14) + (lM42 * rM24)) + (lM43 * rM34)) + (lM44 * rM44));
 }
 
-Matrix4x4 Matrix4x4::operator+=(const Matrix4x4 & other) {
+Matrix4 Matrix4::operator+=(const Matrix4 & other) {
 	return *this = other + (*this);
 }
 
-Matrix4x4 Matrix4x4::operator-=(const Matrix4x4 & other) {
+Matrix4 Matrix4::operator-=(const Matrix4 & other) {
 	return *this = other - (*this);
 }
 
-Matrix4x4 Matrix4x4::operator*=(const Matrix4x4 & other) {
+Matrix4 Matrix4::operator*=(const Matrix4 & other) {
 	return *this = other * (*this);
 }
 
-Matrix4x4 Matrix4x4::operator+(const float other) const {
-	return Matrix4x4(
+Matrix4 Matrix4::operator+(const float other) const {
+	return Matrix4(
 		rows[0] + other,
 		rows[1] + other,
 		rows[2] + other,
@@ -345,8 +356,8 @@ Matrix4x4 Matrix4x4::operator+(const float other) const {
 	);
 }
 
-Matrix4x4 Matrix4x4::operator-(const float other) const {
-	return Matrix4x4(
+Matrix4 Matrix4::operator-(const float other) const {
+	return Matrix4(
 		rows[0] - other,
 		rows[1] - other,
 		rows[2] - other,
@@ -354,8 +365,8 @@ Matrix4x4 Matrix4x4::operator-(const float other) const {
 	);
 }
 
-Matrix4x4 Matrix4x4::operator*(const float other) const {
-	return Matrix4x4(
+Matrix4 Matrix4::operator*(const float other) const {
+	return Matrix4(
 		rows[0] * other,
 		rows[1] * other,
 		rows[2] * other,
@@ -364,8 +375,8 @@ Matrix4x4 Matrix4x4::operator*(const float other) const {
 }
 
 
-Matrix4x4 Matrix4x4::operator/(const float other) const {
-	return Matrix4x4(
+Matrix4 Matrix4::operator/(const float other) const {
+	return Matrix4(
 		rows[0] / other,
 		rows[1] / other,
 		rows[2] / other,
@@ -373,43 +384,43 @@ Matrix4x4 Matrix4x4::operator/(const float other) const {
 	);
 }
 
-Matrix4x4 Matrix4x4::operator+=(const float other) {
+Matrix4 Matrix4::operator+=(const float other) {
 	return *this = other * (*this);
 }
 
-Matrix4x4 Matrix4x4::operator-=(const float other) {
+Matrix4 Matrix4::operator-=(const float other) {
 	return *this = other * (*this);
 }
 
-Matrix4x4 Matrix4x4::operator*=(const float other) {
+Matrix4 Matrix4::operator*=(const float other) {
 	return *this = other * (*this);
 }
 
-Matrix4x4 Matrix4x4::operator/=(const float other) {
+Matrix4 Matrix4::operator/=(const float other) {
 	return *this = other / (*this);
 }
 
-Matrix4x4 Matrix4x4::operator-() const {
-	return Matrix4x4(-rows[0], -rows[1], -rows[2], -rows[3]);
+Matrix4 Matrix4::operator-() const {
+	return Matrix4(-rows[0], -rows[1], -rows[2], -rows[3]);
 }
 
-bool Matrix4x4::operator==(const Matrix4x4& other) const {
+bool Matrix4::operator==(const Matrix4& other) const {
 	return Equals(other);
 }
 
-bool Matrix4x4::operator!=(const Matrix4x4& other) const {
+bool Matrix4::operator!=(const Matrix4& other) const {
 	return !Equals(other);
 }
 
-bool Matrix4x4::Equals(const Matrix4x4& other) const {
+bool Matrix4::Equals(const Matrix4& other) const {
 	return rows[0] == other.rows[0] && rows[1] == other.rows[1] && rows[2] == other.rows[2] && rows[3] == other.rows[3];
 }
 
-Matrix4x4 Matrix4x4::CreateFromAxisAngle(float x, float y, float z, float angle) {
+Matrix4 Matrix4::CreateFromAxisAngle(float x, float y, float z, float angle) {
 	return CreateFromAxisAngle(Vector3(x, y, z), angle);
 }
 
-Matrix4x4 Matrix4x4::CreateFromAxisAngle(const Vector3& axis, float angle) {
+Matrix4 Matrix4::CreateFromAxisAngle(const Vector3& axis, float angle) {
 	Vector3 a = axis.Normalized();
 	float axisX = a.x;
 	float axisY = a.y;
@@ -430,7 +441,7 @@ Matrix4x4 Matrix4x4::CreateFromAxisAngle(const Vector3& axis, float angle) {
 	float sinY = sin * axisY;
 	float sinZ = sin * axisZ;
 
-	return Matrix4x4(
+	return Matrix4(
 		tXX + cos, tXY - sinZ, tXZ + sinY, 0,
 		tXY + sinZ, tYY + cos, tYZ - sinX, 0,
 		tXZ - sinY, tYZ + sinX, tZZ + cos, 0,
@@ -438,16 +449,16 @@ Matrix4x4 Matrix4x4::CreateFromAxisAngle(const Vector3& axis, float angle) {
 	);
 }
 
-Matrix4x4 Matrix4x4::CreateFromQuaternion(const Quaternion& quaternion) {
+Matrix4 Matrix4::CreateFromQuaternion(const Quaternion& quaternion) {
 	Vector4 aa = quaternion.ToAxisAngle();
 	return CreateFromAxisAngle(aa.x, aa.y, aa.z, aa.w);
 }
 
-Matrix4x4 Matrix4x4::CreateRoatationX(float angle) {
+Matrix4 Matrix4::CreateRoatationX(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
-	Matrix4x4 out = Matrix4x4::Identity;
+	Matrix4 out = Matrix4::Identity;
 	out.rows[1].y = cos;
 	out.rows[1].z = sin;
 	out.rows[2].y = -sin;
@@ -456,11 +467,11 @@ Matrix4x4 Matrix4x4::CreateRoatationX(float angle) {
 	return out;
 }
 
-Matrix4x4 Matrix4x4::CreateRoatationY(float angle) {
+Matrix4 Matrix4::CreateRoatationY(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
-	Matrix4x4 out = Matrix4x4::Identity;
+	Matrix4 out = Matrix4::Identity;
 	out.rows[0].x = cos;
 	out.rows[0].z = -sin;
 	out.rows[2].x = sin;
@@ -469,11 +480,11 @@ Matrix4x4 Matrix4x4::CreateRoatationY(float angle) {
 	return out;
 }
 
-Matrix4x4 Matrix4x4::CreateRoatationZ(float angle) {
+Matrix4 Matrix4::CreateRoatationZ(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
-	Matrix4x4 out = Matrix4x4::Identity;
+	Matrix4 out = Matrix4::Identity;
 	out.rows[0].x = cos;
 	out.rows[0].y = sin;
 	out.rows[1].x = -sin;
@@ -482,20 +493,20 @@ Matrix4x4 Matrix4x4::CreateRoatationZ(float angle) {
 	return out;
 }
 
-Matrix4x4 Matrix4x4::CreateRoatation(const Vector3& angles) {
-	return Matrix4x4::CreateRoatation(angles.x, angles.y, angles.z);
+Matrix4 Matrix4::CreateRoatation(const Vector3& angles) {
+	return Matrix4::CreateRoatation(angles.x, angles.y, angles.z);
 }
 
-Matrix4x4 Matrix4x4::CreateRoatation(float x, float y, float z) {
-	return Matrix4x4::CreateRoatationX(x).CreateRoatationY(y).CreateRoatationZ(z);
+Matrix4 Matrix4::CreateRoatation(float x, float y, float z) {
+	return Matrix4::CreateRoatationX(x).CreateRoatationY(y).CreateRoatationZ(z);
 }
 
-Matrix4x4 Matrix4x4::CreateTranslation(const Vector3& translation) {
+Matrix4 Matrix4::CreateTranslation(const Vector3& translation) {
 	return CreateTranslation(translation.x, translation.y, translation.z);
 }
 
-Matrix4x4 Matrix4x4::CreateTranslation(float x, float y, float z) {
-	return Matrix4x4(
+Matrix4 Matrix4::CreateTranslation(float x, float y, float z) {
+	return Matrix4(
 		1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
@@ -503,16 +514,16 @@ Matrix4x4 Matrix4x4::CreateTranslation(float x, float y, float z) {
 	);
 }
 
-Matrix4x4 Matrix4x4::CreateScale(float scale) {
+Matrix4 Matrix4::CreateScale(float scale) {
 	return CreateScale(scale, scale, scale);
 }
 
-Matrix4x4 Matrix4x4::CreateScale(const Vector3& scale) {
+Matrix4 Matrix4::CreateScale(const Vector3& scale) {
 	return CreateScale(scale.x, scale.y, scale.z);
 }
 
-Matrix4x4 Matrix4x4::CreateScale(float x, float y, float z) {
-	return Matrix4x4(
+Matrix4 Matrix4::CreateScale(float x, float y, float z) {
+	return Matrix4(
 		x, 0, 0, 0,
 		0, y, 0, 0,
 		0, 0, z, 0,
@@ -520,12 +531,12 @@ Matrix4x4 Matrix4x4::CreateScale(float x, float y, float z) {
 	);
 }
 
-Matrix4x4 Matrix4x4::CreateOrthographic(float width, float height, float zNear, float zFar) {
+Matrix4 Matrix4::CreateOrthographic(float width, float height, float zNear, float zFar) {
 	return CreateOrthographicOffCenter(-width / 2, width / 2, -height / 2, height / 2, zNear, zFar);
 }
 
-Matrix4x4 Matrix4x4::CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNear, float zFar) {
-	Matrix4x4 out = Matrix4x4::Identity;
+Matrix4 Matrix4::CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNear, float zFar) {
+	Matrix4 out = Matrix4::Identity;
 
 	float invRL = 1.0f / (right - left);
 	float invTB = 1.0f / (top - bottom);
@@ -541,7 +552,7 @@ Matrix4x4 Matrix4x4::CreateOrthographicOffCenter(float left, float right, float 
 	return out;
 }
 
-Matrix4x4 Matrix4x4::CreatePerspectiveFieldOfView(float fov, float aspect, float zNear, float zFar) {
+Matrix4 Matrix4::CreatePerspectiveFieldOfView(float fov, float aspect, float zNear, float zFar) {
 	if (fov <= 0 || fov > M_PI) {
 		throw std::invalid_argument("fovy");
 	}
@@ -566,7 +577,7 @@ Matrix4x4 Matrix4x4::CreatePerspectiveFieldOfView(float fov, float aspect, float
 	return CreatePerspectiveOffCenter(xMin, xMax, yMin, yMax, zNear, zFar);
 }
 
-Matrix4x4 Matrix4x4::CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float zNear, float zFar) {
+Matrix4 Matrix4::CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float zNear, float zFar) {
 	if (zNear <= 0 || zNear >= zFar) {
 		throw std::invalid_argument("zNear");
 	}
@@ -575,52 +586,51 @@ Matrix4x4 Matrix4x4::CreatePerspectiveOffCenter(float left, float right, float b
 		throw std::invalid_argument("zFar");
 	}
 
-	float x = (2.0f * zNear) / (right - left);
-	float y = (2.0f * zNear) / (top - bottom);
-	float a = (right + left) / (right - left);
-	float b = (top + bottom) / (top - bottom);
-	float c = -(zFar + zNear) / (zFar - zNear);
-	float d = -(2.0f * zFar * zNear) / (zFar - zNear);
+	float x = 2.0f * zNear / (right - left);
+	float y = 2 * zNear / (top - bottom);
+	float a = -(zFar + zNear) / (zFar - zNear);
+	float b = -zNear * (right + left) / (right - left);
+	float c = -zNear * (top + bottom) / (top - bottom);
+	float d = 2 * zFar * zNear / (zNear - zFar);
 
-	return Matrix4x4(
+	return Matrix4(
 		x, 0, 0, 0,
 		0, y, 0, 0,
-		a, b, c, -1, 
-		0, 0, d, 0
+		0, 0, a, -1,
+		b, c, d, 0
 	);
 }
 
-Matrix4x4 Matrix4x4::LookAt(Vector3 eye, Vector3 target, Vector3 up) {
+Matrix4 Matrix4::LookAt(const Vector3& eye, const Vector3& target, const Vector3& up) {
 	Vector3 z = (eye - target).Normalized();
 	Vector3 x = up.Cross(z).Normalized();
 	Vector3 y = z.Cross(x).Normalized();
 
-	return Matrix4x4(
+	return Matrix4(
 		x.x, y.x, z.x, 0,
 		x.y, y.y, z.y, 0,
 		x.z, y.z, z.z, 0,
 		-((x.x * eye.x) + (x.y * eye.y) + (x.z * eye.z)), 
 		-((y.x * eye.x) + (y.y * eye.y) + (y.z * eye.z)), 
-		-((z.x * eye.x) + (z.y * eye.y) + (z.z * eye.z)), 1
-	);
+		-((z.x * eye.x) + (z.y * eye.y) + (z.z * eye.z)), 1);
 }
 
-std::ostream& Math::operator<<(std::ostream& ostream, const Matrix4x4& a) {
+std::ostream& Math::operator<<(std::ostream& ostream, const Matrix4& a) {
 	return ostream << a.rows[0] << std::endl << a.rows[1] << std::endl << a.rows[2] << std::endl << a.rows[3];
 }
 
-Matrix4x4 Math::operator+(const float left, const Matrix4x4& right) {
+Matrix4 Math::operator+(const float left, const Matrix4& right) {
 	return right + left;
 }
 
-Matrix4x4 Math::operator-(const float left, const Matrix4x4& right) {
+Matrix4 Math::operator-(const float left, const Matrix4& right) {
 	return right - left;
 }
 
-Matrix4x4 Math::operator*(const float left, const Matrix4x4& right) {
+Matrix4 Math::operator*(const float left, const Matrix4& right) {
 	return right * left;
 }
 
-Matrix4x4 Math::operator/(const float left, const Matrix4x4& right) {
+Matrix4 Math::operator/(const float left, const Matrix4& right) {
 	return right / left;
 }

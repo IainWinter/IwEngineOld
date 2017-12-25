@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IwEngine\Graphics\VertexBufferLayout.h"
-#include "IwEngine\Graphics\VertexBuffer.h"
+#include "VertexBufferLayout.h"
+#include "VertexBuffer.h"
 
 class VertexArray {
 private:
