@@ -1,19 +1,20 @@
 #pragma once
 
+class GameObject; //monkeys
+
 #include "GameObject.h"
 
 class Component : public Object {
 private:
-	const GameObject& gameObject;
+	const GameObject* gameObject;
 	//Transform& transform;
 public:
-	Component(const GameObject& gameObject) : gameObject(gameObject) {
-	{
+	Component(const GameObject* gameObject) : gameObject(gameObject) {
 		//transform = gameObject.GetComponent<Transform>();
 	}
 
 	inline const GameObject& GetGameObject() const {
-		return gameObject;
+		return *gameObject;
 	}
 
 	//Transform& GetTransform() const {
