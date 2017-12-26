@@ -50,5 +50,6 @@ namespace Math {
 
 		friend IWENGINE_API std::ostream& operator<<(std::ostream &strm, const Quaternion &a);
 		friend IWENGINE_API Quaternion operator*(const float left, const Quaternion& right);
+		friend IWENGINE_API Vector3 operator*(const Vector3& left, const Quaternion& right);
 	};
 }

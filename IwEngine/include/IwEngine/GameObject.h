@@ -27,7 +27,7 @@ public:
 
 template<typename TComponent>
 void GameObject::AddComponent() {
-	TComponent component();
+	TComponent component(this);
 	_components.push_back(component);
 }
 

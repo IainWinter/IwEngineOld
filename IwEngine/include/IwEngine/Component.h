@@ -3,21 +3,22 @@
 class GameObject; //monkeys
 
 #include "GameObject.h"
+#include "Transform.h"
 
 class Component : public Object {
 private:
-	const GameObject* gameObject;
-	//Transform& transform;
+	GameObject& gameObject;
+	Transform& transform;
 public:
-	Component(const GameObject* gameObject) : gameObject(gameObject) {
-		//transform = gameObject.GetComponent<Transform>();
-	}
+	Component(GameObject& gameObject) 
+		: gameObject(gameObject), 
+		transform(gameObject.GetComponent<Transform>()) { }
 
 	inline const GameObject& GetGameObject() const {
-		return *gameObject;
+		return gameObject;
 	}
 
-	//Transform& GetTransform() const {
-	//	return transform;
-	//}
+	Transform& GetTransform() const {
+		return transform;
+	}
 };

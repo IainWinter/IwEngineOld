@@ -202,3 +202,10 @@ std::ostream & Math::operator<<(std::ostream & ostream, const Quaternion & quate
 Quaternion Math::operator*(const float left, const Quaternion& right) {
 	return right * left;
 }
+
+Vector3 Math::operator*(const Math::Vector3& left, const Quaternion& right) {
+	Math::Vector3 vec = right.GetXYZ();
+	float scale = right.w;
+
+	return 2.0f * vec.Dot(left) * vec + (scale*scale - vec.Dot(vec)) * left + 2.0f * scale * vec.Cross(left);
+}
