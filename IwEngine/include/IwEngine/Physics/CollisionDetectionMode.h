@@ -1,5 +1,8 @@
 #pragma once
-enum CollisionDetectionMode {
-	Continuous, 
-	Discrete
-};
+
+namespace Physics {
+	enum CollisionDetectionMode {
+		CONTINUOUS,
+		DISCRETE
+	};
+}
