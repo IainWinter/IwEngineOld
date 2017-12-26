@@ -33,10 +33,12 @@
     <ClInclude Include="include\IwEngine\Math\Vector4.h" />
     <ClInclude Include="include\IwEngine\Object.h" />
     <ClInclude Include="include\IwEngine\Physics\BounceCombine.h" />
+    <ClInclude Include="include\IwEngine\Physics\Collider.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionDetectionMode.h" />
     <ClInclude Include="include\IwEngine\Physics\FrictionCombine.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsMaterial.h" />
+    <ClInclude Include="include\IwEngine\Physics\RigidBody.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\Directory.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\File.h" />
     <ClInclude Include="include\IwEngine\Utility\IO\Path.h" />
@@ -56,9 +58,6 @@
     <ClInclude Include="src\Graphics\VertexBuffer.h" />
     <ClInclude Include="include\IwEngine\GameObject.h" />
     <ClInclude Include="include\IwEngine\Component.h" />
-    <ClInclude Include="include\IwEngine\Physics\AABB.h" />
-    <ClInclude Include="include\IwEngine\RigidBody.h" />
-    <ClInclude Include="include\IwEngine\Collider.h" />
-    <ClInclude Include="include\IwEngine\Physics\Physics.h" />
+    <ClInclude Include="include\IwEngine\Transform.h" />
   </ItemGroup>
 </Project>
