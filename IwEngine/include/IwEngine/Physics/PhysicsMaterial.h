@@ -7,6 +7,7 @@ namespace Physics {
 		float coef_static_friction;
 		float coef_kinetic_friction;
 		float elasticity;
-		
+		enum FrictionCombine;
+		enum BounceCombine;
 	};
 }

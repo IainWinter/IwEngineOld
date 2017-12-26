@@ -61,7 +61,7 @@
     <ClInclude Include="include\IwEngine\Transform.h" />
     <ClInclude Include="include\IwEngine\Physics\AABB.h" />
     <ClInclude Include="include\IwEngine\Physics\Physics.h" />
-    <ClInclude Include="include\IwEngine\Collider.h" />
     <ClInclude Include="include\IwEngine\RigidBody.h" />
+    <ClInclude Include="include\IwEngine\MeshCollider.h" />
   </ItemGroup>
 </Project>
