@@ -4,7 +4,7 @@
 
 namespace Physics {
 	struct IWENGINE_API AABB {
-		Math::Vector2 max;
-		Math::Vector2 min; 
+		Math::Vector3 max;
+		Math::Vector3 min; 
 	};
 }
