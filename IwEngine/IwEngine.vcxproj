@@ -160,8 +160,8 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\IwEngine\Physics\GameObject.cpp" />
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
+    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Display.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
@@ -183,8 +183,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\Common.h" />
+    <ClInclude Include="include\IwEngine\Component.h" />
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
+    <ClInclude Include="include\IwEngine\GameObject.h" />
     <ClInclude Include="include\IwEngine\Graphics\Display.h" />
     <ClInclude Include="src\Graphics\ShaderProgram.h" />
     <ClInclude Include="src\Graphics\VertexBuffer.h" />
@@ -203,7 +205,6 @@
     <ClInclude Include="include\IwEngine\Physics\Collider.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionDetectionMode.h" />
     <ClInclude Include="include\IwEngine\Physics\FrictionCombine.h" />
-    <ClInclude Include="include\IwEngine\Physics\GameObject.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsMaterial.h" />
     <ClInclude Include="include\IwEngine\Physics\RigidBody.h" />

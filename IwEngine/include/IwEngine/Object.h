@@ -6,19 +6,27 @@
 
 class Object {
 private:
-	static std::atomic<int> m_staticId;
-	int m_instanceId = ++m_staticId;
-	std::string m_name;
+	static std::atomic<int> _staticId;
+	int _instanceId = ++_staticId;
+	std::string _name;
 public:
-	IWENGINE_API inline int GetInstanceID() const;
-	IWENGINE_API inline const std::string& GetName() const;
-	IWENGINE_API inline Object& SetName(const std::string& name);
-	IWENGINE_API inline Object& SetName(const char* name);
+	IWENGINE_API inline int GetInstanceID() const {
+		return _instanceId;
+	}
+
+	IWENGINE_API inline const std::string& GetName() const {
+		return _name;
+	}
+
+	IWENGINE_API inline Object& SetName(const std::string& name) {
+		_name = name;
+		return *this;
+	}
 
 	//static void Destroy(Object& object);
 	//static Object* Instantiate(Object& object);
 	//template<typename T> static Object* FindObjectsOfType();
-	//template<typename T> static Object&??? FindObjectOfType();
+	//template<typename T> static Object&?? FindObjectOfType();
 };
 
-std::atomic<int> Object::m_staticId;
+std::atomic<int> Object::_staticId;

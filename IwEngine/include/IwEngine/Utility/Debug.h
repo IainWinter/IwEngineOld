@@ -1,3 +1,5 @@
 #pragma once
 
-#define ASSERT(x) if(!(x)) __debugbreak();
+namespace Utility {
+	#define ASSERT(x) if(!(x)) __debugbreak();
+}

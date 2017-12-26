@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="include\IwEngine\Physics\GameObject.cpp" />
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
     <ClCompile Include="src\Graphics\Display.cpp" />
     <ClCompile Include="src\Math\MathHelper.cpp" />
@@ -21,6 +20,7 @@
     <ClCompile Include="src\Math\Matrix3.cpp" />
     <ClCompile Include="src\Math\Matrix4.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\Common.h" />
@@ -36,7 +36,6 @@
     <ClInclude Include="include\IwEngine\Physics\Collider.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionDetectionMode.h" />
     <ClInclude Include="include\IwEngine\Physics\FrictionCombine.h" />
-    <ClInclude Include="include\IwEngine\Physics\GameObject.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsHelper.h" />
     <ClInclude Include="include\IwEngine\Physics\PhysicsMaterial.h" />
     <ClInclude Include="include\IwEngine\Physics\RigidBody.h" />
@@ -57,5 +56,7 @@
     <ClInclude Include="src\Graphics\ShaderProgram.h" />
     <ClInclude Include="src\Graphics\VertexArray.h" />
     <ClInclude Include="src\Graphics\VertexBuffer.h" />
+    <ClInclude Include="include\IwEngine\GameObject.h" />
+    <ClInclude Include="include\IwEngine\Component.h" />
   </ItemGroup>
 </Project>
