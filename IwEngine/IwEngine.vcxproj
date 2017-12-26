@@ -188,6 +188,7 @@
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
     <ClInclude Include="include\IwEngine\GameObject.h" />
     <ClInclude Include="include\IwEngine\Graphics\Display.h" />
+    <ClInclude Include="include\IwEngine\Transform.h" />
     <ClInclude Include="src\Graphics\ShaderProgram.h" />
     <ClInclude Include="src\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Graphics\VertexBufferLayout.h" />
