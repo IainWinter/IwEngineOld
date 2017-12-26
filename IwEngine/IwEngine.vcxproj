@@ -182,12 +182,16 @@
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IwEngine\Collider.h" />
     <ClInclude Include="include\IwEngine\Common.h" />
     <ClInclude Include="include\IwEngine\Component.h" />
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
     <ClInclude Include="include\IwEngine\GameObject.h" />
     <ClInclude Include="include\IwEngine\Graphics\Display.h" />
+    <ClInclude Include="include\IwEngine\Physics\AABB.h" />
+    <ClInclude Include="include\IwEngine\Physics\Physics.h" />
+    <ClInclude Include="include\IwEngine\RigidBody.h" />
     <ClInclude Include="include\IwEngine\Transform.h" />
     <ClInclude Include="src\Graphics\ShaderProgram.h" />
     <ClInclude Include="src\Graphics\VertexBuffer.h" />
