@@ -1,24 +1,15 @@
 #pragma once
 
-class GameObject; //monkeys
-
 #include "GameObject.h"
-#include "Transform.h"
 
-class Component : public Object {
+class GameObject;
+class IWENGINE_API Component : public Object {
 private:
 	GameObject& gameObject;
-	Transform& transform;
 public:
-	Component(GameObject& gameObject) 
-		: gameObject(gameObject), 
-		transform(gameObject.GetComponent<Transform>()) { }
+	Component(GameObject& gameObject) : gameObject(gameObject) { }
 
 	inline const GameObject& GetGameObject() const {
 		return gameObject;
-	}
-
-	Transform& GetTransform() const {
-		return transform;
 	}
 };

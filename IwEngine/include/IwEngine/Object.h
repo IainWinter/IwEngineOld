@@ -3,23 +3,28 @@
 #include "Common.h"
 #include <atomic>
 #include <string>
+#include <memory>
 
-class Object {
+class IWENGINE_API Object {
 private:
-	static std::atomic<int> _staticId;
-	int _instanceId = ++_staticId;
-	std::string _name;
+	//Wrappers for __dllspec C4251
+	struct String { std::string string; };
+	struct AtomicInt { std::atomic<int> atomic; };
+
+	static AtomicInt _staticId;
+	int _instanceId = ++_staticId.atomic;
+	String _name;
 public:
-	IWENGINE_API inline int GetInstanceID() const {
+	inline int GetInstanceID() const {
 		return _instanceId;
 	}
 
-	IWENGINE_API inline const std::string& GetName() const {
-		return _name;
+	const std::string& GetName() const {
+		return _name.string;
 	}
 
-	IWENGINE_API inline Object& SetName(const std::string& name) {
-		_name = name;
+	Object& SetName(const std::string& name) {
+		_name.string = name;
 		return *this;
 	}
 
@@ -28,5 +33,3 @@ public:
 	//template<typename T> static Object* FindObjectsOfType();
 	//template<typename T> static Object&?? FindObjectOfType();
 };
-
-std::atomic<int> Object::_staticId;

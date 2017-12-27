@@ -6,5 +6,5 @@ namespace Physics {
 		ADD,
 		SUBTRACT,
 		MULTIPLY
-	}
-};
+	};
+}

@@ -4,7 +4,7 @@
 #include "Math\Vector3.h"
 #include "Math\Quaternion.h"
 
-class Transform : public Component {
+class IWENGINE_API Transform : public Component {
 private:
 	Math::Vector3 position;
 	Math::Quaternion rotation;
