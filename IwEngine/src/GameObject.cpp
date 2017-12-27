@@ -11,21 +11,21 @@ GameObject::GameObject(const char* name) {
 }
 
 GameObject::~GameObject() {
-	size_t size = _components.size();
+	size_t size = _components.vector.size();
 	for (size_t i = 0; i < size; i++) {
-		delete & _components[i];
+		delete & _components.vector[i];
 	}
 }
 
 void GameObject::AddComponent(const Component* component) {
-	_components.push_back(component);
+	_components.vector.push_back(component);
 }
 
 void GameObject::RemoveComponent(const Component& component) {
-	size_t size = _components.size();
+	size_t size = _components.vector.size();
 	for (size_t i = 0; i < size; i++) {
-		if (_components[i] == &component) {
-			_components.erase(_components.begin() + i);
+		if (_components.vector[i] == &component) {
+			_components.vector.erase(_components.vector.begin() + i);
 			break;
 		}
 	}
