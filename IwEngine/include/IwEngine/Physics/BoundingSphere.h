@@ -7,9 +7,10 @@ private:
 	const Math::Vector3 center;
 	float radius;
 public:
-	BoundingSphere(float x, float y, float z, float rad) 
+	BoundingSphere(Math::Vector3& cen, float rad) 
 	{
-		//center = Math::Vector3(x, y, z);
+		//center = cen;
 		radius = rad;
 	};
+	void IntersectBS(const BoundingSphere& other); 
 };

@@ -64,5 +64,6 @@
     <ClInclude Include="include\IwEngine\RigidBody.h" />
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
+    <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
   </ItemGroup>
 </Project>
