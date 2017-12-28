@@ -1,10 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "Object.h"
 #include "Component.h"
+#include "Transform.h"
 
-class Component;
 class IWENGINE_API GameObject : public Object {
 private:
 	//Wrapper for __dllspec C4251
@@ -18,7 +17,7 @@ public:
 	
 	template<typename TComponent>
 	void AddComponent() {
-		TComponent component(this);
+		Component* component = new TComponent(*this);
 		_components.vector.push_back(component);
 	}
 

@@ -22,7 +22,7 @@ public:
 	inline Math::Vector3& GetPosition() { return position; }
 	inline const Math::Quaternion& GetRotation() const { return rotation; }
 	inline Math::Quaternion& GetRotation() { return rotation; }
-	inline const Math::Vector3& GetEulerRotation() const { return rotation.ToEulerAngles(); }
+	inline const Math::Vector3 GetEulerRotation() const { return rotation.ToEulerAngles(); }
 
 	inline void SetPosition(const Math::Vector3& position) { this->position = position; }
 	inline void SetRotation(const Math::Quaternion& rotation) { this->rotation = rotation; }

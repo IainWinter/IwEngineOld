@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObject.h"
+#include "Object.h"
 
 class GameObject;
 class IWENGINE_API Component : public Object {
