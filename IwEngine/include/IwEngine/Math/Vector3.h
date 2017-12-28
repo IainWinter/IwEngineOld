@@ -3,6 +3,7 @@
 #include "IwEngine\Common.h"
 #include <iostream>
 
+//like this well commented code
 namespace Math {
 	struct IWENGINE_API Vector3 {
 		float x, y, z;

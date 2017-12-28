@@ -13,6 +13,7 @@ private:
 	VectorConstComponent _components;
 public:
 	GameObject();
+	//should we pass the physics material in the game object constructor?
 	GameObject(const char* name);
 	~GameObject();
 	
