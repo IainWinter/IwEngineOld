@@ -4,6 +4,7 @@
 #include <atomic>
 #include <string>
 #include <memory>
+#include "Physics\Physics.h"
 
 class IWENGINE_API Object {
 private:

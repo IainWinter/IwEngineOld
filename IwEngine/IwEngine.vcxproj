@@ -190,6 +190,8 @@
     <ClInclude Include="include\IwEngine\GameObject.h" />
     <ClInclude Include="include\IwEngine\Graphics\Display.h" />
     <ClInclude Include="include\IwEngine\Physics\AABB.h" />
+    <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
+    <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
     <ClInclude Include="include\IwEngine\Physics\Physics.h" />
     <ClInclude Include="include\IwEngine\RigidBody.h" />
     <ClInclude Include="include\IwEngine\Transform.h" />
