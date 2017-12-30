@@ -8,8 +8,9 @@ private:
 	GameObject& gameObject;
 public:
 	Component(GameObject& gameObject) : gameObject(gameObject) { }
+	virtual ~Component() = default;
 
-	inline const GameObject& GetGameObject() const {
+	inline const GameObject& GetGameObject() const { //Prolly not going to be constant idk
 		return gameObject;
 	}
 };

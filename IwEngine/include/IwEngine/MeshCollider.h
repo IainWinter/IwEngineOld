@@ -5,7 +5,6 @@
 #include "Math\Math.h"
 
 class IWENGINE_API MeshCollider {
-
 public:
 	MeshCollider(int count) {
 		Math::Vector3* collider = new Math::Vector3[count];

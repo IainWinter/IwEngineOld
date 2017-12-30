@@ -13,11 +13,11 @@ GameObject::GameObject(const char* name) {
 GameObject::~GameObject() {
 	size_t size = _components.vector.size();
 	for (size_t i = 0; i < size; i++) {
-		delete & _components.vector[i];
+		delete _components.vector[i];
 	}
 }
 
-void GameObject::AddComponent(const Component* component) {
+void GameObject::AddComponent(Component* component) {
 	_components.vector.push_back(component);
 }
 

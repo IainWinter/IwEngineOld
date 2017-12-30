@@ -5,17 +5,13 @@
 #include "IwEngine\Utility\IO\File.h"
 #include <sstream>
 
-#include "VertexBuffer.h"
+#include "IwEngine\Graphics\Display.h"
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "ShaderProgram.h"
 #include "IwEngine\Math\Matrix4.h"
 
-Display::Display() {
-
-}
-
-int Display::Start() {
+int Graphics::Display::Start() {
 	GLFWwindow* window;
 
 	/* Initialize the library */
@@ -85,15 +81,15 @@ int Display::Start() {
 		22, 23, 20
 	};
 
-	VertexArray va;
-	VertexBuffer vb(pos, 72 * sizeof(float));
-	VertexBufferLayout layout;
+	Graphics::VertexArray va;
+	Graphics::VertexBuffer vb(pos, 72 * sizeof(float));
+	Graphics::VertexBufferLayout layout;
 	layout.Push<float>(3);
 	va.AddBuffer(vb, layout);
 
-	IndexBuffer ib(indices, 36);
+	Graphics::IndexBuffer ib(indices, 36);
 
-	ShaderProgram shader("res/shaders/default.shader");
+	Graphics::ShaderProgram shader("res/shaders/default.shader");
 
 	glBindVertexArray(0);
 	glUseProgram(0);

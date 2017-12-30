@@ -2,7 +2,7 @@
 #include "IwEngine\Common.h"
 
 namespace Physics {
-	enum IWENGINE_API FrictionCombine {
+	enum class IWENGINE_API FrictionCombine {
 		ADD,
 		SUBTRACT,
 		MULTIPLY

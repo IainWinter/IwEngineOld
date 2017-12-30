@@ -16,6 +16,8 @@ private:
 	int _instanceId = ++_staticId.atomic;
 	String _name;
 public:
+	virtual ~Object() = default;
+
 	inline int GetInstanceID() const {
 		return _instanceId;
 	}

@@ -2,8 +2,9 @@
 
 #include "IwEngine\Common.h"
 
-class IWENGINE_API Display {
-public: 
-	 Display();
-	 int Start();
-};
+namespace Graphics {
+	class IWENGINE_API Display {
+	public:
+		int Start();
+	};
+}

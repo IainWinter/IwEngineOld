@@ -5,6 +5,8 @@
 #include "IwEngine\Utility\IO\File.h"
 #include "IwEngine\Utility\Logger.h"
 
+using namespace Graphics;
+
 ShaderProgram::ShaderProgram(const char* fileName) {
 	ShaderProgramSource source = ReadShader(fileName);
 

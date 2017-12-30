@@ -1,4 +1,5 @@
 #include "IwEngine\Utility\Logger.h"
+#include <stdexcept>
 
 void Utility::Info(const std::string& message) {
 	Log("Info", message, ConsoleColorCode::WHITE);
@@ -16,8 +17,9 @@ void Utility::Error(const std::string& message) {
 	Log("Error", message, ConsoleColorCode::LIGHT_RED);
 }
 
-void Utility::Exception(const std::string& message) {
+void Utility::ThrowRunTimeError(const std::string& message) {
 	Log("Exception", message, ConsoleColorCode::LIGHT_RED);
+	throw std::runtime_error(message);
 }
 
 void Utility::Log(const char* level, const std::string& message, ConsoleColorCode colorCode) {

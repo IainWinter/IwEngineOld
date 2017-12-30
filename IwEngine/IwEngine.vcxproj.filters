@@ -21,6 +21,7 @@
     <ClCompile Include="src\Math\Matrix4.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Graphics\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\Common.h" />
@@ -46,16 +47,10 @@
     <ClInclude Include="include\IwEngine\Utility\Color.h" />
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
-    <ClInclude Include="src\Graphics\VertexBufferLayout.cpp" />
     <ClInclude Include="include\IwEngine\Utility\Debug.h" />
     <ClInclude Include="include\IwEngine\Math\Matrix2.h" />
     <ClInclude Include="include\IwEngine\Math\Matrix3.h" />
     <ClInclude Include="include\IwEngine\Math\Matrix4.h" />
-    <ClInclude Include="src\Graphics\VertexBufferLayout.h" />
-    <ClInclude Include="src\Graphics\IndexBuffer.h" />
-    <ClInclude Include="src\Graphics\ShaderProgram.h" />
-    <ClInclude Include="src\Graphics\VertexArray.h" />
-    <ClInclude Include="src\Graphics\VertexBuffer.h" />
     <ClInclude Include="include\IwEngine\GameObject.h" />
     <ClInclude Include="include\IwEngine\Component.h" />
     <ClInclude Include="include\IwEngine\Transform.h" />
@@ -65,5 +60,12 @@
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
+    <ClInclude Include="include\IwEngine\MeshFilter.h" />
+    <ClInclude Include="src\Graphics\VertexBufferLayout.h" />
+    <ClInclude Include="src\Graphics\IndexBuffer.h" />
+    <ClInclude Include="src\Graphics\ShaderProgram.h" />
+    <ClInclude Include="src\Graphics\VertexArray.h" />
+    <ClInclude Include="src\Graphics\VertexBuffer.h" />
+    <ClInclude Include="src\Graphics\Mesh.h" />
   </ItemGroup>
 </Project>
