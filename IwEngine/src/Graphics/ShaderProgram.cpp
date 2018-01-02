@@ -1,7 +1,7 @@
-#include "ShaderProgram.h"
-#include "GL\glew.h"
 #include <sstream>
 #include <vector>
+#include "GL\glew.h"
+#include "IwEngine\Graphics\ShaderProgram.h"
 #include "IwEngine\Utility\IO\File.h"
 #include "IwEngine\Utility\Logger.h"
 
@@ -11,8 +11,8 @@ ShaderProgram::ShaderProgram(const char* fileName) {
 	ShaderProgramSource source = ReadShader(fileName);
 
 	_renderId = glCreateProgram();
-	unsigned int vsid = CompileShader(GL_VERTEX_SHADER, source.vertex);
-	unsigned int fsid = CompileShader(GL_FRAGMENT_SHADER, source.fragment);
+	uint vsid = CompileShader(GL_VERTEX_SHADER, source.vertex);
+	uint fsid = CompileShader(GL_FRAGMENT_SHADER, source.fragment);
 
 	glAttachShader(_renderId, vsid);
 	glAttachShader(_renderId, fsid);
@@ -49,8 +49,8 @@ ShaderProgramSource ShaderProgram::ReadShader(const char* fileName) {
 	return ShaderProgramSource{ ss[VERTEX].str(), ss[FRAGMENT].str() };
 }
 
-unsigned int ShaderProgram::CompileShader(unsigned int type, std::string source) {
-	unsigned int id = glCreateShader(type);
+uint ShaderProgram::CompileShader(uint type, std::string source) {
+	uint id = glCreateShader(type);
 	const char* src = source.c_str();
 	glShaderSource(id, 1, &src, nullptr);
 	glCompileShader(id);

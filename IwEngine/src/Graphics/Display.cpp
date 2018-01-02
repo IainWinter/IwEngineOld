@@ -6,9 +6,9 @@
 #include <sstream>
 
 #include "IwEngine\Graphics\Display.h"
-#include "VertexArray.h"
-#include "IndexBuffer.h"
-#include "ShaderProgram.h"
+#include "IwEngine\Graphics\VertexArray.h"
+#include "IwEngine\Graphics\IndexBuffer.h"
+#include "IwEngine\Graphics\ShaderProgram.h"
 #include "IwEngine\Math\Matrix4.h"
 
 int Graphics::Display::Start() {
@@ -66,7 +66,7 @@ int Graphics::Display::Start() {
 		
 	};
 
-	unsigned int indices[] = {
+	uint indices[] = {
 		0, 1, 2,
 		2, 3, 0,
 		4, 5, 6,

@@ -1,11 +1,13 @@
 #pragma once
 
+#include "IwEngine\Common.h"
+
 namespace Graphics {
 	class VertexBuffer {
 	private:
-		unsigned int _renderId;
+		uint _renderId;
 	public:
-		VertexBuffer(const void* data, unsigned int size);
+		VertexBuffer(const void* data, uint size);
 		~VertexBuffer();
 
 		void Bind() const;

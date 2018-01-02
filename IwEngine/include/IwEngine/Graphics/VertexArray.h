@@ -1,12 +1,13 @@
 #pragma once
 
+#include "IwEngine\Common.h"
 #include "VertexBufferLayout.h"
 #include "VertexBuffer.h"
 
 namespace Graphics {
 	class VertexArray {
 	private:
-		unsigned int _renderId;
+		uint _renderId;
 	public:
 		VertexArray();
 		~VertexArray();
@@ -16,5 +17,4 @@ namespace Graphics {
 		void Bind() const;
 		void Unbind() const;
 	};
-
 }

@@ -5,3 +5,5 @@
 #else
 #define IWENGINE_API __declspec(dllimport)
 #endif
+
+typedef unsigned int uint;

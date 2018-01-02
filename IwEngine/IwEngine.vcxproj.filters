@@ -61,11 +61,11 @@
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
     <ClInclude Include="include\IwEngine\MeshFilter.h" />
-    <ClInclude Include="src\Graphics\VertexBufferLayout.h" />
-    <ClInclude Include="src\Graphics\IndexBuffer.h" />
-    <ClInclude Include="src\Graphics\ShaderProgram.h" />
-    <ClInclude Include="src\Graphics\VertexArray.h" />
-    <ClInclude Include="src\Graphics\VertexBuffer.h" />
-    <ClInclude Include="src\Graphics\Mesh.h" />
+    <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
+    <ClInclude Include="include\IwEngine\Graphics\ShaderProgram.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexBuffer.h" />
+    <ClInclude Include="include\IwEngine\Graphics\VertexBufferLayout.h" />
+    <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
   </ItemGroup>
 </Project>

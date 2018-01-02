@@ -1,9 +1,9 @@
-#include "VertexBuffer.h"
+#include "IwEngine\Graphics\VertexBuffer.h"
 #include "GL\glew.h"
 
 using namespace Graphics;
 
-VertexBuffer::VertexBuffer(const void* data, unsigned int size) {
+VertexBuffer::VertexBuffer(const void* data, uint size) {
 	glGenBuffers(1, &_renderId);
 	glBindBuffer(GL_ARRAY_BUFFER, _renderId);
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
