@@ -5,7 +5,7 @@ using namespace Graphics;
 
 Mesh::Mesh() {
 	vertexArray = new VertexArray();
-	indexBuffer = new IndexBuffer({ 0 }, 0);
+	indexBuffer = new IndexBuffer({ }, 0);
 }
 
 Mesh::Mesh(const void* data, uint dataCount, const VertexBufferLayout& layout, const uint* indices, uint indexCount) {

@@ -4,6 +4,8 @@
 
 namespace Graphics {
 	class IWENGINE_API Display {
+	private:
+		void Init();
 	public:
 		int Start();
 	};

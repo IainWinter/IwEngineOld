@@ -24,6 +24,7 @@
     <ClCompile Include="src\Graphics\Mesh.cpp" />
     <ClCompile Include="src\Physics\BoundingSphere.cpp" />
     <ClCompile Include="src\Physics\AABB.cpp" />
+    <ClCompile Include="src\Graphics\VertexBufferLayout.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\Common.h" />
@@ -62,12 +63,15 @@
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
-    <ClInclude Include="include\IwEngine\MeshFilter.h" />
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexBufferLayout.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
+    <ClInclude Include="include\IwEngine\MeshComponent.h" />
+    <ClInclude Include="include\IwEngine\Events\EventQueue.h" />
+    <ClInclude Include="include\IwEngine\Events\EventHandler.h" />
+    <ClInclude Include="include\IwEngine\Scene.h" />
   </ItemGroup>
 </Project>

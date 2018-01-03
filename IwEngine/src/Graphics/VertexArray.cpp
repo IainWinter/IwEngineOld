@@ -1,3 +1,4 @@
+#include "GL\glew.h"
 #include "IwEngine\Graphics\VertexArray.h"
 
 using namespace Graphics;

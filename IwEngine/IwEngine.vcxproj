@@ -167,6 +167,7 @@
     <ClCompile Include="src\Graphics\Display.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="src\Graphics\VertexBuffer.cpp" />
+    <ClCompile Include="src\Graphics\VertexBufferLayout.cpp" />
     <ClCompile Include="src\Math\MathHelper.cpp" />
     <ClCompile Include="src\Math\Matrix2.cpp" />
     <ClCompile Include="src\Math\Matrix3.cpp" />
@@ -185,7 +186,9 @@
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\IwEngine\MeshFilter.h" />
+    <ClInclude Include="include\IwEngine\Events\EventHandler.h" />
+    <ClInclude Include="include\IwEngine\Events\EventQueue.h" />
+    <ClInclude Include="include\IwEngine\MeshComponent.h" />
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\Common.h" />
     <ClInclude Include="include\IwEngine\Component.h" />
@@ -228,6 +231,7 @@
     <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
+    <ClInclude Include="include\IwEngine\Scene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

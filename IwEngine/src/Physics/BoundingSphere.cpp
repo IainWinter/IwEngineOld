@@ -1,17 +1,14 @@
-#pragma once 
-#include "IwEngine\Physics\Physics.h"
+#pragma once
 
-Physics::CollisionData Physics::BoundingSphere::IntersectBS(const BoundingSphere& other) 
-{
-	float radiusLength = radius + other.radius; 
+#include "IwEngine\Physics\BoundingSphere.h"
+
+using namespace Physics;
+
+CollisionData BoundingSphere::IntersectBS(const BoundingSphere& other) const {
+	float radiusLength = radius + other.radius;
 	float centerDistance = (center + other.center).Length();
 
-	if (centerDistance < radiusLength)
-	{
-		CollisionData(true, centerDistance - radiusLength);
-	}
-	else
-	{
-		CollisionData(false, centerDistance - radiusLength);
-	}
+	bool intersects = centerDistance < radiusLength;
+
+	return CollisionData(intersects, centerDistance - radiusLength);
 }

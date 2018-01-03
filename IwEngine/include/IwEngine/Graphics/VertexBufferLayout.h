@@ -1,60 +1,40 @@
 #pragma once
 
 #include <vector>
-#include "GL\glew.h"
 #include "IwEngine\Common.h"
 #include "IwEngine\Utility\Debug.h"
 
 namespace Graphics {
-	struct VertexBufferLayoutElement {
+	struct IWENGINE_API VertexBufferLayoutElement {
 		uint type;
 		uint count;
 		unsigned char normalized;
 
-		static uint GetSizeOfType(uint glType) {
-			switch (glType) {
-			case GL_FLOAT: return sizeof(GLfloat);
-			case GL_UNSIGNED_INT: return sizeof(GLuint);
-			case GL_UNSIGNED_BYTE: return sizeof(GLbyte);
-			}
-
-			ASSERT(false);
-			return 0;
-		}
+		static uint GetSizeOfType(uint glType);
 	};
 
-	class VertexBufferLayout {
+	class IWENGINE_API VertexBufferLayout {
 	private:
-		std::vector<VertexBufferLayoutElement> _elements;
+		struct VectorVertexBufferLayoutElement { std::vector<VertexBufferLayoutElement> vector; };
+
+		VectorVertexBufferLayoutElement _elements;
 		uint _stride;
 	public:
 		VertexBufferLayout() : _stride(0) {}
 
 		template<typename T>
-		void Push(uint count) {
-			static_assert(false);
-		}
+		void Push(uint count);
 
 		template<>
-		void Push<float>(uint count) {
-			_elements.push_back({ GL_FLOAT, count, GL_FALSE });
-			_stride += count * VertexBufferLayoutElement::GetSizeOfType(GL_FLOAT);
-		}
+		void Push<float>(uint count);
 
 		template<>
-		void Push<uint>(uint count) {
-			_elements.push_back({ GL_UNSIGNED_INT, count, GL_FALSE });
-			_stride += count * VertexBufferLayoutElement::GetSizeOfType(GL_UNSIGNED_INT);
-		}
+		void Push<uint>(uint count);
 
 		template<>
-		void Push<unsigned char>(uint count) {
-			_elements.push_back({ GL_UNSIGNED_BYTE, count, GL_TRUE });
-			_stride += count * VertexBufferLayoutElement::GetSizeOfType(GL_UNSIGNED_BYTE);
-		}
-
+		void Push<unsigned char>(uint count);
 		inline const std::vector<VertexBufferLayoutElement>& GetElements() const {
-			return _elements;
+			return _elements.vector;
 		}
 
 		inline uint GetStride() const {

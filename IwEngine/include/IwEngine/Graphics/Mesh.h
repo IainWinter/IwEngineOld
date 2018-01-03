@@ -7,7 +7,7 @@
 #include "IwEngine\Graphics\VertexBufferLayout.h" //TODO: Not this one though because it is thread safe
 
 namespace Graphics {
-	class Mesh : public Object {
+	class IWENGINE_API Mesh : public Object {
 	private:
 		Graphics::VertexArray* vertexArray;
 		Graphics::IndexBuffer* indexBuffer;
@@ -20,4 +20,3 @@ namespace Graphics {
 		void SetIndices(const uint* indices, uint count);
 	};
 }
-

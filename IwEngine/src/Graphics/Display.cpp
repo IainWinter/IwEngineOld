@@ -11,26 +11,21 @@
 #include "IwEngine\Graphics\ShaderProgram.h"
 #include "IwEngine\Math\Matrix4.h"
 
-int Graphics::Display::Start() {
-	GLFWwindow* window;
+//TODO: Temp
+#include "IwEngine\Graphics\Display.h"
+#include "IwEngine\Transform.h"
+#include "IwEngine\GameObject.h"
+#include "IwEngine\Utility\Logger.h"
+#include "IwEngine\MeshComponent.h"
+#include "IwEngine\Scene.h"
+//
 
-	/* Initialize the library */
-	if (!glfwInit())
-		return -1;
+void Graphics::Display::Init() {
+	Scene* scene = new Scene();
 
-	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-	if (!window) {
-		glfwTerminate();
-		return -1;
-	}
+	GameObject& go = scene->AddGameObject("GameObject Test Cube");
 
-	/* Make the window's context current */
-	glfwMakeContextCurrent(window);
-
-	if (glewInit() != GLEW_OK) {
-		Utility::Error("GLEW init not ok");
-	}
+	go.AddComponent<Transform>();
 
 	float pos[] = {
 		//left
@@ -63,7 +58,7 @@ int Graphics::Display::Start() {
 		+0.5f, -0.5f, +0.5f,
 		+0.5f, +0.5f, +0.5f,
 		-0.5f, +0.5f, +0.5f
-		
+
 	};
 
 	uint indices[] = {
@@ -81,13 +76,40 @@ int Graphics::Display::Start() {
 		22, 23, 20
 	};
 
-	Graphics::VertexArray va;
-	Graphics::VertexBuffer vb(pos, 72 * sizeof(float));
+
 	Graphics::VertexBufferLayout layout;
 	layout.Push<float>(3);
-	va.AddBuffer(vb, layout);
 
-	Graphics::IndexBuffer ib(indices, 36);
+	Mesh* mesh = new Mesh(pos, 72, layout, indices, 36);
+
+	MeshComponent* meshComp = new MeshComponent(go, mesh);
+
+	go.AddComponent(meshComp);
+}
+
+int Graphics::Display::Start() {
+	GLFWwindow* window;
+
+	/* Initialize the library */
+	if (!glfwInit())
+		return -1;
+
+	/* Create a windowed mode window and its OpenGL context */
+	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+	if (!window) {
+		glfwTerminate();
+		return -1;
+	}
+
+	/* Make the window's context current */
+	glfwMakeContextCurrent(window);
+
+	if (glewInit() != GLEW_OK) {
+		Utility::Error("GLEW init not ok");
+	}
+
+	//TODO:: Temp
+	Init();
 
 	Graphics::ShaderProgram shader("res/shaders/default.shader");
 
@@ -106,22 +128,22 @@ int Graphics::Display::Start() {
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		shader.Use();
-		glUniform4f(1, .4f, 1.0f, .2f, 1.0f);
+		//shader.Use();
+		//glUniform4f(1, .4f, 1.0f, .2f, 1.0f);
 
-		glUniformMatrix4fv(0, 1, GL_FALSE, projection.elements);
-		glUniformMatrix4fv(4, 1, GL_FALSE, view.elements);
-		glUniformMatrix4fv(8, 1, GL_FALSE, world.elements);
+		//glUniformMatrix4fv(0, 1, GL_FALSE, projection.elements);
+		//glUniformMatrix4fv(4, 1, GL_FALSE, view.elements);
+		//glUniformMatrix4fv(8, 1, GL_FALSE, world.elements);
 
-		//position.y += 0.005f;
-		position.x -= 0.005f;
-		//position.z += 0.005f;
-		view = Math::Matrix4::LookAt(position, position - Math::Vector3::UnitZ, Math::Vector3::UnitY);
+		////position.y += 0.005f;
+		//position.x -= 0.005f;
+		////position.z += 0.005f;
+		//view = Math::Matrix4::LookAt(position, position - Math::Vector3::UnitZ, Math::Vector3::UnitY);
 
-		va.Bind();
-		ib.Bind();
+		//va.Bind();
+		//ib.Bind();
 
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 
 		glfwSwapBuffers(window);
 
