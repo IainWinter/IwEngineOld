@@ -76,5 +76,6 @@
     <ClInclude Include="include\IwEngine\RenderMeshComponent.h" />
     <ClInclude Include="include\IwEngine\Physics\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\CollisionMeshComponent.h" />
+    <ClInclude Include="src\CollisionMeshComponent.h" />
   </ItemGroup>
 </Project>
