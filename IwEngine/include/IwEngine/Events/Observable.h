@@ -4,7 +4,7 @@
 #include "Observer.h"
 #include <vector>
 
-namespace Evenets {
+namespace Events {
 	template<typename TEventArg>
 	class Observable {
 	private:

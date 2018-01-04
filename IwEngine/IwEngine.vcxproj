@@ -231,7 +231,8 @@
     <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
-    <ClInclude Include="include\IwEngine\Scene.h" />
+    <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\System.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

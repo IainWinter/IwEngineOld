@@ -72,6 +72,7 @@
     <ClInclude Include="include\IwEngine\MeshComponent.h" />
     <ClInclude Include="include\IwEngine\Events\EventQueue.h" />
     <ClInclude Include="include\IwEngine\Events\EventHandler.h" />
-    <ClInclude Include="include\IwEngine\Scene.h" />
+    <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\System.h" />
   </ItemGroup>
 </Project>
