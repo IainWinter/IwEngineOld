@@ -4,9 +4,9 @@
 #include "GameObject.h"
 #include "Physics\CollisionMesh.h"
 
-class CollisionMesh : public Component {
+class MeshCollider : public Component {
 private:
 	Physics::CollisionMesh _collider;
 public:
-	CollisionMesh(GameObject& gameObject, Physics::CollisionMesh _collider) : Component(gameObject), _collider(_collider) { }
+	MeshCollider(GameObject& gameObject, Physics::CollisionMesh _collider) : Component(gameObject), _collider(_collider) { }
 };
