@@ -7,16 +7,16 @@
 #include "IwEngine\Events\Observable.h"
 #include "System.h"
 #include "TransformSystem.h"
-#include "RenderMeshComponentSystem.h"
+#include "RenderMeshSystem.h"
 
 class Scene : public Object, Events::Observable<float> {
 public:
 	Scene() {
 		System<Transform>* transformSystem = new System<Transform>();
-		System<RenderMeshComponent>* renderMeshComponentSystem = new System<RenderMeshComponent>();
+		System<RenderMesh>* renderMeshSystem = new System<RenderMesh>();
 
 		Attach(transformSystem);
-		Attach(renderMeshComponentSystem);
+		Attach(renderMeshSystem);
 
 		Notify(5.0f);
 	}

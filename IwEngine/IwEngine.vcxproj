@@ -186,10 +186,10 @@
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\IwEngine\CollisionMeshComponent.h" />
+    <ClInclude Include="include\IwEngine\CollisionMesh.h" />
     <ClInclude Include="include\IwEngine\Events\EventHandler.h" />
     <ClInclude Include="include\IwEngine\Events\EventQueue.h" />
-    <ClInclude Include="include\IwEngine\RenderMeshComponent.h" />
+    <ClInclude Include="include\IwEngine\RenderMesh.h" />
     <ClInclude Include="include\IwEngine\Physics\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\Common.h" />
     <ClInclude Include="include\IwEngine\Component.h" />
@@ -232,7 +232,7 @@
     <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
-    <ClInclude Include="src\RenderMeshComponentSystem.h" />
+    <ClInclude Include="src\RenderMeshSystem.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\TransformSystem.h" />
