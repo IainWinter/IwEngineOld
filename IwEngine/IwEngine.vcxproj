@@ -186,10 +186,11 @@
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IwEngine\CollisionMeshComponent.h" />
     <ClInclude Include="include\IwEngine\Events\EventHandler.h" />
     <ClInclude Include="include\IwEngine\Events\EventQueue.h" />
-    <ClInclude Include="include\IwEngine\MeshComponent.h" />
-    <ClInclude Include="include\IwEngine\MeshCollider.h" />
+    <ClInclude Include="include\IwEngine\RenderMeshComponent.h" />
+    <ClInclude Include="include\IwEngine\Physics\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\Common.h" />
     <ClInclude Include="include\IwEngine\Component.h" />
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
@@ -233,6 +234,7 @@
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\System.h" />
+    <ClInclude Include="src\TransformSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

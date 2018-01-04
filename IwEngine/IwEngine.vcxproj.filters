@@ -60,7 +60,6 @@
     <ClInclude Include="include\IwEngine\Physics\AABB.h" />
     <ClInclude Include="include\IwEngine\Physics\Physics.h" />
     <ClInclude Include="include\IwEngine\RigidBody.h" />
-    <ClInclude Include="include\IwEngine\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
@@ -69,10 +68,13 @@
     <ClInclude Include="include\IwEngine\Graphics\VertexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexBufferLayout.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
-    <ClInclude Include="include\IwEngine\MeshComponent.h" />
     <ClInclude Include="include\IwEngine\Events\EventQueue.h" />
     <ClInclude Include="include\IwEngine\Events\EventHandler.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\System.h" />
+    <ClInclude Include="src\TransformSystem.h" />
+    <ClInclude Include="include\IwEngine\RenderMeshComponent.h" />
+    <ClInclude Include="include\IwEngine\Physics\MeshCollider.h" />
+    <ClInclude Include="include\IwEngine\CollisionMeshComponent.h" />
   </ItemGroup>
 </Project>
