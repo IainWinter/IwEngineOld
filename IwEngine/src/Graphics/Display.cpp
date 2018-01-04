@@ -16,7 +16,7 @@
 #include "IwEngine\Transform.h"
 #include "IwEngine\GameObject.h"
 #include "IwEngine\Utility\Logger.h"
-#include "IwEngine\MeshComponent.h"
+#include "IwEngine\RenderMeshComponent.h"
 #include "..\Scene.h"
 //
 
