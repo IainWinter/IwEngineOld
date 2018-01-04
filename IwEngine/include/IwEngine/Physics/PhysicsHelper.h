@@ -7,5 +7,5 @@ namespace Physics {
 		static float gravity;
 	};
 
-	//float Physics::gravity = 9.81f;
+	float Physics::gravity = 9.81f;
 }
