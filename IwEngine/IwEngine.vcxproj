@@ -232,6 +232,7 @@
     <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
+    <ClInclude Include="src\CollisionMeshSystem.h" />
     <ClInclude Include="src\RenderMeshSystem.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\System.h" />
