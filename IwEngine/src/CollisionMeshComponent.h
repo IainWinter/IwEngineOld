@@ -1,15 +1,15 @@
 #pragma once
 
 #include "System.h"
-#include "IwEngine\CollisionMeshComponent.h"
+#include "IwEngine\CollisionMesh.h"
 
 template<>
-class System<CollisionMeshComponent> : public Events::Observer<float> {
+class System<CollisionMesh> : public Events::Observer<float> {
 private:
-	std::vector<CollisionMeshComponent> _transformComponents;
+	std::vector<CollisionMesh> _transformComponents;
 public:
 	System() {
-		_transformComponents = std::vector<CollisionMeshComponent>();
+		_transformComponents = std::vector<CollisionMesh>();
 	}
 
 	void Update(const float& deltaTime) {
