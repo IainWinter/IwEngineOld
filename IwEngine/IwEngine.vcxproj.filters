@@ -73,9 +73,9 @@
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\TransformSystem.h" />
-    <ClInclude Include="include\IwEngine\Physics\MeshCollider.h" />
-    <ClInclude Include="include\IwEngine\CollisionMesh.h" />
     <ClInclude Include="include\IwEngine\RenderMesh.h" />
     <ClInclude Include="src\RenderMeshSystem.h" />
+    <ClInclude Include="include\IwEngine\Physics\CollisionMesh.h" />
+    <ClInclude Include="include\IwEngine\MeshCollider.h" />
   </ItemGroup>
 </Project>

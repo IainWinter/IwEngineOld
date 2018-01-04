@@ -5,9 +5,9 @@
 #include "IwEngine\Math\Math.h"
 
 namespace Physics {
-	class IWENGINE_API MeshCollider {
+	class IWENGINE_API CollisionMesh {
 	public:
-		MeshCollider(int count) {
+		CollisionMesh(int count) {
 			Math::Vector3* _collider = new Math::Vector3[count];
 		}
 	};
