@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IwEngine\Common.h"
+
 namespace Physics {
 	class IWENGINE_API CollisionData {
 	private:

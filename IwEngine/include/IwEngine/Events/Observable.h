@@ -30,12 +30,7 @@ namespace Events {
 
 	template<typename TEventArg>
 	void Observable<TEventArg>::Detach(Observer<TEventArg>* observer) {
-		int size = _observers.size();
-		for (size_t i = 0; i < size; i++) {
-			if (_observers[i] == observer) {
-				_observers.erase(_observers.begin(), i);
-				break;
-			}
-		}
+		auto itr = std::find_if(_observers.begin(), _observers.end(), [&](Observer<TEventArg>* o) { return o == observer; });
+		if (itr != _observers.end()) _observers.erase(itr);
 	};
 }

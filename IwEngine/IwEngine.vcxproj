@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
+    <ClCompile Include="src\Events\EventBus.cpp" />
     <ClCompile Include="src\Graphics\Mesh.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Graphics\IndexBuffer.cpp" />
@@ -186,9 +187,12 @@
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IwEngine\Events\EventBase.h" />
+    <ClInclude Include="include\IwEngine\Events\EventBus.h" />
+    <ClInclude Include="include\IwEngine\Events\IEvent.h" />
+    <ClInclude Include="include\IwEngine\Events\EventHandlerBase.h" />
+    <ClInclude Include="include\IwEngine\Events\IHandler.h" />
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
-    <ClInclude Include="include\IwEngine\Events\EventHandler.h" />
-    <ClInclude Include="include\IwEngine\Events\EventQueue.h" />
     <ClInclude Include="include\IwEngine\RenderMesh.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionMesh.h" />
     <ClInclude Include="include\IwEngine\Common.h" />
@@ -200,7 +204,6 @@
     <ClInclude Include="include\IwEngine\Physics\AABB.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
-    <ClInclude Include="include\IwEngine\Physics\Physics.h" />
     <ClInclude Include="include\IwEngine\RigidBody.h" />
     <ClInclude Include="include\IwEngine\Transform.h" />
     <ClInclude Include="include\IwEngine\Graphics\ShaderProgram.h" />

@@ -1,32 +1,27 @@
 #include "IwEngine\GameObject.h"
 
-GameObject::GameObject() {
+GameObject::GameObject(Events::EventBus* eventBus) : _eventBus(eventBus) {
 	std::string name("Gameobject ");
 	name.append(std::to_string(GetInstanceID()));
 	SetName(name);
 }
 
-GameObject::GameObject(const char* name) {
+GameObject::GameObject(Events::EventBus* eventBus, const char* name) : _eventBus(eventBus) {
 	SetName(name);
 }
 
 GameObject::~GameObject() {
-	size_t size = _components.vector.size();
-	for (size_t i = 0; i < size; i++) {
-		delete _components.vector[i];
-	}
+	SendEvent(new GameObjectEvent(GameObjectEventType::GAMEOBJECT_DESTROYED, *this, nullptr));
 }
 
 void GameObject::AddComponent(Component* component) {
-	_components.vector.push_back(component);
+	SendEvent(new GameObjectEvent(GameObjectEventType::ADD_COMPONENT, *this, component));
 }
 
-void GameObject::RemoveComponent(const Component& component) {
-	size_t size = _components.vector.size();
-	for (size_t i = 0; i < size; i++) {
-		if (_components.vector[i] == &component) {
-			_components.vector.erase(_components.vector.begin() + i);
-			break;
-		}
-	}
+void GameObject::RemoveComponent(Component* component) {
+	SendEvent(new GameObjectEvent(GameObjectEventType::REMOVE_COMPONENT, *this, component));
+}
+
+void GameObject::SendEvent(Events::IEvent* event) {
+	_eventBus->SendEvent(event);
 }

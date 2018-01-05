@@ -18,14 +18,18 @@
 #include "IwEngine\Utility\Logger.h"
 #include "IwEngine\RenderMesh.h"
 #include "..\Scene.h"
+#include "IwEngine\Events\EventBus.h"
 //
 
 void Graphics::Display::Init() {
-	Scene* scene = new Scene();
+	eventBus = new Events::EventBus();
+	Scene* scene = new Scene(*eventBus);
+
+	GameObject go = GameObject(eventBus);
 
 	//GameObject& go = scene->AddGameObject("GameObject Test Cube");
 
-	//go.AddComponent<Transform>();
+	go.AddComponent(new Transform(go));
 
 	//float pos[] = {
 	//	//left
@@ -148,6 +152,7 @@ int Graphics::Display::Start() {
 		glfwSwapBuffers(window);
 
 		glfwPollEvents();
+		eventBus->ProcessEvents();
 	}
 
 	shader.Delete();

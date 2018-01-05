@@ -1,8 +1,7 @@
 #pragma once
 
 #include "IwEngine\Common.h"
-#include "IwEngine\Physics\Physics.h"
-#include "IwEngine\Math\Math.h"
+#include "IwEngine\Math\Vector3.h"
 
 namespace Physics {
 	class IWENGINE_API CollisionMesh {

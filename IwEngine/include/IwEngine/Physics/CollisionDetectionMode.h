@@ -1,7 +1,9 @@
 #pragma once
 
+#include "IwEngine\Common.h"
+
 namespace Physics {
-	enum IWENGINE_API CollisionDetectionMode {
+	enum class IWENGINE_API CollisionDetectionMode {
 		CONTINUOUS,
 		DISCRETE
 	};

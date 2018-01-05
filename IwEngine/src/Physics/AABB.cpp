@@ -1,5 +1,9 @@
 #pragma once 
-#include "IwEngine\Physics\Physics.h"
+
+#include "IwEngine\Physics\CollisionData.h"
+#include "IwEngine\Math\Vector3.h"
+#include "IwEngine\Physics\CollisionData.h"
+#include "IwEngine\Physics\AABB.h"
 
 using namespace Physics;
 

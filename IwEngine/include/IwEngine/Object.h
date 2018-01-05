@@ -4,7 +4,6 @@
 #include <atomic>
 #include <string>
 #include <memory>
-#include "Physics\Physics.h"
 
 class IWENGINE_API Object {
 private:
@@ -22,11 +21,11 @@ public:
 		return _instanceId;
 	}
 
-	const std::string& GetName() const {
+	inline const std::string& GetName() const {
 		return _name.string;
 	}
 
-	Object& SetName(const std::string& name) {
+	inline Object& SetName(const std::string& name) {
 		_name.string = name;
 		return *this;
 	}
