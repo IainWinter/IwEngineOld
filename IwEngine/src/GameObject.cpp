@@ -1,4 +1,5 @@
 #include "IwEngine\GameObject.h"
+#include "Scene.h"
 
 GameObject::GameObject(Events::EventBus* eventBus) : _eventBus(eventBus) {
 	std::string name("Gameobject ");
@@ -24,4 +25,12 @@ void GameObject::RemoveComponent(Component* component) {
 
 void GameObject::SendEvent(Events::IEvent* event) {
 	_eventBus->SendEvent(event);
+}
+
+void GameObject::SendInstantEvent(Events::IEvent * event) {
+	_eventBus->SendInstantEvent(event);
+}
+
+void GameObject::CasheComponent(Component* component) {
+	cachedComponent = component;
 }

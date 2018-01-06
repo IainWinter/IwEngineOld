@@ -6,8 +6,6 @@
 #include "IwEngine\Events\EventBus.h"
 #include "IwEngine\Events\EventBase.h"
 
-#include "IwEngine\Transform.h"
-
 enum class GameObjectEventType {
 	ADD_COMPONENT,
 	REMOVE_COMPONENT,
@@ -19,21 +17,16 @@ struct GameObjectEvent : Events::EventBase<GameObjectEvent> {
 	GameObjectEventType type;
 	GameObject& gameObject;
 	void* otherArgs;
-	void* returnArgs;
 
 	GameObjectEvent(GameObjectEventType type, GameObject& gameObject,  void* otherArgs)
-		: type(type), gameObject(gameObject),  otherArgs(otherArgs), returnArgs(nullptr) {
-	}
-
-	GameObjectEvent(GameObjectEventType type, GameObject& gameObject,  void* otherArgs, void* returnArgs)
-		: type(type), gameObject(gameObject),  otherArgs(otherArgs), returnArgs(returnArgs)  {
-	}
+		: type(type), gameObject(gameObject),  otherArgs(otherArgs) {}
 };
 
 
 class IWENGINE_API GameObject : public Object {
 private:
 	Events::EventBus* _eventBus;
+	Component* cachedComponent;
 public:
 	GameObject(Events::EventBus* eventBus);
 	GameObject(Events::EventBus* eventBus, const char* name);
@@ -43,24 +36,23 @@ public:
 	void RemoveComponent(Component* component);
 
 	template<typename TComponent>
-	TComponent& GetComponent() const;
+	TComponent& GetComponent();
 
 	void SendEvent(Events::IEvent* event);
+	void SendInstantEvent(Events::IEvent* event);
+
+	friend class Scene;
+	void CasheComponent(Component* component); //TODO: Could have function pass in lambda but this works for now
 };
 
-template<typename TComponent> // = std::enable_if<TComponent, Component>
-TComponent& GameObject::GetComponent() const {
-	TComponent& ref;
-	SendEvent(GameObjectEvent(GameObjectEventType::GET_COMPONENT, *this, TComponent, ref));
+template<typename TComponent>
+TComponent& GameObject::GetComponent() {
+	std::size_t requestedTypeID = typeid(TComponent).hash_code();
+	std::size_t cashedTypeID = typeid(cachedComponent).hash_code();
 
-	return ref;
+	if (requestedTypeID != cashedTypeID) {
+		SendInstantEvent(new GameObjectEvent(GameObjectEventType::GET_COMPONENT, *this, &requestedTypeID));
+	}
 
-	//for (Component* component : _components.vector) {
-	//	TComponent* ptr = dynamic_cast<TComponent*>(component);
-	//	if (ptr != nullptr) {
-	//		return *ptr;
-	//	}
-	//}
-
-	//Utility::ThrowRunTimeError("'" + GetName() + "' has no component of type '" + typeid(TComponent).name() + "'");
+	return *dynamic_cast<TComponent*>(cachedComponent);
 }

@@ -27,9 +27,9 @@ void Graphics::Display::Init() {
 
 	GameObject go = GameObject(eventBus);
 
-	//GameObject& go = scene->AddGameObject("GameObject Test Cube");
-
 	go.AddComponent(new Transform(go));
+
+	Transform& transform = go.GetComponent<Transform>();
 
 	//float pos[] = {
 	//	//left

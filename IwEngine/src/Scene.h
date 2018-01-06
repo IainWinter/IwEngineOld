@@ -23,5 +23,8 @@ public:
 
 	void ProcessEvent(const GameObjectEvent& eventArgs) {
 		Utility::Debug("Process GameObject Event!");
+		if (eventArgs.type == GameObjectEventType::GET_COMPONENT) {
+			eventArgs.gameObject.CasheComponent(new Transform(eventArgs.gameObject)); //TODO: Remove test code
+		}
 	}
 };

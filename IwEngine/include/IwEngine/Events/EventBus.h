@@ -18,5 +18,6 @@ namespace Events {
 		void AddHandler(IHandler* handler);
 		void RemoveHandler(const IHandler* handler);
 		void SendEvent(IEvent* e);
+		void SendInstantEvent(IEvent* e);
 	};
 }

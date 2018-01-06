@@ -34,3 +34,12 @@ void EventBus::RemoveHandler(const IHandler* handler) {
 void EventBus::SendEvent(IEvent* e) {
 	_queuedEvents.push(e);
 }
+
+void EventBus::SendInstantEvent(IEvent * e) {
+	uint count = _eventHandlers.size();
+	for (size_t i = 0; i < count; i++) {
+		e->Dispatch(_eventHandlers[i]);
+	}
+
+	delete e;
+}
