@@ -3,6 +3,9 @@
 
 using namespace Events;
 
+Events::EventBus::EventBus(Memory::LinearAllocator& tempMem) 
+	: _tempMem(tempMem) { }
+
 void EventBus::ProcessEvents() {
 	while (!_queuedEvents.empty()) {
 		IEvent*& e = _queuedEvents.front();
@@ -31,8 +34,9 @@ void EventBus::RemoveHandler(const IHandler* handler) {
 	if (itr != _eventHandlers.end()) _eventHandlers.erase(itr);
 }
 
-void EventBus::SendEvent(IEvent* e) {
-	_queuedEvents.push(e);
+void EventBus::SendEvent(IEvent& e) {
+	IEvent* event = Memory::AllocateNew<IEvent>(_tempMem, e);
+	_queuedEvents.push(event);
 }
 
 void EventBus::SendInstantEvent(IEvent * e) {

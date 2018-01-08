@@ -26,6 +26,8 @@
     <ClCompile Include="src\Utility\Logger.cpp" />
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
     <ClCompile Include="src\Events\EventBus.cpp" />
+    <ClCompile Include="src\Memory\LinearAllocator.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
@@ -72,7 +74,6 @@
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
     <ClInclude Include="src\RenderMeshSystem.h" />
-    <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\TransformSystem.h" />
     <ClInclude Include="src\MeshColliderSystem.h" />
@@ -81,5 +82,10 @@
     <ClInclude Include="include\IwEngine\Events\IEvent.h" />
     <ClInclude Include="include\IwEngine\Events\EventBase.h" />
     <ClInclude Include="include\IwEngine\Events\EventHandlerBase.h" />
+    <ClInclude Include="include\IwEngine\Memory\Allocator.h" />
+    <ClInclude Include="include\IwEngine\Memory\PointerMath.h" />
+    <ClInclude Include="include\IwEngine\Memory\LinearAllocator.h" />
+    <ClInclude Include="include\IwEngine\Engine.h" />
+    <ClInclude Include="include\IwEngine\Scene.h" />
   </ItemGroup>
 </Project>

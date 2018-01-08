@@ -17,6 +17,7 @@ GameObject::~GameObject() {
 
 void GameObject::AddComponent(Component* component) {
 	SendEvent(new GameObjectEvent(GameObjectEventType::ADD_COMPONENT, *this, component));
+	CasheComponent(component);
 }
 
 void GameObject::RemoveComponent(Component* component) {

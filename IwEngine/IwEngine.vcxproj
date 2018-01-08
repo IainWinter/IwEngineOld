@@ -160,6 +160,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
     <ClCompile Include="src\Events\EventBus.cpp" />
     <ClCompile Include="src\Graphics\Mesh.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="src\Math\Vector2.cpp" />
     <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Math\Vector4.cpp" />
+    <ClCompile Include="src\Memory\LinearAllocator.cpp" />
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\Physics\AABB.cpp" />
     <ClCompile Include="src\Physics\BoundingSphere.cpp" />
@@ -187,11 +189,15 @@
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IwEngine\Engine.h" />
     <ClInclude Include="include\IwEngine\Events\EventBase.h" />
     <ClInclude Include="include\IwEngine\Events\EventBus.h" />
     <ClInclude Include="include\IwEngine\Events\IEvent.h" />
     <ClInclude Include="include\IwEngine\Events\EventHandlerBase.h" />
     <ClInclude Include="include\IwEngine\Events\IHandler.h" />
+    <ClInclude Include="include\IwEngine\Memory\Allocator.h" />
+    <ClInclude Include="include\IwEngine\Memory\LinearAllocator.h" />
+    <ClInclude Include="include\IwEngine\Memory\PointerMath.h" />
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\RenderMesh.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionMesh.h" />
@@ -237,7 +243,7 @@
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
     <ClInclude Include="src\MeshColliderSystem.h" />
     <ClInclude Include="src\RenderMeshSystem.h" />
-    <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="include\IwEngine\Scene.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\TransformSystem.h" />
   </ItemGroup>
