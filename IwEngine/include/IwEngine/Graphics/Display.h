@@ -3,12 +3,12 @@
 #include "IwEngine\Common.h"
 
 //Temp
-#include "IwEngine\Events\EventBus.h"
+#include "IwEngine\Engine.h"
 
 namespace Graphics {
 	class IWENGINE_API Display {
 	private:
-		Events::EventBus* eventBus;
+		Engine* engine;
 		void Init();
 	public:
 		int Start();

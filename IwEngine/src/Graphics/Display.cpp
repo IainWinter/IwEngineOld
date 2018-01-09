@@ -21,9 +21,9 @@
 //
 
 void Graphics::Display::Init() {
-	Engine* e = new Engine();
+	engine = new Engine();
 
-	GameObject go = GameObject(e->GetEventBus());
+	GameObject go = GameObject(engine->GetEventBus());
 
 	go.AddComponent(new Transform(go));
 
@@ -150,7 +150,7 @@ int Graphics::Display::Start() {
 		glfwSwapBuffers(window);
 
 		glfwPollEvents();
-		eventBus->ProcessEvents();
+		engine->GetEventBus().ProcessEvents();
 	}
 
 	shader.Delete();
