@@ -8,12 +8,9 @@
 
 class IWENGINE_API Engine {
 private:
-	Window* _glfwWindow;
+	Window* _window;
 	Scene* _scene;
-	Events::EventBus* _eventBus;
 	//ResourceManager* _resourceManager
-	Memory::LinearAllocator _tempMem; //tmp memory for each frame. Not going to put this here but it works for now
-	bool _running;
 public:
 	Engine();
 	~Engine();

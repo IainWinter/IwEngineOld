@@ -4,7 +4,10 @@
 #include "GLFW\glfw3.h"
 
 Window::Window(int width, int height, const char* name) 
-	:_width(width), _height(height), _name(name) {}
+	: _width(width), _height(height), _name(name), _tempMem(16777216, malloc(16777216))
+{
+	_eventBus = new Events::EventBus(_tempMem);
+}
 
 Window::~Window() {
 	glfwTerminate();
@@ -37,6 +40,8 @@ void Window::Run() {
 
 	while (!glfwWindowShouldClose(_glfwWindow)) {
 		Utility::Info("Window Open");
+		_eventBus->ProcessEvents();
+		glfwPollEvents();
 	}
 
 	Utility::Info("Window Closed");
