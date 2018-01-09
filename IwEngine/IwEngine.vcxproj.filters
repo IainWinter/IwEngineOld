@@ -87,5 +87,6 @@
     <ClInclude Include="include\IwEngine\Engine.h" />
     <ClInclude Include="include\IwEngine\Scene.h" />
     <ClInclude Include="include\IwEngine\Window.h" />
+    <ClInclude Include="src\RigidBodySystem.h" />
   </ItemGroup>
 </Project>
