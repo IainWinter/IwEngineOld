@@ -18,10 +18,9 @@ struct GameObjectEvent : Events::EventBase<GameObjectEvent> {
 	GameObject& gameObject;
 	void* otherArgs;
 
-	GameObjectEvent(GameObjectEventType type, GameObject& gameObject,  void* otherArgs)
+	GameObjectEvent(GameObjectEventType type, GameObject& gameObject, void* otherArgs)
 		: type(type), gameObject(gameObject),  otherArgs(otherArgs) {}
 };
-
 
 class IWENGINE_API GameObject : public Object {
 private:
