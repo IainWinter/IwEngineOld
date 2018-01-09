@@ -7,7 +7,7 @@ namespace Events {
 	template<typename TEventType>
 	class EventBase : public IEvent {
 	private:
-		virtual void Dispatch(IHandler* handler) {
+		virtual void Dispatch(IHandler* handler) override {
 			TEventType* self = dynamic_cast<TEventType*>(this);
 			if (self) {
 				DynamicDispatch(handler, *self);

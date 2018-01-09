@@ -17,15 +17,13 @@
 #include "IwEngine\GameObject.h"
 #include "IwEngine\Utility\Logger.h"
 #include "IwEngine\RenderMesh.h"
-#include "..\Scene.h"
-#include "IwEngine\Events\EventBus.h"
+#include "IwEngine\Engine.h"
 //
 
 void Graphics::Display::Init() {
-	eventBus = new Events::EventBus();
-	Scene* scene = new Scene(*eventBus);
+	Engine* e = new Engine();
 
-	GameObject go = GameObject(eventBus);
+	GameObject go = GameObject(e->GetEventBus());
 
 	go.AddComponent(new Transform(go));
 

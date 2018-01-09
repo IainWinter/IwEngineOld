@@ -3,8 +3,9 @@
 
 using namespace Events;
 
-Events::EventBus::EventBus(Memory::LinearAllocator& tempMem) 
-	: _tempMem(tempMem) { }
+Events::EventBus::EventBus(Memory::LinearAllocator& tempMem) : _tempMem(tempMem) {
+	_queuedEvents = std::queue<IEvent*>();
+}
 
 void EventBus::ProcessEvents() {
 	while (!_queuedEvents.empty()) {
@@ -15,7 +16,6 @@ void EventBus::ProcessEvents() {
 		}
 
 		_queuedEvents.pop();
-		delete e;
 	}
 }
 
@@ -35,15 +35,13 @@ void EventBus::RemoveHandler(const IHandler* handler) {
 }
 
 void EventBus::SendEvent(IEvent& e) {
-	IEvent* event = Memory::AllocateNew<IEvent>(_tempMem, e);
+	IEvent* event = Memory::AllocateNew<IEvent>(_tempMem, e); //Event gets truncated
 	_queuedEvents.push(event);
 }
 
-void EventBus::SendInstantEvent(IEvent * e) {
+void EventBus::SendInstantEvent(IEvent& e) {
 	uint count = _eventHandlers.size();
 	for (size_t i = 0; i < count; i++) {
-		e->Dispatch(_eventHandlers[i]);
+		e.Dispatch(_eventHandlers[i]);
 	}
-
-	delete e;
 }

@@ -17,4 +17,7 @@ private:
 public:
 	Engine();
 	~Engine();
+	inline Events::EventBus& GetEventBus() {
+		return *_eventBus;
+	}
 };

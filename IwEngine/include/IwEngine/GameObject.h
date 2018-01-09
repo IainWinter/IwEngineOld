@@ -25,11 +25,11 @@ struct GameObjectEvent : Events::EventBase<GameObjectEvent> {
 
 class IWENGINE_API GameObject : public Object {
 private:
-	Events::EventBus* _eventBus;
+	Events::EventBus& _eventBus;
 	Component* cachedComponent;
 public:
-	GameObject(Events::EventBus* eventBus);
-	GameObject(Events::EventBus* eventBus, const char* name);
+	GameObject(Events::EventBus& eventBus);
+	GameObject(Events::EventBus& eventBus, const char* name);
 	~GameObject();
 
 	void AddComponent(Component* component);
@@ -38,8 +38,8 @@ public:
 	template<typename TComponent>
 	TComponent& GetComponent();
 
-	void SendEvent(Events::IEvent* event);
-	void SendInstantEvent(Events::IEvent* event);
+	void SendEvent(Events::IEvent& event);
+	void SendInstantEvent(Events::IEvent& event);
 
 	friend class Scene;
 	void CasheComponent(Component* component); //TODO: Could have function pass in lambda but this works for now
@@ -51,7 +51,7 @@ TComponent& GameObject::GetComponent() {
 	std::size_t cashedTypeID = typeid(cachedComponent).hash_code();
 
 	if (requestedTypeID != cashedTypeID) {
-		SendInstantEvent(new GameObjectEvent(GameObjectEventType::GET_COMPONENT, *this, &requestedTypeID));
+		SendInstantEvent(GameObjectEvent(GameObjectEventType::GET_COMPONENT, *this, &requestedTypeID));
 	}
 
 	return *dynamic_cast<TComponent*>(cachedComponent);

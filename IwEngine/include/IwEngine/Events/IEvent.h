@@ -7,7 +7,7 @@ namespace Events {
 	class IEvent {
 	private:
 		friend class EventBus;
-		virtual void Dispatch(IHandler* handler) = 0;
+		virtual void Dispatch(IHandler* handler) {}
 	public:
 		virtual ~IEvent() {}
 	};
