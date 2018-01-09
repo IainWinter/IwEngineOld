@@ -1,6 +1,7 @@
-#include "IwEngine\Graphics\Display.h"
+#include "IwEngine\Engine.h"
 
 int main() {
-	Graphics::Display d = Graphics::Display();
-	d.Start();
+	Engine* engine = new Engine();
+	engine->Run();
+	delete &engine;
 }

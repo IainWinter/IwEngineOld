@@ -166,7 +166,6 @@
     <ClCompile Include="src\Graphics\Mesh.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Graphics\IndexBuffer.cpp" />
-    <ClCompile Include="src\Graphics\Display.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="src\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\VertexBufferLayout.cpp" />
@@ -187,6 +186,7 @@
     <ClCompile Include="src\Utility\IO\Path.cpp" />
     <ClCompile Include="src\Utility\Logger.cpp" />
     <ClCompile Include="src\Graphics\VertexArray.cpp" />
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\Engine.h" />
@@ -206,7 +206,6 @@
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
     <ClInclude Include="include\IwEngine\GameObject.h" />
-    <ClInclude Include="include\IwEngine\Graphics\Display.h" />
     <ClInclude Include="include\IwEngine\Physics\AABB.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
@@ -241,6 +240,7 @@
     <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
+    <ClInclude Include="include\IwEngine\Window.h" />
     <ClInclude Include="src\MeshColliderSystem.h" />
     <ClInclude Include="src\RenderMeshSystem.h" />
     <ClInclude Include="include\IwEngine\Scene.h" />

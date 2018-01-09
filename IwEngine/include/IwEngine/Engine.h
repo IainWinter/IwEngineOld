@@ -1,23 +1,25 @@
 #pragma once
 
+#include "IwEngine\Common.h"
+#include "IwEngine\Window.h"
 #include "IwEngine\Scene.h"
 #include "IwEngine\Events\EventBus.h"
 #include "IwEngine\Memory\LinearAllocator.h"
 
-class Engine {
+class IWENGINE_API Engine {
 private:
+	Window* _glfwWindow;
 	Scene* _scene;
 	Events::EventBus* _eventBus;
 	//ResourceManager* _resourceManager
-	Memory::LinearAllocator _tempMem; //tmp memory for each frame. Probly not going to put this here but it works for now
-
-	//Don't allow copying
-	Engine(const Engine&);
-	Engine& operator=(const Engine&) {}
+	Memory::LinearAllocator _tempMem; //tmp memory for each frame. Not going to put this here but it works for now
+	bool _running;
 public:
 	Engine();
 	~Engine();
-	inline Events::EventBus& GetEventBus() {
-		return *_eventBus;
-	}
+
+	Engine(const Engine&) = delete;
+	Engine& operator=(const Engine&) = delete;
+
+	void Run();
 };
