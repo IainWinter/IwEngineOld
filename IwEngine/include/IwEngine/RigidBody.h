@@ -4,8 +4,9 @@
 #include "Physics\CollisionDetectionMode.h"
 #include "Physics\PhysicsMaterial.h"
 #include "IwEngine\Math\Vector3.h"
+#include "Component.h"
 
-class IWENGINE_API RigidBody {
+class IWENGINE_API RigidBody: public Component {
 public:
 	Math::Vector3 velocity;
 	Math::Vector3 acceleration;

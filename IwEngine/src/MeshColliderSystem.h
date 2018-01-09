@@ -4,7 +4,7 @@
 #include "IwEngine\MeshCollider.h"
 
 template<>
-class System<MeshCollider> : public Events::Observer<float> {
+class System<MeshCollider> : public Events::EventHandlerBase<float> {
 private:
 	std::vector<MeshCollider> meshcolliders;
 public:

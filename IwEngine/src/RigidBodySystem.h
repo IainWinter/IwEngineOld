@@ -3,9 +3,10 @@
 #include "System.h"
 #include "IwEngine\Physics\PhysicsHelper.h"
 #include "IwEngine\RigidBody.h"
+#include "IwEngine\GameObject.h"
 
 template<>
-class System<RigidBody> : public Events::Observer<float> {
+class System<RigidBody> : public Events::EventHandlerBase<float> {
 private:
 	std::vector<RigidBody> _transformComponents;
 public:
@@ -19,6 +20,6 @@ public:
 
 	void UpdatePosition(RigidBody object, float deltaTime)
 	{
-		
+		object.GetGameObject().GetComponent();
 	}
 };
