@@ -1,10 +1,11 @@
 #pragma once
 
+#include "IwEngine\Common.h"
 #include "IwEngine\Utility\Debug.h"
 #include "IwEngine\Utility\Logger.h"
 
 namespace Memory {
-	class Allocator {
+	class IWENGINE_API Allocator {
 	protected:
 		size_t _size;
 		size_t _usedMemory;
