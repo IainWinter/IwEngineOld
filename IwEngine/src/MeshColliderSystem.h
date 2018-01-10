@@ -4,7 +4,7 @@
 #include "IwEngine\MeshCollider.h"
 
 template<>
-class System<MeshCollider> : public Events::Observer<float> {
+class System<MeshCollider> : public Events::EventHandlerBase<float> {
 private:
 	std::vector<MeshCollider> meshcolliders;
 public:
@@ -18,7 +18,7 @@ public:
 			bool is_colliding = meshcolliders.at(i).GetIntersect;
 			if (is_colliding)
 			{
-				float distance = meshcolliders.at(i).GetDistance;
+				//send collision data to event bus
 			}
 		 }
 	}

@@ -247,6 +247,7 @@
     <ClInclude Include="src\MeshColliderSystem.h" />
     <ClInclude Include="src\RenderMeshSystem.h" />
     <ClInclude Include="include\IwEngine\Scene.h" />
+    <ClInclude Include="src\RigidBodySystem.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\TransformSystem.h" />
   </ItemGroup>
