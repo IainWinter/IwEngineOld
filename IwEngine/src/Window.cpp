@@ -14,6 +14,9 @@ Window::~Window() {
 	delete &_glfwWindow;
 }
 
+#include "IwEngine\GameObject.h"
+#include "IwEngine\Transform.h"
+
 void Window::Init() {
 	if (!glfwInit()) {
 		Utility::Error("GLFW failed to initialize!!");

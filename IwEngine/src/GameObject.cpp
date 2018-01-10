@@ -1,36 +1,19 @@
 #include "IwEngine\GameObject.h"
 
-GameObject::GameObject(Events::EventBus& eventBus) : _eventBus(eventBus) {
+GameObject::GameObject(ComponentLookUp& componentLookUp) 
+	: _componentLookUp(componentLookUp) 
+{
 	std::string name("Gameobject ");
 	name.append(std::to_string(GetInstanceID()));
 	SetName(name);
 }
 
-GameObject::GameObject(Events::EventBus& eventBus, const char* name) : _eventBus(eventBus) {
+GameObject::GameObject(ComponentLookUp& componentLookUp, const char* name) 
+	: _componentLookUp(componentLookUp) 
+{
 	SetName(name);
 }
 
 GameObject::~GameObject() {
-	SendEvent(GameObjectEvent(GameObjectEventType::GAMEOBJECT_DESTROYED, *this, nullptr));
-}
-
-void GameObject::AddComponent(Component* component) {
-	SendEvent(GameObjectEvent(GameObjectEventType::ADD_COMPONENT, *this, component));
-	CasheComponent(component);
-}
-
-void GameObject::RemoveComponent(Component* component) {
-	SendEvent(GameObjectEvent(GameObjectEventType::REMOVE_COMPONENT, *this, component));
-}
-
-void GameObject::SendEvent(Events::IEvent& event) {
-	_eventBus.SendEvent(event);
-}
-
-void GameObject::SendInstantEvent(Events::IEvent& event) {
-	_eventBus.SendInstantEvent(event);
-}
-
-void GameObject::CasheComponent(Component* component) {
-	cachedComponent = component;
+	_componentLookUp.RemoveAllComponents(GetInstanceID());
 }

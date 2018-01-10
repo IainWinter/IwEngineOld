@@ -160,6 +160,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ComponentLookUp.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
     <ClCompile Include="src\Events\EventBus.cpp" />
@@ -189,6 +190,8 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IwEngine\ComponentLookUp.h" />
+    <ClInclude Include="include\IwEngine\ComponentTable.h" />
     <ClInclude Include="include\IwEngine\Engine.h" />
     <ClInclude Include="include\IwEngine\Events\EventBase.h" />
     <ClInclude Include="include\IwEngine\Events\EventBus.h" />
