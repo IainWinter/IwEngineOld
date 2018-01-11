@@ -44,4 +44,16 @@ public:
 	inline int GetComponentCount() {
 		return _lookUp.size();
 	}
+
+	//TODO: Monkey
+	inline std::vector<int>& GetLookUp() {
+		std::vector<int> keys;
+		keys.reserve(_lookUp.size());
+
+		for (auto const& element : _lookUp) {
+			retval.push_back(element.first);
+		}
+
+		return keys;
+	}
 };
