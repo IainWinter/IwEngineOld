@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IwEngine\Common.h"
-#include "Observer.h"
+#include "IwEngine\Events\Observer.h"
 #include <vector>
 
 namespace Events {

@@ -10,7 +10,7 @@ const Vector3 Vector3::UnitX = Vector3(1, 0, 0);
 const Vector3 Vector3::UnitY = Vector3(0, 1, 0);
 const Vector3 Vector3::UnitZ = Vector3(0, 0, 1);
 
-Vector3::Vector3() {}
+Vector3::Vector3() : x(0), y(0), z(0) {}
 
 Vector3::Vector3(float xyz) : x(xyz), y(xyz), z(xyz) {}
 

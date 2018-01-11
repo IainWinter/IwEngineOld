@@ -1,22 +1,22 @@
 #pragma once
 
-#include "Component.h"
-#include "Math\Vector3.h"
-#include "Math\Quaternion.h"
+#include "IwEngine\Component.h"
+#include "IwEngine\Math\Vector3.h"
+#include "IwEngine\Math\Quaternion.h"
 
-class IWENGINE_API Transform : public Component {
+class Transform : public Component {
 private:
 	Math::Vector3 position;
 	Math::Quaternion rotation;
 public:
-	Transform(GameObject& gameObject) 
-		: Component(gameObject) { }
+	Transform(GameObject& gameObject)
+		: Component(gameObject) {}
 
-	Transform(GameObject& gameObject, Math::Vector3 position) 
-		: Component(gameObject), position(position) { }
+	Transform(GameObject& gameObject, Math::Vector3 position)
+		: Component(gameObject), position(position) {}
 
-	Transform(GameObject& gameObject, Math::Vector3 position, Math::Quaternion rotation) 
-		: Component(gameObject), position(position), rotation(rotation) { }
+	Transform(GameObject& gameObject, Math::Vector3 position, Math::Quaternion rotation)
+		: Component(gameObject), position(position), rotation(rotation) {}
 
 	inline const Math::Vector3& GetPosition() const { return position; }
 	inline Math::Vector3& GetPosition() { return position; }

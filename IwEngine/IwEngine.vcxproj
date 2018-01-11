@@ -160,6 +160,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\RigidBodySystem.cpp" />
+    <ClCompile Include="src\SystemManager.cpp" />
+    <ClCompile Include="src\RenderMeshSystem.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\ComponentLookUp.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
@@ -190,6 +194,8 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IwEngine\ColliderSystem.h" />
+    <ClInclude Include="include\IwEngine\CommonEvents.h" />
     <ClInclude Include="include\IwEngine\ComponentLookUp.h" />
     <ClInclude Include="include\IwEngine\ComponentTable.h" />
     <ClInclude Include="include\IwEngine\Engine.h" />
@@ -212,7 +218,11 @@
     <ClInclude Include="include\IwEngine\Physics\AABB.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
+    <ClInclude Include="include\IwEngine\RenderMeshSystem.h" />
     <ClInclude Include="include\IwEngine\RigidBody.h" />
+    <ClInclude Include="include\IwEngine\RigidBodySystem.h" />
+    <ClInclude Include="include\IwEngine\System.h" />
+    <ClInclude Include="include\IwEngine\SystemManager.h" />
     <ClInclude Include="include\IwEngine\Transform.h" />
     <ClInclude Include="include\IwEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexBuffer.h" />
@@ -244,12 +254,8 @@
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
     <ClInclude Include="include\IwEngine\Window.h" />
-    <ClInclude Include="src\MeshColliderSystem.h" />
-    <ClInclude Include="src\RenderMeshSystem.h" />
     <ClInclude Include="include\IwEngine\Scene.h" />
-    <ClInclude Include="src\RigidBodySystem.h" />
-    <ClInclude Include="src\System.h" />
-    <ClInclude Include="src\TransformSystem.h" />
+    <ClInclude Include="src\ColliderSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,7 @@
 #include "Component.h"
 #include "IwEngine\Graphics\Mesh.h"
 
-class IWENGINE_API RenderMesh : public Component {
+class RenderMesh : public Component {
 private:
 	Graphics::Mesh* mesh;
 public:
