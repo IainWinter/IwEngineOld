@@ -7,7 +7,7 @@ template<>
 class System<Transform> {
 public:
 	System() {
-		_transformComponents = std::vector<Transform>();
+		 _transformComponents = std::vector<Transform>();
 	}
 
 	void Update(const float& deltaTime) {
