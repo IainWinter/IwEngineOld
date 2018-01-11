@@ -44,4 +44,8 @@ public:
 	inline int GetComponentCount() {
 		return _lookUp.size();
 	}
+
+	inline std::map<int, int>& GetLookUp() {
+		return _lookUp;
+	}
 };

@@ -1,5 +1,5 @@
 #include "IwEngine\RigidBodySystem.h"
 
-void System<RigidBody>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
+void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
 
 }

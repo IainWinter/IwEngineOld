@@ -3,8 +3,9 @@
 #include "IwEngine\System.h"
 #include "IwEngine\Rigidbody.h"
 #include "IwEngine\Utility\Logger.h"
+#include "IwEngine\Transform.h"
 
 template<>
-class IWENGINE_API System<RigidBody> : public ISystem {
+class IWENGINE_API System<RigidBody, Transform> : public ISystem {
 	virtual void Update(ComponentLookUp& componentLookUp, float deltaTime);
 };
