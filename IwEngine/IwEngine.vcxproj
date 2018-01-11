@@ -160,6 +160,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\RenderMeshSystem.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\ComponentLookUp.cpp" />
     <ClCompile Include="src\Engine.cpp" />

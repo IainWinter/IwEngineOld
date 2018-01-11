@@ -41,8 +41,12 @@ void Window::Run() {
 	}
 
 	while (!glfwWindowShouldClose(_glfwWindow)) {
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		_eventBus->SendEvent<UpdateEvent>(UpdateEvent(1.0f));
 		_eventBus->ProcessEvents();
+
+		glfwSwapBuffers(_glfwWindow);
 
 		glfwPollEvents();
 	}

@@ -18,4 +18,8 @@ public:
 	GameObject& Scene::MakeGameObject();
 	GameObject& Scene::MakeGameObject(const char* name);
 	void AddSystem(ISystem* system);
+
+	inline ComponentLookUp& GetComponentLookUp() {
+		return *_componentLookUp;
+	}
 };

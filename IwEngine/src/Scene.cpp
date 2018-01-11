@@ -18,6 +18,6 @@ GameObject& Scene::MakeGameObject(const char* name) {
 	return *go;
 }
 
-void Scene::AddSystem(ISystem * system) {
+void Scene::AddSystem(ISystem* system) {
 	_systems.push_back(system);
 }

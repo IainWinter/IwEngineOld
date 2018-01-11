@@ -25,4 +25,8 @@ public:
 	inline Events::EventBus& GetEventBus() {
 		return _window->GetEventBus();
 	}
+
+	inline ComponentLookUp& GetComponentLookUp() {
+		return _scene->GetComponentLookUp();
+	}
 };
