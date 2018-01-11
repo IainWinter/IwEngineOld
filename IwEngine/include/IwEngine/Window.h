@@ -20,6 +20,10 @@ public:
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
 
+	inline Events::EventBus& GetEventBus() {
+		return *_eventBus;
+	}
+
 	void Init();
 	void Run();
 };

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Object.h"
-#include "Utility\Logger.h"
+#include "IwEngine\Object.h"
+#include "IwEngine\Utility\Logger.h"
 
 class GameObject;
 class IWENGINE_API Component : public Object {

@@ -33,15 +33,3 @@ void EventBus::RemoveHandler(const IHandler* handler) {
 	auto itr = std::find_if(_eventHandlers.begin(), _eventHandlers.end(), [&](IHandler* h) { return h == handler; });
 	if (itr != _eventHandlers.end()) _eventHandlers.erase(itr);
 }
-
-void EventBus::SendEvent(IEvent& e) {
-	IEvent* event = Memory::AllocateNew<IEvent>(_tempMem, e); //Event gets truncated
-	_queuedEvents.push(event);
-}
-
-void EventBus::SendInstantEvent(IEvent& e) {
-	uint count = _eventHandlers.size();
-	for (size_t i = 0; i < count; i++) {
-		e.Dispatch(_eventHandlers[i]);
-	}
-}

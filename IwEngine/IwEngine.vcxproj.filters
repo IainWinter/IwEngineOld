@@ -29,6 +29,7 @@
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\ComponentLookUp.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
@@ -73,10 +74,6 @@
     <ClInclude Include="include\IwEngine\Graphics\VertexArray.h" />
     <ClInclude Include="include\IwEngine\Graphics\IndexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\Mesh.h" />
-    <ClInclude Include="src\RenderMeshSystem.h" />
-    <ClInclude Include="src\System.h" />
-    <ClInclude Include="src\TransformSystem.h" />
-    <ClInclude Include="src\MeshColliderSystem.h" />
     <ClInclude Include="include\IwEngine\Events\EventBus.h" />
     <ClInclude Include="include\IwEngine\Events\IHandler.h" />
     <ClInclude Include="include\IwEngine\Events\IEvent.h" />
@@ -90,5 +87,8 @@
     <ClInclude Include="include\IwEngine\Window.h" />
     <ClInclude Include="include\IwEngine\ComponentLookUp.h" />
     <ClInclude Include="include\IwEngine\ComponentTable.h" />
+    <ClInclude Include="include\IwEngine\System.h" />
+    <ClInclude Include="include\IwEngine\CommonEvents.h" />
+    <ClInclude Include="include\IwEngine\RenderMeshSystem.h" />
   </ItemGroup>
 </Project>

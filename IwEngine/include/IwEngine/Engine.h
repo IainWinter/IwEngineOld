@@ -3,8 +3,6 @@
 #include "IwEngine\Common.h"
 #include "IwEngine\Window.h"
 #include "IwEngine\Scene.h"
-#include "IwEngine\Events\EventBus.h"
-#include "IwEngine\Memory\LinearAllocator.h"
 
 class IWENGINE_API Engine {
 private:
@@ -19,4 +17,12 @@ public:
 	Engine& operator=(const Engine&) = delete;
 
 	void Run();
+
+	inline Scene& GetScene() {
+		return *_scene;
+	}
+
+	inline Events::EventBus& GetEventBus() {
+		return _window->GetEventBus();
+	}
 };

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IHandler.h"
+#include "IwEngine\Events\IHandler.h"
 
 namespace Events {
 	class EventBus;
 	class IEvent {
 	private:
 		friend class EventBus;
-		virtual void Dispatch(IHandler* handler) {}
+		virtual void Dispatch(IHandler* handler) = 0;
 	public:
 		virtual ~IEvent() {}
 	};

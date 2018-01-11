@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IEvent.h"
-#include "EventHandlerBase.h"
+#include "IwEngine\Events\IEvent.h"
+#include "IwEngine\Events\EventHandlerBase.h"
 
 namespace Events {
 	template<typename TEventType>

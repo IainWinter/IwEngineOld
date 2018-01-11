@@ -15,6 +15,7 @@ public:
 
 	template<typename TComponent>
 	void AddComponent(TComponent* component);
+
 	template<typename TComponent>
 	void RemoveComponent(TComponent* component);
 

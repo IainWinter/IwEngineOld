@@ -11,7 +11,7 @@ const Vector4 Vector4::UnitY = Vector4(0, 1, 0, 0);
 const Vector4 Vector4::UnitZ = Vector4(0, 0, 1, 0);
 const Vector4 Vector4::UnitW = Vector4(0, 0, 0, 1);
 
-Vector4::Vector4() {}
+Vector4::Vector4() : x(0), y(0), z(0), w(0) {}
 
 Vector4::Vector4(float xyzw) : x(xyzw), y(xyzw), z(xyzw), w(xyzw) {}
 

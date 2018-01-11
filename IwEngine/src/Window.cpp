@@ -3,6 +3,8 @@
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
 
+#include "IwEngine\CommonEvents.h"
+
 Window::Window(int width, int height, const char* name) 
 	: _width(width), _height(height), _name(name), _tempMem(16777216, malloc(16777216))
 {
@@ -13,9 +15,6 @@ Window::~Window() {
 	glfwTerminate();
 	delete &_glfwWindow;
 }
-
-#include "IwEngine\GameObject.h"
-#include "IwEngine\Transform.h"
 
 void Window::Init() {
 	if (!glfwInit()) {
@@ -42,10 +41,9 @@ void Window::Run() {
 	}
 
 	while (!glfwWindowShouldClose(_glfwWindow)) {
-		Utility::Info("Window Open");
+		_eventBus->SendEvent<UpdateEvent>(UpdateEvent(1.0f));
 		_eventBus->ProcessEvents();
+
 		glfwPollEvents();
 	}
-
-	Utility::Info("Window Closed");
 }
