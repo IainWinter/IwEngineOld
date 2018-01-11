@@ -11,3 +11,4 @@ void System</*SphereCollider, BoxCollider*/>::Update(ComponentLookUp& componentL
 	glVertex3f(0, 1, 0);
 	glEnd();
 }
+
