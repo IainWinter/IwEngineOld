@@ -21,6 +21,9 @@ public:
 
 	template<typename TComponent>
 	TComponent* GetComponent(int gameObjectID);
+
+	template<typename TComponent>
+	ComponentTable<TComponent>& GetComponentTable();
 };
 
 template<typename TComponent>
@@ -63,4 +66,10 @@ TComponent* ComponentLookUp::GetComponent(int gameObjectID) {
 	}
 
 	return nullptr;
+}
+
+template<typename TComponent>
+inline ComponentTable<TComponent>& ComponentLookUp::GetComponentTable() {
+	int componentID = typeid(TComponent).hash_code();
+	return dynamic_cast<ComponentTable<TComponent>*>(_componentTables[componentID])
 }

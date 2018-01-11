@@ -1,7 +1,8 @@
 #include "IwEngine\Scene.h"
 
-Scene::Scene() {
+Scene::Scene(Events::EventBus& eventBus) {
 	_componentLookUp = new ComponentLookUp();
+	_systemManager = new SystemManager(eventBus, *_componentLookUp);
 }
 
 Scene::~Scene() {
@@ -16,8 +17,4 @@ GameObject& Scene::MakeGameObject(const char* name) {
 	GameObject* go = new GameObject(*_componentLookUp, name);
 	_gameObjects.push_back(go);
 	return *go;
-}
-
-void Scene::AddSystem(ISystem* system) {
-	_systems.push_back(system);
 }

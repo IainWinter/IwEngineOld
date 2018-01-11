@@ -1,8 +1,8 @@
 #include "IwEngine\Engine.h"
 
 Engine::Engine() {
-	_scene = new Scene(); //Load this from resource manager
 	_window = new Window(640, 480, "Physics Project!!");
+	_scene = new Scene(_window->GetEventBus()); //Load this from resource manager
 }
 
 Engine::~Engine() {

@@ -21,12 +21,4 @@ public:
 	inline Scene& GetScene() {
 		return *_scene;
 	}
-
-	inline Events::EventBus& GetEventBus() {
-		return _window->GetEventBus();
-	}
-
-	inline ComponentLookUp& GetComponentLookUp() {
-		return _scene->GetComponentLookUp();
-	}
 };

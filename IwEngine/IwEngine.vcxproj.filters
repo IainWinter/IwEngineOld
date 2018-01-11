@@ -31,6 +31,8 @@
     <ClCompile Include="src\ComponentLookUp.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\RenderMeshSystem.cpp" />
+    <ClCompile Include="src\SystemManager.cpp" />
+    <ClCompile Include="src\RigidBodySystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
@@ -91,5 +93,9 @@
     <ClInclude Include="include\IwEngine\System.h" />
     <ClInclude Include="include\IwEngine\CommonEvents.h" />
     <ClInclude Include="include\IwEngine\RenderMeshSystem.h" />
+    <ClInclude Include="include\IwEngine\SystemManager.h" />
+    <ClInclude Include="include\IwEngine\ColliderSystem.h" />
+    <ClInclude Include="include\IwEngine\RigidBodySystem.h" />
+    <ClInclude Include="src\ColliderSystem.cpp" />
   </ItemGroup>
 </Project>
