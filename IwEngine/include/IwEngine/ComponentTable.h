@@ -45,7 +45,15 @@ public:
 		return _lookUp.size();
 	}
 
-	inline std::map<int, int>& GetLookUp() {
-		return _lookUp;
+	//TODO: Monkey
+	inline std::vector<int>& GetLookUp() {
+		std::vector<int> keys;
+		keys.reserve(_lookUp.size());
+
+		for (auto const& element : _lookUp) {
+			retval.push_back(element.first);
+		}
+
+		return keys;
 	}
 };
