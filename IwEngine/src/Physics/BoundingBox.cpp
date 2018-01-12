@@ -3,11 +3,11 @@
 #include "IwEngine\Physics\CollisionData.h"
 #include "IwEngine\Math\Vector3.h"
 #include "IwEngine\Physics\CollisionData.h"
-#include "IwEngine\Physics\AABB.h"
+#include "IwEngine\Physics\BoundingBox.h"
 
 using namespace Physics;
 
-CollisionData AABB::IntersectAABB(const AABB& other) const {
+CollisionData BoundingBox::IntersectBoundingBox(const BoundingBox& other) const {
 	Math::Vector3 distance1 = other.GetMin() - GetMax();
 	Math::Vector3 distance2 = GetMin() - other.GetMax();
 

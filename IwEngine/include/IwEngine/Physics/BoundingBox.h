@@ -5,12 +5,12 @@
 #include "CollisionData.h"
 
 namespace Physics {
-	struct IWENGINE_API AABB {
+	struct IWENGINE_API BoundingBox {
 	private:
 		Math::Vector3 max;
 		Math::Vector3 min;
 	public:
-		AABB(const Math::Vector3 min_ex, Math::Vector3 max_ex) {
+		BoundingBox(const Math::Vector3 min_ex, Math::Vector3 max_ex) {
 			min = min_ex;
 			max = max_ex;
 		}
@@ -23,6 +23,6 @@ namespace Physics {
 			return max;
 		}
 
-		CollisionData AABB::IntersectAABB(const AABB& other) const;
+		CollisionData BoundingBox::IntersectBoundingBox(const BoundingBox& other) const;
 	};
 }

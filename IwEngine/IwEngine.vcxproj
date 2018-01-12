@@ -184,7 +184,7 @@
     <ClCompile Include="src\Math\Vector4.cpp" />
     <ClCompile Include="src\Memory\LinearAllocator.cpp" />
     <ClCompile Include="src\Object.cpp" />
-    <ClCompile Include="src\Physics\AABB.cpp" />
+    <ClCompile Include="src\Physics\BoundingBox.cpp" />
     <ClCompile Include="src\Physics\BoundingSphere.cpp" />
     <ClCompile Include="src\Utility\IO\Directory.cpp" />
     <ClCompile Include="src\Utility\IO\File.cpp" />
@@ -194,6 +194,7 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IwEngine\BoxCollider.h" />
     <ClInclude Include="include\IwEngine\ColliderSystem.h" />
     <ClInclude Include="include\IwEngine\CommonEvents.h" />
     <ClInclude Include="include\IwEngine\ComponentLookUp.h" />
@@ -215,12 +216,13 @@
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
     <ClInclude Include="include\IwEngine\GameObject.h" />
-    <ClInclude Include="include\IwEngine\Physics\AABB.h" />
+    <ClInclude Include="include\IwEngine\Physics\BoundingBox.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
     <ClInclude Include="include\IwEngine\RenderMeshSystem.h" />
     <ClInclude Include="include\IwEngine\RigidBody.h" />
     <ClInclude Include="include\IwEngine\RigidBodySystem.h" />
+    <ClInclude Include="include\IwEngine\SphereCollider.h" />
     <ClInclude Include="include\IwEngine\System.h" />
     <ClInclude Include="include\IwEngine\SystemManager.h" />
     <ClInclude Include="include\IwEngine\Transform.h" />

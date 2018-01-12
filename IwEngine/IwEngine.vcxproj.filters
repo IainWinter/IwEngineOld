@@ -17,7 +17,6 @@
     <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Math\Vector4.cpp" />
     <ClCompile Include="src\Object.cpp" />
-    <ClCompile Include="src\Physics\AABB.cpp" />
     <ClCompile Include="src\Physics\BoundingSphere.cpp" />
     <ClCompile Include="src\Utility\IO\Directory.cpp" />
     <ClCompile Include="src\Utility\IO\File.cpp" />
@@ -33,6 +32,7 @@
     <ClCompile Include="src\RenderMeshSystem.cpp" />
     <ClCompile Include="src\SystemManager.cpp" />
     <ClCompile Include="src\RigidBodySystem.cpp" />
+    <ClCompile Include="src\Physics\BoundingBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
@@ -43,7 +43,6 @@
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
     <ClInclude Include="include\IwEngine\Events\Observer.h" />
     <ClInclude Include="include\IwEngine\GameObject.h" />
-    <ClInclude Include="include\IwEngine\Physics\AABB.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingSphere.h" />
     <ClInclude Include="include\IwEngine\Physics\CollisionData.h" />
     <ClInclude Include="include\IwEngine\RigidBody.h" />
@@ -97,5 +96,8 @@
     <ClInclude Include="include\IwEngine\ColliderSystem.h" />
     <ClInclude Include="include\IwEngine\RigidBodySystem.h" />
     <ClInclude Include="src\ColliderSystem.cpp" />
+    <ClInclude Include="include\IwEngine\SphereCollider.h" />
+    <ClInclude Include="include\IwEngine\Physics\BoundingBox.h" />
+    <ClInclude Include="include\IwEngine\BoxCollider.h" />
   </ItemGroup>
 </Project>
