@@ -3,11 +3,6 @@
 
 using namespace Graphics;
 
-Mesh::Mesh() {
-	_vertexArray = new VertexArray();
-	_indexBuffer = new IndexBuffer({ }, 0);
-}
-
 Mesh::Mesh(const void* data, uint dataCount, const VertexBufferLayout& layout, const uint* indices, uint indexCount) {
 	_vertexArray = new VertexArray();
 	_indexBuffer = new IndexBuffer(indices, indexCount);
@@ -19,7 +14,7 @@ Mesh::~Mesh() {
 	delete &_indexBuffer;
 }
 
-void Graphics::Mesh::Bind() {
+void Graphics::Mesh::Bind() const {
 	_vertexArray->Bind();
 	_indexBuffer->Bind();
 }

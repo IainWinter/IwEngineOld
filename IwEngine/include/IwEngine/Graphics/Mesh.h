@@ -12,11 +12,10 @@ namespace Graphics {
 		Graphics::VertexArray* _vertexArray;
 		Graphics::IndexBuffer* _indexBuffer;
 	public:
-		Mesh();
 		Mesh(const void* data, uint dataCount, const VertexBufferLayout& layout, const uint* indices, uint indexCount);
 		~Mesh();
 
-		void Bind();
+		void Bind() const;
 
 		void AddData(const void* data, uint size, const VertexBufferLayout& layout);
 		void SetIndices(const uint* indices, uint count);

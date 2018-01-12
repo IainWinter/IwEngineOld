@@ -7,7 +7,7 @@ void System<RenderMesh>::Update(ComponentLookUp& componentLookUp, float deltaTim
 	std::vector<RenderMesh*>& components = componentLookUp.GetComponentTable<RenderMesh>()->GetComponents();
 
 	for (RenderMesh* renderMesh : components) {
-		Graphics::Mesh mesh = renderMesh->GetMesh();
+		const Graphics::Mesh& mesh = renderMesh->GetMesh();
 		mesh.Bind();
 	}
 }

@@ -10,7 +10,11 @@ Engine::~Engine() {
 	delete _scene;
 }
 
-void Engine::Run() {
+void Engine::Init() {
 	_window->Init();
+}
+
+
+void Engine::Run() {
 	_window->Run();
 }

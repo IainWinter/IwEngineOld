@@ -16,6 +16,7 @@ public:
 	Engine(const Engine&) = delete;
 	Engine& operator=(const Engine&) = delete;
 
+	void Init();
 	void Run();
 
 	inline Scene& GetScene() {
