@@ -4,9 +4,9 @@
 #include "IwEngine\Math\Vector3.h"
 
 namespace Physics {
-	class IWENGINE_API CollisionMesh {
+	class IWENGINE_API BoundingMesh {
 	public:
-		CollisionMesh(int count) {
+		BoundingMesh(int count) {
 			Math::Vector3* _collider = new Math::Vector3[count];
 		}
 	};

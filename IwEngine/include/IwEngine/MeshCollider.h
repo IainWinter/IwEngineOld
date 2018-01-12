@@ -2,12 +2,12 @@
 
 #include "Component.h"
 #include "GameObject.h"
-#include "Physics\CollisionMesh.h"
+#include "Physics\BoundingMesh.h"
 
 class MeshCollider : public Component {
 private:
-	Physics::CollisionMesh _collider;
+	Physics::BoundingMesh _collider;
 public:
-	MeshCollider(GameObject& gameObject, Physics::CollisionMesh _collider) 
+	MeshCollider(GameObject& gameObject, Physics::BoundingMesh _collider) 
 		: Component(gameObject), _collider(_collider) {}
 };

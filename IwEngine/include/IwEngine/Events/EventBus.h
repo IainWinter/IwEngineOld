@@ -9,20 +9,20 @@
 #include "IwEngine\Memory\LinearAllocator.h"
 
 namespace Events {
-	class IWENGINE_API EventBus {
+	class EventBus {
 	private:
 		std::vector<IHandler*> _eventHandlers;
 		std::queue<IEvent*> _queuedEvents;
 		Memory::LinearAllocator& _tempMem;
 	public:
-		EventBus(Memory::LinearAllocator& _tempMem);
-		EventBus(const EventBus&) = delete;
-		EventBus& operator=(const EventBus&) = delete;
+		IWENGINE_API EventBus(Memory::LinearAllocator& _tempMem);
+		IWENGINE_API EventBus(const EventBus&) = delete;
+		IWENGINE_API EventBus& operator=(const EventBus&) = delete;
 
-		~EventBus();
-		void ProcessEvents();
-		void AddHandler(IHandler* handler);
-		void RemoveHandler(const IHandler* handler);
+		IWENGINE_API ~EventBus();
+		IWENGINE_API void ProcessEvents();
+		IWENGINE_API void AddHandler(IHandler* handler);
+		IWENGINE_API void RemoveHandler(const IHandler* handler);
 
 		template<typename TEventType>
 		void SendEvent(TEventType& e);

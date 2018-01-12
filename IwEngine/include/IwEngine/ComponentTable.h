@@ -46,7 +46,7 @@ public:
 	}
 
 	//TODO: Monkey
-	inline std::vector<int>& GetLookUp() {
+	inline std::vector<int>& GetGameObjectIDS() {
 		std::vector<int> keys;
 		keys.reserve(_lookUp.size());
 
@@ -55,5 +55,9 @@ public:
 		}
 
 		return keys;
+	}
+
+	inline std::vector<TComponent*>& GetComponents() {
+		return _components;
 	}
 };

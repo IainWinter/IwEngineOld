@@ -37,7 +37,6 @@
   <ItemGroup>
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
     <ClInclude Include="include\IwEngine\RenderMesh.h" />
-    <ClInclude Include="include\IwEngine\Physics\CollisionMesh.h" />
     <ClInclude Include="include\IwEngine\Common.h" />
     <ClInclude Include="include\IwEngine\Component.h" />
     <ClInclude Include="include\IwEngine\Events\Observable.h" />
@@ -97,5 +96,6 @@
     <ClInclude Include="include\IwEngine\ColliderSystem.h" />
     <ClInclude Include="include\IwEngine\RigidBodySystem.h" />
     <ClInclude Include="src\ColliderSystem.cpp" />
+    <ClInclude Include="include\IwEngine\Physics\BoundingMesh.h" />
   </ItemGroup>
 </Project>

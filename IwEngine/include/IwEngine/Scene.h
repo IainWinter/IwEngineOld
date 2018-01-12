@@ -6,17 +6,17 @@
 #include "IwEngine\GameObject.h"
 #include "IwEngine\SystemManager.h"
 
-class IWENGINE_API Scene {
+class Scene {
 private:
 	std::vector<GameObject*> _gameObjects;
 	ComponentLookUp* _componentLookUp;
 	SystemManager* _systemManager;
 public:
-	Scene(Events::EventBus& eventBus);
-	~Scene();
+	IWENGINE_API Scene(Events::EventBus& eventBus);
+	IWENGINE_API ~Scene();
 
-	GameObject& Scene::MakeGameObject();
-	GameObject& Scene::MakeGameObject(const char* name);
+	IWENGINE_API GameObject& Scene::MakeGameObject();
+	IWENGINE_API GameObject& Scene::MakeGameObject(const char* name);
 
 	template<typename ...TComponents>
 	void MakeSystem();
