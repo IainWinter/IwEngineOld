@@ -18,10 +18,4 @@ public:
 	std::vector <Math::Vector3> getPosition() {
 		return points; 
 	}
-	void changePosition(Math::Vector3 translation) {
-		points.push_back(points.at(0).operator+=(translation));
-		points.push_back(points.at(1).operator+= (translation));
-		points.erase(points.at(0));
-		points.erase(points.at(1));
-	}
 };
