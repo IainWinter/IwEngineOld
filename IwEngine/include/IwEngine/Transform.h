@@ -12,10 +12,10 @@ public:
 	Transform(GameObject& gameObject)
 		: Component(gameObject) {}
 
-	Transform(GameObject& gameObject, Math::Vector3 position)
+	Transform(GameObject& gameObject, Math::Vector3& position)
 		: Component(gameObject), position(position) {}
 
-	Transform(GameObject& gameObject, Math::Vector3 position, Math::Quaternion rotation)
+	Transform(GameObject& gameObject, Math::Vector3& position, Math::Quaternion& rotation)
 		: Component(gameObject), position(position), rotation(rotation) {}
 
 	inline const Math::Vector3& GetPosition() const { return position; }

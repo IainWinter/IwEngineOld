@@ -1,6 +1,8 @@
 #include "IwEngine\Graphics\Mesh.h"
 #include "IwEngine\Graphics\IndexBuffer.h"
+#include "IwEngine\Math\Matrix4.h"
 #include "GL\glew.h"
+#include "GLFW\glfw3.h"
 
 using namespace Graphics;
 
@@ -13,7 +15,11 @@ Mesh::~Mesh() {
 	delete _indexBuffer;
 }
 
-void Mesh::Draw() const {
+void Mesh::Draw(const Math::Vector3& position, const Math::Vector3& rotation) const {
+	Math::Matrix4 world = Math::Matrix4::CreateRoatation(rotation.x, rotation.y, rotation.z) * Math::Matrix4::CreateTranslation(position);
+
+	glUniformMatrix4fv(8, 1, GL_FALSE, world.elements);
+
 	_vertexArray->Bind();
 	_indexBuffer->Bind();
 

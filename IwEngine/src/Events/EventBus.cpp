@@ -17,6 +17,8 @@ void EventBus::ProcessEvents() {
 
 		_queuedEvents.pop();
 	}
+
+	_tempMem.Clear();
 }
 
 Events::EventBus::~EventBus() {

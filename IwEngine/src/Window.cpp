@@ -3,7 +3,7 @@
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
 #include "IwEngine\CommonEvents.h"
-
+#include <ctime>
 
 //Temp
 #include "IwEngine\Graphics\ShaderProgram.h"
@@ -47,7 +47,7 @@ void Window::Run() {
 
 	Graphics::ShaderProgram shader = Graphics::ShaderProgram("res/shaders/default.shader");
 
-	Math::Vector3 position = Math::Vector3(0, 0, 2);
+	Math::Vector3 position = Math::Vector3(0, 0, 0);
 	Math::Matrix4 projection = Math::Matrix4::CreatePerspectiveFieldOfView(3.14f / 2, 4.0f / 3, 0.01f, 100.0f);
 	Math::Matrix4 view = Math::Matrix4::LookAt(position, position - Math::Vector3::UnitZ, Math::Vector3::UnitY);
 	Math::Matrix4 world = Math::Matrix4::Identity;
@@ -59,6 +59,8 @@ void Window::Run() {
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+	clock_t startTime = clock();
+	float deltaTime = 0;
 	while (!glfwWindowShouldClose(_glfwWindow)) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -69,12 +71,15 @@ void Window::Run() {
 		glUniformMatrix4fv(4, 1, GL_FALSE, view.elements);
 		glUniformMatrix4fv(8, 1, GL_FALSE, world.elements);
 
-		_eventBus->SendEvent<UpdateEvent>(UpdateEvent(1.0f));
+		_eventBus->SendEvent<UpdateEvent>(UpdateEvent(deltaTime));
 		_eventBus->ProcessEvents();
 
 		glfwSwapBuffers(_glfwWindow);
 
 		glfwPollEvents();
+
+		deltaTime = (clock() - startTime) / (float) CLOCKS_PER_SEC;
+		startTime = clock();
 	}
 
 	shader.Delete();

@@ -22,8 +22,9 @@ int main() {
 	RenderMesh* renderMesh = new RenderMesh(gameObject, mesh);
 
 	gameObject.AddComponent<RenderMesh>(renderMesh);
+	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(0, 0, -2), Math::Quaternion::FromEulerAngles(0, 0.7853982f, 0)));
 
-	scene.MakeSystem<RenderMesh>();
+	scene.MakeSystem<RenderMesh, Transform>();
 
 	engine->Run();
 }
