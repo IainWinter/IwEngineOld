@@ -10,6 +10,16 @@ VertexArray::VertexArray() {
 
 VertexArray::~VertexArray() {
 	glDeleteVertexArrays(1, &_renderId);
+
+	uint bCount = _buffers.size();
+	uint lCount = _layouts.size();
+	for (size_t i = 0; i < bCount; i++) {
+		delete _buffers[i];
+	}
+
+	for (size_t i = 0; i < lCount; i++) {
+		delete _layouts[i];
+	}
 }
 
 void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout) {

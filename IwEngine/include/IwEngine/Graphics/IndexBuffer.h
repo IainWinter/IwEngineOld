@@ -6,8 +6,8 @@ namespace Graphics {
 	class IWENGINE_API IndexBuffer {
 	private:
 		uint _renderId;
-		uint _count;
 		const void* _data;
+		uint _count;
 	public:
 		IndexBuffer(const void* data, uint count);
 		~IndexBuffer();

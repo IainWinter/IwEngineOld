@@ -6,7 +6,8 @@ class ComponentLookUp {
 private:
 	std::map<int, IComponentTable*> _componentTables;
 public:
-	ComponentLookUp() {}
+	ComponentLookUp();
+	~ComponentLookUp();
 
 	ComponentLookUp(const ComponentLookUp&) = delete;
 	const ComponentLookUp& operator=(const ComponentLookUp&) = delete;

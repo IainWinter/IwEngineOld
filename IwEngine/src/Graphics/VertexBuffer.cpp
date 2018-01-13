@@ -3,7 +3,7 @@
 
 using namespace Graphics;
 
-VertexBuffer::VertexBuffer(const void* data, uint size) {
+VertexBuffer::VertexBuffer(const void* data, uint size) : _data(data) {
 	glGenBuffers(1, &_renderId);
 	glBindBuffer(GL_ARRAY_BUFFER, _renderId);
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
@@ -11,6 +11,7 @@ VertexBuffer::VertexBuffer(const void* data, uint size) {
 
 VertexBuffer::~VertexBuffer() {
 	glDeleteBuffers(1, &_renderId);
+	delete _data;
 }
 
 void VertexBuffer::Bind() const {

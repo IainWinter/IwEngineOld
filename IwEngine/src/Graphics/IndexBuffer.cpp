@@ -11,6 +11,7 @@ IndexBuffer::IndexBuffer(const void* data, uint count) : _count(count), _data(da
 
 IndexBuffer::~IndexBuffer() {
 	glDeleteBuffers(1, &_renderId);
+	delete _data;
 }
 
 void IndexBuffer::Bind() const {

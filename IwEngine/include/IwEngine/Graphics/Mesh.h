@@ -5,6 +5,8 @@
 #include "IwEngine\Graphics\IndexBuffer.h"
 #include "IwEngine\Graphics\VertexBufferLayout.h" //TODO: Not this one though because it is thread safe
 
+#include "IwEngine\Math\Vector3.h"
+
 namespace Graphics {
 	class IWENGINE_API Mesh {
 	private:
@@ -15,5 +17,8 @@ namespace Graphics {
 		~Mesh();
 
 		void Draw() const;
+
+		static Mesh* MakeBox(const Math::Vector3& topCorner, const Math::Vector3& scale);
+		static Mesh* MakeSphere(const Math::Vector3& center, float radius, uint detail);
 	};
 }

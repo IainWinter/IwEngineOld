@@ -7,6 +7,7 @@ Scene::Scene(Events::EventBus& eventBus) {
 
 Scene::~Scene() {
 	delete _componentLookUp;
+	delete _systemManager;
 }
 
 GameObject& Scene::MakeGameObject() {

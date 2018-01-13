@@ -5,16 +5,18 @@
 #include "VertexBuffer.h"
 
 namespace Graphics {
-	class IWENGINE_API VertexArray {
+	class VertexArray {
 	private:
 		uint _renderId;
+		std::vector<VertexBuffer*> _buffers;
+		std::vector<VertexBufferLayout*> _layouts;
 	public:
-		VertexArray();
-		~VertexArray();
+		IWENGINE_API VertexArray();
+		IWENGINE_API ~VertexArray();
 
-		void AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout);
+		IWENGINE_API void AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout);
 
-		void Bind() const;
-		void Unbind() const;
+		IWENGINE_API void Bind() const;
+		IWENGINE_API void Unbind() const;
 	};
 }

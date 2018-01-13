@@ -6,6 +6,7 @@ namespace Graphics {
 	class IWENGINE_API VertexBuffer {
 	private:
 		uint _renderId;
+		const void* _data;
 	public:
 		VertexBuffer(const void* data, uint size);
 		~VertexBuffer();
