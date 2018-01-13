@@ -18,8 +18,4 @@ public:
 		points.push_back(_collider.GetCenter());
 		radius = _collider.GetRadius();
 	}
-	void changePosition(Math::Vector3 translation) {
-		points.push_back(points.at(0).operator+=(translation));
-		points.erase(points.at(0));
-	}
 };
