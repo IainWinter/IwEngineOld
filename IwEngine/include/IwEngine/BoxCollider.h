@@ -11,8 +11,8 @@ private:
 public:
 	BoxCollider(GameObject& gameObject, Physics::BoundingBox _collider)
 		: Collider(gameObject), _collider(_collider) {
-		points.push_back(_collider.GetMax);
-		points.push_back(_collider.GetMin);
+		points.push_back(_collider.GetMax());
+		points.push_back(_collider.GetMin());
 	}
 
 	std::vector <Math::Vector3> getPosition() {
