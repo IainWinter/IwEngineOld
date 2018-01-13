@@ -46,7 +46,7 @@ public:
 	}
 
 	//TODO: Monkey
-	inline std::vector<int>& GetGameObjectIDS() {
+	std::vector<int> GetGameObjectIDs() {
 		std::vector<int> keys;
 		keys.reserve(_lookUp.size());
 
