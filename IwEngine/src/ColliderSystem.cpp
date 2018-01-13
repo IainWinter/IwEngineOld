@@ -2,7 +2,6 @@
 
 #include "IwEngine\ColliderSystem.h"
 #include "IwEngine\Transform.h"
-#include "IwEngine\RigidBody.h"
 #include <vector>
 #include "IwEngine\Physics\BoundingBox.h"
 #include "IwEngine\Physics\BoundingSphere.h"
