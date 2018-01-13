@@ -11,9 +11,9 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 	ComponentTable <BoxCollider>* boxColliderTable = componentLookUp.GetComponentTable <BoxCollider>();
 	ComponentTable <SphereCollider>* sphereColliderTable = componentLookUp.GetComponentTable <SphereCollider>();
 
-	std::vector<int> transformKeys = transformTable->GetGameObjectIDS();
-	std::vector<int> boxColliderKeys = boxColliderTable->GetGameObjectIDS();
-	std::vector<int> sphereColliderKeys = sphereColliderTable->GetGameObjectIDS();
+	std::vector<int> transformKeys = transformTable->GetGameObjectIDs();
+	std::vector<int> boxColliderKeys = boxColliderTable->GetGameObjectIDs();
+	std::vector<int> sphereColliderKeys = sphereColliderTable->GetGameObjectIDs();
 	std::vector<int> checkObjects; 
 
 	for (int i = 0; i < transformKeys.size(); i++) {
@@ -30,8 +30,8 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 			}
 		}
 	}
-	for (int objectKey : checkObjects) {
-
+	for (int i = 0; i < checkObjects.size(); i++) {
+		
 	}
 }
 
