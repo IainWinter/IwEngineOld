@@ -54,6 +54,7 @@ Mesh* Mesh::MakeBox(const Math::Vector3& bottomCorner, const Math::Vector3& scal
 		bottomCorner.x,				bottomCorner.y + scale.y, bottomCorner.z + scale.z
 	};
 
+	//This does not have to be made everytime because it never changes
 	uint* indices = new uint[36] {
 		0, 1, 2,
 		2, 3, 0,
@@ -81,6 +82,6 @@ Mesh* Mesh::MakeBox(const Math::Vector3& bottomCorner, const Math::Vector3& scal
 	return new Mesh(va, ib);
 }
 
-Mesh* Mesh::MakeSphere(const Math::Vector3 & center, float radius, uint detail) {
+Mesh* Mesh::MakeSphere(const Math::Vector3& center, float radius, uint detail) {
 	return nullptr;
 }
