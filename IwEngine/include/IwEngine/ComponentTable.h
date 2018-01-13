@@ -51,7 +51,7 @@ public:
 		keys.reserve(_lookUp.size());
 
 		for (auto const& element : _lookUp) {
-			retval.push_back(element.first);
+			keys.push_back(element.first);
 		}
 
 		return keys;
