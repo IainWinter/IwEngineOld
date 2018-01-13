@@ -2,8 +2,13 @@
 #include "IwEngine\Utility\Logger.h"
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
-
 #include "IwEngine\CommonEvents.h"
+
+
+//Temp
+#include "IwEngine\Graphics\ShaderProgram.h"
+#include "IwEngine\Math\Vector3.h"
+#include "IwEngine\Math\Matrix4.h"
 
 Window::Window(int width, int height, const char* name) 
 	: _width(width), _height(height), _name(name), _tempMem(16777216, malloc(16777216))
@@ -40,8 +45,29 @@ void Window::Run() {
 		return;
 	}
 
+	Graphics::ShaderProgram shader = Graphics::ShaderProgram("res/shaders/default.shader");
+
+	Math::Vector3 position = Math::Vector3(0, 0, 2);
+	Math::Matrix4 projection = Math::Matrix4::CreatePerspectiveFieldOfView(3.14f / 2, 4.0f / 3, 0.01f, 100.0f);
+	Math::Matrix4 view = Math::Matrix4::LookAt(position, position - Math::Vector3::UnitZ, Math::Vector3::UnitY);
+	Math::Matrix4 world = Math::Matrix4::Identity;
+
+	glBindVertexArray(0);
+	glUseProgram(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 	while (!glfwWindowShouldClose(_glfwWindow)) {
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		shader.Use();
+		glUniform4f(1, .4f, 1.0f, .2f, 1.0f);
+
+		glUniformMatrix4fv(0, 1, GL_FALSE, projection.elements);
+		glUniformMatrix4fv(4, 1, GL_FALSE, view.elements);
+		glUniformMatrix4fv(8, 1, GL_FALSE, world.elements);
 
 		_eventBus->SendEvent<UpdateEvent>(UpdateEvent(1.0f));
 		_eventBus->ProcessEvents();
@@ -50,4 +76,7 @@ void Window::Run() {
 
 		glfwPollEvents();
 	}
+
+	shader.Delete();
+	glfwTerminate();
 }

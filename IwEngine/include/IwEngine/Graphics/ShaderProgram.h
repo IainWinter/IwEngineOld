@@ -4,8 +4,8 @@
 #include "IwEngine\Common.h"
 
 namespace Graphics {
-	struct ShaderProgramSource;
-	class ShaderProgram {
+	struct IWENGINE_API ShaderProgramSource;
+	class IWENGINE_API ShaderProgram {
 	private:
 		uint _renderId;
 
@@ -19,7 +19,7 @@ namespace Graphics {
 		void Delete();
 	};
 
-	struct ShaderProgramSource {
+	struct IWENGINE_API ShaderProgramSource {
 		std::string vertex;
 		std::string fragment;
 	};

@@ -5,7 +5,7 @@
 #include "VertexBuffer.h"
 
 namespace Graphics {
-	class VertexArray {
+	class IWENGINE_API VertexArray {
 	private:
 		uint _renderId;
 	public:

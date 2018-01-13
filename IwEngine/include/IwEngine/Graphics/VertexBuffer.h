@@ -3,7 +3,7 @@
 #include "IwEngine\Common.h"
 
 namespace Graphics {
-	class VertexBuffer {
+	class IWENGINE_API VertexBuffer {
 	private:
 		uint _renderId;
 	public:
