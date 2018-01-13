@@ -498,7 +498,9 @@ Matrix4 Matrix4::CreateRoatation(const Vector3& angles) {
 }
 
 Matrix4 Matrix4::CreateRoatation(float x, float y, float z) {
-	return Matrix4::CreateRoatationX(x).CreateRoatationY(y).CreateRoatationZ(z);
+	return Matrix4::CreateRoatationX(x) 
+		 * Matrix4::CreateRoatationY(y)
+		 * Matrix4::CreateRoatationZ(z);
 }
 
 Matrix4 Matrix4::CreateTranslation(const Vector3& translation) {
