@@ -2,7 +2,6 @@
 
 #include "IwEngine\ColliderSystem.h"
 #include "IwEngine\Transform.h"
-#include "IwEngine\RigidBody.h"
 #include <vector>
 #include "IwEngine\Physics\BoundingBox.h"
 #include "IwEngine\Physics\BoundingSphere.h"
@@ -53,7 +52,7 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 	std::vector<int> sphereColliderKeys = sphereColliderTable->GetGameObjectIDs();
 	std::vector<int> transformBoxKeys;
 	std::vector<int> transformSphereKeys;
-
+	//check for components of type transform and collider and put them in seperate vector
 	for (int i = 0; i < transformKeys.size(); i++) {
 		for (int j = 0; j < boxColliderKeys.size() + sphereColliderKeys.size(); j++) {
 			if (j <= boxColliderKeys.size()) {
@@ -68,6 +67,7 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 				}
 		}
 	}
+	//check all components with transform and collider for collisions
 	for (int i = 0; i < transformBoxKeys.size() + transformSphereKeys.size(); i++){
 		bool isColliding; 
 		if (i <= boxColliderKeys.size()) {
@@ -77,8 +77,11 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 			for (int j = i+1; j < boxColliderKeys.size; j++) {
 				BoxCollider* other = boxColliderTable->GetComponent(boxColliderKeys.at(j));
 				Physics::BoundingBox box2 = other->GetCollider;
-				box1.IntersectBoundingBox (box2);
-				//still need to process and return if colliding 
+				Physics::CollisionData boxCollision = box1.IntersectBoundingBox (box2);
+				isColliding = boxCollision.GetIntersect;
+				if (isColliding) {
+					//collision response stuff
+				}
 			}
 		}
 		else {
@@ -87,7 +90,11 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 			for (int j = i + 1; j < sphereColliderKeys.size; j++) {
 				SphereCollider* other = sphereColliderTable->GetComponent(sphereColliderKeys.at(j));
 				Physics::BoundingSphere sphere2 = other->GetCollider;
-				sphere1.IntersectBS(sphere2);
+				Physics::CollisionData sphereCollision = sphere1.IntersectBS(sphere2);
+				isColliding = sphereCollision.GetIntersect; 
+				if (isColliding) {
+					//collision response stuff
+				}
 			}
 		}
 	}
