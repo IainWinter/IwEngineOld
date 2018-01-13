@@ -1,10 +1,13 @@
 #include "IwEngine\Physics\BoundingMesh.h"
 
-Physics::BoundingMesh::BoundingMesh(int count) {
+using namespace Physics;
+
+BoundingMesh::BoundingMesh(int count) {
 }
 
-Physics::BoundingMesh::~BoundingMesh() {
+BoundingMesh::~BoundingMesh() {
 }
 
-Physics::BoundingMesh::Intersects(int count) {
+CollisionData BoundingMesh::Intersects(const BoundingMesh& other, const Math::Vector3& offset, const Math::Vector3& otherOffset) {
+	return CollisionData(false, 0);
 }
