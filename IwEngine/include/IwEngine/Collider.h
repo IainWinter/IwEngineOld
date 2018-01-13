@@ -7,6 +7,7 @@
 
 class Collider : public Component {
 private:
-	std::vector <Math::Vector3> points; 
+	std::vector <Math::Vector3> position; 
 public:
+	Collider(GameObject& gameObject) : Component(gameObject) {}
 };
