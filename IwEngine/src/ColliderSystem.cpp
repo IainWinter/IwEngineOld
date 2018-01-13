@@ -14,24 +14,25 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 	std::vector<int> transformKeys = transformTable->GetGameObjectIDs();
 	std::vector<int> boxColliderKeys = boxColliderTable->GetGameObjectIDs();
 	std::vector<int> sphereColliderKeys = sphereColliderTable->GetGameObjectIDs();
-	std::vector<int> checkObjects; 
+	std::vector<int> transformBoxKeys;
+	std::vector<int> transformSphereKeys;
 
 	for (int i = 0; i < transformKeys.size(); i++) {
 		for (int j = 0; j < boxColliderKeys.size() + sphereColliderKeys.size(); j++) {
 			if (j <= boxColliderKeys.size()) {
 				if (transformKeys.at(i) == boxColliderKeys.at(j)) {
-					checkObjects.push_back(transformKeys.at(i));
-				}
-				else {
-					if (transformKeys.at(i) == sphereColliderKeys.at(j)) {
-						checkObjects.push_back(transformKeys.at(i));
-					}
+					transformBoxKeys.push_back(boxColliderKeys.at(j));
 				}
 			}
+				else {
+					if (transformKeys.at(i) == sphereColliderKeys.at(j)) {
+						transformSphereKeys.push_back(sphereColliderKeys.at(j));
+					}
+				}
 		}
 	}
-	for (int i = 0; i < checkObjects.size(); i++) {
-		
+	for (int i = 0; i < transformBoxKeys.size() + transformSphereKeys.size(); i++){
+		if (i <= boxColliderKeys.size()) {
+			BoxCollider collider = boxColliderTable.GetComponent(boxColliderKeys.at(i));
 	}
 }
-
