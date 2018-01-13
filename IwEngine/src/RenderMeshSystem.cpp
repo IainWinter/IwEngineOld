@@ -2,8 +2,6 @@
 #include <vector>
 
 void System<RenderMesh, Transform>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
-	Utility::Info(std::to_string(deltaTime));
-
 	std::vector<int> transformGOIDs = componentLookUp.GetComponentTable<Transform>()->GetGameObjectIDs();
 	std::vector<int> renderMeshGOIDs = componentLookUp.GetComponentTable<RenderMesh>()->GetGameObjectIDs();
 
@@ -27,5 +25,6 @@ void System<RenderMesh, Transform>::Update(ComponentLookUp& componentLookUp, flo
 
 		const Graphics::Mesh& mesh = renderMesh->GetMesh();
 		mesh.Draw(transform->GetPosition(), transform->GetEulerRotation());
+
 	}
 }

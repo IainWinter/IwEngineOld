@@ -1,6 +1,7 @@
 #include "IwEngine\Engine.h"
 #include "IwEngine\Scene.h"
 #include "IwEngine\RenderMesh.h"
+#include "IwEngine\RigidBody.h"
 #include "IwEngine\GameObject.h"
 #include "IwEngine\Common.h"
 
@@ -24,7 +25,10 @@ int main() {
 	gameObject.AddComponent<RenderMesh>(renderMesh);
 	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(0, 0, -2), Math::Quaternion::FromEulerAngles(0, 0.7853982f, 0)));
 
+	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject));
+
 	scene.MakeSystem<RenderMesh, Transform>();
+	scene.MakeSystem<RigidBody, Transform>();
 
 	engine->Run();
 }

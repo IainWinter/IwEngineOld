@@ -1,16 +1,27 @@
 #include "IwEngine\RigidBodySystem.h"
 
 void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
-	ComponentTable <Transform>* transformTable = componentLookUp.GetComponentTable<Transform>();
-	ComponentTable <RigidBody>* rigidBodyTable = componentLookUp.GetComponentTable<RigidBody>();
-	std::vector<int> transformKeys = transformTable->GetGameObjectIDs();
-	std::vector<int> rigidBodyKeys = rigidBodyTable->GetGameObjectIDs();
-	std::vector<int> Objects;
-	for (int i = 0; i < transformKeys.size(); i++) {
-		for (int j = 0; j < rigidBodyKeys.size(); j++) {
-			if (transformKeys.at(i) == rigidBodyKeys.at(j)) {
-				Objects.push_back(rigidBodyKeys.at(j));
+	std::vector<int> transformGOIDs = componentLookUp.GetComponentTable<Transform>()->GetGameObjectIDs();
+	std::vector<int> rigidBodyGOIDs = componentLookUp.GetComponentTable<RigidBody>()->GetGameObjectIDs();
+
+	std::vector<int> gameObjectIDs = std::vector<int>();
+
+	uint tCount = transformGOIDs.size();
+	uint rCount = rigidBodyGOIDs.size();
+	for (uint i = 0; i < tCount; i++) {
+		for (uint j = 0; j < rCount; j++) {
+			if (transformGOIDs[i] == rigidBodyGOIDs[j]) {
+				gameObjectIDs.push_back(i);
+				i++;
 			}
 		}
+	}
+
+	uint gCount = gameObjectIDs.size();
+	for (size_t i = 0; i < gCount; i++) {
+		Transform* transform = componentLookUp.GetComponentTable<Transform>()->GetComponent(gameObjectIDs[i]);
+		RigidBody* rigidBody = componentLookUp.GetComponentTable<RigidBody>()->GetComponent(gameObjectIDs[i]);
+
+		transform->SetPosition(transform->GetPosition() - Math::Vector3(0.001f, 0, 0));
 	}
 }
