@@ -18,4 +18,8 @@ public:
 		points.push_back(_collider.GetCenter());
 		radius = _collider.GetRadius();
 	}
+
+	Physics::BoundingSphere GetCollider() {
+		return _collider;
+	}
 };

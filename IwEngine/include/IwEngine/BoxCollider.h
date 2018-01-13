@@ -18,4 +18,8 @@ public:
 	std::vector <Math::Vector3> getPosition() {
 		return points; 
 	}
+	Physics::BoundingBox GetCollider() {
+		return _collider; 
+	}
+
 };

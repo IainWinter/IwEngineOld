@@ -4,6 +4,9 @@
 #include "IwEngine\Transform.h"
 #include "IwEngine\RigidBody.h"
 #include <vector>
+#include "IwEngine\Physics\BoundingBox.h"
+#include "IwEngine\Physics\BoundingSphere.h"
+#include "IwEngine\Physics\CollisionData.h"
 
 
 void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
@@ -32,7 +35,26 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 		}
 	}
 	for (int i = 0; i < transformBoxKeys.size() + transformSphereKeys.size(); i++){
+		bool isColliding; 
 		if (i <= boxColliderKeys.size()) {
-			BoxCollider collider = boxColliderTable.GetComponent(boxColliderKeys.at(i));
+			BoxCollider* collider = boxColliderTable->GetComponent(boxColliderKeys.at(i));
+			Physics::BoundingBox box1 = collider->GetCollider;
+			//Can't check for collision between box and sphere
+			for (int j = i+1; j < boxColliderKeys.size; j++) {
+				BoxCollider* other = boxColliderTable->GetComponent(boxColliderKeys.at(j));
+				Physics::BoundingBox box2 = other->GetCollider;
+				box1.IntersectBoundingBox (box2);
+				//still need to process and return if colliding 
+			}
+		}
+		else {
+			SphereCollider* collider = sphereColliderTable->GetComponent(sphereColliderKeys.at(i));
+			Physics::BoundingSphere sphere1 = collider->GetCollider;
+			for (int j = i + 1; j < sphereColliderKeys.size; j++) {
+				SphereCollider* other = sphereColliderTable->GetComponent(sphereColliderKeys.at(j));
+				Physics::BoundingSphere sphere2 = other->GetCollider;
+				sphere1.IntersectBS(sphere2);
+			}
+		}
 	}
 }
