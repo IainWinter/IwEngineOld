@@ -30,5 +30,8 @@ void System<SphereCollider, BoxCollider>::Update(ComponentLookUp& componentLookU
 			}
 		}
 	}
+	for (int objectKey : checkObjects) {
+
+	}
 }
 

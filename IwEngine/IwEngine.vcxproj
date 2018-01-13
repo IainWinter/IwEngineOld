@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\BoxCollider.h" />
+    <ClInclude Include="include\IwEngine\Collider.h" />
     <ClInclude Include="include\IwEngine\ColliderSystem.h" />
     <ClInclude Include="include\IwEngine\CommonEvents.h" />
     <ClInclude Include="include\IwEngine\ComponentLookUp.h" />
