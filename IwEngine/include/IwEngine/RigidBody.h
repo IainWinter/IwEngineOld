@@ -6,9 +6,9 @@
 #include "IwEngine\Math\Vector3.h"
 #include "Component.h"
 
-class IWENGINE_API RigidBody: public Component {
+class RigidBody: public Component {
 public:
-	RigidBody(GameObject& gameObject)
+	IWENGINE_API RigidBody(GameObject& gameObject)
 		: Component(gameObject) {
 	}
 

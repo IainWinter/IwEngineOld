@@ -33,6 +33,7 @@
     <ClCompile Include="src\SystemManager.cpp" />
     <ClCompile Include="src\RigidBodySystem.cpp" />
     <ClCompile Include="src\Physics\BoundingBox.cpp" />
+    <ClCompile Include="src\Physics\BoundingMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\MeshCollider.h" />

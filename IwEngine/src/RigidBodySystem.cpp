@@ -22,6 +22,6 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		Transform* transform = componentLookUp.GetComponentTable<Transform>()->GetComponent(gameObjectIDs[i]);
 		RigidBody* rigidBody = componentLookUp.GetComponentTable<RigidBody>()->GetComponent(gameObjectIDs[i]);
 
-		transform->SetPosition(transform->GetPosition() - Math::Vector3(0.001f, 0, 0));
+		transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, 0, 0));
 	}
 }

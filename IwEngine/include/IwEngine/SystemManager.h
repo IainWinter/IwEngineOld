@@ -5,6 +5,7 @@
 #include "IwEngine\Events\EventBus.h"
 #include "IwEngine\CommonEvents.h"
 #include "IwEngine\RenderMeshSystem.h"
+#include "IwEngine\RigidBodySystem.h"
 
 class SystemManager : Events::EventHandlerBase<UpdateEvent> {
 private:

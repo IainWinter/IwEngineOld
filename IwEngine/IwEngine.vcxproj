@@ -160,6 +160,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Physics\BoundingMesh.cpp" />
     <ClCompile Include="src\RigidBodySystem.cpp" />
     <ClCompile Include="src\SystemManager.cpp" />
     <ClCompile Include="src\RenderMeshSystem.cpp" />
