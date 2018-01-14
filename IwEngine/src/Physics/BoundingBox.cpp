@@ -33,6 +33,6 @@ std::vector<Math::Vector3> Physics::BoundingBox::GetVertices() const {
 	};
 }
 
-std::vector<Math::Vector3> Physics::BoundingBox::ProjectOntoAxis() const {
-	return std::vector<Math::Vector3>();
+std::vector<float> Physics::BoundingBox::ProjectOntoAxis(const Math::Vector3& axis) const {
+	return std::vector<float>();
 }

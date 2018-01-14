@@ -44,8 +44,7 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 		Math::Vector3 angularAcceleration = rigidBody->torque / rigidBody->momentOfInertia;
 		Math::Vector3 rotationChange = rigidBody->rotationalVelocity*(deltaTime) + angularAcceleration / 2 * (deltaTime * deltaTime);
-		transform->SetEulerRotation(transform->GetEulerRotation().operator+(rotationChange));
+		transform->SetEulerRotation(transform->GetEulerRotation() + rotationChange );
 		rigidBody->rotationalVelocity+=(angularAcceleration * deltaTime);
-		//transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, deltaTime, deltaTime));
 	}
 }
