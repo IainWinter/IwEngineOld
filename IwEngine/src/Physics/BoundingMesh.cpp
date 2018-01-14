@@ -5,21 +5,24 @@
 using namespace Physics;
 
 BoundingMesh::BoundingMesh(Math::Vector3* collider, uint count)
-	: _collider(collider), _count(count) {
-}
+	: _collider(collider), _count(count) {}
 
 BoundingMesh::~BoundingMesh() {
 	delete[] _collider;
 }
 
-CollisionData BoundingMesh::Intersects(const BoundingMesh& other, const Transform* transform, const Transform* otherTransform) const {
-	CollisionData collisionData = CollisionData(true, 0);
+std::vector<Math::Vector3> Physics::BoundingMesh::GetAxies(const Bounds & other) const {
+	return std::vector<Math::Vector3>();
+}
 
+std::vector<Math::Vector3> Physics::BoundingMesh::GetNormals() const {
+	return std::vector<Math::Vector3>();
+}
 
-	//Find axies. If circle axis is from closest point to center of the circle
-	//Remove similar ones
-	//Project verticies on axis
-	//Find if overlapping
-	//Repeat for all axies
-	return collisionData;
+std::vector<Math::Vector3> Physics::BoundingMesh::GetVertices() const {
+	return std::vector<Math::Vector3>();
+}
+
+std::vector<Math::Vector3> Physics::BoundingMesh::ProjectOntoAxis() const {
+	return std::vector<Math::Vector3>();
 }
