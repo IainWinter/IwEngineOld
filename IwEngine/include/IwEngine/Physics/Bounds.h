@@ -13,5 +13,6 @@ namespace Physics {
 		virtual std::vector<Math::Vector3> GetNormals() const = 0;
 		virtual std::vector<Math::Vector3> GetVertices() const = 0;
 		virtual std::vector<float> ProjectOntoAxis(const Math::Vector3& axis) const = 0;
+		virtual float GetVolume() const = 0;
 	};
 }

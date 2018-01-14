@@ -41,3 +41,7 @@ std::vector<Math::Vector3> Physics::BoundingSphere::GetVertices() const {
 std::vector<float> Physics::BoundingSphere::ProjectOntoAxis(const Math::Vector3& axis) const {
 	return std::vector<float>(-_radius, _radius);
 }
+
+float Physics::BoundingSphere::GetVolume() const {
+	return 4.0f / 3.0f * 3.14f * _radius * _radius * _radius;
+}

@@ -41,10 +41,11 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		rigidBody->velocity += acceleration * deltaTime;
 		transform->SetPosition(position);
 
+		std::cout << transform->GetEulerRotation() << std::endl;
 
 		Math::Vector3 angularAcceleration = rigidBody->torque / rigidBody->momentOfInertia;
 		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcceleration / 2 * deltaTime * deltaTime;
-		transform->SetEulerRotation(transform->GetEulerRotation() + rotationChange);
+		transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(Math::Vector3::UnitY * 0.1f));
 		rigidBody->rotationalVelocity += (angularAcceleration * deltaTime);
 	}
 }

@@ -6,15 +6,15 @@
 
 class RenderMesh : public Component {
 private:
-	Graphics::Mesh* _mesh;
+	Graphics::Mesh* _bounds;
 public:
-	RenderMesh(GameObject& gameObject, Graphics::Mesh* mesh) : Component(gameObject), _mesh(mesh) { }
+	RenderMesh(GameObject& gameObject, Graphics::Mesh* mesh) : Component(gameObject), _bounds(mesh) { }
 	~RenderMesh() {
-		delete _mesh;
+		delete _bounds;
 	}
 
 	inline const Graphics::Mesh& GetMesh() const {
-		return *_mesh;
+		return *_bounds;
 	}
 
 	//Methods for getting normals/verts/setting mesh 

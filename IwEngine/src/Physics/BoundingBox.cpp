@@ -36,3 +36,7 @@ std::vector<Math::Vector3> Physics::BoundingBox::GetVertices() const {
 std::vector<float> Physics::BoundingBox::ProjectOntoAxis(const Math::Vector3& axis) const {
 	return std::vector<float>();
 }
+
+float Physics::BoundingBox::GetVolume() {
+	return (*_max - *_min).x *(*_max - *_min).y * (*_max - *_min).z;
+}

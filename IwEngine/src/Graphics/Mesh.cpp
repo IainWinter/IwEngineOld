@@ -15,8 +15,8 @@ Mesh::~Mesh() {
 	delete _indexBuffer;
 }
 
-void Mesh::Draw(const Math::Vector3& position, const Math::Vector3& rotation) const {
-	Math::Matrix4 world = Math::Matrix4::CreateRoatation(rotation.x, rotation.y, rotation.z) * Math::Matrix4::CreateTranslation(position);
+void Mesh::Draw(const Math::Vector3& position, const Math::Quaternion& rotation) const {
+	Math::Matrix4 world = Math::Matrix4::CreateFromQuaternion(rotation) * Math::Matrix4::CreateTranslation(position);
 
 	glUniformMatrix4fv(8, 1, GL_FALSE, world.elements);
 

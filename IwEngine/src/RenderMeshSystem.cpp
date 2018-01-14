@@ -24,7 +24,7 @@ void System<RenderMesh, Transform>::Update(ComponentLookUp& componentLookUp, flo
 		RenderMesh* renderMesh = componentLookUp.GetComponentTable<RenderMesh>()->GetComponent(gameObjectIDs[i]);
 
 		const Graphics::Mesh& mesh = renderMesh->GetMesh();
-		mesh.Draw(transform->GetPosition(), transform->GetEulerRotation());
+		mesh.Draw(transform->GetPosition(), transform->GetRotation());
 
 	}
 }

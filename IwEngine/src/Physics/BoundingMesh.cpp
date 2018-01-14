@@ -26,3 +26,7 @@ std::vector<Math::Vector3> Physics::BoundingMesh::GetVertices() const {
 std::vector<float> Physics::BoundingMesh::ProjectOntoAxis(const Math::Vector3& axis) const {
 	return std::vector<float>();
 }
+
+float Physics::BoundingMesh::GetVolume() const {
+	return 0.0f;
+}
