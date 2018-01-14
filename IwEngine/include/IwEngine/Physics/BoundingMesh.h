@@ -2,25 +2,18 @@
 
 #include "IwEngine\Common.h"
 #include "IwEngine\Math\Vector3.h"
-#include "IwEngine\Physics\CollisionData.h"
-#include "IwEngine\Transform.h"
+#include "IwEngine\Physics\Bounds.h"
 
 namespace Physics {
-	class IWENGINE_API BoundingMesh {
+	class IWENGINE_API BoundingMesh : Bounds {
 		Math::Vector3* _collider;
 		uint _count;
 	public:
 		BoundingMesh(Math::Vector3* collider, uint count);
-		~BoundingMesh();
-
-		inline const Math::Vector3* GetCollider() const {
-			return _collider;
-		}
-
-		inline uint GetCount() const {
-			return _count;
-		}
-
-		CollisionData Intersects(const BoundingMesh& other, const Transform* transform, const Transform* otherTransform) const;
+		virtual ~BoundingMesh();
+		virtual std::vector<Math::Vector3> GetAxies(const Bounds& other) const;
+		virtual std::vector<Math::Vector3> GetNormals() const;
+		virtual std::vector<Math::Vector3> GetVertices() const;
+		virtual std::vector<Math::Vector3> ProjectOntoAxis() const;
 	};
 }

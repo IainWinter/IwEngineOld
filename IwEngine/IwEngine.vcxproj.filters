@@ -99,5 +99,6 @@
     <ClInclude Include="include\IwEngine\Physics\BoundingBox.h" />
     <ClInclude Include="include\IwEngine\Physics\BoundingMesh.h" />
     <ClInclude Include="include\IwEngine\Collider.h" />
+    <ClInclude Include="include\IwEngine\Physics\Bounds.h" />
   </ItemGroup>
 </Project>

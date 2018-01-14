@@ -1,52 +1,38 @@
 #include "IwEngine\Physics\BoundingBox.h"
 
 Physics::BoundingBox::BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale)
-	: BoundingMesh(new Math::Vector3[36]{
-	//left
-	Math::Vector3(origin.x,				origin.y,			  origin.z),
-	Math::Vector3(origin.x,				origin.y + scale.y,   origin.z),
-	Math::Vector3(origin.x,				origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y,			  origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y,			  origin.z),
+	:_min(new Math::Vector3(origin)), _max(new Math::Vector3(origin + scale)) {}
 
-	//right
-	Math::Vector3(origin.x + scale.x,	origin.y,			  origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x + scale.x,	origin.y,			  origin.z + scale.z),
-	Math::Vector3(origin.x + scale.x,	origin.y,			  origin.z),
+Physics::BoundingBox::~BoundingBox() {
+	delete _min;
+	delete _max;
+}
 
-	//bottom
-	Math::Vector3(origin.x,				origin.y,			  origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y,			  origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y,			  origin.z + scale.z),
-	Math::Vector3(origin.x + scale.x,	origin.y,			  origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y,			  origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y,			  origin.z),
+std::vector<Math::Vector3> Physics::BoundingBox::GetAxies(const Bounds& other) const {
+	return GetNormals();
+}
 
-	//top
-	Math::Vector3(origin.x,				origin.y + scale.y,   origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y + scale.y,   origin.z),
+std::vector<Math::Vector3> Physics::BoundingBox::GetNormals() const {
+	return std::vector<Math::Vector3> {
+		Math::Vector3::UnitX,
+		Math::Vector3::UnitY,
+		Math::Vector3::UnitZ
+	};
+}
 
-	//back
-	Math::Vector3(origin.x,				origin.y,			  origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y,			  origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z),
-	Math::Vector3(origin.x,				origin.y + scale.y,   origin.z),
-	Math::Vector3(origin.x,				origin.y,			  origin.z),
+std::vector<Math::Vector3> Physics::BoundingBox::GetVertices() const {
+	return std::vector<Math::Vector3> {
+		*_min, 
+		Math::Vector3(_min->x, _max->y,	_min->z),
+		Math::Vector3(_min->x, _max->y, _max->z),
+		Math::Vector3(_min->x, _min->y, _max->z),
+		Math::Vector3(_max->x, _min->y,_max->z),
+		Math::Vector3(_max->x, _max->y,_max->z),
+		Math::Vector3(_max->x, _max->y,_min->z),
+		Math::Vector3(_max->x, _min->y,_min->z)
+	};
+}
 
-	//front
-	Math::Vector3(origin.x,				origin.y,			  origin.z + scale.z),
-	Math::Vector3(origin.x + scale.x,	origin.y,			  origin.z + scale.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x + scale.x,	origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y + scale.y,   origin.z + scale.z),
-	Math::Vector3(origin.x,				origin.y,			  origin.z + scale.z)}, 36) {
+std::vector<Math::Vector3> Physics::BoundingBox::ProjectOntoAxis() const {
+	return std::vector<Math::Vector3>();
 }

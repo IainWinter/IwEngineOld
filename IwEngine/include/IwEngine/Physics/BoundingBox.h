@@ -2,11 +2,19 @@
 
 #include "IwEngine\Common.h"
 #include "IwEngine\Math\Vector3.h"
-#include "IwEngine\Physics\BoundingMesh.h"
+#include "IwEngine\Physics\Bounds.h"
 
 namespace Physics {
-	struct IWENGINE_API BoundingBox : public BoundingMesh {
+	struct IWENGINE_API BoundingBox : public Bounds {
+	private:
+		Math::Vector3* _min;
+		Math::Vector3* _max;
 	public:
 		BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale);
+		virtual ~BoundingBox();
+		virtual std::vector<Math::Vector3> GetAxies(const Bounds& other) const;
+		virtual std::vector<Math::Vector3> GetNormals() const;
+		virtual std::vector<Math::Vector3> GetVertices() const;
+		virtual std::vector<Math::Vector3> ProjectOntoAxis() const;
 	};
 }
