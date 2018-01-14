@@ -1,11 +1,10 @@
 #pragma once
 
 #include "IwEngine\System.h"
-#include "IwEngine\SphereCollider.h"
-#include "IwEngine\BoxCollider.h"
-#include "IwEngine\Utility\Logger.h"
+#include "IwEngine\Collider.h"
+#include "IwEngine\Transform.h"
 
 template<>
-class IWENGINE_API System<SphereCollider, BoxCollider> : public ISystem {
+class IWENGINE_API System<Collider, Transform> : public ISystem {
 	virtual void Update(ComponentLookUp& componentLookUp, float deltaTime);
 };

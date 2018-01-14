@@ -7,9 +7,8 @@
 
 class IWENGINE_API Object {
 private:
-	//Wrappers for __dllspec C4251
-	struct String { std::string string; };
 	struct AtomicInt { std::atomic<int> atomic; };
+	struct String { std::string string; };
 
 	static AtomicInt _staticId;
 	int _instanceId = ++_staticId.atomic;

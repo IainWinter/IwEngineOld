@@ -9,7 +9,7 @@ public:
 };
 
 template<typename ...TComponent>
-class System : public ISystem {
+class IWENGINE_API System : public ISystem {
 public:
 	void Update(ComponentLookUp& componentLookUp, float deltaTime);
 };

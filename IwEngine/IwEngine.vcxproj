@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{369AE9F9-8A7A-42C5-BBB7-9282B02D7F79}</ProjectGuid>
     <RootNamespace>IwEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -160,7 +160,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Object.cpp" />
+    <ClCompile Include="src\Physics\BoundingBox.cpp" />
     <ClCompile Include="src\Physics\BoundingMesh.cpp" />
+    <ClCompile Include="src\Physics\BoundingSphere.cpp" />
     <ClCompile Include="src\RigidBodySystem.cpp" />
     <ClCompile Include="src\SystemManager.cpp" />
     <ClCompile Include="src\RenderMeshSystem.cpp" />
@@ -184,7 +187,6 @@
     <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Math\Vector4.cpp" />
     <ClCompile Include="src\Memory\LinearAllocator.cpp" />
-    <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\Utility\IO\Directory.cpp" />
     <ClCompile Include="src\Utility\IO\File.cpp" />
     <ClCompile Include="src\Utility\IO\Path.cpp" />
@@ -193,7 +195,6 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\IwEngine\BoxCollider.h" />
     <ClInclude Include="include\IwEngine\Collider.h" />
     <ClInclude Include="include\IwEngine\ColliderSystem.h" />
     <ClInclude Include="include\IwEngine\CommonEvents.h" />
@@ -222,7 +223,6 @@
     <ClInclude Include="include\IwEngine\RenderMeshSystem.h" />
     <ClInclude Include="include\IwEngine\RigidBody.h" />
     <ClInclude Include="include\IwEngine\RigidBodySystem.h" />
-    <ClInclude Include="include\IwEngine\SphereCollider.h" />
     <ClInclude Include="include\IwEngine\System.h" />
     <ClInclude Include="include\IwEngine\SystemManager.h" />
     <ClInclude Include="include\IwEngine\Transform.h" />

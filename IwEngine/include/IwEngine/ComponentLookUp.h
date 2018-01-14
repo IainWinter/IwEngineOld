@@ -1,16 +1,17 @@
 #pragma once
 
+#include "IwEngine\Common.h"
 #include "IwEngine\ComponentTable.h"
 
 class ComponentLookUp {
 private:
 	std::map<int, IComponentTable*> _componentTables;
 public:
-	ComponentLookUp();
-	~ComponentLookUp();
+	IWENGINE_API ComponentLookUp();
+	IWENGINE_API ~ComponentLookUp();
 
-	ComponentLookUp(const ComponentLookUp&) = delete;
-	const ComponentLookUp& operator=(const ComponentLookUp&) = delete;
+	IWENGINE_API ComponentLookUp(const ComponentLookUp&) = delete;
+	IWENGINE_API const ComponentLookUp& operator=(const ComponentLookUp&) = delete;
 
 	template<typename TComponent>
 	void AddComponent(int gameObjectID, TComponent* component);
@@ -18,7 +19,7 @@ public:
 	template<typename TComponent>
 	void RemoveComponent(int gameObjectID, TComponent* component);
 
-	void RemoveAllComponents(int gameObjectID);
+	IWENGINE_API void RemoveAllComponents(int gameObjectID);
 
 	template<typename TComponent>
 	TComponent* GetComponent(int gameObjectID);
