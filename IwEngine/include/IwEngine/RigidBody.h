@@ -14,10 +14,11 @@ public:
 
 	Math::Vector3 velocity;
 	Math::Vector3 rotationalVelocity;
-	Math::Vector3 rotationalAcceleration;
+	Math::Vector3 torque;
 	Math::Vector3 force; 
 
 	float mass;
+	float momentOfInertia;
 	float drag;
 	float angular_drag;
 	bool use_gravity;
