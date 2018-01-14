@@ -37,8 +37,8 @@ int main() {
 	Collider* collider2 = new Collider(gameObject, bounds2);
 
 	gameObject.AddComponent<RenderMesh>(renderMesh);
-	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(0, 0, -2), Math::Quaternion::FromEulerAngles(0, 0.7853982f, 0)));
-	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject));
+	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-0.5f, -0.5f, -5)));
+	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, 50, Math::Vector3(0, 10, 0)));
 	gameObject.AddComponent<Collider>(collider);
 
 	gameObject2.AddComponent<RenderMesh>(renderMesh2);
@@ -47,6 +47,7 @@ int main() {
 
 	scene.MakeSystem<RenderMesh, Transform>();
 	scene.MakeSystem<Collider, Transform>();
+	scene.MakeSystem<RigidBody, Transform>();
 
 	engine->Run();
 }

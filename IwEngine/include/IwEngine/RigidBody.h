@@ -8,10 +8,6 @@
 
 class RigidBody: public Component {
 public:
-	RigidBody(GameObject& gameObject)
-		: Component(gameObject) {
-	}
-
 	Math::Vector3 velocity;
 	Math::Vector3 rotationalVelocity;
 	Math::Vector3 torque;
@@ -27,4 +23,9 @@ public:
 	Physics::CollisionDetectionMode collision_detection_mode;
 	std::tuple<bool, bool, bool> freeze_position_xyz;
 	std::tuple<bool, bool, bool> freeze_rotation;
+
+	RigidBody(GameObject& gameObject, float mass, Math::Vector3 velocity)
+		: Component(gameObject), mass(mass), velocity(velocity) {
+	}
+
 };
