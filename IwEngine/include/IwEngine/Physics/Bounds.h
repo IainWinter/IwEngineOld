@@ -8,7 +8,7 @@
 namespace Physics {
 	class IWENGINE_API Bounds {
 	public:
-		virtual ~Bounds() = 0;
+		virtual ~Bounds() {}
 		virtual std::vector<Math::Vector3> GetAxies(const Bounds& other) const = 0;
 		virtual std::vector<Math::Vector3> GetNormals() const = 0;
 		virtual std::vector<Math::Vector3> GetVertices() const = 0;

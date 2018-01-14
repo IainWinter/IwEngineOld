@@ -5,16 +5,16 @@
 
 class Collider : public Component {
 private:
-	Physics::BoundingMesh* _mesh;
+	Physics::Bounds* _mesh;
 public:
-	Collider(GameObject& gameObject, Physics::BoundingMesh* mesh) 
+	Collider(GameObject& gameObject, Physics::Bounds* mesh) 
 		: Component(gameObject), _mesh(mesh) {}
 	
 	~Collider() {
 		delete _mesh;
 	}
 
-	inline const Physics::BoundingMesh& GetCollider() const {
+	inline const Physics::Bounds& GetCollider() const {
 		return *_mesh;
 	}
 };

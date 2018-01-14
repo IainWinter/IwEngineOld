@@ -28,10 +28,10 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			Collider* collider1 = componentLookUp.GetComponent<Collider>(gameObjectIDs[i]);
 			Collider* collider2 = componentLookUp.GetComponent<Collider>(gameObjectIDs[j]);
 
-			const Physics::BoundingMesh& bounds1 = collider1->GetCollider();
-			const Physics::BoundingMesh& bounds2 = collider2->GetCollider();
+			const Physics::Bounds& bounds1 = collider1->GetCollider();
+			const Physics::Bounds& bounds2 = collider2->GetCollider();
 
-			bounds1.Intersects(bounds2, transform1, transform2);
+			//bounds1.Intersects(bounds2, transform1, transform2);
 		}
 	}
 }

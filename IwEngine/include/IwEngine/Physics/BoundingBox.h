@@ -11,10 +11,10 @@ namespace Physics {
 		Math::Vector3* _max;
 	public:
 		BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale);
-		virtual ~BoundingBox();
+		~BoundingBox();
 		virtual std::vector<Math::Vector3> GetAxies(const Bounds& other) const;
 		virtual std::vector<Math::Vector3> GetNormals() const;
 		virtual std::vector<Math::Vector3> GetVertices() const;
-		virtual std::vector<Math::Vector3> ProjectOntoAxis() const;
+		virtual std::vector<float> ProjectOntoAxis(const Math::Vector3& axis) const;
 	};
 }

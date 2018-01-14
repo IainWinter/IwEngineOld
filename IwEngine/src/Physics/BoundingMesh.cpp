@@ -23,6 +23,6 @@ std::vector<Math::Vector3> Physics::BoundingMesh::GetVertices() const {
 	return std::vector<Math::Vector3>();
 }
 
-std::vector<Math::Vector3> Physics::BoundingMesh::ProjectOntoAxis() const {
-	return std::vector<Math::Vector3>();
+std::vector<float> Physics::BoundingMesh::ProjectOntoAxis(const Math::Vector3& axis) const {
+	return std::vector<float>();
 }
