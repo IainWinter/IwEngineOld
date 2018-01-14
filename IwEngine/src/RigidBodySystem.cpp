@@ -26,7 +26,7 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		Math::Vector3 position = transform->GetPosition();
 		Math::Quaternion rotation = transform->GetRotation();
 
-		if (rigidBody->use_gravity) {
+		if (rigidBody->use_gravity && false) {
 			Math::Vector3 gravity(0, -9.81f, 0);
 			rigidBody->force = gravity.operator*(rigidBody->mass);
 		}
@@ -37,7 +37,7 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//rigidBody->force += forceFriction;
 
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
-		position+=rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
+		position += rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
 		rigidBody->velocity += acceleration * deltaTime;
 		transform->SetPosition(position);
 
@@ -45,7 +45,6 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		Math::Vector3 angularAcceleration = rigidBody->torque / rigidBody->momentOfInertia;
 		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcceleration / 2 * deltaTime * deltaTime;
 		transform->SetEulerRotation(transform->GetEulerRotation() + rotationChange);
-		rigidBody->rotationalVelocity+=(angularAcceleration * deltaTime);
-		//transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, deltaTime, deltaTime));
+		rigidBody->rotationalVelocity += (angularAcceleration * deltaTime);
 	}
 }
