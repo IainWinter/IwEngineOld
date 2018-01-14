@@ -35,6 +35,7 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
 		//Math::Vector3 forceFriction(frictionForce, 0, 0);
 		//rigidBody->force += forceFriction;
+		Math::Vector3 dragForce(rigidBody->drag * rigidBody->mass / rigidBody->volume * rigidBody->velocity * rigidBody->velocity / 2);
 
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
 		position += rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;

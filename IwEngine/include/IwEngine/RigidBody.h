@@ -14,6 +14,7 @@ public:
 	Math::Vector3 force; 
 
 	float mass;
+	float volume; 
 	float momentOfInertia;
 	float drag;
 	float angular_drag;
