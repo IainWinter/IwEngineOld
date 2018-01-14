@@ -17,7 +17,6 @@
     <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Math\Vector4.cpp" />
     <ClCompile Include="src\Object.cpp" />
-    <ClCompile Include="src\Physics\BoundingSphere.cpp" />
     <ClCompile Include="src\Utility\IO\Directory.cpp" />
     <ClCompile Include="src\Utility\IO\File.cpp" />
     <ClCompile Include="src\Utility\IO\Path.cpp" />
@@ -32,7 +31,6 @@
     <ClCompile Include="src\RenderMeshSystem.cpp" />
     <ClCompile Include="src\SystemManager.cpp" />
     <ClCompile Include="src\RigidBodySystem.cpp" />
-    <ClCompile Include="src\Physics\BoundingBox.cpp" />
     <ClCompile Include="src\Physics\BoundingMesh.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,15 @@
 #pragma once
 
-#include "Component.h"
-#include "GameObject.h"
-#include <vector>
-#include "Math\Vector3.h"
+#include "IwEngine\Component.h"
+#include "IwEngine\Physics\BoundingMesh.h"
 
-class Collider : public Component {
+class IWENGINE_API Collider : public Component {
 private:
-	std::vector <Math::Vector3> points; 
+	Physics::BoundingMesh _mesh;
 public:
-	Collider(GameObject& gameObject) : Component(gameObject) {}
+	Collider(GameObject& gameObject, Physics::BoundingMesh mesh) : Component(gameObject), _mesh(mesh) {}
+
+	inline const Physics::BoundingMesh& GetCollider() const {
+		return _mesh;
+	}
 };

@@ -3,22 +3,10 @@
 #include "IwEngine\Common.h"
 
 namespace Physics {
-	class IWENGINE_API CollisionData {
-	private:
-		bool intersect;
+	struct IWENGINE_API CollisionData {
+		bool intersects;
 		float distance;
-	public:
-		CollisionData(bool does_intersect, float dist) {
-			intersect = does_intersect;
-			distance = dist;
-		}
-
-		bool GetIntersect() {
-			return intersect;
-		}
-
-		float GetDistance() {
-			return distance;
-		}
+		CollisionData(bool intersects, float distance)
+			: intersects(intersects), distance(distance) {}
 	};
 }

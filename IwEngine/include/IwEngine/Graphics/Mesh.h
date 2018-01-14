@@ -18,7 +18,7 @@ namespace Graphics {
 
 		void Draw(const Math::Vector3& position, const Math::Vector3& rotation) const;
 
-		static Mesh* MakeBox(const Math::Vector3& topCorner, const Math::Vector3& scale);
+		static Mesh* MakeBox(const Math::Vector3& bottomCorner, const Math::Vector3& scale);
 		static Mesh* MakeSphere(const Math::Vector3& center, float radius, uint detail);
 	};
 }

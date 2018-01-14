@@ -3,26 +3,21 @@
 #include "IwEngine\Common.h"
 #include "IwEngine\Math\Vector3.h"
 #include "CollisionData.h"
+#include "IwEngine\Physics\BoundingMesh.h"
 
 namespace Physics {
-	struct IWENGINE_API BoundingBox {
-	private:
-		Math::Vector3 max;
-		Math::Vector3 min;
+	struct IWENGINE_API BoundingBox : public BoundingMesh {
 	public:
-		BoundingBox(const Math::Vector3 min_ex, Math::Vector3 max_ex) {
-			min = min_ex;
-			max = max_ex;
-		}
-
-		inline const Math::Vector3 GetMin() const {
-			return min;
-		}
-
-		inline const Math::Vector3 GetMax() const {
-			return max;
-		}
-
-		CollisionData BoundingBox::IntersectBoundingBox(const BoundingBox& other) const;
+		BoundingBox(Math::Vector3 origin, Math::Vector3 scale) 
+			: BoundingMesh(new Math::Vector3[]{ 
+			origin,
+			Math::Vector3(origin.x,			  origin.y + scale.y, origin.z),
+			Math::Vector3(origin.x,			  origin.y + scale.y, origin.z + scale.z),
+			Math::Vector3(origin.x,			  origin.y,			  origin.z + scale.z),
+			Math::Vector3(origin.x + scale.x, origin.y,			  origin.z),
+			Math::Vector3(origin.x + scale.x, origin.y + scale.y, origin.z),
+			Math::Vector3(origin.x + scale.x, origin.y + scale.y, origin.z + scale.z),
+			Math::Vector3(origin.x + scale.x, origin.y,			  origin.z + scale.z)
+		}) {}
 	};
 }
