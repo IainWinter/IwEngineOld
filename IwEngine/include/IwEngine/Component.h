@@ -4,7 +4,7 @@
 #include "IwEngine\Utility\Logger.h"
 
 class GameObject;
-class IWENGINE_API Component : public Object {
+class Component : public Object {
 private:
 	GameObject& gameObject;
 public:

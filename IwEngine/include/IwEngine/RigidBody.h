@@ -8,7 +8,7 @@
 
 class RigidBody: public Component {
 public:
-	IWENGINE_API RigidBody(GameObject& gameObject)
+	RigidBody(GameObject& gameObject)
 		: Component(gameObject) {
 	}
 

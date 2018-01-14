@@ -2,7 +2,6 @@
 
 #include "IwEngine\System.h"
 #include "IwEngine\Rigidbody.h"
-#include "IwEngine\Utility\Logger.h"
 #include "IwEngine\Transform.h"
 
 template<>
