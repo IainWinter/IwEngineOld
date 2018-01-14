@@ -33,21 +33,19 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 		//rigidBody->force.operator+=(applied force vector);
 		//float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
-		//rigidBody->force.x += frictionForce;
+		//Math::Vector3 forceFriction(frictionForce, 0, 0);
+		//rigidBody->force += forceFriction;
 
-		std::cout << rigidBody->velocity << std::endl;
-		std::cout << deltaTime << std::endl;
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
 		position.operator+=(rigidBody->velocity.operator*(deltaTime).operator+(acceleration.operator/(2).operator*(deltaTime * deltaTime)));
 		rigidBody->velocity.operator+=(acceleration * deltaTime);
 		transform->SetPosition(position);
 
 
-		//Math::Vector3 angularAcceleration = rigidBody->torque.operator/=(rigidBody->momentOfInertia);
-		//Math::Quaternion rotationalChange(rigidBody->rotationalVelocity.operator*=(deltaTime)+angularAcceleration.operator*=(2).operator*=(deltaTime*deltaTime), 1);
-		//transform->SetRotation(rotation.operator+=(rotationalChange));
-		//rigidBody->rotationalVelocity.operator+=(angularAcceleration*deltaTime);
-
+		Math::Vector3 angularAcceleration = rigidBody->torque / rigidBody->momentOfInertia;
+		Math::Vector3 rotationChange = rigidBody->rotationalVelocity*(deltaTime) + angularAcceleration / 2 * (deltaTime * deltaTime);
+		transform->SetEulerRotation(transform->GetEulerRotation().operator+(rotationChange));
+		rigidBody->rotationalVelocity+=(angularAcceleration * deltaTime);
 		//transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, deltaTime, deltaTime));
 	}
 }
