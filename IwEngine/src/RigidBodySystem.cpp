@@ -35,6 +35,10 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		position.operator+=(rigidBody->velocity.operator*=(deltaTime)+acceleration.operator/=(2).operator*=(deltaTime*deltaTime));
 		transform->SetPosition(position);
 		rigidBody->velocity.operator+=(acceleration.operator*(deltaTime));
+		Math::Vector3 angularAcceleration = rigidBody->torque.operator/=(rigidBody->momentOfInertia);
+		Math::Quaternion rotationalChange(rigidBody->rotationalVelocity.operator*=(deltaTime)+angularAcceleration.operator*=(2).operator*=(deltaTime*deltaTime), 1);
+		transform->SetRotation(rotation.operator+=(rotationalChange));
+		rigidBody->rotationalVelocity.operator+=(angularAcceleration*deltaTime);
 
 		transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, 0, 0));
 		//rotate with angular velocity
