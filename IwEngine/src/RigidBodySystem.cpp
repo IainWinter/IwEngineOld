@@ -35,7 +35,7 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
 		//Math::Vector3 forceFriction(frictionForce, 0, 0);
 		//rigidBody->force += forceFriction;
-		Math::Vector3 dragForce(rigidBody->drag * rigidBody->mass / rigidBody->volume * rigidBody->velocity * rigidBody->velocity / 2);
+		//Math::Vector3 dragForce(rigidBody->drag * rigidBody->mass / rigidBody->volume * rigidBody->velocity * rigidBody->velocity / 2);
 
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
 		position += rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
@@ -46,7 +46,7 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 		Math::Vector3 angularAcceleration = rigidBody->torque / rigidBody->momentOfInertia;
 		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcceleration / 2 * deltaTime * deltaTime;
-		transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(Math::Vector3::UnitY * 0.1f));
+		transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(rotationChange));
 		rigidBody->rotationalVelocity += (angularAcceleration * deltaTime);
 	}
 }
