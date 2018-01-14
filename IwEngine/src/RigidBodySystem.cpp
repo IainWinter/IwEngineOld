@@ -28,17 +28,18 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 		if (rigidBody->use_gravity) {
 			Math::Vector3 gravity(0, -9.81f, 0);
-			rigidBody->force = gravity * rigidBody->mass;
+			rigidBody->force = gravity.operator*(rigidBody->mass);
 		}
 
 		//rigidBody->force.operator+=(applied force vector);
 		//float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
 		//rigidBody->force.x += frictionForce;
 
-
+		std::cout << rigidBody->velocity << std::endl;
+		std::cout << deltaTime << std::endl;
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
-		position += rigidBody->velocity * deltaTime + acceleration / 2 * deltaTime * deltaTime;
-		rigidBody->velocity += acceleration * deltaTime;
+		position.operator+=(rigidBody->velocity.operator*(deltaTime).operator+(acceleration.operator/(2).operator*(deltaTime * deltaTime)));
+		rigidBody->velocity.operator+=(acceleration * deltaTime);
 		transform->SetPosition(position);
 
 
