@@ -37,8 +37,8 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//rigidBody->force += forceFriction;
 
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
-		position.operator+=(rigidBody->velocity.operator*(deltaTime).operator+(acceleration.operator/(2).operator*(deltaTime * deltaTime)));
-		rigidBody->velocity.operator+=(acceleration * deltaTime);
+		position+=(rigidBody->velocity*(deltaTime)+(acceleration/ 2*(deltaTime * deltaTime)));
+		rigidBody->velocity+=(acceleration * deltaTime);
 		transform->SetPosition(position);
 
 
