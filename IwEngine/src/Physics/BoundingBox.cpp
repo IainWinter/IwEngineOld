@@ -37,6 +37,6 @@ std::vector<float> Physics::BoundingBox::ProjectOntoAxis(const Math::Vector3& ax
 	return std::vector<float>();
 }
 
-float Physics::BoundingBox::GetVolume() {
-	return (*_max - *_min).x *(*_max - *_min).y * (*_max - *_min).z;
+float Physics::BoundingBox::GetVolume() const {
+	return (*_max - *_min).x * (*_max - *_min).y * (*_max - *_min).z;
 }
