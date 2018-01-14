@@ -13,9 +13,9 @@ public:
 	}
 
 	Math::Vector3 velocity;
-	Math::Vector3 acceleration;
 	Math::Vector3 rotationalVelocity;
 	Math::Vector3 rotationalAcceleration;
+	Math::Vector3 force; 
 
 	float mass;
 	float drag;

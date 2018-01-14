@@ -1,12 +1,13 @@
 #pragma once
 
 #include "IwEngine\Common.h"
+#include "IwEngine\Math\Vector3.h"
 
 namespace Physics {
-	class IWENGINE_API Physics {
+	class IWENGINE_API PhysicsHelper {
 	public:
-		static float gravity;
+		static Math::Vector3 gravity;
 	};
 
-	float Physics::gravity = 9.81f;
+	Math::Vector3 gravity(0, 9.81f, 0);
 }

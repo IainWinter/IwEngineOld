@@ -1,4 +1,5 @@
 #include "IwEngine\RigidBodySystem.h"
+#include "IwEngine\Physics\PhysicsHelper.h"
 
 void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
 	std::vector<int> transformGOIDs = componentLookUp.GetComponentTable<Transform>()->GetGameObjectIDs();
@@ -21,7 +22,21 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 	for (size_t i = 0; i < gCount; i++) {
 		Transform* transform = componentLookUp.GetComponentTable<Transform>()->GetComponent(gameObjectIDs[i]);
 		RigidBody* rigidBody = componentLookUp.GetComponentTable<RigidBody>()->GetComponent(gameObjectIDs[i]);
+		Math::Vector3 position = transform->GetPosition;
+		Math::Quaternion rotation = transform->GetRotation;
+		if (rigidBody->use_gravity) {
+			Math::Vector3 gravity(0, -9.8f, 0);
+			rigidBody->force.operator+=(gravity);
+		}
+		//rigidBody->force.operator+=(applied force vector);
+		Math::Vector3 acceleration = rigidBody->force.operator/=(rigidBody->mass);
+		//position.operator+=(rigidBody->velocity.operator*(deltaTime));
+		rigidBody->velocity.operator+=(acceleration.operator*(deltaTime));
 
 		transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, 0, 0));
+		//rotate with angular velocity
+		//move by translational v
+		//add forces
+		//add gravity
 	}
 }
