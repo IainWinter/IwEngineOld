@@ -24,26 +24,22 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		RigidBody* rigidBody = componentLookUp.GetComponentTable<RigidBody>()->GetComponent(gameObjectIDs[i]);
 		Math::Vector3 position = transform->GetPosition();
 		Math::Quaternion rotation = transform->GetRotation();
-		if (rigidBody->use_gravity) {
-			Math::Vector3 gravity(0, -9.8f, 0);
+		//if (rigidBody->use_gravity) {
+			Math::Vector3 gravity(0, -9.81f, 0);
 			rigidBody->force.operator+=(gravity);
-		}
+		//}
 		//rigidBody->force.operator+=(applied force vector);
-		float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
-		rigidBody->force.x += frictionForce;
+		//float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
+		//rigidBody->force.x += frictionForce;
 		Math::Vector3 acceleration = rigidBody->force.operator/=(rigidBody->mass);
 		position.operator+=(rigidBody->velocity.operator*=(deltaTime)+acceleration.operator/=(2).operator*=(deltaTime*deltaTime));
 		transform->SetPosition(position);
 		rigidBody->velocity.operator+=(acceleration.operator*(deltaTime));
-		Math::Vector3 angularAcceleration = rigidBody->torque.operator/=(rigidBody->momentOfInertia);
-		Math::Quaternion rotationalChange(rigidBody->rotationalVelocity.operator*=(deltaTime)+angularAcceleration.operator*=(2).operator*=(deltaTime*deltaTime), 1);
-		transform->SetRotation(rotation.operator+=(rotationalChange));
-		rigidBody->rotationalVelocity.operator+=(angularAcceleration*deltaTime);
+		//Math::Vector3 angularAcceleration = rigidBody->torque.operator/=(rigidBody->momentOfInertia);
+	    //Math::Quaternion rotationalChange(rigidBody->rotationalVelocity.operator*=(deltaTime)+angularAcceleration.operator*=(2).operator*=(deltaTime*deltaTime), 1);
+		//transform->SetRotation(rotation.operator+=(rotationalChange));
+		//rigidBody->rotationalVelocity.operator+=(angularAcceleration*deltaTime);
 
-		transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, 0, 0));
-		//rotate with angular velocity
-		//move by translational v
-		//add forces
-		//add gravity
+		//transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, deltaTime, deltaTime));
 	}
 }
