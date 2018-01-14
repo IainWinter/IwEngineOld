@@ -19,6 +19,8 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 	}
 
 	uint gCount = gameObjectIDs.size();
+
+	//fix by actually giving rigidbody values for mass and other vars 
 	for (size_t i = 0; i < gCount; i++) {
 		Transform* transform = componentLookUp.GetComponentTable<Transform>()->GetComponent(gameObjectIDs[i]);
 		RigidBody* rigidBody = componentLookUp.GetComponentTable<RigidBody>()->GetComponent(gameObjectIDs[i]);
@@ -31,15 +33,16 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//rigidBody->force.operator+=(applied force vector);
 		//float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
 		//rigidBody->force.x += frictionForce;
-		Math::Vector3 acceleration = rigidBody->force.operator/=(rigidBody->mass);
-		position.operator+=(rigidBody->velocity.operator*=(deltaTime)+acceleration.operator/=(2).operator*=(deltaTime*deltaTime));
-		transform->SetPosition(position);
+		Math::Vector3 acceleration = rigidBody->force.operator/(rigidBody->mass);
+		//position.operator+=(rigidBody->velocity.operator*=(deltaTime)+acceleration.operator/=(2).operator*=(deltaTime*deltaTime));
+		Math::Vector3 changeposition = rigidBody->velocity.operator*=(deltaTime)+acceleration.operator/=(2).operator*=(deltaTime*deltaTime);
+		//transform->SetPosition(position+changeposition*deltaTime);
 		rigidBody->velocity.operator+=(acceleration.operator*(deltaTime));
 		//Math::Vector3 angularAcceleration = rigidBody->torque.operator/=(rigidBody->momentOfInertia);
 	    //Math::Quaternion rotationalChange(rigidBody->rotationalVelocity.operator*=(deltaTime)+angularAcceleration.operator*=(2).operator*=(deltaTime*deltaTime), 1);
 		//transform->SetRotation(rotation.operator+=(rotationalChange));
 		//rigidBody->rotationalVelocity.operator+=(angularAcceleration*deltaTime);
-
-		//transform->SetPosition(transform->GetPosition() - Math::Vector3(deltaTime, deltaTime, deltaTime));
+		
+		transform->SetPosition(transform->GetPosition() + Math::Vector3(deltaTime, deltaTime, deltaTime).operator*(changeposition));
 	}
 }

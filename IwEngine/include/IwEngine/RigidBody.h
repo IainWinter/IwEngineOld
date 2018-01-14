@@ -11,6 +11,8 @@ public:
 	IWENGINE_API RigidBody(GameObject& gameObject)
 		: Component(gameObject) {
 	}
+	RigidBody(GameObject& gameObject, float mass)
+		: Component(gameObject), mass(mass) {}
 
 	Math::Vector3 velocity;
 	Math::Vector3 rotationalVelocity;
