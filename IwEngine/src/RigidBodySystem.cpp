@@ -38,10 +38,10 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//Math::Vector3 forceFriction(frictionForce, 0, 0);
 		//rigidBody->force += forceFriction;
 
-		//float volume = collider->GetVolume();
-		//Math::Vector3 dragForce (rigidBody->drag * rigidBody->mass / volume * rigidBody->velocity * rigidBody->velocity / 2);
+		float volume = collider->GetVolume();
+		Math::Vector3 dragForce (rigidBody->drag * rigidBody->mass / volume * rigidBody->velocity * rigidBody->velocity / 2);
 
-		//rigidBody->force -= dragForce;
+		rigidBody->force -= dragForce;
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
 		position += rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
 		rigidBody->velocity += acceleration * deltaTime;
