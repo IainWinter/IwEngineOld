@@ -61,7 +61,7 @@ uint ShaderProgram::CompileShader(uint type, std::string source) {
 		int length;
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 
-		char* message = (char*)alloca(length * sizeof(char));
+		char* message = (char*)_malloca(length * sizeof(char));
 		glGetShaderInfoLog(id, length, &length, message);
 
 		glDeleteShader(id);

@@ -31,7 +31,39 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			const Physics::Bounds& bounds1 = collider1->GetCollider();
 			const Physics::Bounds& bounds2 = collider2->GetCollider();
 
-			//bounds1.Intersects(bounds2, transform1, transform2);
+			std::vector<Math::Vector3> axies1 = bounds1.GetAxies();
+			std::vector<Math::Vector3> axies2 = bounds2.GetAxies();
+
+			std::vector<Math::Vector3> axies;
+			size_t count1 = axies1.size();
+			size_t count2 = axies2.size();
+
+			Math::Vector3 axis;
+			float distance;
+			for (size_t i = 0; i < count1 + count2; i++) {
+				if (i < count1) {
+					axis = axies1[i] * transform1->GetRotation();
+				} else {
+					axis = axies2[i - count1] * transform2->GetRotation();
+				}
+
+				float min1, max1, min2, max2;
+				bounds1.ProjectOntoAxis(axis, transform1->GetRotation(), transform1->GetPosition(), min1, max1);
+				bounds2.ProjectOntoAxis(axis, transform2->GetRotation(), transform2->GetPosition(), min2, max2);
+
+				if (min1 < min2) {
+					distance = min2 - max1;
+				} else {
+					distance = min1 - max2;
+				}
+
+				if (distance > 0) {
+					break;
+				}
+			}
+
+			collider1->SetCollisionData(collider2, axis, distance < 0, distance);
+			collider2->SetCollisionData(collider1, axis, distance < 0, -distance);
 		}
 	}
 }

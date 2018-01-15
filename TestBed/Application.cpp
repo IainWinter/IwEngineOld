@@ -13,7 +13,6 @@
 #include "IwEngine\Collider.h"
 #include "IwEngine\Transform.h"
 #include "IwEngine\Physics\BoundingBox.h"
-#include "IwEngine\Physics\BoundingSphere.h"
 
 int main() {
 	Engine* engine = new Engine();
@@ -22,19 +21,29 @@ int main() {
 	Scene& scene = engine->GetScene();
 
 	GameObject& gameObject = scene.MakeGameObject();
+	GameObject& gameObject2 = scene.MakeGameObject();
 
 	Graphics::Mesh* mesh = Graphics::Mesh::MakeBox(Math::Vector3(-0.5f), 1);
+	Graphics::Mesh* mesh2 = Graphics::Mesh::MakeBox(Math::Vector3(-0.5f), 1);
 	
 	Physics::BoundingBox* bounds = new Physics::BoundingBox(Math::Vector3(-0.5f), 1);
+	Physics::BoundingBox* bounds2 = new Physics::BoundingBox(Math::Vector3(-0.5f), 1);
 
 	RenderMesh* renderMesh = new RenderMesh(gameObject, mesh);
+	RenderMesh* renderMesh2 = new RenderMesh(gameObject, mesh2);
 
-	Collider* collider = new Collider(gameObject, bounds);
+	Collider* collider = new Collider(gameObject, bounds, Physics::PhysicsMaterial(0, 0, 1, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
+	Collider* collider2 = new Collider(gameObject, bounds2, Physics::PhysicsMaterial(0, 0, 1, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
 
 	gameObject.AddComponent<RenderMesh>(renderMesh);
-	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-0.5f, -0.5f, -5)));
-	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, 50, 50, Math::Vector3(0, 0, 0), Math::Vector3(0, 10, 10)));
+	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-5.0f, -0.5f, -5)));
+	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, 50, 50, Math::Vector3(1, 0, 0), Math::Vector3(30, 20, 10)));
 	gameObject.AddComponent<Collider>(collider);
+
+	gameObject2.AddComponent<RenderMesh>(renderMesh2);
+	gameObject2.AddComponent<Transform>(new Transform(gameObject2, Math::Vector3(5.0f, -0.5f, -5)));
+	gameObject2.AddComponent<RigidBody>(new RigidBody(gameObject2, 50, 50, Math::Vector3(-1, 0, 0), Math::Vector3(10, 20, 30)));
+	gameObject2.AddComponent<Collider>(collider2);
 
 	scene.MakeSystem<RenderMesh, Transform>();
 	scene.MakeSystem<Collider, Transform>();

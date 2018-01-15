@@ -12,10 +12,9 @@ namespace Physics {
 	public:
 		BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale);
 		~BoundingBox();
-		virtual std::vector<Math::Vector3> GetAxies(const Bounds& other) const;
-		virtual std::vector<Math::Vector3> GetNormals() const;
+		virtual std::vector<Math::Vector3> GetAxies() const;
 		virtual std::vector<Math::Vector3> GetVertices() const;
-		virtual std::vector<float> ProjectOntoAxis(const Math::Vector3& axis) const;
+		virtual void ProjectOntoAxis(const Math::Vector3& axis, const Math::Quaternion& rotation, const Math::Vector3 offset, float& min, float& max) const;
 		virtual float GetVolume() const;
 	};
 }

@@ -8,11 +8,7 @@ Physics::BoundingBox::~BoundingBox() {
 	delete _max;
 }
 
-std::vector<Math::Vector3> Physics::BoundingBox::GetAxies(const Bounds& other) const {
-	return GetNormals();
-}
-
-std::vector<Math::Vector3> Physics::BoundingBox::GetNormals() const {
+std::vector<Math::Vector3> Physics::BoundingBox::GetAxies() const {
 	return std::vector<Math::Vector3> {
 		Math::Vector3::UnitX,
 		Math::Vector3::UnitY,
@@ -22,7 +18,7 @@ std::vector<Math::Vector3> Physics::BoundingBox::GetNormals() const {
 
 std::vector<Math::Vector3> Physics::BoundingBox::GetVertices() const {
 	return std::vector<Math::Vector3> {
-		*_min, 
+		Math::Vector3(*_min),
 		Math::Vector3(_min->x, _max->y,	_min->z),
 		Math::Vector3(_min->x, _max->y, _max->z),
 		Math::Vector3(_min->x, _min->y, _max->z),
@@ -33,8 +29,23 @@ std::vector<Math::Vector3> Physics::BoundingBox::GetVertices() const {
 	};
 }
 
-std::vector<float> Physics::BoundingBox::ProjectOntoAxis(const Math::Vector3& axis) const {
-	return std::vector<float>();
+void Physics::BoundingBox::ProjectOntoAxis(const Math::Vector3& axis, const Math::Quaternion& rotation, const Math::Vector3 offset, float& min, float& max) const {
+	std::vector<Math::Vector3> verts = GetVertices();
+	size_t count = verts.size();
+
+	min = std::numeric_limits<float>::max();
+	max = -std::numeric_limits<float>::max();
+
+	for (size_t i = 0; i < count; i++) {
+		float projection = axis.Dot(verts[i] * rotation + offset);
+		if (min > projection) {
+			min = projection;
+		}
+
+		if (max < projection) {
+			max = projection;
+		}
+	}
 }
 
 float Physics::BoundingBox::GetVolume() const {

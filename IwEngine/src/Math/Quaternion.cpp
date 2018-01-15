@@ -1,5 +1,6 @@
 #include "IwEngine\Math\Quaternion.h"
 #include "IwEngine\Math\MathHelper.h"
+#include "IwEngine\Math\Matrix3.h"
 
 using namespace Math;
 
@@ -204,8 +205,20 @@ Quaternion Math::operator*(const float left, const Quaternion& right) {
 }
 
 Vector3 Math::operator*(const Math::Vector3& left, const Quaternion& right) {
-	Math::Vector3 vec = right.GetXYZ();
-	float scale = right.w;
+	float w = right.w;
+	float x = right.x;
+	float y = right.y;
+	float z = right.z;
 
-	return 2.0f * vec.Dot(left) * vec + (scale*scale - vec.Dot(vec)) * left + 2.0f * scale * vec.Cross(left);
+	Math::Matrix3 mat = Math::Matrix3(
+		1 - 2 * y*y - 2 * z*z, 2 * (x*y + w*z),		  2 * (y*z - w*y),
+		2 * (x*y - w*z),	   1 - 2 * x*x - 2 * z*z, 2 * (y*z + w*x),
+		2 * (x*z + w*y),	   2 * (y*z - w*x),		  1 - 2 * x*x - 2 * y*y
+	);
+
+	return Vector3(
+		mat(0, 0) * left.x + mat(0, 1) * left.y + mat(0, 2) * left.z,
+		mat(1, 0) * left.x + mat(1, 1) * left.y + mat(1, 2) * left.z,
+		mat(2, 0) * left.x + mat(2, 1) * left.y + mat(2, 2) * left.z
+	);
 }

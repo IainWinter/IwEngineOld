@@ -11,11 +11,7 @@ BoundingMesh::~BoundingMesh() {
 	delete[] _collider;
 }
 
-std::vector<Math::Vector3> Physics::BoundingMesh::GetAxies(const Bounds & other) const {
-	return std::vector<Math::Vector3>();
-}
-
-std::vector<Math::Vector3> Physics::BoundingMesh::GetNormals() const {
+std::vector<Math::Vector3> Physics::BoundingMesh::GetAxies() const {
 	return std::vector<Math::Vector3>();
 }
 
@@ -23,8 +19,9 @@ std::vector<Math::Vector3> Physics::BoundingMesh::GetVertices() const {
 	return std::vector<Math::Vector3>();
 }
 
-std::vector<float> Physics::BoundingMesh::ProjectOntoAxis(const Math::Vector3& axis) const {
-	return std::vector<float>();
+void Physics::BoundingMesh::ProjectOntoAxis(const Math::Vector3& axis, const Math::Quaternion& rotation, const Math::Vector3 offset, float& min, float& max) const {
+	min = 0;
+	max = 0;
 }
 
 float Physics::BoundingMesh::GetVolume() const {

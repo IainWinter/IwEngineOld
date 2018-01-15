@@ -19,7 +19,7 @@ namespace Graphics {
 		void Delete();
 	};
 
-	struct IWENGINE_API ShaderProgramSource {
+	struct ShaderProgramSource {
 		std::string vertex;
 		std::string fragment;
 	};

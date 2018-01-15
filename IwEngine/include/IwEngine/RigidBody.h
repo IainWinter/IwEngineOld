@@ -20,7 +20,6 @@ public:
 	float angular_drag;
 	bool use_gravity;
 	bool is_kinematic;
-	Physics::PhysicsMaterial material;
 	Physics::CollisionDetectionMode collision_detection_mode;
 	std::tuple<bool, bool, bool> freeze_position_xyz;
 	std::tuple<bool, bool, bool> freeze_rotation;

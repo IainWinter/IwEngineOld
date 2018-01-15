@@ -20,8 +20,8 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 	uint gCount = gameObjectIDs.size();
 	for (size_t i = 0; i < gCount; i++) {
-		Transform* transform = componentLookUp.GetComponentTable<Transform>()->GetComponent(gameObjectIDs[i]);
-		RigidBody* rigidBody = componentLookUp.GetComponentTable<RigidBody>()->GetComponent(gameObjectIDs[i]);
+		Transform* transform = componentLookUp.GetComponent<Transform>(gameObjectIDs[i]);
+		RigidBody* rigidBody = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[i]);
 
 		Math::Vector3 position = transform->GetPosition();
 		Math::Quaternion rotation = transform->GetRotation();
@@ -41,8 +41,6 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		position += rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
 		rigidBody->velocity += acceleration * deltaTime;
 		transform->SetPosition(position);
-
-		std::cout << transform->GetEulerRotation() << std::endl;
 
 		Math::Vector3 angularAcceleration = rigidBody->torque / rigidBody->momentOfInertia;
 		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcceleration / 2 * deltaTime * deltaTime;
