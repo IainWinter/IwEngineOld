@@ -44,9 +44,11 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 		Math::Vector3 normV = -rigidBody->velocity.NormalizedFast();
 		Math::Vector3 dragForce (rigidBody->drag * rigidBody->mass / volume * rigidBody->velocity * rigidBody->velocity / 2);
-
+		if (dragForce.LengthFast() >= rigidBody->force.LengthFast()) {
+			dragForce = -rigidBody->force;
+		}
 		rigidBody->force += dragForce * normV;
-
+		
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
 
 		position += rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
@@ -61,17 +63,22 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		rigidBody->rotationalVelocity += (angularAcc * deltaTime);
 
 		//Collisions
-		if (/*isColliding*/false) {
+		if (collider->GetCollisionData()->intersects) {
 			//Math::Vector3 otherVelocity = collisiondata.getOtherVelocity;
 			//float otherMass = collisiondata.getOtherMass;
-			Math::Vector3 momentum = rigidBody->velocity * rigidBody->mass;
+			//Math::Vector3 momentum = rigidBody->velocity * rigidBody->mass;
 			//Math::Vector3 otherMomentum = otherVelocity * otherMass;
-			float elasicity = rigidBody->material.elasticity; 
+			//float elasicity = rigidBody->GetGameObject
 			//float otherelasticity = collisiondata.otherelasticity
-			float combine = rigidBody->material.elasticity;//*collisiondata.elasticity
-			Math::Vector3 totalMomentum = momentum; //-othermomentum
-			Math::Vector3 totalMechenergy = 1 / 2 * rigidBody->mass * rigidBody->velocity * rigidBody->velocity /*+ collisiondata->velocity.NormalizedFast()*/ * combine;
-
+			//float combine = rigidBody->material.elasticity;//*collisiondata.elasticity
+			//Math::Vector3 totalMomentum = momentum; //-othermomentum
+			//float KineticE1 = 1 / 2 * rigidBody->mass * rigidBody->velocity * rigidBody->velocity;
+			//float KineticE2 = 1 / 2 * other.getmass * other.velocity ^2;
+			//float postKE1 = KineticE1 * combine;
+			//float postKE2 = KineticE2 * combine;
+			if (/*combine < .5*/false) {
+				if(false/*momentum1 > momentum2*/){}
+			}
 		}
 
 		//Debugging
