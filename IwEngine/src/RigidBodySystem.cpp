@@ -42,30 +42,8 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		motion(rigidBody, transform, position, deltaTime);
 		
 		//Rotation
-		Math::Vector3 angularAcc = rigidBody->torque / rigidBody->momentOfInertia;
-		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcc / 2 * deltaTime * deltaTime;
-
-		transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(rotationChange));
-		rigidBody->rotationalVelocity += (angularAcc * deltaTime);
-
-		//Collisions
-		if (collider->GetCollisionData()->intersects) {
-			//Math::Vector3 otherVelocity = collisiondata.getOtherVelocity;
-			//float otherMass = collisiondata.getOtherMass;
-			//Math::Vector3 momentum = rigidBody->velocity * rigidBody->mass;
-			//Math::Vector3 otherMomentum = otherVelocity * otherMass;
-			//float elasicity = rigidBody->GetGameObject
-			//float otherelasticity = collisiondata.otherelasticity
-			//float combine = rigidBody->material.elasticity;//*collisiondata.elasticity
-			//Math::Vector3 totalMomentum = momentum; //-othermomentum
-			//float KineticE1 = 1 / 2 * rigidBody->mass * rigidBody->velocity * rigidBody->velocity;
-			//float KineticE2 = 1 / 2 * other.getmass * other.velocity ^2;
-			//float postKE1 = KineticE1 * combine;
-			//float postKE2 = KineticE2 * combine;
-			if (/*combine < .5*/false) {
-				if(false/*momentum1 > momentum2*/){}
-			}
-		}
+		
+		rotate(rigidBody, transform, deltaTime);
 
 		//Debugging
 		std::cout << rigidBody->velocity << std::endl;
@@ -102,4 +80,13 @@ void System<RigidBody, Transform>::motion(RigidBody* rigidbody, Transform* trans
 	position += rigidbody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
 	rigidbody->velocity += acceleration * deltaTime;
 	transform->SetPosition(position);
+}
+
+void System<RigidBody, Transform>::rotate(RigidBody * rigidbody, Transform * transform, float deltaTime)
+{
+	Math::Vector3 angularAcc = rigidbody->torque / rigidbody->momentOfInertia;
+	Math::Vector3 rotationChange = rigidbody->rotationalVelocity * deltaTime + angularAcc / 2 * deltaTime * deltaTime;
+
+	transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(rotationChange));
+	rigidbody->rotationalVelocity += (angularAcc * deltaTime);
 }
