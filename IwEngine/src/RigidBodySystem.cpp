@@ -67,7 +67,11 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 			Math::Vector3 momentum = rigidBody->velocity * rigidBody->mass;
 			//Math::Vector3 otherMomentum = otherVelocity * otherMass;
 			float elasicity = rigidBody->material.elasticity; 
-			//
+			//float otherelasticity = collisiondata.otherelasticity
+			float combine = rigidBody->material.elasticity;//*collisiondata.elasticity
+			Math::Vector3 totalMomentum = momentum; //-othermomentum
+			Math::Vector3 totalMechenergy = 1 / 2 * rigidBody->mass * rigidBody->velocity * rigidBody->velocity /*+ collisiondata->velocity.NormalizedFast()*/ * combine;
+
 		}
 
 		//Debugging
