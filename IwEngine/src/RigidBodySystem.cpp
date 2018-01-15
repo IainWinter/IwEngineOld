@@ -38,21 +38,28 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//Math::Vector3 forceFriction(frictionForce, 0, 0);
 		//rigidBody->force += forceFriction;
 
+		//Kinematics and drag
 		float volume = collider->GetVolume();
+
+		Math::Vector3 normV = -rigidBody->velocity.NormalizedFast();
 		Math::Vector3 dragForce (rigidBody->drag * rigidBody->mass / volume * rigidBody->velocity * rigidBody->velocity / 2);
 
-		rigidBody->force -= dragForce;
+		rigidBody->force += dragForce * normV;
+
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
+
 		position += rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
 		rigidBody->velocity += acceleration * deltaTime;
 		transform->SetPosition(position);
 
+		//Rotation
+		Math::Vector3 angularAcc = rigidBody->torque / rigidBody->momentOfInertia;
+		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcc / 2 * deltaTime * deltaTime;
 
-		Math::Vector3 angularAcceleration = rigidBody->torque / rigidBody->momentOfInertia;
-		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcceleration / 2 * deltaTime * deltaTime;
 		transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(rotationChange));
-		rigidBody->rotationalVelocity += (angularAcceleration * deltaTime);
+		rigidBody->rotationalVelocity += (angularAcc * deltaTime);
 
+		//Debugging
 		std::cout << rigidBody->velocity << std::endl;
 		std::cout << deltaTime << std::endl;
 		std::cout << rigidBody->torque << std::endl;
