@@ -84,6 +84,6 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//Debugging
 		std::cout << rigidBody->velocity << std::endl;
 		std::cout << deltaTime << std::endl;
-		std::cout << rigidBody->torque << std::endl;
+		std::cout << transform->GetPosition() << std::endl;
 	}
 }
