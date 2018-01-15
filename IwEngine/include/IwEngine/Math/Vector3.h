@@ -21,6 +21,8 @@ namespace Math {
 		float LengthFast() const;
 		Vector3 Normalized() const;
 		Vector3 NormalizedFast() const;
+		Vector3 Normalized();
+		Vector3 NormalizedFast();
 		void Normalize();
 		void NormalizeFast();
 		float Dot(const Vector3& other) const;

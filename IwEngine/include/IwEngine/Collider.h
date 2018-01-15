@@ -44,6 +44,5 @@ public:
 		_collisionData->axis = axis;
 		_collisionData->intersects = intersecting;
 		_collisionData->distance = distance;
-
 	}
 };

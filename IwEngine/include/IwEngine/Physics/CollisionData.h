@@ -11,7 +11,7 @@ namespace Physics {
 		Math::Vector3 axis;
 		bool intersects;
 		float distance;
-		CollisionData(Collider* const collider1, Collider* collider2, Math::Vector3& axis, bool intersecting, float distance)
+		CollisionData(Collider* const collider1, Collider* collider2, Math::Vector3& axis, bool intersects, float distance)
 			: collider1(collider1),
 			collider2(collider2),
 			axis(axis),

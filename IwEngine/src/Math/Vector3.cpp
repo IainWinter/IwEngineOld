@@ -38,6 +38,16 @@ Vector3 Vector3::NormalizedFast() const {
 	return Vector3(x / scale, y / scale, z / scale);
 }
 
+Vector3 Math::Vector3::Normalized() {
+	float scale = Length();
+	return Vector3(x / scale, y / scale, z / scale);
+}
+
+Vector3 Math::Vector3::NormalizedFast() {
+	float scale = LengthFast();
+	return Vector3(x / scale, y / scale, z / scale);
+}
+
 void Vector3::Normalize() {
 	float scale = Length();
 	x /= scale;
@@ -180,9 +190,9 @@ Vector3 Math::operator-(const float right, const Vector3& left) {
 }
 
 Vector3 Math::operator*(const float right, const Vector3& left) {
-	return left + right;
+	return left * right;
 }
 
 Vector3 Math::operator/(const float right, const Vector3& left) {
-	return left + right;
+	return left / right;
 }
