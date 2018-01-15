@@ -1,5 +1,7 @@
 #include "IwEngine\RigidBodySystem.h"
 #include "IwEngine\Physics\PhysicsHelper.h"
+#include "IwEngine\Collider.h"
+#include "IwEngine\Physics\CollisionData.h"
 
 void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
 	std::vector<int> transformGOIDs = componentLookUp.GetComponentTable<Transform>()->GetGameObjectIDs();
@@ -20,13 +22,14 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 	uint gCount = gameObjectIDs.size();
 	for (size_t i = 0; i < gCount; i++) {
-		Transform* transform = componentLookUp.GetComponent<Transform>(gameObjectIDs[i]);
-		RigidBody* rigidBody = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[i]);
+		Transform* transform = componentLookUp.GetComponentTable<Transform>()->GetComponent(gameObjectIDs[i]);
+		RigidBody* rigidBody = componentLookUp.GetComponentTable<RigidBody>()->GetComponent(gameObjectIDs[i]);
+		Collider* collider = componentLookUp.GetComponentTable<Collider>()->GetComponent(gameObjectIDs[i]);
 
 		Math::Vector3 position = transform->GetPosition();
 		Math::Quaternion rotation = transform->GetRotation();
 
-		if (rigidBody->use_gravity && false) {
+		if (rigidBody->use_gravity) {
 			Math::Vector3 gravity(0, -9.81f, 0);
 			rigidBody->force = gravity.operator*(rigidBody->mass);
 		}
@@ -35,16 +38,45 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		//float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
 		//Math::Vector3 forceFriction(frictionForce, 0, 0);
 		//rigidBody->force += forceFriction;
-		//Math::Vector3 dragForce(rigidBody->drag * rigidBody->mass / rigidBody->volume * rigidBody->velocity * rigidBody->velocity / 2);
+
+		//Kinematics and drag
+		float volume = collider->GetVolume();
+
+		Math::Vector3 normV = -rigidBody->velocity.NormalizedFast();
+		Math::Vector3 dragForce (rigidBody->drag * rigidBody->mass / volume * rigidBody->velocity * rigidBody->velocity / 2);
+
+		rigidBody->force += dragForce * normV;
 
 		Math::Vector3 acceleration = rigidBody->force / rigidBody->mass;
+
 		position += rigidBody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
 		rigidBody->velocity += acceleration * deltaTime;
 		transform->SetPosition(position);
 
-		Math::Vector3 angularAcceleration = rigidBody->torque / rigidBody->momentOfInertia;
-		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcceleration / 2 * deltaTime * deltaTime;
+		//Rotation
+		Math::Vector3 angularAcc = rigidBody->torque / rigidBody->momentOfInertia;
+		Math::Vector3 rotationChange = rigidBody->rotationalVelocity * deltaTime + angularAcc / 2 * deltaTime * deltaTime;
+
 		transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(rotationChange));
-		rigidBody->rotationalVelocity += (angularAcceleration * deltaTime);
+		rigidBody->rotationalVelocity += (angularAcc * deltaTime);
+
+		//Collisions
+		if (/*isColliding*/false) {
+			//Math::Vector3 otherVelocity = collisiondata.getOtherVelocity;
+			//float otherMass = collisiondata.getOtherMass;
+			Math::Vector3 momentum = rigidBody->velocity * rigidBody->mass;
+			//Math::Vector3 otherMomentum = otherVelocity * otherMass;
+			float elasicity = rigidBody->material.elasticity; 
+			//float otherelasticity = collisiondata.otherelasticity
+			float combine = rigidBody->material.elasticity;//*collisiondata.elasticity
+			Math::Vector3 totalMomentum = momentum; //-othermomentum
+			Math::Vector3 totalMechenergy = 1 / 2 * rigidBody->mass * rigidBody->velocity * rigidBody->velocity /*+ collisiondata->velocity.NormalizedFast()*/ * combine;
+
+		}
+
+		//Debugging
+		std::cout << rigidBody->velocity << std::endl;
+		std::cout << deltaTime << std::endl;
+		std::cout << rigidBody->torque << std::endl;
 	}
 }
