@@ -1,6 +1,7 @@
 #include "IwEngine\RigidBodySystem.h"
 #include "IwEngine\Physics\PhysicsHelper.h"
 #include "IwEngine\Collider.h"
+#include "IwEngine\Physics\CollisionData.h"
 
 void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
 	std::vector<int> transformGOIDs = componentLookUp.GetComponentTable<Transform>()->GetGameObjectIDs();
@@ -58,6 +59,16 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 		transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(rotationChange));
 		rigidBody->rotationalVelocity += (angularAcc * deltaTime);
+
+		//Collisions
+		if (/*isColliding*/false) {
+			//Math::Vector3 otherVelocity = collisiondata.getOtherVelocity;
+			//float otherMass = collisiondata.getOtherMass;
+			Math::Vector3 momentum = rigidBody->velocity * rigidBody->mass;
+			//Math::Vector3 otherMomentum = otherVelocity * otherMass;
+			float elasicity = rigidBody->material.elasticity; 
+			//
+		}
 
 		//Debugging
 		std::cout << rigidBody->velocity << std::endl;
