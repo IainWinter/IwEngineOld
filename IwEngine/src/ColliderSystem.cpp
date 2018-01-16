@@ -47,6 +47,7 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			size_t count2 = axies2.size();
 
 			Math::Vector3 axis;
+			Math::Vector3 pointOfContact;
 			float distance = (std::numeric_limits<float>::max)();
 
 			Math::Vector3 tmpAxis;
@@ -58,6 +59,7 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 					tmpAxis = axies2[i - count1] * transform2->GetRotation();
 				}
 
+				//This can't be right?
 				tmpAxis.x = fabsf(tmpAxis.x);
 				tmpAxis.y = fabsf(tmpAxis.y);
 				tmpAxis.z = fabsf(tmpAxis.z);
@@ -79,13 +81,19 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 					if (fabsf(tmpDistance) < fabsf(distance)) {
 						distance = tmpDistance;
 						axis = tmpAxis;
+
+						if (min1 < min2) {
+							pointOfContact = axis * (min2 + max1) / 2 + transform1->GetPosition();
+						} else {
+							pointOfContact = axis * (min1 + max2) / 2 + transform1->GetPosition();
+						}
 					}
 				}
 			}
 
 			//Response
 			if (axis != Math::Vector3::Zero) {
-				std::cout << "Colliding" << std::endl;
+				std::cout << pointOfContact << std::endl;
 				RigidBody* rigidbody1 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[i]);
 				RigidBody* rigidbody2 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[j]);
 
