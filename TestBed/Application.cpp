@@ -36,13 +36,13 @@ int main() {
 	Collider* collider2 = new Collider(gameObject, bounds2, Physics::PhysicsMaterial(0, 0, 1, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
 
 	gameObject.AddComponent<RenderMesh>(renderMesh);
-	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-5.0f, -0.5f, -5)));
-	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, 1, 1, 10, true, Math::Vector3(1, 0, 0), Math::Vector3(0, 0, .8f)));
+	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(0, 1, -5)));
+	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, 1, 1, 10, true, Math::Vector3(0, 0, 0), Math::Vector3(0, 0, 0)));
 	gameObject.AddComponent<Collider>(collider);
 
 	gameObject2.AddComponent<RenderMesh>(renderMesh2);
-	gameObject2.AddComponent<Transform>(new Transform(gameObject2, Math::Vector3(5.0f, -0.5f, -5)));
-	gameObject2.AddComponent<RigidBody>(new RigidBody(gameObject2, 1, 1, 10, true, Math::Vector3(-1, 0, 0), Math::Vector3(0, 0, 0)));
+	gameObject2.AddComponent<Transform>(new Transform(gameObject2, Math::Vector3(0, -0.5f, -5)));
+	gameObject2.AddComponent<RigidBody>(new RigidBody(gameObject2, 1, 1, 10, false, Math::Vector3(0, 0, 0), Math::Vector3(0, 0, 0)));
 	gameObject2.AddComponent<Collider>(collider2);
 
 	scene.MakeSystem<RenderMesh, Transform>();

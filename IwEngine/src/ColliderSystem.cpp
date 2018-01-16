@@ -106,6 +106,22 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 
 				rigidbody1->velocity -= impulse * (1 / rigidbody1->mass);
 				rigidbody2->velocity += impulse * (1 / rigidbody2->mass);
+
+				float Ainv_mass;
+				float Binv_mass;
+				if (rigidbody1->mass == 0) {
+					Ainv_mass = 0;
+				}
+				else { Ainv_mass = 1 / rigidbody1->mass; }
+				if (rigidbody2->mass == 0) {
+					Binv_mass = 0;
+				}
+				else { Binv_mass = 1 / rigidbody2->mass; }
+				const float percent = 0.2f; // usually 20% to 80%
+					const float slop = 0.01f; // usually 0.01 to 0.1
+					Math::Vector3 correction = max(distance - slop, 0.0f) / (Ainv_mass + Binv_mass) * percent * axis;
+					transform1->SetPosition(transform1->GetPosition() -= Ainv_mass * correction);
+					transform2->SetPosition(transform2->GetPosition() += Binv_mass * correction);
 			}
 		}
 	}
