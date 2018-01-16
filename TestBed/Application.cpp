@@ -36,7 +36,7 @@ int main() {
 	Collider* collider2 = new Collider(gameObject, bounds2, Physics::PhysicsMaterial(0, 0, 1, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
 
 	gameObject.AddComponent<RenderMesh>(renderMesh);
-	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-0.5f, 0.0f, -5), Math::Quaternion::FromEulerAngles(0, 0, .4f)));
+	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-0.5f, 0.0f, -5), Math::Quaternion::FromEulerAngles(0, 0, 1.0f)));
 	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, 1000000, 1, 1, false, Math::Vector3(0, 0, 0), Math::Vector3(0, 0, 0)));
 	gameObject.AddComponent<Collider>(collider);
 

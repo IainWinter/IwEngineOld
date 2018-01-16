@@ -60,9 +60,9 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 				}
 
 				//This can't be right?
-				tmpAxis.x = fabsf(tmpAxis.x);
-				tmpAxis.y = fabsf(tmpAxis.y);
-				tmpAxis.z = fabsf(tmpAxis.z);
+				//tmpAxis.x = fabsf(tmpAxis.x);
+				//tmpAxis.y = fabsf(tmpAxis.y);
+				//tmpAxis.z = fabsf(tmpAxis.z);
 
 				float min1, max1, min2, max2;
 				bounds1.ProjectOntoAxis(tmpAxis, transform1->GetRotation(), transform1->GetPosition(), min1, max1);
