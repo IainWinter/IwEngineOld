@@ -110,7 +110,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\dev\code\c++\IwEngine\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>IwEngine.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>

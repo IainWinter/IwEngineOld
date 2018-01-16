@@ -3,7 +3,6 @@
 #include "IwEngine\RenderMesh.h"
 #include "IwEngine\RigidBody.h"
 #include "IwEngine\GameObject.h"
-#include "IwEngine\Common.h"
 
 #include "IwEngine\Graphics\VertexArray.h"
 #include "IwEngine\Graphics\IndexBuffer.h"
