@@ -1,4 +1,4 @@
-#include <vector>
+﻿#include <vector>
 #include <limits>
 #include <set>
 #include "IwEngine\ColliderSystem.h"
@@ -84,6 +84,8 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 				RigidBody* rigidbody1 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[i]);
 				RigidBody* rigidbody2 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[j]);
 
+				if (!rigidbody1 || !rigidbody2) return;
+
 				Math::Vector3 relitiveVelocity = rigidbody2->velocity - rigidbody1->velocity;
 
 				float rvOnNormal = relitiveVelocity.Dot(axis);
@@ -99,8 +101,20 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 
 				Math::Vector3 impulse = impulseScale * axis;
 
+				//Debug
+				if (impulse != 0) {
+					std::cout << std::endl << "Before" << std::endl;
+					Print(rigidbody1, rigidbody2);
+				}
+
 				rigidbody1->velocity -= impulse * (1 / rigidbody1->mass);
 				rigidbody2->velocity += impulse * (1 / rigidbody2->mass);
+
+				//Debug
+				if (impulse != 0) {
+					std::cout << std::endl << "After" << std::endl;
+					Print(rigidbody1, rigidbody2);
+				}
 
 				//Correction
 				float Ainv_mass;
@@ -125,4 +139,27 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			}
 		}
 	}
+}
+
+void System<Collider, Transform>::Print(RigidBody* object1, RigidBody* object2) {
+	float velocity1 = object1->velocity.Length();
+	float velocity2 = object2->velocity.Length();
+
+	float k1 = object1->mass * velocity1*velocity1 / 2;
+	float k2 = object2->mass * velocity2*velocity2 / 2;
+
+	Math::Vector3 m1 = object1->velocity * object1->mass;
+	Math::Vector3 m2 = object2->velocity * object2->mass;
+
+	std::cout << "Kinetic energy of Object 1 (left): " << k1 << "J" << std::endl;
+	std::cout << "Kinetic energy of Object 2 (right): " << k2 << "J" << std::endl;
+
+	std::cout << "Momentum of Object 2 (right): " << m1 << "kgm/s" << std::endl;
+	std::cout << "Momentum of Object 2 (right): " << m2 << "kgm/s" << std::endl;
+
+	std::cout << "Kinetic energy of system: " << k1 + k2 << "J" << std::endl;
+	std::cout << "Momentum of system: " << m1 + m2 << "kgm/s" << std::endl;
+
+	std::cout << std::endl;
+
 }

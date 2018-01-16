@@ -4,7 +4,7 @@
 #include "IwEngine\Common.h"
 
 namespace Graphics {
-	struct IWENGINE_API ShaderProgramSource;
+	struct ShaderProgramSource;
 	class IWENGINE_API ShaderProgram {
 	private:
 		uint _renderId;

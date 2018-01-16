@@ -9,7 +9,7 @@ private:
 	GameObject& gameObject;
 public:
 	Component(GameObject& gameObject) : gameObject(gameObject) { }
-	virtual ~Component() = default;
+	virtual ~Component() {}
 
 	inline GameObject& GetGameObject() { 
 		return gameObject;

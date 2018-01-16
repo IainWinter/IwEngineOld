@@ -11,6 +11,7 @@ LinearAllocator::LinearAllocator(size_t size, void* start)
 
 LinearAllocator::~LinearAllocator() {
 	_currentPos = nullptr;
+	delete _start;
 }
 
 void* LinearAllocator::Allocate(size_t size, size_t alignment) {

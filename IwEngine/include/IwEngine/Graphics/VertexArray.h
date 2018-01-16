@@ -14,7 +14,7 @@ namespace Graphics {
 		IWENGINE_API VertexArray();
 		IWENGINE_API ~VertexArray();
 
-		IWENGINE_API void AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout);
+		IWENGINE_API void AddBuffer(VertexBuffer* vb, VertexBufferLayout* layout);
 
 		IWENGINE_API void Bind() const;
 		IWENGINE_API void Unbind() const;

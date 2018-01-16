@@ -83,7 +83,7 @@ Mesh* Mesh::MakeBox(const Math::Vector3& bottomCorner, const Math::Vector3& scal
 	IndexBuffer* ib = new Graphics::IndexBuffer(indices, 36);
 
 	VertexBuffer* vb = new VertexBuffer(pos, 72 * sizeof(float));
-	va->AddBuffer(*vb, *layout);
+	va->AddBuffer(vb, layout);
 
 	return new Mesh(va, ib);
 }

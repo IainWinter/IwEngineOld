@@ -12,8 +12,8 @@ private:
 	ComponentLookUp& _componentLookUp;
 	std::vector<ISystem*> _systems;
 public:
-	IWENGINE_API SystemManager(Events::EventBus& eventBus, ComponentLookUp& componentLookUp)
-		: Events::EventHandlerBase<UpdateEvent>(eventBus), _componentLookUp(componentLookUp) {}
+	IWENGINE_API SystemManager(Events::EventBus& eventBus, ComponentLookUp& componentLookUp);
+	IWENGINE_API ~SystemManager();
 
 	IWENGINE_API SystemManager(const SystemManager&) = delete;
 	IWENGINE_API const SystemManager& operator=(const SystemManager&) = delete;

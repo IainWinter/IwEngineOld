@@ -16,21 +16,37 @@
 #include <iostream>
 #include <string>
 
+void Demo1();
+void Demo2();
+
+int main() {
+	int i;
+	do {
+		std::cout << "Demo: ";
+		std::cin >> i;
+		if (i == 1) {
+			Demo1();
+		} else if (i == 2) {
+			Demo2();
+		}
+	} while (i != 0);
+}
+
 float getInput(std::string prompt) {
 	std::cout << prompt;
 	float i;
 	std::cin >> i;
 	return i;
 }
-int main() {
-	float mass1 = getInput("Please enter a Mass for Object 1: ");
-	float mass2 = getInput("Please enter a Mass for Object 2: ");
-	float vel1X = getInput("Please enter an x component of velocity for object 1: ");
-	float vel1y = getInput("Please enter a y component of velocity for object 1: ");
-	float vel1z = getInput("Please enter a z component of velocity for object 1: ");
-	float vel2X = getInput("Please enter an x component of velocity for object 2: ");
-	float vel2y = getInput("Please enter a y component of velocity for object 2: ");
-	float vel2z = getInput("Please enter a z component of velocity for object 2: ");
+
+void Demo1() {
+	float mass1 = getInput("Please enter a Mass for Object 1 (left): ");
+	float mass2 = getInput("Please enter a Mass for Object 2 (right): ");
+	float vel1X = getInput("Please enter an x component of velocity for Object 1 (left): ");
+	float vel1y = getInput("Please enter a y component of velocity for Object 1 (left): ");
+	float vel2X = getInput("Please enter an x component of velocity for Object 2 (right): ");
+	float vel2y = getInput("Please enter a y component of velocity for Object 2 (right): ");
+	float elast = getInput("Please enter the elasticity of the collision: ");
 
 	Engine* engine = new Engine();
 	engine->Init();
@@ -40,26 +56,26 @@ int main() {
 	GameObject& gameObject = scene.MakeGameObject();
 	GameObject& gameObject2 = scene.MakeGameObject();
 
-	Graphics::Mesh* mesh = Graphics::Mesh::MakeBox(Math::Vector3(-0.5f), Math::Vector3(5, 1, 1));
-	Graphics::Mesh* mesh2 = Graphics::Mesh::MakeBox(Math::Vector3(-0.5f), 1);
-	
-	Physics::BoundingBox* bounds = new Physics::BoundingBox(Math::Vector3(-0.5f), Math::Vector3(5, 1, 1));
-	Physics::BoundingBox* bounds2 = new Physics::BoundingBox(Math::Vector3(-0.5f), 1);
+	Graphics::Mesh* mesh = Graphics::Mesh::MakeBox(Math::Vector3(-0.75f), 1.5f);
+	Graphics::Mesh* mesh2 = Graphics::Mesh::MakeBox(Math::Vector3(-0.75f), 1.5f);
+
+	Physics::BoundingBox* bounds = new Physics::BoundingBox(Math::Vector3(-0.75f), 1.5f);
+	Physics::BoundingBox* bounds2 = new Physics::BoundingBox(Math::Vector3(-0.75f), 1.5f);
 
 	RenderMesh* renderMesh = new RenderMesh(gameObject, mesh);
 	RenderMesh* renderMesh2 = new RenderMesh(gameObject, mesh2);
 
-	Collider* collider = new Collider(gameObject, bounds, Physics::PhysicsMaterial(0, 0, .5, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
-	Collider* collider2 = new Collider(gameObject, bounds2, Physics::PhysicsMaterial(0, 0, 1, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
+	Collider* collider = new Collider(gameObject, bounds, Physics::PhysicsMaterial(0, 0, elast, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
+	Collider* collider2 = new Collider(gameObject, bounds2, Physics::PhysicsMaterial(0, 0, elast, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
 
 	gameObject.AddComponent<RenderMesh>(renderMesh);
-	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-0.5f, 0.0f, -5), Math::Quaternion::FromEulerAngles(0, 0, 1.0f)));
-	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, mass1, 1, 1, false, Math::Vector3(vel1X, vel1y, vel1z), Math::Vector3(0, 0, 0)));
+	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-5, -0.5f, -5)));
+	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, mass1, 1, 1, false, Math::Vector3(vel1X, vel1y, 0), Math::Vector3(0, 0, 0)));
 	gameObject.AddComponent<Collider>(collider);
 
 	gameObject2.AddComponent<RenderMesh>(renderMesh2);
-	gameObject2.AddComponent<Transform>(new Transform(gameObject2, Math::Vector3(-0.5f, 5.0f, -5)));
-	gameObject2.AddComponent<RigidBody>(new RigidBody(gameObject2, mass2, 1, 0, true, Math::Vector3(vel2X, vel2y, vel2z), Math::Vector3(0, 0, 0)));
+	gameObject2.AddComponent<Transform>(new Transform(gameObject2, Math::Vector3(5, -0.5f, -5)));
+	gameObject2.AddComponent<RigidBody>(new RigidBody(gameObject2, mass2, 1, 0, false, Math::Vector3(vel2X, vel2y, 0), Math::Vector3(0, 0, 0)));
 	gameObject2.AddComponent<Collider>(collider2);
 
 	scene.MakeSystem<RenderMesh, Transform>();
@@ -67,4 +83,54 @@ int main() {
 	scene.MakeSystem<RigidBody, Transform>();
 
 	engine->Run();
+
+	delete engine;
+}
+
+void Demo2() {
+	float mass1 = getInput("Please enter a Mass for Object 1 (left): ");
+	float mass2 = getInput("Please enter a Mass for Object 2 (right): ");
+	float vel1X = getInput("Please enter an x component of velocity for Object 1 (left): ");
+	float vel1y = getInput("Please enter a y component of velocity for Object 1 (left): ");
+	float vel2X = getInput("Please enter an x component of velocity for Object 2 (right): ");
+	float vel2y = getInput("Please enter a y component of velocity for Object 2 (right): ");
+	float elast = getInput("Please enter the elasticity of the collision: ");
+
+	Engine* engine = new Engine();
+	engine->Init();
+
+	Scene& scene = engine->GetScene();
+
+	GameObject& gameObject = scene.MakeGameObject();
+	GameObject& gameObject2 = scene.MakeGameObject();
+
+	Graphics::Mesh* mesh = Graphics::Mesh::MakeBox(Math::Vector3(-0.75f), 1.5f);
+	Graphics::Mesh* mesh2 = Graphics::Mesh::MakeBox(Math::Vector3(-0.75f), 1.5f);
+
+	Physics::BoundingBox* bounds = new Physics::BoundingBox(Math::Vector3(-0.75f), 1.5f);
+	Physics::BoundingBox* bounds2 = new Physics::BoundingBox(Math::Vector3(-0.75f), 1.5f);
+
+	RenderMesh* renderMesh = new RenderMesh(gameObject, mesh);
+	RenderMesh* renderMesh2 = new RenderMesh(gameObject, mesh2);
+
+	Collider* collider = new Collider(gameObject, bounds, Physics::PhysicsMaterial(0, 0, elast, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
+	Collider* collider2 = new Collider(gameObject, bounds2, Physics::PhysicsMaterial(0, 0, elast, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
+
+	gameObject.AddComponent<RenderMesh>(renderMesh);
+	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-5, -0.5f, -5)));
+	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, mass1, 1, 1, false, Math::Vector3(vel1X, vel1y, 0), Math::Vector3(0, 0, 0)));
+	gameObject.AddComponent<Collider>(collider);
+
+	gameObject2.AddComponent<RenderMesh>(renderMesh2);
+	gameObject2.AddComponent<Transform>(new Transform(gameObject2, Math::Vector3(0, -0.5f, -5)));
+	gameObject2.AddComponent<RigidBody>(new RigidBody(gameObject2, mass2, 1, 0, false, Math::Vector3(vel2X, vel2y, 0), Math::Vector3(0, 0, 0)));
+	gameObject2.AddComponent<Collider>(collider2);
+
+	scene.MakeSystem<RenderMesh, Transform>();
+	scene.MakeSystem<Collider, Transform>();
+	scene.MakeSystem<RigidBody, Transform>();
+
+	engine->Run();
+
+	delete engine;
 }

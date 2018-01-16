@@ -11,28 +11,32 @@ VertexArray::VertexArray() {
 VertexArray::~VertexArray() {
 	glDeleteVertexArrays(1, &_renderId);
 
-	uint bCount = _buffers.size();
-	uint lCount = _layouts.size();
-	for (size_t i = 0; i < bCount; i++) {
-		delete _buffers[i];
+	for (std::vector<VertexBuffer*>::iterator it = _buffers.begin(); it != _buffers.end(); ++it) {
+		delete (*it);
 	}
 
-	for (size_t i = 0; i < lCount; i++) {
-		delete _layouts[i];
+	for (std::vector<VertexBufferLayout*>::iterator it = _layouts.begin(); it != _layouts.end(); ++it) {
+		delete (*it);
 	}
+
+	_buffers.clear();
+	_layouts.clear();
 }
 
-void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout) {
+void VertexArray::AddBuffer(VertexBuffer* vb, VertexBufferLayout* layout) {
 	Bind();
-	vb.Bind();
-	const auto& elements = layout.GetElements();
+	vb->Bind();
+	const auto& elements = layout->GetElements();
 	uint offset = 0;
 	for (uint i = 0; i < elements.size(); i++) {
 		const auto& element = elements[i];
 		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, element.count, element.type, element.normalized, layout.GetStride(), (const void*)offset);
+		glVertexAttribPointer(i, element.count, element.type, element.normalized, layout->GetStride(), (const void*)offset);
 		offset += element.count * VertexBufferLayoutElement::GetSizeOfType(element.type);
 	}
+
+	_buffers.push_back(vb);
+	_layouts.push_back(layout);
 }
 
 void VertexArray::Bind() const {

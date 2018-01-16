@@ -18,7 +18,7 @@ Window::Window(int width, int height, const char* name)
 
 Window::~Window() {
 	glfwTerminate();
-	delete &_glfwWindow;
+	delete _eventBus;
 }
 
 void Window::Init() {
@@ -48,7 +48,7 @@ void Window::Run() {
 	Graphics::ShaderProgram shader = Graphics::ShaderProgram("res/shaders/default.shader");
 
 	Math::Vector3 position = Math::Vector3(0, 0, 0);
-	Math::Matrix4 projection = Math::Matrix4::CreatePerspectiveFieldOfView(3.14f / 2, 4.0f / 3, 0.01f, 100.0f);
+	Math::Matrix4 projection = Math::Matrix4::CreatePerspectiveFieldOfView(1.744f, 16.0f / 9.0f, 0.01f, 100.0f);
 	Math::Matrix4 view = Math::Matrix4::LookAt(position, position - Math::Vector3::UnitZ, Math::Vector3::UnitY);
 	Math::Matrix4 world = Math::Matrix4::Identity;
 

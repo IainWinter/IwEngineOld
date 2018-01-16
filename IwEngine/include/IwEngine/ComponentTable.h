@@ -8,6 +8,7 @@
 class IComponentTable {
 public:
 	virtual void RemoveComponent(int gameObjectID) = 0;
+	virtual ~IComponentTable() {};
 };
 
 template<typename TComponent>
@@ -39,10 +40,11 @@ ComponentTable<TComponent>::ComponentTable() {}
 
 template<typename TComponent>
 ComponentTable<TComponent>::~ComponentTable() {
-	uint cCount = _components.size();
-	for (size_t i = 0; i < cCount; i++) {
-		delete _components[i];
+	for (std::vector<TComponent*>::iterator it = _components.begin(); it != _components.end(); ++it) {
+		delete (*it);
 	}
+
+	_components.clear();
 }
 
 template<typename TComponent>

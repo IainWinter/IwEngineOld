@@ -8,6 +8,10 @@ Scene::Scene(Events::EventBus& eventBus) {
 Scene::~Scene() {
 	delete _componentLookUp;
 	delete _systemManager;
+
+	for (std::vector<GameObject*>::iterator it = _gameObjects.begin(); it != _gameObjects.end(); ++it) {
+		delete (*it);
+	}
 }
 
 GameObject& Scene::MakeGameObject() {

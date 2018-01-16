@@ -22,8 +22,9 @@ void EventBus::ProcessEvents() {
 }
 
 Events::EventBus::~EventBus() {
-	for (IHandler* handler : _eventHandlers) {
-		delete &handler;
+	while (!_queuedEvents.empty()) {
+		delete _queuedEvents.front();
+		_queuedEvents.pop();
 	}
 }
 

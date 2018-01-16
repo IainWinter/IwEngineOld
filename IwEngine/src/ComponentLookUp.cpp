@@ -4,9 +4,10 @@ ComponentLookUp::ComponentLookUp() {
 }
 
 ComponentLookUp::~ComponentLookUp() {
-	uint tableCount = _componentTables.size();
-	for (size_t i = 0; i < tableCount; i++) {
-		_componentTables.erase(i);
+	std::map<int, IComponentTable*>::iterator itr = _componentTables.begin();
+	while (itr != _componentTables.end()) {
+		delete itr->second;
+		itr++;
 	}
 }
 

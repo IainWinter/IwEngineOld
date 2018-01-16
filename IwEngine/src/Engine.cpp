@@ -1,13 +1,13 @@
 #include "IwEngine\Engine.h"
 
 Engine::Engine() {
-	_window = new Window(640, 480, "Physics Project!!");
+	_window = new Window(1280, 720, "Physics Project!!");
 	_scene = new Scene(_window->GetEventBus()); //Load this from resource manager
 }
 
 Engine::~Engine() {
-	delete _window;
 	delete _scene;
+	delete _window;
 }
 
 void Engine::Init() {
