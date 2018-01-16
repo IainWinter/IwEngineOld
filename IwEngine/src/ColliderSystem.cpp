@@ -125,9 +125,9 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 					Binv_mass = 0;
 				}
 				else { Binv_mass = 1 / rigidbody2->mass; }
-				const float percent = 0.2f; // usually 20% to 80%
-					const float slop = 0.01f; // usually 0.01 to 0.1
-					Math::Vector3 correction = max(distance - slop, 0.0f) / (Ainv_mass + Binv_mass) * percent * axis;
+				const float percent = 0.8f; // usually 20% to 80%
+					const float slop = 0.1f; // usually 0.01 to 0.1
+					Math::Vector3 correction = max(distance - slop, 0.0001f) / (Ainv_mass + Binv_mass) * percent * axis;
 					transform1->SetPosition(transform1->GetPosition() -= Ainv_mass * correction);
 					transform2->SetPosition(transform2->GetPosition() += Binv_mass * correction);
 			}
