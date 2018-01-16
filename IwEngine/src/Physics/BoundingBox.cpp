@@ -36,12 +36,8 @@ void Physics::BoundingBox::ProjectOntoAxis(const Math::Vector3& axis, const Math
 	min = std::numeric_limits<float>::max();
 	max = -std::numeric_limits<float>::max();
 
-	for (size_t i = 0; i < verts.size(); i++) {
-		verts[i] = verts[i] * rotation + offset;
-	}
-
 	for (size_t i = 0; i < count; i++) {
-		float projection = axis.Dot(verts[i]);
+		float projection = axis.Dot(verts[i] * rotation + offset);
 		if (min > projection) {
 			min = projection;
 		}

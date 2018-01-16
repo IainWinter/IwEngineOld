@@ -47,7 +47,6 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			size_t count2 = axies2.size();
 
 			Math::Vector3 axis;
-			Math::Vector3 pointOfContact;
 			float distance = (std::numeric_limits<float>::max)();
 
 			Math::Vector3 tmpAxis;
@@ -58,11 +57,6 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 				} else {
 					tmpAxis = axies2[i - count1] * transform2->GetRotation();
 				}
-
-				//This can't be right?
-				//tmpAxis.x = fabsf(tmpAxis.x);
-				//tmpAxis.y = fabsf(tmpAxis.y);
-				//tmpAxis.z = fabsf(tmpAxis.z);
 
 				float min1, max1, min2, max2;
 				bounds1.ProjectOntoAxis(tmpAxis, transform1->GetRotation(), transform1->GetPosition(), min1, max1);
@@ -81,19 +75,12 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 					if (fabsf(tmpDistance) < fabsf(distance)) {
 						distance = tmpDistance;
 						axis = tmpAxis;
-
-						if (min1 < min2) {
-							pointOfContact = axis * (min2 + max1) / 2 + transform1->GetPosition();
-						} else {
-							pointOfContact = axis * (min1 + max2) / 2 + transform1->GetPosition();
-						}
 					}
 				}
 			}
 
 			//Response
 			if (axis != Math::Vector3::Zero) {
-				std::cout << pointOfContact << std::endl;
 				RigidBody* rigidbody1 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[i]);
 				RigidBody* rigidbody2 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[j]);
 
@@ -115,21 +102,26 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 				rigidbody1->velocity -= impulse * (1 / rigidbody1->mass);
 				rigidbody2->velocity += impulse * (1 / rigidbody2->mass);
 
+				//Correction
 				float Ainv_mass;
 				float Binv_mass;
 				if (rigidbody1->mass == 0) {
 					Ainv_mass = 0;
+				} else {
+					Ainv_mass = 1 / rigidbody1->mass;
 				}
-				else { Ainv_mass = 1 / rigidbody1->mass; }
+
 				if (rigidbody2->mass == 0) {
 					Binv_mass = 0;
+				} else {
+					Binv_mass = 1 / rigidbody2->mass;
 				}
-				else { Binv_mass = 1 / rigidbody2->mass; }
-				const float percent = 0.8f; // usually 20% to 80%
-					const float slop = 0.1f; // usually 0.01 to 0.1
-					Math::Vector3 correction = max(distance - slop, 0.0001f) / (Ainv_mass + Binv_mass) * percent * axis;
-					transform1->SetPosition(transform1->GetPosition() -= Ainv_mass * correction);
-					transform2->SetPosition(transform2->GetPosition() += Binv_mass * correction);
+
+				const float percent = 0.8f;
+				const float slop = 0.1f;
+				Math::Vector3 correction = max(distance - slop, .0001f) / (Ainv_mass + Binv_mass) * percent * axis;
+				transform1->SetPosition(transform1->GetPosition() -= Ainv_mass * correction);
+				transform2->SetPosition(transform2->GetPosition() += Binv_mass * correction);
 			}
 		}
 	}

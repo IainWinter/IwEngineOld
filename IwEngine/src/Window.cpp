@@ -65,7 +65,7 @@ void Window::Run() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shader.Use();
-		glUniform4f(1, .4f, 1.0f, .2f, 1.0f);
+		glUniform4f(1, 1, 1, 1, 1.0f);
 
 		glUniformMatrix4fv(0, 1, GL_FALSE, projection.elements);
 		glUniformMatrix4fv(4, 1, GL_FALSE, view.elements);

@@ -23,10 +23,10 @@ int main() {
 	GameObject& gameObject = scene.MakeGameObject();
 	GameObject& gameObject2 = scene.MakeGameObject();
 
-	Graphics::Mesh* mesh = Graphics::Mesh::MakeBox(Math::Vector3(-0.5f), Math::Vector3(5, 1, 1));
+	Graphics::Mesh* mesh = Graphics::Mesh::MakeBox(Math::Vector3(-0.5f), 1);
 	Graphics::Mesh* mesh2 = Graphics::Mesh::MakeBox(Math::Vector3(-0.5f), 1);
 	
-	Physics::BoundingBox* bounds = new Physics::BoundingBox(Math::Vector3(-0.5f), Math::Vector3(5, 1, 1));
+	Physics::BoundingBox* bounds = new Physics::BoundingBox(Math::Vector3(-0.5f), 1);
 	Physics::BoundingBox* bounds2 = new Physics::BoundingBox(Math::Vector3(-0.5f), 1);
 
 	RenderMesh* renderMesh = new RenderMesh(gameObject, mesh);
@@ -36,7 +36,7 @@ int main() {
 	Collider* collider2 = new Collider(gameObject, bounds2, Physics::PhysicsMaterial(0, 0, 1, Physics::FrictionCombine::ADD, Physics::BounceCombine::ADD));
 
 	gameObject.AddComponent<RenderMesh>(renderMesh);
-	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-0.5f, 0.0f, -5), Math::Quaternion::FromEulerAngles(0, 0, 1.0f)));
+	gameObject.AddComponent<Transform>(new Transform(gameObject, Math::Vector3(-0.5f, 0.0f, -5)));
 	gameObject.AddComponent<RigidBody>(new RigidBody(gameObject, 1000000, 1, 1, false, Math::Vector3(0, 0, 0), Math::Vector3(0, 0, 0)));
 	gameObject.AddComponent<Collider>(collider);
 
