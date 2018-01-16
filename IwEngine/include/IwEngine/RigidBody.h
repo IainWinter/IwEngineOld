@@ -23,8 +23,8 @@ public:
 	std::tuple<bool, bool, bool> freeze_position_xyz;
 	std::tuple<bool, bool, bool> freeze_rotation;
 
-	RigidBody(GameObject& gameObject, float mass, float momentOfInertia, float drag, bool use_gravity, Math::Vector3 velocity, Math::Vector3 torque)
-		: Component(gameObject), mass(mass), velocity(velocity), torque(torque), momentOfInertia(momentOfInertia), use_gravity(use_gravity), drag(drag) {
+	RigidBody(GameObject& gameObject, float mass, float momentOfInertia, float drag, bool use_gravity, Math::Vector3 velocity, Math::Vector3 rotationalVelocity)
+		: Component(gameObject), mass(mass), velocity(velocity), rotationalVelocity(rotationalVelocity), momentOfInertia(momentOfInertia), use_gravity(use_gravity), drag(drag) {
 	}
 
 };
