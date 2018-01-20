@@ -9,5 +9,5 @@ namespace Physics {
 		static Math::Vector3 gravity;
 	};
 
-	Math::Vector3 gravity(0, 9.81f, 0);
+	Math::Vector3 gravity(0, -9.81f, 0);
 }
