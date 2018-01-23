@@ -3,6 +3,7 @@
 #include <set>
 #include "IwEngine\ColliderSystem.h"
 #include "IwEngine\Physics\CollisionData.h"
+#include "Physics\GJK.h"
 
 void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float deltaTime) {
 	std::vector<int> transformGOIDs = componentLookUp.GetComponentTable<Transform>()->GetGameObjectIDs();
@@ -33,58 +34,15 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			Transform* transform1 = componentLookUp.GetComponent<Transform>(gameObjectIDs[i]);
 			Transform* transform2 = componentLookUp.GetComponent<Transform>(gameObjectIDs[j]);
 
-
-			Math::Vector3 position1 = transform1->GetPosition();
-			Math::Vector3 position2 = transform2->GetPosition();
-			Math::Quaternion rotation1 = transform1->GetRotation();
-			Math::Quaternion rotation2 = transform2->GetRotation();
-
 			const Physics::Bounds& bounds1 = componentLookUp.GetComponent<Collider>(gameObjectIDs[i])->GetCollider();
 			const Physics::Bounds& bounds2 = componentLookUp.GetComponent<Collider>(gameObjectIDs[j])->GetCollider();
 
-			std::vector<Math::Vector3> points;
-			points.reserve(2);
-			Math::Vector3 direction = transform1 - transform2;
-
-			Math::Vector3 support = (bounds1.GetSupport(direction, rotation1) + position1) - (bounds2.GetSupport(-direction, rotation2) + position2);
-			points.push_back(support);
-			direction = -support;
-
-			bool collision = false;
-
-			int count = 0; //debug
-
-			while (!collision) {
-				count++;
-				Math::Vector3 a = (bounds1.GetSupport(direction, rotation1) + position1) - (bounds2.GetSupport(-direction, rotation2) + position2);
-
-				if (a.Dot(direction) <= 0) {
-					break;
-				}
-
-				points.push_back(a);
-
-				//Simplex checks
-				switch (points.size()) {
-					case 2: direction = SimplexDirection(a, points[0]); break;
-					case 3: direction = SimplexDirection(a, points[1], points[0]); break;
-					case 4: {
-						direction = SimplexDirection(a, points[2], points[1], points[0]);
-						if (direction == 0) {
-							collision = true;
-						} else {
-							points.erase(points.begin());
-						}
-
-						break;
-					}
-					default: break;
-				}
-			}
-
-
-			std::cout << count << ", " << collision << std::endl; //debug
-
+			Physics::ColliderGJK(
+				bounds1, bounds2, 
+				transform1->GetPosition(),
+				transform2->GetPosition(),
+				transform1->GetRotation(),
+				transform2->GetRotation());
 		}
 	}
 

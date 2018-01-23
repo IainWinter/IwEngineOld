@@ -11,7 +11,7 @@ namespace Physics {
 	public:
 		BoundingMesh(Math::Vector3* collider, uint count);
 		~BoundingMesh();
-		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const;
+		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const;
 		float GetVolume() const;
 		std::vector<Math::Vector3> GetNormals() const;
 		std::vector<Math::Vector3> GetVertices() const;

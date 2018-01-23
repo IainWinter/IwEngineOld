@@ -19,7 +19,7 @@ std::vector<Math::Vector3> Physics::BoundingMesh::GetVertices() const {
 	return std::vector<Math::Vector3>();
 }
 
-Math::Vector3 Physics::BoundingMesh::GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const {
+Math::Vector3 Physics::BoundingMesh::GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const {
 	return Math::Vector3();
 }
 

@@ -164,6 +164,7 @@
     <ClCompile Include="src\Physics\BoundingBox.cpp" />
     <ClCompile Include="src\Physics\BoundingMesh.cpp" />
     <ClCompile Include="src\Physics\BoundingSphere.cpp" />
+    <ClCompile Include="src\Physics\GJK.cpp" />
     <ClCompile Include="src\RigidBodySystem.cpp" />
     <ClCompile Include="src\SystemManager.cpp" />
     <ClCompile Include="src\RenderMeshSystem.cpp" />
@@ -259,6 +260,7 @@
     <ClInclude Include="include\IwEngine\Window.h" />
     <ClInclude Include="include\IwEngine\Scene.h" />
     <ClInclude Include="src\ColliderSystem.cpp" />
+    <ClInclude Include="src\Physics\GJK.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

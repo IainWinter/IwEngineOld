@@ -11,7 +11,7 @@ Physics::BoundingSphere::~BoundingSphere() {
 	delete _center;
 }
 
-Math::Vector3 Physics::BoundingSphere::GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const {
+Math::Vector3 Physics::BoundingSphere::GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const {
 	return Math::Vector3();
 }
 

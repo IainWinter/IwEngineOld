@@ -11,7 +11,7 @@ namespace Physics {
 	public:
 		BoundingSphere(Math::Vector3& center, float radius);
 		~BoundingSphere();
-		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const;
+		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const;
 		float GetVolume() const;
 	};
 }

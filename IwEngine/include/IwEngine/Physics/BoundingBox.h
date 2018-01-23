@@ -12,7 +12,7 @@ namespace Physics {
 	public:
 		BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale);
 		~BoundingBox();
-		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const;
+		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const;
 		float GetVolume() const;
 
 		inline const Math::Vector3& GetMin() const {

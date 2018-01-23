@@ -34,6 +34,7 @@
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\Physics\BoundingBox.cpp" />
     <ClCompile Include="src\Physics\BoundingSphere.cpp" />
+    <ClCompile Include="src\Physics\GJK.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IwEngine\MeshCollider.h" />
@@ -100,5 +101,6 @@
     <ClInclude Include="include\IwEngine\Physics\BoundingMesh.h" />
     <ClInclude Include="include\IwEngine\Collider.h" />
     <ClInclude Include="include\IwEngine\Physics\Bounds.h" />
+    <ClInclude Include="src\Physics\GJK.h" />
   </ItemGroup>
 </Project>

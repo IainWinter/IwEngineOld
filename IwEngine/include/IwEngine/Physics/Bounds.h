@@ -9,7 +9,7 @@ namespace Physics {
 	class IWENGINE_API Bounds {
 	public:
 		virtual ~Bounds() {}
-		virtual Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const = 0;
+		virtual Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const = 0;
 		virtual float GetVolume() const = 0;
 	};
 }

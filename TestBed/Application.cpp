@@ -43,7 +43,7 @@ int main() {
 
 	gameObject2.AddComponent<RenderMesh>(renderMesh2);
 	gameObject2.AddComponent<Transform>(new Transform(gameObject2, Math::Vector3(0, 0, -5)));
-	gameObject2.AddComponent<RigidBody>(new RigidBody(gameObject2, 1, 1, 0, false, Math::Vector3(0, 0, 0), Math::Vector3(0, 0, 0)));
+	gameObject2.AddComponent<RigidBody>(new RigidBody(gameObject2, 1, 1, 0, false, Math::Vector3(1, 0, 0), Math::Vector3(0, 0, 0)));
 	gameObject2.AddComponent<Collider>(collider2);
 
 	scene.MakeSystem<RenderMesh, Transform>();
