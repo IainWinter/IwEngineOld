@@ -11,17 +11,8 @@ Physics::BoundingSphere::~BoundingSphere() {
 	delete _center;
 }
 
-std::vector<Math::Vector3> Physics::BoundingSphere::GetAxies() const {
-	return std::vector<Math::Vector3>();
-}
-
-std::vector<Math::Vector3> Physics::BoundingSphere::GetVertices() const {
-	return std::vector<Math::Vector3> { *_center };
-}
-
-void Physics::BoundingSphere::ProjectOntoAxis(const Math::Vector3& axis, const Math::Quaternion& rotation, const Math::Vector3 offset, float& min, float& max) const {
-	min = 0;
-	max = 0;
+Math::Vector3 Physics::BoundingSphere::GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const {
+	return Math::Vector3();
 }
 
 float Physics::BoundingSphere::GetVolume() const {

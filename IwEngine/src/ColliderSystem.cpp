@@ -15,13 +15,80 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 	for (uint i = 0; i < tCount; i++) {
 		for (uint j = 0; j < rCount; j++) {
 			if (transformGOIDs[i] == colliderGOIDs[j]) {
-				gameObjectIDs.push_back(i);
+				gameObjectIDs.push_back(transformGOIDs[i]);
 				i++;
 			}
 		}
 	}
 
 	std::set<int> alreadyIterated;
+	uint gCount = gameObjectIDs.size();
+	for (size_t i = 0; i < gCount; i++) {
+		for (size_t j = 0; j < gCount; j++) {
+			//Don't interate twice
+			if (i == j) continue;
+			if (alreadyIterated.find(j) != alreadyIterated.end()) continue;
+			alreadyIterated.insert(i);
+
+			Transform* transform1 = componentLookUp.GetComponent<Transform>(gameObjectIDs[i]);
+			Transform* transform2 = componentLookUp.GetComponent<Transform>(gameObjectIDs[j]);
+
+
+			Math::Vector3 position1 = transform1->GetPosition();
+			Math::Vector3 position2 = transform2->GetPosition();
+			Math::Quaternion rotation1 = transform1->GetRotation();
+			Math::Quaternion rotation2 = transform2->GetRotation();
+
+			const Physics::Bounds& bounds1 = componentLookUp.GetComponent<Collider>(gameObjectIDs[i])->GetCollider();
+			const Physics::Bounds& bounds2 = componentLookUp.GetComponent<Collider>(gameObjectIDs[j])->GetCollider();
+
+			std::vector<Math::Vector3> points;
+			points.reserve(2);
+			Math::Vector3 direction = transform1 - transform2;
+
+			Math::Vector3 support = (bounds1.GetSupport(direction, rotation1) + position1) - (bounds2.GetSupport(-direction, rotation2) + position2);
+			points.push_back(support);
+			direction = -support;
+
+			bool collision = false;
+
+			int count = 0; //debug
+
+			while (!collision) {
+				count++;
+				Math::Vector3 a = (bounds1.GetSupport(direction, rotation1) + position1) - (bounds2.GetSupport(-direction, rotation2) + position2);
+
+				if (a.Dot(direction) <= 0) {
+					break;
+				}
+
+				points.push_back(a);
+
+				//Simplex checks
+				switch (points.size()) {
+					case 2: direction = SimplexDirection(a, points[0]); break;
+					case 3: direction = SimplexDirection(a, points[1], points[0]); break;
+					case 4: {
+						direction = SimplexDirection(a, points[2], points[1], points[0]);
+						if (direction == 0) {
+							collision = true;
+						} else {
+							points.erase(points.begin());
+						}
+
+						break;
+					}
+					default: break;
+				}
+			}
+
+
+			std::cout << count << ", " << collision << std::endl; //debug
+
+		}
+	}
+
+	/*std::set<int> alreadyIterated;
 
 	uint gCount = gameObjectIDs.size();
 	for (size_t i = 0; i < gCount; i++) {
@@ -49,13 +116,16 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			Math::Vector3 axis;
 			float distance = (std::numeric_limits<float>::max)();
 
+			Math::Vector3 tmpPoc;
 			Math::Vector3 tmpAxis;
 			float tmpDistance;
 			for (size_t i = 0; i < count1 + count2; i++) {
 				if (i < count1) {
 					tmpAxis = axies1[i] * transform1->GetRotation();
+					tmpPoc = tmpAxis + transform1->GetPosition();
 				} else {
 					tmpAxis = axies2[i - count1] * transform2->GetRotation();
+					tmpPoc = tmpAxis + transform1->GetPosition();
 				}
 
 				float min1, max1, min2, max2;
@@ -75,12 +145,15 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 					if (fabsf(tmpDistance) < fabsf(distance)) {
 						distance = tmpDistance;
 						axis = tmpAxis;
+
 					}
 				}
 			}
 
 			//Response
 			if (axis != Math::Vector3::Zero) {
+				std::cout << distance << std::endl;
+
 				RigidBody* rigidbody1 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[i]);
 				RigidBody* rigidbody2 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[j]);
 
@@ -101,20 +174,8 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 
 				Math::Vector3 impulse = impulseScale * axis;
 
-				//Debug
-				if (impulse != 0) {
-					std::cout << std::endl << "Before" << std::endl;
-					Print(rigidbody1, rigidbody2);
-				}
-
 				rigidbody1->velocity -= impulse * (1 / rigidbody1->mass);
 				rigidbody2->velocity += impulse * (1 / rigidbody2->mass);
-
-				//Debug
-				if (impulse != 0) {
-					std::cout << std::endl << "After" << std::endl;
-					Print(rigidbody1, rigidbody2);
-				}
 
 				//Correction
 				float Ainv_mass;
@@ -138,28 +199,82 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 				transform2->SetPosition(transform2->GetPosition() += Binv_mass * correction);
 			}
 		}
+	}*/
+}
+
+Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3& a, const Math::Vector3& b) {
+	if (SameDirection(b - a, -a)) {
+		return (b - a).Cross(-a).Cross(b - a);
+	} else {
+		return -a;
 	}
 }
 
-void System<Collider, Transform>::Print(RigidBody* object1, RigidBody* object2) {
-	float velocity1 = object1->velocity.Length();
-	float velocity2 = object2->velocity.Length();
+Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& c) {
+	Math::Vector3 abc = (b - a).Cross(c - a);
+	if (SameDirection(abc.Cross(c - a), -a)) {
+		if (SameDirection(c - a, -a)) {
+			return (c - a).Cross(-a).Cross(c - a);
+		}
 
-	float k1 = object1->mass * velocity1*velocity1 / 2;
-	float k2 = object2->mass * velocity2*velocity2 / 2;
+		if (SameDirection(b - a, -a)) {
+			return (b - a).Cross(-a).Cross(b - a);
+		}
 
-	Math::Vector3 m1 = object1->velocity * object1->mass;
-	Math::Vector3 m2 = object2->velocity * object2->mass;
+		return -a;
+	}
 
-	std::cout << "Kinetic energy of Object 1 (left): " << k1 << "J" << std::endl;
-	std::cout << "Kinetic energy of Object 2 (right): " << k2 << "J" << std::endl;
+	if (SameDirection((b - a).Cross(abc), -a)) {
+		if (SameDirection(b - a, -a)) {
+			return (b - a).Cross(-a).Cross(b - a);
+		}
 
-	std::cout << "Momentum of Object 2 (right): " << m1 << "kgm/s" << std::endl;
-	std::cout << "Momentum of Object 2 (right): " << m2 << "kgm/s" << std::endl;
+		return -a;
+	}
 
-	std::cout << "Kinetic energy of system: " << k1 + k2 << "J" << std::endl;
-	std::cout << "Momentum of system: " << m1 + m2 << "kgm/s" << std::endl;
+	if (SameDirection(abc, -a)) {
+		return abc;
+	}
 
-	std::cout << std::endl;
+	return -abc;
+}
 
+Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3& a, const Math::Vector3& b,
+	const Math::Vector3& c, const Math::Vector3& d) {
+	Math::Vector3 abd = (b - a).Cross(d - a);
+	Math::Vector3 bcd = (c - b).Cross(d - c);
+	Math::Vector3 cad = (a - c).Cross(d - a);
+
+	if (SameDirection(abd, -a)) {
+		Math::Vector3 dir = SimplexDirection(a, b, d);
+		if (abd != -dir) {
+			return dir;
+		}
+
+		return 0;
+	}
+
+	if (SameDirection(bcd, -a)) {
+		Math::Vector3 dir = SimplexDirection(b, c, d);
+		if (bcd != -dir) {
+			return dir;
+		}
+
+		return 0;
+	}
+
+	if (SameDirection(cad, -a)) {
+		Math::Vector3 dir = SimplexDirection(c, a, d);
+		if (cad != -dir) {
+			return dir;
+		}
+
+		return 0;
+	}
+
+	return 0;
+}
+
+bool System<Collider, Transform>::SameDirection(const Math::Vector3& direction, const Math::Vector3& ao) {
+	return direction.Dot(ao) > 0;
 }

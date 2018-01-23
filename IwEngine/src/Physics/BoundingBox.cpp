@@ -1,53 +1,41 @@
 #include "IwEngine\Physics\BoundingBox.h"
+#include "IwEngine\Math\MathHelper.h"
 
-Physics::BoundingBox::BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale)
-	:_min(new Math::Vector3(origin)), _max(new Math::Vector3(origin + scale)) {}
+using namespace Physics;
 
-Physics::BoundingBox::~BoundingBox() {
-	delete _min;
-	delete _max;
+#define VERT_COUNT 8
+
+BoundingBox::BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale)
+	: _scale(new Math::Vector3(scale)), _vertices(new Math::Vector3[VERT_COUNT]{
+		Math::Vector3(origin),
+		Math::Vector3(origin.x,			   origin.y + scale.y,  origin.z),
+		Math::Vector3(origin.x,			   origin.y + scale.y,  origin.z + scale.z),
+		Math::Vector3(origin.x,			   origin.y,			origin.z + scale.z),
+		Math::Vector3(origin.x + scale.x,  origin.y,			origin.z + scale.z),
+		Math::Vector3(origin.x + scale.x,  origin.y + scale.y,  origin.z + scale.z),
+		Math::Vector3(origin.x + scale.x,  origin.y + scale.y,  origin.z),
+		Math::Vector3(origin.x + scale.x,  origin.y,			origin.z)
+}) {}
+
+BoundingBox::~BoundingBox() {
+	delete[] _vertices;
 }
 
-std::vector<Math::Vector3> Physics::BoundingBox::GetAxies() const {
-	return std::vector<Math::Vector3> {
-		Math::Vector3::UnitX,
-		Math::Vector3::UnitY,
-		Math::Vector3::UnitZ
-	};
-}
+Math::Vector3 BoundingBox::GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const {
+	Math::Vector3 maxVert;
+	float max = -std::numeric_limits<float>::max(); //min gives e
 
-std::vector<Math::Vector3> Physics::BoundingBox::GetVertices() const {
-	return std::vector<Math::Vector3> {
-		Math::Vector3(*_min),
-		Math::Vector3(_min->x, _max->y,	_min->z),
-		Math::Vector3(_min->x, _max->y, _max->z),
-		Math::Vector3(_min->x, _min->y, _max->z),
-		Math::Vector3(_max->x, _min->y,_max->z),
-		Math::Vector3(_max->x, _max->y,_max->z),
-		Math::Vector3(_max->x, _max->y,_min->z),
-		Math::Vector3(_max->x, _min->y,_min->z)
-	};
-}
-
-void Physics::BoundingBox::ProjectOntoAxis(const Math::Vector3& axis, const Math::Quaternion& rotation, const Math::Vector3 offset, float& min, float& max) const {
-	std::vector<Math::Vector3> verts = GetVertices();
-	size_t count = verts.size();
-
-	min = std::numeric_limits<float>::max();
-	max = -std::numeric_limits<float>::max();
-
-	for (size_t i = 0; i < count; i++) {
-		float projection = axis.Dot(verts[i] * rotation + offset);
-		if (min > projection) {
-			min = projection;
-		}
-
-		if (max < projection) {
-			max = projection;
+	for (size_t i = 0; i < VERT_COUNT; i++) {
+		float d = (_vertices[i] * rotation).Dot(direction);
+		if (d > max) {
+			max = d;
+			maxVert = _vertices[i] * rotation;
 		}
 	}
+	
+	return maxVert;
 }
 
-float Physics::BoundingBox::GetVolume() const {
-	return (*_max - *_min).x * (*_max - *_min).y * (*_max - *_min).z;
+float BoundingBox::GetVolume() const {
+	return abs(_scale->x) * abs(_scale->y) * abs(_scale->z);
 }

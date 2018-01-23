@@ -6,7 +6,9 @@
 
 template<>
 class IWENGINE_API System<Collider, Transform> : public ISystem {
-	virtual void Update(ComponentLookUp& componentLookUp, float deltaTime);
-private:
-	void Print(RigidBody* object1, RigidBody* object2);
+	void Update(ComponentLookUp& componentLookUp, float deltaTime);
+	Math::Vector3 SimplexDirection(const Math::Vector3& a, const Math::Vector3& b);
+	Math::Vector3 SimplexDirection(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& c);
+	Math::Vector3 SimplexDirection(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& c, const Math::Vector3& d);
+	bool SameDirection(const Math::Vector3& direction, const Math::Vector3& ao);
 };

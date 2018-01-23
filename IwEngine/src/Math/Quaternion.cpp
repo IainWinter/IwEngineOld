@@ -205,15 +205,18 @@ Quaternion Math::operator*(const float left, const Quaternion& right) {
 }
 
 Vector3 Math::operator*(const Math::Vector3& left, const Quaternion& right) {
-	float w = right.w;
-	float x = right.x;
-	float y = right.y;
-	float z = right.z;
+	float r = right.w;
+	float i = right.x;
+	float j = right.y;
+	float k = right.z;
+
+	float length = right.Length();
+	float s = 2 * 1 / (length*length);
 
 	Math::Matrix3 mat = Math::Matrix3(
-		1 - 2 * y*y - 2 * z*z, 2 * (x*y + w*z),		  2 * (y*z - w*y),
-		2 * (x*y - w*z),	   1 - 2 * x*x - 2 * z*z, 2 * (y*z + w*x),
-		2 * (x*z + w*y),	   2 * (y*z - w*x),		  1 - 2 * x*x - 2 * y*y
+		1 - s * (j*j + k*k), s * (i*j - k*r),     s * (i*k + j*r),
+		s * (i*j + k*r),	 1 - s * (i*i + k*k), s * (j*k + i*r),
+		s * (i*k - j*r),	 s * (j*k + i*r),     1 - s * (i*i - j*j)
 	);
 
 	return Vector3(

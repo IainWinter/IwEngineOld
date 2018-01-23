@@ -8,3 +8,13 @@ float Math::InvSqrt(float x) {
 	x = x * (1.5f - xhalf * x * x);
 	return x;
 }
+
+float Math::Max(float a, float b) {
+	if (a > b) return a;
+	return b;
+}
+
+float Math::Min(float a, float b) {
+	if (a < b) return a;
+	return b;
+}

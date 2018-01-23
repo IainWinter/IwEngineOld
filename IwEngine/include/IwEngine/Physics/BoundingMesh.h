@@ -10,10 +10,10 @@ namespace Physics {
 		uint _count;
 	public:
 		BoundingMesh(Math::Vector3* collider, uint count);
-		virtual ~BoundingMesh();
-		virtual std::vector<Math::Vector3> GetAxies() const;
-		virtual std::vector<Math::Vector3> GetVertices() const;
-		virtual void ProjectOntoAxis(const Math::Vector3& axis, const Math::Quaternion& rotation, const Math::Vector3 offset, float& min, float& max) const;
-		virtual float GetVolume() const;
+		~BoundingMesh();
+		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const;
+		float GetVolume() const;
+		std::vector<Math::Vector3> GetNormals() const;
+		std::vector<Math::Vector3> GetVertices() const;
 	};
 }

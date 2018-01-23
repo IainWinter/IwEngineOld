@@ -14,8 +14,7 @@ public:
 template<typename TComponent>
 class ComponentTable : public IComponentTable {
 private:
-	std::map<int, int> _lookUp;
-	std::vector<TComponent*> _components;
+	std::map<int, TComponent*> _components;
 public:
 	ComponentTable();
 	~ComponentTable();
@@ -26,11 +25,7 @@ public:
 	std::vector<int> GetGameObjectIDs();
 
 	inline int GetComponentCount() {
-		return _lookUp.size();
-	}
-
-	inline std::vector<TComponent*>& GetComponents() {
-		return _components;
+		return _components.size();
 	}
 };
 
@@ -40,36 +35,27 @@ ComponentTable<TComponent>::ComponentTable() {}
 
 template<typename TComponent>
 ComponentTable<TComponent>::~ComponentTable() {
-	for (std::vector<TComponent*>::iterator it = _components.begin(); it != _components.end(); ++it) {
-		delete (*it);
+	std::map<int, TComponent*>::iterator itr = _components.begin();
+	while (itr != _components.end()) {
+		delete itr->second;
+		itr++;
 	}
-
-	_components.clear();
 }
 
 template<typename TComponent>
 void ComponentTable<TComponent>::AddComponent(int gameObjectID, TComponent* component) {
-	int index = _components.size();
-	bool unique = _lookUp.emplace(gameObjectID, index).second;
-	if (unique) {
-		_components.push_back(component);
-	}
+	_components.emplace(gameObjectID, component);
 }
 
 template<typename TComponent>
 void ComponentTable<TComponent>::RemoveComponent(int gameObjectID) {
-	int index = _lookUp[gameObjectID];
-	if (index >= 0) {
-		_lookUp.erase(gameObjectID);
-		_components.erase(_components.begin() + index);
-	}
+	_components.erase(gameObjectID);
 }
 
 template<typename TComponent>
 TComponent* ComponentTable<TComponent>::GetComponent(int gameObjectID) {
-	int index = _lookUp[gameObjectID];
-	if (index >= 0) {
-		return _components[index];
+	if (_components.count(gameObjectID)) {
+		return _components[gameObjectID];
 	}
 
 	return nullptr;
@@ -78,9 +64,9 @@ TComponent* ComponentTable<TComponent>::GetComponent(int gameObjectID) {
 template<typename TComponent>
 std::vector<int> ComponentTable<TComponent>::GetGameObjectIDs() {
 	std::vector<int> keys;
-	keys.reserve(_lookUp.size());
+	keys.reserve(_components.size());
 
-	for (auto const& element : _lookUp) {
+	for (auto const& element : _components) {
 		keys.push_back(element.first);
 	}
 

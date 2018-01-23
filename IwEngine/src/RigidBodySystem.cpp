@@ -14,7 +14,7 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 	for (uint i = 0; i < tCount; i++) {
 		for (uint j = 0; j < rCount; j++) {
 			if (transformGOIDs[i] == rigidBodyGOIDs[j]) {
-				gameObjectIDs.push_back(i);
+				gameObjectIDs.push_back(transformGOIDs[i]);
 				i++;
 			}
 		}

@@ -10,10 +10,8 @@ namespace Physics {
 		float _radius;
 	public:
 		BoundingSphere(Math::Vector3& center, float radius);
-		virtual ~BoundingSphere();
-		virtual std::vector<Math::Vector3> GetAxies() const;
-		virtual std::vector<Math::Vector3> GetVertices() const;
-		virtual void ProjectOntoAxis(const Math::Vector3& axis, const Math::Quaternion& rotation, const Math::Vector3 offset, float& min, float& max) const;
-		virtual float GetVolume() const;
+		~BoundingSphere();
+		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const;
+		float GetVolume() const;
 	};
 }

@@ -12,7 +12,7 @@ void System<RenderMesh, Transform>::Update(ComponentLookUp& componentLookUp, flo
 	for (uint i = 0; i < tCount; i++) {
 		for (uint j = 0; j < rCount; j++) {
 			if (transformGOIDs[i] == renderMeshGOIDs[j]) {
-				gameObjectIDs.push_back(i);
+				gameObjectIDs.push_back(transformGOIDs[i]);
 				i++;
 			}
 		}
@@ -20,8 +20,8 @@ void System<RenderMesh, Transform>::Update(ComponentLookUp& componentLookUp, flo
 
 	uint gCount = gameObjectIDs.size();
 	for (size_t i = 0; i < gCount; i++) {
-		Transform* transform = componentLookUp.GetComponentTable<Transform>()->GetComponent(gameObjectIDs[i]);
-		RenderMesh* renderMesh = componentLookUp.GetComponentTable<RenderMesh>()->GetComponent(gameObjectIDs[i]);
+		Transform* transform = componentLookUp.GetComponent<Transform>(gameObjectIDs[i]);
+		RenderMesh* renderMesh = componentLookUp.GetComponent<RenderMesh>(gameObjectIDs[i]);
 
 		const Graphics::Mesh& mesh = renderMesh->GetMesh();
 		mesh.Draw(transform->GetPosition(), transform->GetRotation());

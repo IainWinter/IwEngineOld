@@ -7,14 +7,20 @@
 namespace Physics {
 	struct IWENGINE_API BoundingBox : public Bounds {
 	private:
-		Math::Vector3* _min;
-		Math::Vector3* _max;
+		Math::Vector3* _vertices;
+		Math::Vector3* _scale;
 	public:
 		BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale);
 		~BoundingBox();
-		virtual std::vector<Math::Vector3> GetAxies() const;
-		virtual std::vector<Math::Vector3> GetVertices() const;
-		virtual void ProjectOntoAxis(const Math::Vector3& axis, const Math::Quaternion& rotation, const Math::Vector3 offset, float& min, float& max) const;
-		virtual float GetVolume() const;
+		Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation) const;
+		float GetVolume() const;
+
+		inline const Math::Vector3& GetMin() const {
+			return _vertices[0];
+		}
+
+		inline const Math::Vector3& GetMax() const {
+			return _vertices[5];
+		}
 	};
 }
