@@ -39,10 +39,11 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 
 			Physics::ColliderGJK(
 				bounds1, bounds2, 
-				transform1->GetPosition(),
-				transform2->GetPosition(),
-				transform1->GetRotation(),
-				transform2->GetRotation());
+				{ 
+					transform1->GetPosition(), transform2->GetPosition(),
+					transform1->GetRotation(), transform2->GetRotation() 
+				}
+			);
 		}
 	}
 
