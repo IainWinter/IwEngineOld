@@ -3,16 +3,16 @@
 
 using namespace Physics;
 
-Physics::BoundingSphere::BoundingSphere(Math::Vector3& center, float radius)
-	: _center(new Math::Vector3(center)), _radius(radius) {
+Physics::BoundingSphere::BoundingSphere(math::vector3& center, float radius)
+	: _center(new math::vector3(center)), _radius(radius) {
 }
 
 Physics::BoundingSphere::~BoundingSphere() {
 	delete _center;
 }
 
-Math::Vector3 Physics::BoundingSphere::GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const {
-	return Math::Vector3();
+math::vector3 Physics::BoundingSphere::GetSupport(const math::vector3& direction, const math::quaternion& rotation, const math::vector3& position) const {
+	return math::vector3();
 }
 
 float Physics::BoundingSphere::GetVolume() const {

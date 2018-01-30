@@ -1,20 +1,20 @@
 #include "IwEngine\Physics\BoundingBox.h"
-#include "IwEngine\Math\MathHelper.h"
+#include "IwMath\mathf.h"
 
 using namespace Physics;
 
 #define VERT_COUNT 8
 
-BoundingBox::BoundingBox(const Math::Vector3& origin, const Math::Vector3& scale)
-	: _scale(new Math::Vector3(scale)), _vertices(new Math::Vector3[VERT_COUNT]{
-		Math::Vector3(origin),
-		Math::Vector3(origin.x,			   origin.y + scale.y,  origin.z),
-		Math::Vector3(origin.x,			   origin.y + scale.y,  origin.z + scale.z),
-		Math::Vector3(origin.x,			   origin.y,			origin.z + scale.z),
-		Math::Vector3(origin.x + scale.x,  origin.y,			origin.z + scale.z),
-		Math::Vector3(origin.x + scale.x,  origin.y + scale.y,  origin.z + scale.z),
-		Math::Vector3(origin.x + scale.x,  origin.y + scale.y,  origin.z),
-		Math::Vector3(origin.x + scale.x,  origin.y,			origin.z)
+BoundingBox::BoundingBox(const math::vector3& origin, const math::vector3& scale)
+	: _scale(new math::vector3(scale)), _vertices(new math::vector3[VERT_COUNT]{
+		math::vector3(origin),
+		math::vector3(origin.x,			   origin.y + scale.y,  origin.z),
+		math::vector3(origin.x,			   origin.y + scale.y,  origin.z + scale.z),
+		math::vector3(origin.x,			   origin.y,			origin.z + scale.z),
+		math::vector3(origin.x + scale.x,  origin.y,			origin.z + scale.z),
+		math::vector3(origin.x + scale.x,  origin.y + scale.y,  origin.z + scale.z),
+		math::vector3(origin.x + scale.x,  origin.y + scale.y,  origin.z),
+		math::vector3(origin.x + scale.x,  origin.y,			origin.z)
 }) {
 }
 
@@ -22,13 +22,13 @@ BoundingBox::~BoundingBox() {
 	delete[] _vertices;
 }
 
-Math::Vector3 BoundingBox::GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const {
-	Math::Vector3 maxVert;
+math::vector3 BoundingBox::GetSupport(const math::vector3& direction, const math::quaternion& rotation, const math::vector3& position) const {
+	math::vector3 maxVert;
 	float max = -std::numeric_limits<float>::max(); //min gives e
 
 	for (size_t i = 0; i < VERT_COUNT; i++) {
-		Math::Vector3 vert = _vertices[i] * rotation + position;
-		float d = vert.Dot(direction);
+		math::vector3 vert = _vertices[i] * rotation + position;
+		float d = vert.dot(direction);
 		if (d > max) {
 			max = d;
 			maxVert = vert;

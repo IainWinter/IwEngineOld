@@ -63,7 +63,7 @@ namespace math {
 
 		static matrix4 createFromAxisAngle(float x, float y, float z, float angle);
 		static matrix4 createFromAxisAngle(const vector3& axis, float angle);
-		static matrix4 createFromquaternion(const quaternion& quaternion);
+		static matrix4 createFromQuaternion(const quaternion& quaternion);
 		static matrix4 createRoatationX(float angle);
 		static matrix4 createRoatationY(float angle);
 		static matrix4 createRoatationZ(float angle);

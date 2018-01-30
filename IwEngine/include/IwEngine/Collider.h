@@ -14,7 +14,7 @@ public:
 	Collider(GameObject& gameObject, Physics::Bounds* mesh, Physics::PhysicsMaterial& material)
 		: Component(gameObject), _bounds(mesh), _material(new Physics::PhysicsMaterial(material)) 
 	{
-		_collisionData = new Physics::CollisionData(this, nullptr, Math::Vector3(), false, 0);
+		_collisionData = new Physics::CollisionData(math::vector3(), false, 0);
 	}
 
 	~Collider() {
@@ -39,8 +39,7 @@ public:
 		return _collisionData;
 	}
 
-	inline void SetCollisionData(Collider* other, Math::Vector3& axis, bool intersecting, float distance) {
-		_collisionData->collider2 = other;
+	inline void SetCollisionData(Collider* other, math::vector3& axis, bool intersecting, float distance) {
 		_collisionData->axis = axis;
 		_collisionData->intersects = intersecting;
 		_collisionData->distance = distance;

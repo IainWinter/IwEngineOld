@@ -1,21 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
     <ClCompile Include="src\Graphics\Mesh.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="src\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\VertexBufferLayout.cpp" />
-    <ClCompile Include="src\Math\MathHelper.cpp" />
-    <ClCompile Include="src\Math\Matrix2.cpp" />
-    <ClCompile Include="src\Math\Matrix3.cpp" />
-    <ClCompile Include="src\Math\Matrix4.cpp" />
-    <ClCompile Include="src\Math\Quaternion.cpp" />
-    <ClCompile Include="src\Math\Vector2.cpp" />
-    <ClCompile Include="src\Math\Vector3.cpp" />
-    <ClCompile Include="src\Math\Vector4.cpp" />
     <ClCompile Include="src\Utility\IO\Directory.cpp" />
     <ClCompile Include="src\Utility\IO\File.cpp" />
     <ClCompile Include="src\Utility\IO\Path.cpp" />
@@ -51,15 +42,6 @@
     <ClInclude Include="include\IwEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexBufferLayout.h" />
-    <ClInclude Include="include\IwEngine\Math\Math.h" />
-    <ClInclude Include="include\IwEngine\Math\MathHelper.h" />
-    <ClInclude Include="include\IwEngine\Math\Matrix2.h" />
-    <ClInclude Include="include\IwEngine\Math\Matrix3.h" />
-    <ClInclude Include="include\IwEngine\Math\Matrix4.h" />
-    <ClInclude Include="include\IwEngine\Math\Quaternion.h" />
-    <ClInclude Include="include\IwEngine\Math\Vector2.h" />
-    <ClInclude Include="include\IwEngine\Math\Vector3.h" />
-    <ClInclude Include="include\IwEngine\Math\Vector4.h" />
     <ClInclude Include="include\IwEngine\Object.h" />
     <ClInclude Include="include\IwEngine\Physics\BounceCombine.h" />
     <ClInclude Include="include\IwEngine\Physics\Collider.h" />

@@ -7,8 +7,8 @@
 
 //Temp
 #include "IwEngine\Graphics\ShaderProgram.h"
-#include "IwEngine\Math\Vector3.h"
-#include "IwEngine\Math\Matrix4.h"
+#include "IwMath\vector3.h"
+#include "IwMath\matrix4.h"
 
 Window::Window(int width, int height, const char* name) 
 	: _width(width), _height(height), _name(name), _tempMem(16777216, malloc(16777216))
@@ -47,10 +47,10 @@ void Window::Run() {
 
 	Graphics::ShaderProgram shader = Graphics::ShaderProgram("res/shaders/default.shader");
 
-	Math::Vector3 position = Math::Vector3(0, 0, 0);
-	Math::Matrix4 projection = Math::Matrix4::CreatePerspectiveFieldOfView(1.744f, 16.0f / 9.0f, 0.01f, 100.0f);
-	Math::Matrix4 view = Math::Matrix4::LookAt(position, position - Math::Vector3::UnitZ, Math::Vector3::UnitY);
-	Math::Matrix4 world = Math::Matrix4::Identity;
+	math::vector3 position = math::vector3(0, 0, 0);
+	math::matrix4 projection = math::matrix4::createPerspectiveFieldOfView(1.744f, 16.0f / 9.0f, 0.01f, 100.0f);
+	math::matrix4 view = math::matrix4::lookAt(position, position - math::vector3::unitZ, math::vector3::unitY);
+	math::matrix4 world = math::matrix4::identity;
 
 	glBindVertexArray(0);
 	glUseProgram(0);

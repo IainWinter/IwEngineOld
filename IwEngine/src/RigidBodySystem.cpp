@@ -26,14 +26,14 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 		RigidBody* rigidBody = componentLookUp.GetComponentTable<RigidBody>()->GetComponent(gameObjectIDs[i]);
 		Collider* collider = componentLookUp.GetComponentTable<Collider>()->GetComponent(gameObjectIDs[i]);
 
-		Math::Vector3 position = transform->GetPosition();
-		Math::Quaternion rotation = transform->GetRotation();
+		math::vector3 position = transform->GetPosition();
+		math::quaternion rotation = transform->GetRotation();
 
 		checkGravity(rigidBody);
 
 		//rigidBody->force.operator+=(applied force vector);
 		//float frictionForce = rigidBody->material.coef_kinetic_friction*rigidBody->mass*rigidBody->velocity.y;
-		//Math::Vector3 forceFriction(frictionForce, 0, 0);
+		//math::vector3 forceFriction(frictionForce, 0, 0);
 		//rigidBody->force += forceFriction;
 
 		//Kinematics and drag
@@ -49,7 +49,7 @@ void System<RigidBody, Transform>::Update(ComponentLookUp& componentLookUp, floa
 
 void System<RigidBody, Transform>::checkGravity(RigidBody* rigidbody) {
 	if (rigidbody->use_gravity) {
-		Math::Vector3 gravity(0, -9.81f, 0);
+		math::vector3 gravity(0, -9.81f, 0);
 		rigidbody->force = gravity * rigidbody->mass;
 	}
 }
@@ -57,17 +57,17 @@ void System<RigidBody, Transform>::checkGravity(RigidBody* rigidbody) {
 void System<RigidBody, Transform>::drag(RigidBody * rigidbody, Collider * collider) {
 	float volume = collider->GetVolume();
 
-	Math::Vector3 normV = -rigidbody->velocity.NormalizedFast();
-	Math::Vector3 dragForce(rigidbody->drag * rigidbody->mass / volume * rigidbody->velocity * rigidbody->velocity / 2);
-	if (dragForce.LengthFast() >= rigidbody->force.LengthFast()) {
+	math::vector3 normV = -rigidbody->velocity.normalizedFast();
+	math::vector3 dragForce(rigidbody->drag * rigidbody->mass / volume * rigidbody->velocity * rigidbody->velocity / 2);
+	if (dragForce.lengthFast() >= rigidbody->force.lengthFast()) {
 		dragForce = -rigidbody->force;
 	}
 
 	rigidbody->force += dragForce * normV;
 }
 
-void System<RigidBody, Transform>::motion(RigidBody* rigidbody, Transform* transform, Math::Vector3 position, float deltaTime) {
-	Math::Vector3 acceleration = rigidbody->force / rigidbody->mass;
+void System<RigidBody, Transform>::motion(RigidBody* rigidbody, Transform* transform, math::vector3 position, float deltaTime) {
+	math::vector3 acceleration = rigidbody->force / rigidbody->mass;
 
 	position += rigidbody->velocity*deltaTime + acceleration / 2 * deltaTime * deltaTime;
 	rigidbody->velocity += acceleration * deltaTime;
@@ -75,9 +75,9 @@ void System<RigidBody, Transform>::motion(RigidBody* rigidbody, Transform* trans
 }
 
 void System<RigidBody, Transform>::rotate(RigidBody * rigidbody, Transform * transform, float deltaTime) {
-	Math::Vector3 angularAcc = rigidbody->torque / rigidbody->momentOfInertia;
-	Math::Vector3 rotationChange = rigidbody->rotationalVelocity * deltaTime + angularAcc / 2 * deltaTime * deltaTime;
+	math::vector3 angularAcc = rigidbody->torque / rigidbody->momentOfInertia;
+	math::vector3 rotationChange = rigidbody->rotationalVelocity * deltaTime + angularAcc / 2 * deltaTime * deltaTime;
 
-	transform->SetRotation(transform->GetRotation() * Math::Quaternion::FromEulerAngles(rotationChange));
+	transform->SetRotation(transform->GetRotation() * math::quaternion::fromEulerAngles(rotationChange));
 	rigidbody->rotationalVelocity += (angularAcc * deltaTime);
 }

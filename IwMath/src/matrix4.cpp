@@ -447,7 +447,7 @@ matrix4 matrix4::createFromAxisAngle(const vector3& axis, float angle) {
 	);
 }
 
-matrix4 matrix4::createFromquaternion(const quaternion& quaternion) {
+matrix4 matrix4::createFromQuaternion(const quaternion& quaternion) {
 	vector4 aa = quaternion.toAxisAngle();
 	return createFromAxisAngle(aa.x, aa.y, aa.z, aa.w);
 }

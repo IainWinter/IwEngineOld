@@ -66,17 +66,17 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			const Physics::Bounds& bounds1 = collider1->GetCollider();
 			const Physics::Bounds& bounds2 = collider2->GetCollider();
 
-			std::vector<Math::Vector3> axies1 = bounds1.GetAxies();
-			std::vector<Math::Vector3> axies2 = bounds2.GetAxies();
+			std::vector<math::vector3> axies1 = bounds1.GetAxies();
+			std::vector<math::vector3> axies2 = bounds2.GetAxies();
 
 			size_t count1 = axies1.size();
 			size_t count2 = axies2.size();
 
-			Math::Vector3 axis;
+			math::vector3 axis;
 			float distance = (std::numeric_limits<float>::max)();
 
-			Math::Vector3 tmpPoc;
-			Math::Vector3 tmpAxis;
+			math::vector3 tmpPoc;
+			math::vector3 tmpAxis;
 			float tmpDistance;
 			for (size_t i = 0; i < count1 + count2; i++) {
 				if (i < count1) {
@@ -98,7 +98,7 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 				}
 
 				if (tmpDistance > 0) {
-					axis = Math::Vector3::Zero;
+					axis = math::vector3::Zero;
 					break;
 				} else {
 					if (fabsf(tmpDistance) < fabsf(distance)) {
@@ -110,7 +110,7 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 			}
 
 			//Response
-			if (axis != Math::Vector3::Zero) {
+			if (axis != math::vector3::Zero) {
 				std::cout << distance << std::endl;
 
 				RigidBody* rigidbody1 = componentLookUp.GetComponent<RigidBody>(gameObjectIDs[i]);
@@ -118,9 +118,9 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 
 				if (!rigidbody1 || !rigidbody2) return;
 
-				Math::Vector3 relitiveVelocity = rigidbody2->velocity - rigidbody1->velocity;
+				math::vector3 relitiveVelocity = rigidbody2->velocity - rigidbody1->velocity;
 
-				float rvOnNormal = relitiveVelocity.Dot(axis);
+				float rvOnNormal = relitiveVelocity.dot(axis);
 
 				if (rvOnNormal > 0) {
 					return;
@@ -131,7 +131,7 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 				float impulseScale = -(1 + elasticity) * rvOnNormal;
 				impulseScale /= 1 / rigidbody1->mass + 1 / rigidbody2->mass;
 
-				Math::Vector3 impulse = impulseScale * axis;
+				math::vector3 impulse = impulseScale * axis;
 
 				rigidbody1->velocity -= impulse * (1 / rigidbody1->mass);
 				rigidbody2->velocity += impulse * (1 / rigidbody2->mass);
@@ -153,7 +153,7 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 
 				const float percent = 0.8f;
 				const float slop = 0.1f;
-				Math::Vector3 correction = max(distance - slop, .0001f) / (Ainv_mass + Binv_mass) * percent * axis;
+				math::vector3 correction = max(distance - slop, .0001f) / (Ainv_mass + Binv_mass) * percent * axis;
 				transform1->SetPosition(transform1->GetPosition() -= Ainv_mass * correction);
 				transform2->SetPosition(transform2->GetPosition() += Binv_mass * correction);
 			}
@@ -161,31 +161,31 @@ void System<Collider, Transform>::Update(ComponentLookUp& componentLookUp, float
 	}*/
 }
 
-Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3& a, const Math::Vector3& b) {
+math::vector3 System<Collider, Transform>::SimplexDirection(const math::vector3& a, const math::vector3& b) {
 	if (SameDirection(b - a, -a)) {
-		return (b - a).Cross(-a).Cross(b - a);
+		return (b - a).cross(-a).cross(b - a);
 	} else {
 		return -a;
 	}
 }
 
-Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& c) {
-	Math::Vector3 abc = (b - a).Cross(c - a);
-	if (SameDirection(abc.Cross(c - a), -a)) {
+math::vector3 System<Collider, Transform>::SimplexDirection(const math::vector3& a, const math::vector3& b, const math::vector3& c) {
+	math::vector3 abc = (b - a).cross(c - a);
+	if (SameDirection(abc.cross(c - a), -a)) {
 		if (SameDirection(c - a, -a)) {
-			return (c - a).Cross(-a).Cross(c - a);
+			return (c - a).cross(-a).cross(c - a);
 		}
 
 		if (SameDirection(b - a, -a)) {
-			return (b - a).Cross(-a).Cross(b - a);
+			return (b - a).cross(-a).cross(b - a);
 		}
 
 		return -a;
 	}
 
-	if (SameDirection((b - a).Cross(abc), -a)) {
+	if (SameDirection((b - a).cross(abc), -a)) {
 		if (SameDirection(b - a, -a)) {
-			return (b - a).Cross(-a).Cross(b - a);
+			return (b - a).cross(-a).cross(b - a);
 		}
 
 		return -a;
@@ -198,14 +198,14 @@ Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3&
 	return -abc;
 }
 
-Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3& a, const Math::Vector3& b,
-	const Math::Vector3& c, const Math::Vector3& d) {
-	Math::Vector3 abd = (b - a).Cross(d - a);
-	Math::Vector3 bcd = (c - b).Cross(d - c);
-	Math::Vector3 cad = (a - c).Cross(d - a);
+math::vector3 System<Collider, Transform>::SimplexDirection(const math::vector3& a, const math::vector3& b,
+	const math::vector3& c, const math::vector3& d) {
+	math::vector3 abd = (b - a).cross(d - a);
+	math::vector3 bcd = (c - b).cross(d - c);
+	math::vector3 cad = (a - c).cross(d - a);
 
 	if (SameDirection(abd, -a)) {
-		Math::Vector3 dir = SimplexDirection(a, b, d);
+		math::vector3 dir = SimplexDirection(a, b, d);
 		if (abd != -dir) {
 			return dir;
 		}
@@ -214,7 +214,7 @@ Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3&
 	}
 
 	if (SameDirection(bcd, -a)) {
-		Math::Vector3 dir = SimplexDirection(b, c, d);
+		math::vector3 dir = SimplexDirection(b, c, d);
 		if (bcd != -dir) {
 			return dir;
 		}
@@ -223,7 +223,7 @@ Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3&
 	}
 
 	if (SameDirection(cad, -a)) {
-		Math::Vector3 dir = SimplexDirection(c, a, d);
+		math::vector3 dir = SimplexDirection(c, a, d);
 		if (cad != -dir) {
 			return dir;
 		}
@@ -234,6 +234,6 @@ Math::Vector3 System<Collider, Transform>::SimplexDirection(const Math::Vector3&
 	return 0;
 }
 
-bool System<Collider, Transform>::SameDirection(const Math::Vector3& direction, const Math::Vector3& ao) {
-	return direction.Dot(ao) > 0;
+bool System<Collider, Transform>::SameDirection(const math::vector3& direction, const math::vector3& ao) {
+	return direction.dot(ao) > 0;
 }

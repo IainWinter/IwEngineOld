@@ -18,6 +18,4 @@ namespace math {
 	struct matrix4;
 
 	IWMATH_API float invSqrt(float x);
-	IWMATH_API float max(float a, float b);
-	IWMATH_API float min(float a, float b);
 }

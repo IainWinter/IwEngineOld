@@ -5,17 +5,17 @@
 
 namespace Physics {
 	struct CollisionTransformation {
-		const Math::Vector3& pos1;
-		const Math::Vector3& pos2;
-		const Math::Quaternion& rot1;
-		const Math::Quaternion& rot2;
+		const math::vector3& pos1;
+		const math::vector3& pos2;
+		const math::quaternion& rot1;
+		const math::quaternion& rot2;
 	};
 
-	CollisionData ColliderGJK(
+	void ColliderGJK(
 		const Bounds& bounds1, 
 		const Bounds& bounds2, const CollisionTransformation& collisionTrans);
-	Math::Vector3 Support(const Bounds& bounds1, const Bounds& bounds2, const Math::Vector3& direction, const CollisionTransformation& collisionTrans);
-	Math::Vector3 Simplex(const Math::Vector3& a, const Math::Vector3& b);
-	Math::Vector3 Simplex(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& c);
-	Math::Vector3 Simplex(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& c, const Math::Vector3& d);
+	math::vector3 Support(const Bounds& bounds1, const Bounds& bounds2, const math::vector3& direction, const CollisionTransformation& collisionTrans);
+	math::vector3 Simplex(const math::vector3& a, const math::vector3& b);
+	math::vector3 Simplex(const math::vector3& a, const math::vector3& b, const math::vector3& c);
+	math::vector3 Simplex(const math::vector3& a, const math::vector3& b, const math::vector3& c, const math::vector3& d);
 }

@@ -1,42 +1,42 @@
 #pragma once
 
 #include "IwEngine\Component.h"
-#include "IwEngine\Math\Vector3.h"
-#include "IwEngine\Math\Quaternion.h"
+#include "IwMath\Vector3.h"
+#include "IwMath\Quaternion.h"
 
 class Transform : public Component {
 private:
-	Math::Vector3 position;
-	Math::Quaternion rotation;
+	math::vector3 position;
+	math::quaternion rotation;
 public:
 	Transform(GameObject& gameObject)
 		: Component(gameObject) {}
 
-	Transform(GameObject& gameObject, Math::Vector3& position)
+	Transform(GameObject& gameObject, math::vector3& position)
 		: Component(gameObject), position(position) {}
 
-	Transform(GameObject& gameObject, Math::Vector3& position, Math::Quaternion& rotation)
+	Transform(GameObject& gameObject, math::vector3& position, math::quaternion& rotation)
 		: Component(gameObject), position(position), rotation(rotation) {}
 
-	inline const Math::Vector3& GetPosition() const { return position; }
-	inline Math::Vector3& GetPosition() { return position; }
-	inline const Math::Quaternion& GetRotation() const { return rotation; }
-	inline Math::Quaternion& GetRotation() { return rotation; }
-	inline const Math::Vector3 GetEulerRotation() const { return rotation.ToEulerAngles(); }
+	inline const math::vector3& GetPosition() const { return position; }
+	inline math::vector3& GetPosition() { return position; }
+	inline const math::quaternion& GetRotation() const { return rotation; }
+	inline math::quaternion& GetRotation() { return rotation; }
+	inline const math::vector3 GetEulerRotation() const { return rotation.toEulerAngles(); }
 
-	inline void SetPosition(const Math::Vector3& position) { this->position = position; }
-	inline void SetRotation(const Math::Quaternion& rotation) { this->rotation = rotation; }
-	inline void SetEulerRotation(const Math::Vector3& rotation) { this->rotation = Math::Quaternion::FromEulerAngles(rotation); }
+	inline void SetPosition(const math::vector3& position) { this->position = position; }
+	inline void SetRotation(const math::quaternion& rotation) { this->rotation = rotation; }
+	inline void SetEulerRotation(const math::vector3& rotation) { this->rotation = math::quaternion::fromEulerAngles(rotation); }
 
-	inline Math::Vector3 Forward() const {
-		return Math::Vector3::UnitZ * rotation;
+	inline math::vector3 Forward() const {
+		return math::vector3::unitZ * rotation;
 	}
 
-	inline Math::Vector3 Right() const {
-		return Math::Vector3::UnitX * rotation;
+	inline math::vector3 Right() const {
+		return math::vector3::unitX * rotation;
 	}
 
-	inline Math::Vector3 Up() const {
-		return Math::Vector3::UnitY * rotation;
+	inline math::vector3 Up() const {
+		return math::vector3::unitY * rotation;
 	}
 };

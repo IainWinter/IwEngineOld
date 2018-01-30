@@ -1,6 +1,6 @@
 #include "IwEngine\Graphics\Mesh.h"
 #include "IwEngine\Graphics\IndexBuffer.h"
-#include "IwEngine\Math\Matrix4.h"
+#include "IwMath\matrix4.h"
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
 
@@ -15,8 +15,8 @@ Mesh::~Mesh() {
 	delete _indexBuffer;
 }
 
-void Mesh::Draw(const Math::Vector3& position, const Math::Quaternion& rotation) const {
-	Math::Matrix4 world = Math::Matrix4::CreateFromQuaternion(rotation) * Math::Matrix4::CreateTranslation(position);
+void Mesh::Draw(const math::vector3& position, const math::quaternion& rotation) const {
+	math::matrix4 world = math::matrix4::createFromQuaternion(rotation) * math::matrix4::createTranslation(position);
 
 	glUniformMatrix4fv(8, 1, GL_FALSE, world.elements);
 
@@ -26,7 +26,7 @@ void Mesh::Draw(const Math::Vector3& position, const Math::Quaternion& rotation)
 	_indexBuffer->Draw();
 }
 
-Mesh* Mesh::MakeBox(const Math::Vector3& bottomCorner, const Math::Vector3& scale) {
+Mesh* Mesh::MakeBox(const math::vector3& bottomCorner, const math::vector3& scale) {
 	float* pos = new float[72] {
 		//left
 		bottomCorner.x,				bottomCorner.y,			  bottomCorner.z,
@@ -88,6 +88,6 @@ Mesh* Mesh::MakeBox(const Math::Vector3& bottomCorner, const Math::Vector3& scal
 	return new Mesh(va, ib);
 }
 
-Mesh* Mesh::MakeSphere(const Math::Vector3& center, float radius, uint detail) {
+Mesh* Mesh::MakeSphere(const math::vector3& center, float radius, uint detail) {
 	return nullptr;
 }

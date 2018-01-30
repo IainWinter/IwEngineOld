@@ -86,12 +86,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(ProjectDir)include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IWENGINE_EXPORTS;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(ProjectDir)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IWENGINE_EXPORTS;IWMATH_EXPORTS;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\GLFW\lib-vc2015</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw386.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\IwMath\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>IwMath.lib;glew32s.lib;glfw386.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
     </Link>
@@ -105,12 +105,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(ProjectDir)include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IWENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(ProjectDir)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IWENGINE_EXPORTS;IWMATH_EXPORTS;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW\lib\Release\x64;$(SolutionDir)Dependencies\GLFW\lib-vc2015\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw364.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalDependencies>IwMath32.lib;glew32s.lib;glfw364.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
@@ -171,7 +171,6 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\ComponentLookUp.cpp" />
     <ClCompile Include="src\Engine.cpp" />
-    <ClCompile Include="include\IwEngine\Utility\IO\IO.h" />
     <ClCompile Include="src\Events\EventBus.cpp" />
     <ClCompile Include="src\Graphics\Mesh.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
@@ -179,14 +178,6 @@
     <ClCompile Include="src\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="src\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\VertexBufferLayout.cpp" />
-    <ClCompile Include="src\Math\MathHelper.cpp" />
-    <ClCompile Include="src\Math\Matrix2.cpp" />
-    <ClCompile Include="src\Math\Matrix3.cpp" />
-    <ClCompile Include="src\Math\Matrix4.cpp" />
-    <ClCompile Include="src\Math\Quaternion.cpp" />
-    <ClCompile Include="src\Math\Vector2.cpp" />
-    <ClCompile Include="src\Math\Vector3.cpp" />
-    <ClCompile Include="src\Math\Vector4.cpp" />
     <ClCompile Include="src\Memory\LinearAllocator.cpp" />
     <ClCompile Include="src\Utility\IO\Directory.cpp" />
     <ClCompile Include="src\Utility\IO\File.cpp" />
@@ -231,15 +222,6 @@
     <ClInclude Include="include\IwEngine\Graphics\ShaderProgram.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexBuffer.h" />
     <ClInclude Include="include\IwEngine\Graphics\VertexBufferLayout.h" />
-    <ClInclude Include="include\IwEngine\Math\Math.h" />
-    <ClInclude Include="include\IwEngine\Math\MathHelper.h" />
-    <ClInclude Include="include\IwEngine\Math\Matrix2.h" />
-    <ClInclude Include="include\IwEngine\Math\Matrix3.h" />
-    <ClInclude Include="include\IwEngine\Math\Matrix4.h" />
-    <ClInclude Include="include\IwEngine\Math\Quaternion.h" />
-    <ClInclude Include="include\IwEngine\Math\Vector2.h" />
-    <ClInclude Include="include\IwEngine\Math\Vector3.h" />
-    <ClInclude Include="include\IwEngine\Math\Vector4.h" />
     <ClInclude Include="include\IwEngine\Object.h" />
     <ClInclude Include="include\IwEngine\Physics\BounceCombine.h" />
     <ClInclude Include="include\IwEngine\Physics\Collider.h" />

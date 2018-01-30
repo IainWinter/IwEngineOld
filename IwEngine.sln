@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IwEngine", "IwEngine\IwEngine.vcxproj", "{369AE9F9-8A7A-42C5-BBB7-9282B02D7F79}"
 EndProject
@@ -39,7 +39,6 @@ Global
 		{428253CD-01F0-4D2F-8B89-4EACB0F9A221}.Debug|x64.ActiveCfg = Debug|x64
 		{428253CD-01F0-4D2F-8B89-4EACB0F9A221}.Debug|x64.Build.0 = Debug|x64
 		{428253CD-01F0-4D2F-8B89-4EACB0F9A221}.Debug|x86.ActiveCfg = Release|Win32
-		{428253CD-01F0-4D2F-8B89-4EACB0F9A221}.Debug|x86.Build.0 = Release|Win32
 		{428253CD-01F0-4D2F-8B89-4EACB0F9A221}.Release|x64.ActiveCfg = Release|x64
 		{428253CD-01F0-4D2F-8B89-4EACB0F9A221}.Release|x64.Build.0 = Release|x64
 		{428253CD-01F0-4D2F-8B89-4EACB0F9A221}.Release|x86.ActiveCfg = Release|Win32

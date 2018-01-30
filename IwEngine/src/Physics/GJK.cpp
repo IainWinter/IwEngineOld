@@ -1,12 +1,12 @@
 #include "GJK.h"
 
-Physics::CollisionData Physics::ColliderGJK(const Bounds& bounds1, const Bounds& bounds2, 
+void Physics::ColliderGJK(const Bounds& bounds1, const Bounds& bounds2, 
 	const CollisionTransformation& collisionTrans) 
 {
-	std::vector<Math::Vector3> points(2);
-	Math::Vector3 direction = Math::Vector3::UnitX;
+	std::vector<math::vector3> points(2);
+	math::vector3 direction = math::vector3::unitX;
 
-	Math::Vector3 support = Support(bounds1, bounds2, direction, collisionTrans);
+	math::vector3 support = Support(bounds1, bounds2, direction, collisionTrans);
 	points.push_back(support);
 	direction = -support;
 
@@ -15,9 +15,9 @@ Physics::CollisionData Physics::ColliderGJK(const Bounds& bounds1, const Bounds&
 
 	while (!colliding) {
 		count++;
-		Math::Vector3 a = Support(bounds1, bounds2, direction, collisionTrans);
+		math::vector3 a = Support(bounds1, bounds2, direction, collisionTrans);
 
-		if (a.Dot(direction) <= 0) {
+		if (a.dot(direction) <= 0) {
 			break;
 		}
 
@@ -41,21 +41,21 @@ Physics::CollisionData Physics::ColliderGJK(const Bounds& bounds1, const Bounds&
 	}
 }
 
-Math::Vector3 Physics::Support(const Bounds& bounds1, const Bounds& bounds2, 
-	const Math::Vector3& direction, const CollisionTransformation& collisionTrans) 
+math::vector3 Physics::Support(const Bounds& bounds1, const Bounds& bounds2, 
+	const math::vector3& direction, const CollisionTransformation& collisionTrans) 
 {
 	return bounds1.GetSupport(direction, collisionTrans.rot1, collisionTrans.pos1) 
 		- bounds2.GetSupport(direction, collisionTrans.rot2, collisionTrans.pos2);
 }
 
-Math::Vector3 Physics::Simplex(const Math::Vector3& a, const Math::Vector3& b) {
-	return Math::Vector3();
+math::vector3 Physics::Simplex(const math::vector3& a, const math::vector3& b) {
+	return math::vector3();
 }
 
-Math::Vector3 Physics::Simplex(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& c) {
-	return Math::Vector3();
+math::vector3 Physics::Simplex(const math::vector3& a, const math::vector3& b, const math::vector3& c) {
+	return math::vector3();
 }
 
-Math::Vector3 Physics::Simplex(const Math::Vector3& a, const Math::Vector3& b, const Math::Vector3& c, const Math::Vector3& d) {
-	return Math::Vector3();
+math::vector3 Physics::Simplex(const math::vector3& a, const math::vector3& b, const math::vector3& c, const math::vector3& d) {
+	return math::vector3();
 }

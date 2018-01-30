@@ -1,15 +1,15 @@
 #pragma once
 
 #include "IwEngine\Common.h"
-#include "IwEngine\Math\Vector3.h"
-#include "IwEngine\Math\Matrix4.h"
+#include "IwMath\vector3.h"
+#include "IwMath\matrix4.h"
 #include <vector>
 
 namespace Physics {
 	class IWENGINE_API Bounds {
 	public:
 		virtual ~Bounds() {}
-		virtual Math::Vector3 GetSupport(const Math::Vector3& direction, const Math::Quaternion& rotation, const Math::Vector3& position) const = 0;
+		virtual math::vector3 GetSupport(const math::vector3& direction, const math::quaternion& rotation, const math::vector3& position) const = 0;
 		virtual float GetVolume() const = 0;
 	};
 }
