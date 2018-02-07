@@ -1,4 +1,4 @@
-#include "IwPhysics\boxCollider.h"
+#include "IwPhysics\Collisions\boxCollider.h"
 
 using namespace iwphysics;
 

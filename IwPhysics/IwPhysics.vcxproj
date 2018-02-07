@@ -140,9 +140,11 @@
     <ClInclude Include="include\IwPhysics\Collisions\physicsMaterial.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Collisions\collider.cpp" />
     <ClCompile Include="src\Collisions\broadPhase.cpp" />
     <ClCompile Include="src\Collisions\AABB.cpp" />
     <ClCompile Include="src\Collisions\boxCollider.cpp" />
+    <ClCompile Include="src\octree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
