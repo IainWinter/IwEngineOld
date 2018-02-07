@@ -1,6 +1,6 @@
 #include "IwMath\matrix2.h"
 
-using namespace math;
+using namespace iwmath;
 
 const matrix2 matrix2::identity = matrix2(1.0f);
 
@@ -211,22 +211,22 @@ matrix2 matrix2::createScale(float x, float y) {
 	);
 }
 
-std::ostream& math::operator<<(std::ostream & ostream, const matrix2 & a) {
+std::ostream& iwmath::operator<<(std::ostream & ostream, const matrix2 & a) {
 	return ostream << a.rows[0] << std::endl << a.rows[1];
 }
 
-matrix2 math::operator+(const float& left, const matrix2 & right) {
+matrix2 iwmath::operator+(const float& left, const matrix2 & right) {
 	return right + left;
 }
 
-matrix2 math::operator-(const float& left, const matrix2 & right) {
+matrix2 iwmath::operator-(const float& left, const matrix2 & right) {
 	return right - left;
 }
 
-matrix2 math::operator*(const float& left, const matrix2 & right) {
+matrix2 iwmath::operator*(const float& left, const matrix2 & right) {
 	return right * left;
 }
 
-matrix2 math::operator/(const float& left, const matrix2 & right) {
+matrix2 iwmath::operator/(const float& left, const matrix2 & right) {
 	return right / left;
 }

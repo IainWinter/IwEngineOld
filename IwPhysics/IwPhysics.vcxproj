@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{FCA71E94-1EDA-4012-8192-92B1C6350D08}</ProjectGuid>
-    <RootNamespace>IwEngine</RootNamespace>
+    <ProjectGuid>{926A860C-3C36-4794-ADF6-10358A409220}</ProjectGuid>
+    <RootNamespace>IwPhysics</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -69,28 +69,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetExt>.dll</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <TargetExt>.dll</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetExt>.dll</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetExt>.dll</TargetExt>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IWPHYSICS_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include;$(ProjectDir)\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\IwMath\lib;</AdditionalLibraryDirectories>
       <AdditionalDependencies>iwmath.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\IwMath\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -98,11 +88,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IWPHYSICS_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include;$(ProjectDir)\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\IwMath\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>iwmath.lib</AdditionalDependencies>
+      <AdditionalDependencies>iwmath32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\IwMath\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -112,13 +103,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IWPHYSICS_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include;$(ProjectDir)\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\IwMath\lib;</AdditionalLibraryDirectories>
       <AdditionalDependencies>iwmath.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\IwMath\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,20 +120,29 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IWPHYSICS_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\IwMath\include;$(ProjectDir)\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\IwMath\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>iwmath.lib</AdditionalDependencies>
+      <AdditionalDependencies>iwmath32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\IwMath\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\IwEngine\engine.h" />
+    <ClInclude Include="include\IwPhysics\octree.h" />
+    <ClInclude Include="src\Collisions\broadPhase.h" />
+    <ClInclude Include="include\IwPhysics\Collisions\AABB.h" />
+    <ClInclude Include="include\IwPhysics\Collisions\boxCollider.h" />
+    <ClInclude Include="include\IwPhysics\Collisions\collider.h" />
+    <ClInclude Include="include\IwPhysics\iwphysics.h" />
+    <ClInclude Include="include\IwPhysics\Collisions\physicsMaterial.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="engine.cpp" />
+    <ClCompile Include="src\Collisions\broadPhase.cpp" />
+    <ClCompile Include="src\Collisions\AABB.cpp" />
+    <ClCompile Include="src\Collisions\boxCollider.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

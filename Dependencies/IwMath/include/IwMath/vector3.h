@@ -1,10 +1,11 @@
 #pragma once
 
 #include <ostream>
-#include "IwMath\vector3.h"
-#include "IwMath\vector4.h"
+#include "iwmath.h"
+#include "vector4.h"
 
-namespace math {
+namespace iwmath {
+	struct vector4;
 	struct IWMATH_API vector3 {
 		static const vector3 zero;
 		static const vector3 one;

@@ -2,7 +2,7 @@
 #include <exception>
 #include <cmath>
 
-using namespace math;
+using namespace iwmath;
 
 const vector4 vector4::zero = vector4(0, 0, 0, 0);
 const vector4 vector4::one = vector4(1, 1, 1, 1);
@@ -68,7 +68,7 @@ float vector4::dot(const vector4& other) const {
 	return x * other.x + y * other.y + z * other.z + w * other.w;
 }
 
-float& math::vector4::operator[](std::size_t index) {
+float& iwmath::vector4::operator[](std::size_t index) {
 	if (index == 0) return x;
 	else if (index == 1) return y;
 	else if (index == 2) return z;
@@ -188,22 +188,22 @@ bool vector4::equals(const vector4& other) const {
 	return x == other.x&& y == other.y&& z == other.z&& w == other.w;
 }
 
-std::ostream& math::operator<<(std::ostream& ostream, const vector4& vector) {
+std::ostream& iwmath::operator<<(std::ostream& ostream, const vector4& vector) {
 	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ")";
 }
 
-vector4 math::operator+(const float& right, const vector4& left) {
+vector4 iwmath::operator+(const float& right, const vector4& left) {
 	return left + right;
 }
 
-vector4 math::operator-(const float& right, const vector4& left) {
+vector4 iwmath::operator-(const float& right, const vector4& left) {
 	return left - right;
 }
 
-vector4 math::operator*(const float& right, const vector4& left) {
+vector4 iwmath::operator*(const float& right, const vector4& left) {
 	return left + right;
 }
 
-vector4 math::operator/(const float& right, const vector4& left) {
+vector4 iwmath::operator/(const float& right, const vector4& left) {
 	return left + right;
 }

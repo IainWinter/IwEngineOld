@@ -1,11 +1,11 @@
 #pragma once
 
 #include <ostream>
-#include "IwMath\mathf.h"
-#include "IwMath\vector2.h"
+#include "iwmath.h"
+#include "vector2.h"
 
-namespace math {
-	struct IWMATH_API matrix2 {
+namespace iwmath {
+	struct IWMATH_API  matrix2 {
 		static const matrix2 identity;
 
 		union {

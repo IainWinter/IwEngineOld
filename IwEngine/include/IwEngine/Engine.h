@@ -1,25 +1,4 @@
 #pragma once
+ 
+__declspec(dllexport) int test();
 
-#include "IwEngine\Common.h"
-#include "IwEngine\Window.h"
-#include "IwEngine\Scene.h"
-
-class IWENGINE_API Engine {
-private:
-	Window* _window;
-	Scene* _scene;
-	//ResourceManager* _resourceManager
-public:
-	Engine();
-	~Engine();
-
-	Engine(const Engine&) = delete;
-	Engine& operator=(const Engine&) = delete;
-
-	void Init();
-	void Run();
-
-	inline Scene& GetScene() {
-		return *_scene;
-	}
-};

@@ -1,7 +1,7 @@
 #include "IwMath\vector3.h"
 #include <exception>
 
-using namespace math;
+using namespace iwmath;
 
 const vector3 vector3::zero = vector3(0, 0, 0);
 const vector3 vector3::one = vector3(1, 1, 1);
@@ -43,12 +43,12 @@ vector3 vector3::normalizedFast() const {
 	return vector3(x / scale, y / scale, z / scale);
 }
 
-vector3 math::vector3::normalized() {
+vector3 iwmath::vector3::normalized() {
 	float scale = length();
 	return vector3(x / scale, y / scale, z / scale);
 }
 
-vector3 math::vector3::normalizedFast() {
+vector3 iwmath::vector3::normalizedFast() {
 	float scale = lengthFast();
 	return vector3(x / scale, y / scale, z / scale);
 }
@@ -78,7 +78,7 @@ vector3 vector3::cross(const vector3 & other) const {
 		x * other.y - y * other.x);
 }
 
-float& math::vector3::operator[](std::size_t index) {
+float& iwmath::vector3::operator[](std::size_t index) {
 	if (index == 0) return x;
 	else if (index == 1) return y;
 	else if (index == 2) return z;
@@ -189,22 +189,22 @@ bool vector3::equals(const vector3 & other) const {
 	return x == other.x && y == other.y && z == other.z;
 }
 
-std::ostream& math::operator<<(std::ostream& ostream, const vector3& vector) {
+std::ostream& iwmath::operator<<(std::ostream& ostream, const vector3& vector) {
 	return ostream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")";
 }
 
-vector3 math::operator+(const float& right, const vector3& left) {
+vector3 iwmath::operator+(const float& right, const vector3& left) {
 	return left + right;
 }
 
-vector3 math::operator-(const float& right, const vector3& left) {
+vector3 iwmath::operator-(const float& right, const vector3& left) {
 	return left - right;
 }
 
-vector3 math::operator*(const float& right, const vector3& left) {
+vector3 iwmath::operator*(const float& right, const vector3& left) {
 	return left * right;
 }
 
-vector3 math::operator/(const float& right, const vector3& left) {
+vector3 iwmath::operator/(const float& right, const vector3& left) {
 	return left / right;
 }

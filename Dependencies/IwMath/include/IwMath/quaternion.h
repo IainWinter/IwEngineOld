@@ -1,14 +1,15 @@
 #pragma once
 
 #include <ostream>
-#include "IwMath\mathf.h"
-#include "IwMath\vector3.h"
-#include "IwMath\vector4.h"
+#include "iwmath.h"
+#include "vector3.h"
+#include "vector4.h"
 
-namespace math {
+namespace iwmath {
 	struct IWMATH_API quaternion {
-		float x, y, z, w;
 		static const quaternion identity;
+
+		float x, y, z, w;
 
 		quaternion();
 		quaternion(float x, float y, float z, float w);

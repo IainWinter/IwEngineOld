@@ -1,9 +1,9 @@
 #pragma once
 
 #include <ostream>
-#include "IwMath\mathf.h"
+#include "iwmath.h"
 
-namespace math {
+namespace iwmath {
 	struct IWMATH_API vector2 {
 		static const vector2 zero;
 		static const vector2 one;

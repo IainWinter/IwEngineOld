@@ -1,7 +1,7 @@
 #include "IwMath\vector2.h"
 #include <exception>
 
-using namespace math;
+using namespace iwmath;
 
 const vector2 vector2::zero = vector2(0, 0);
 const vector2 vector2::one = vector2(1, 1);
@@ -67,7 +67,7 @@ float vector2::crossLength(const vector2 & other) const {
 	return x * other.y - y * other.x;
 }
 
-float& math::vector2::operator[](std::size_t index) {
+float& iwmath::vector2::operator[](std::size_t index) {
 	if	   (index == 0) return x;
 	else if(index == 1) return y;
 	throw std::out_of_range("Index out of bounds");
@@ -169,22 +169,22 @@ bool vector2::equals(const vector2 & other) const {
 	return x == other.x && y == other.y;
 }
 
-std::ostream& math::operator<<(std::ostream& ostream, const vector2& vector) {
+std::ostream& iwmath::operator<<(std::ostream& ostream, const vector2& vector) {
 	return ostream << "(" << vector.x << ", " << vector.y << ")";
 }
 
-vector2 math::operator+(const float& right, const vector2& left) {
+vector2 iwmath::operator+(const float& right, const vector2& left) {
 	return left + right;
 }
 
-vector2 math::operator-(const float& right, const vector2& left) {
+vector2 iwmath::operator-(const float& right, const vector2& left) {
 	return left - right;
 }
 
-vector2 math::operator*(const float& right, const vector2& left) {
+vector2 iwmath::operator*(const float& right, const vector2& left) {
 	return left + right;
 }
 
-vector2 math::operator/(const float& right, const vector2& left) {
+vector2 iwmath::operator/(const float& right, const vector2& left) {
 	return left + right;
 }

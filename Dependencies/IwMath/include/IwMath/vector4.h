@@ -1,10 +1,11 @@
 #pragma once
 
 #include <ostream>
-#include "IwMath\mathf.h"
-#include "IwMath\vector3.h"
+#include "iwmath.h"
+#include "vector3.h"
 
-namespace math {
+namespace iwmath {
+	struct vector3;
 	struct IWMATH_API vector4 {
 		static const vector4 zero;
 		static const vector4 one;
@@ -20,7 +21,7 @@ namespace math {
 		vector4(const vector3& xyz);
 		vector4(const vector3& xyz, float w);
 		vector4(float x, float y, float z, float w);
-
+		
 		float length() const;
 		float lengthSquared() const;
 		float lengthFast() const;
@@ -29,6 +30,7 @@ namespace math {
 		void normalize();
 		void normalizeFast();
 		float dot(const vector4& other) const;
+
 		float& operator[](std::size_t index);
 		vector4 operator+(const vector4& other) const;
 		vector4 operator-(const vector4& other) const;
@@ -50,7 +52,7 @@ namespace math {
 		bool operator==(const vector4& other) const;
 		bool operator!=(const vector4& other) const;
 		bool equals(const vector4& other) const;
-
+		
 		friend IWMATH_API std::ostream& operator<<(std::ostream& ostream, const vector4& a);
 		friend IWMATH_API vector4 operator+(const float& left, const vector4& right);
 		friend IWMATH_API vector4 operator-(const float& left, const vector4& right);

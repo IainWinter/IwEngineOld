@@ -1,7 +1,7 @@
 #include "IwMath\matrix4.h"
 #include "IwMath\matrix3.h"
 
-using namespace math;
+using namespace iwmath;
 
 const matrix4 matrix4::identity = matrix4(1.0f);
 
@@ -615,22 +615,22 @@ matrix4 matrix4::lookAt(const vector3& eye, const vector3& target, const vector3
 		-((z.x * eye.x) + (z.y * eye.y) + (z.z * eye.z)), 1);
 }
 
-std::ostream& math::operator<<(std::ostream& ostream, const matrix4& a) {
+std::ostream& iwmath::operator<<(std::ostream& ostream, const matrix4& a) {
 	return ostream << a.rows[0] << std::endl << a.rows[1] << std::endl << a.rows[2] << std::endl << a.rows[3];
 }
 
-matrix4 math::operator+(const float& left, const matrix4& right) {
+matrix4 iwmath::operator+(const float& left, const matrix4& right) {
 	return right + left;
 }
 
-matrix4 math::operator-(const float& left, const matrix4& right) {
+matrix4 iwmath::operator-(const float& left, const matrix4& right) {
 	return right - left;
 }
 
-matrix4 math::operator*(const float& left, const matrix4& right) {
+matrix4 iwmath::operator*(const float& left, const matrix4& right) {
 	return right * left;
 }
 
-matrix4 math::operator/(const float& left, const matrix4& right) {
+matrix4 iwmath::operator/(const float& left, const matrix4& right) {
 	return right / left;
 }

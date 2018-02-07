@@ -1,12 +1,12 @@
 #pragma once
 
 #include <ostream>
-#include "IwMath\mathf.h"
-#include "IwMath\vector3.h"
-#include "IwMath\vector4.h"
-#include "IwMath\quaternion.h"
+#include "iwmath.h"
+#include "vector3.h"
+#include "vector4.h"
+#include "quaternion.h"
 
-namespace math {
+namespace iwmath {
 	struct IWMATH_API matrix4 {
 		static const matrix4 identity;
 

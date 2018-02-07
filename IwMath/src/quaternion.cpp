@@ -1,7 +1,7 @@
 #include "IwMath\quaternion.h"
 #include "IwMath\matrix3.h"
 
-using namespace math;
+using namespace iwmath;
 
 const quaternion quaternion::identity = quaternion(0, 0, 0, 1);
 
@@ -73,14 +73,14 @@ void quaternion::conjugate() {
 	z = -z;
 }
 
-vector3 math::quaternion::getAxis() const {
+vector3 iwmath::quaternion::getAxis() const {
 	float x = 1.0f - w * w;
 	if (x < 0.000001f) {
 		return vector3::unitX;
 	}
 
 	float x2 = x * x;
-	return math::vector3(x, y, z) / x2;
+	return iwmath::vector3(x, y, z) / x2;
 }
 
 vector4 quaternion::toAxisAngle() const {
@@ -188,15 +188,15 @@ quaternion quaternion::fromEulerAngles(const vector3& eulerAngles) {
 	return fromEulerAngles(eulerAngles.x, eulerAngles.y, eulerAngles.z);
 }
 
-std::ostream & math::operator<<(std::ostream & ostream, const quaternion & quaternion) {
+std::ostream & iwmath::operator<<(std::ostream & ostream, const quaternion & quaternion) {
 	return ostream << "(" << quaternion.x << ", " << quaternion.y << ", " << quaternion.z << ", " << quaternion.w << ")";
 }
 
-quaternion math::operator*(const float& left, const quaternion& right) {
+quaternion iwmath::operator*(const float& left, const quaternion& right) {
 	return right * left;
 }
 
-vector3 math::operator*(const math::vector3& left, const quaternion& right) {
+vector3 iwmath::operator*(const iwmath::vector3& left, const quaternion& right) {
 	float r = right.w;
 	float i = right.x;
 	float j = right.y;
@@ -205,7 +205,7 @@ vector3 math::operator*(const math::vector3& left, const quaternion& right) {
 	float length = right.length();
 	float s = 2 * 1 / (length*length);
 
-	math::matrix3 mat = math::matrix3(
+	iwmath::matrix3 mat = iwmath::matrix3(
 		1 - s * (j*j + k*k), s * (i*j - k*r), s * (i*k + j*r),
 		s * (i*j + k*r), 1 - s * (i*i + k*k), s * (j*k + i*r),
 		s * (i*k - j*r), s * (j*k + i*r), 1 - s * (i*i - j*j)

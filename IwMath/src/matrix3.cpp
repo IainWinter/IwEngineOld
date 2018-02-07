@@ -1,7 +1,7 @@
 #include "IwMath\matrix3.h"
 #include "IwMath\matrix2.h"
 
-using namespace math;
+using namespace iwmath;
 
 const matrix3 matrix3::identity = matrix3(1.0f);
 
@@ -415,22 +415,22 @@ matrix3 matrix3::createScale(float x, float y, float z) {
 	);
 }
 
-std::ostream& math::operator<<(std::ostream& stream, const matrix3& a) {
+std::ostream& iwmath::operator<<(std::ostream& stream, const matrix3& a) {
 	return stream << a.rows[0] << std::endl << a.rows[1] << std::endl << a.rows[2];
 }
 
-matrix3 math::operator+(const float& left, const matrix3& right) {
+matrix3 iwmath::operator+(const float& left, const matrix3& right) {
 	return right + left;
 }
 
-matrix3 math::operator-(const float& left, const matrix3& right) {
+matrix3 iwmath::operator-(const float& left, const matrix3& right) {
 	return right - left;
 }
 
-matrix3 math::operator*(const float& left, const matrix3& right) {
+matrix3 iwmath::operator*(const float& left, const matrix3& right) {
 	return right * left;
 }
 
-matrix3 math::operator/(const float& left, const matrix3& right) {
+matrix3 iwmath::operator/(const float& left, const matrix3& right) {
 	return right / left;
 }

@@ -15,54 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\IwMath\quaternion.h">
+    <ClInclude Include="include\IwPhysics\iwphysics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwMath\vector2.h">
+    <ClInclude Include="include\IwPhysics\Collisions\AABB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwMath\vector3.h">
+    <ClInclude Include="include\IwPhysics\Collisions\boxCollider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwMath\matrix2.h">
+    <ClInclude Include="include\IwPhysics\Collisions\collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwMath\matrix3.h">
+    <ClInclude Include="include\IwPhysics\Collisions\physicsMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwMath\matrix4.h">
+    <ClInclude Include="src\Collisions\broadPhase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwMath\iwmath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IwMath\vector4.h">
+    <ClInclude Include="include\IwPhysics\octree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\quaternion.cpp">
+    <ClCompile Include="src\Collisions\AABB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\vector2.cpp">
+    <ClCompile Include="src\Collisions\boxCollider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vector4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\matrix2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\matrix3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\matrix4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\iwmath.cpp">
+    <ClCompile Include="src\Collisions\broadPhase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
