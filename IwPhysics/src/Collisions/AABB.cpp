@@ -1,15 +1,19 @@
 #include "IwPhysics\Collisions\AABB.h"
 
-using namespace iwphysics;
-
-AABB::AABB() 
+iwphysics::AABB::AABB() 
 	: min(0), max(0) {}
 
-AABB::AABB(iwmath::vector3 min, iwmath::vector3 max)
+iwphysics::AABB::AABB(iwmath::vector3 min, iwmath::vector3 max)
 	: min(min), max(max) {}
 
-bool AABB::intersects(const AABB& other) const {
+bool iwphysics::AABB::intersects(const AABB& other) const {
 	return (min.x <= other.max.x && min.x >= other.max.x) &&
 		   (min.y <= other.max.y && min.y >= other.max.y) &&
 		   (min.z <= other.max.z && min.z >= other.max.z);
+}
+
+bool iwphysics::AABB::fits(const AABB& other) const {
+	return (min.x < other.min.x && max.x > other.max.x) &&
+		   (min.y < other.min.y && max.y > other.max.y) &&
+		   (min.z < other.min.z && max.z > other.max.z);
 }

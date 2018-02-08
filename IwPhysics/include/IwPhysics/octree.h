@@ -8,19 +8,20 @@
 namespace iwphysics {
 	class IWPHYSICS_API octree {
 	private:
-		const unsigned int m_maxItemCount = 8; // Hardcoded item count before spliting
+		static constexpr unsigned int m_capacity = 8;
 		unsigned int m_level;
-		AABB m_bounds;
-		octree* m_children;
 		std::vector<collider*> m_items;
+		octree* m_children;
+		AABB m_bounds;
 	public:
 		octree(const AABB& m_bounds, unsigned int m_level = 0);
 		~octree();
 
-		void add(collider* item);
-		void remove(const collider& item);
+		bool insert(collider* collider);
 		void split();
-		collider* items();
-		const AABB& bounds();
+		octree& getChild(unsigned int x, unsigned int y, unsigned int z);
+		inline std::vector<collider*> items() const {
+			return m_items;
+		}
 	};
 }

@@ -132,7 +132,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\IwPhysics\octree.h" />
-    <ClInclude Include="src\Collisions\broadPhase.h" />
     <ClInclude Include="include\IwPhysics\Collisions\AABB.h" />
     <ClInclude Include="include\IwPhysics\Collisions\boxCollider.h" />
     <ClInclude Include="include\IwPhysics\Collisions\collider.h" />
@@ -141,7 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Collisions\collider.cpp" />
-    <ClCompile Include="src\Collisions\broadPhase.cpp" />
     <ClCompile Include="src\Collisions\AABB.cpp" />
     <ClCompile Include="src\Collisions\boxCollider.cpp" />
     <ClCompile Include="src\octree.cpp" />

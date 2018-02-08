@@ -30,9 +30,6 @@
     <ClInclude Include="include\IwPhysics\Collisions\physicsMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Collisions\broadPhase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\IwPhysics\octree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,9 +39,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Collisions\boxCollider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Collisions\broadPhase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\octree.cpp">

@@ -12,5 +12,6 @@ namespace iwphysics {
 		AABB(iwmath::vector3 min, iwmath::vector3 max);
 
 		bool intersects(const AABB& other) const;
+		bool fits(const AABB& other) const;
 	};
 }

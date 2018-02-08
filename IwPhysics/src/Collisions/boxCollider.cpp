@@ -1,11 +1,9 @@
 #include "IwPhysics\Collisions\boxCollider.h"
 
-using namespace iwphysics;
-
-boxCollider::boxCollider(const iwmath::vector3 center, const iwmath::vector3 scale)
+iwphysics::boxCollider::boxCollider(const iwmath::vector3 center, const iwmath::vector3 scale)
 	: m_min(center - scale / 2), m_max(center + scale / 2) {}
 
-iwmath::vector3 boxCollider::support(const iwmath::vector3& direction, const iwmath::vector3& position, const iwmath::quaternion& rotation) {
+iwmath::vector3 iwphysics::boxCollider::support(const iwmath::vector3& direction, const iwmath::vector3& position, const iwmath::quaternion& rotation) {
 	iwmath::vector3 verts[8]{
 		m_min,
 		iwmath::vector3(m_min.x, m_max.y, m_min.z),
@@ -32,7 +30,7 @@ iwmath::vector3 boxCollider::support(const iwmath::vector3& direction, const iwm
 	return verts[maxVert];
 }
 
-float boxCollider::volume() {
+float iwphysics::boxCollider::volume() {
 	iwmath::vector3 lengths = m_max - m_min;
 	return lengths.x * lengths.y * lengths.z;
 }
