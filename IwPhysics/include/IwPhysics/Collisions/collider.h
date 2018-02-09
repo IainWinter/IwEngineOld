@@ -16,7 +16,7 @@ namespace iwphysics {
 	public:
 		virtual iwmath::vector3 support(const iwmath::vector3& direction, const iwmath::vector3& position, const iwmath::quaternion& rotation) = 0;
 		virtual float volume() const = 0;
-		const AABB& bounds() const {
+		inline const AABB& bounds() const {
 			return m_bounds;
 		}
 	};

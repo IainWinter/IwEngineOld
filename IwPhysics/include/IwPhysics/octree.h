@@ -20,6 +20,7 @@ namespace iwphysics {
 		bool insert(collider* collider);
 		void split();
 		octree& getChild(unsigned int x, unsigned int y, unsigned int z);
+
 		inline std::vector<collider*> items() const {
 			return m_items;
 		}

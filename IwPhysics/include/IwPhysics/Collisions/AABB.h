@@ -13,5 +13,6 @@ namespace iwphysics {
 
 		bool intersects(const AABB& other) const;
 		bool fits(const AABB& other) const;
+		iwmath::vector3 mid() const;
 	};
 }

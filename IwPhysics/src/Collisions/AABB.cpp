@@ -17,3 +17,7 @@ bool iwphysics::AABB::fits(const AABB& other) const {
 		   (min.y < other.min.y && max.y > other.max.y) &&
 		   (min.z < other.min.z && max.z > other.max.z);
 }
+
+iwmath::vector3 iwphysics::AABB::mid() const {
+	return (min + max) / 2;
+}
