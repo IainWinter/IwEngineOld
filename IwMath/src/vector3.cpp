@@ -1,5 +1,5 @@
-#include "IwMath\vector3.h"
 #include <exception>
+#include "IwMath\vector3.h"
 
 using namespace iwmath;
 
@@ -14,9 +14,6 @@ vector3::vector3()
 
 vector3::vector3(float xyz) 
 	: x(xyz), y(xyz), z(xyz) {}
-
-vector3::vector3(const vector4& xyzw)
-	: x(xyzw.x), y(xyzw.y), z(xyzw.z) {}
 
 vector3::vector3(float x, float y, float z) 
 	: x(x), y(y), z(z) {}

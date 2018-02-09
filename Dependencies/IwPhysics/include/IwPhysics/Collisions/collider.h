@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\iwphysics.h"
+#include "IwPhysics\iwphysics.h"
 #include "AABB.h"
 #include "physicsMaterial.h"
 #include "IwMath\vector3.h"

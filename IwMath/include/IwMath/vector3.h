@@ -2,10 +2,8 @@
 
 #include <ostream>
 #include "iwmath.h"
-#include "vector4.h"
 
 namespace iwmath {
-	struct vector4;
 	struct IWMATH_API vector3 {
 		static const vector3 zero;
 		static const vector3 one;
@@ -17,7 +15,6 @@ namespace iwmath {
 
 		vector3();
 		vector3(float xyz);
-		vector3(const vector4& xyzw);
 		vector3(float x, float y, float z);
 
 		float length() const;

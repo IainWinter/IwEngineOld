@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\iwphysics.h"
-#include "IwMath\vector3.h"
+#include "IwPhysics\iwphysics.h"
+#include "IwMath/vector3.h"
 
 namespace iwphysics {
 	struct IWPHYSICS_API AABB {

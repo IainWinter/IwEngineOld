@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\iwphysics.h"
+#include "IwPhysics\iwphysics.h"
 
 namespace iwphysics {
 	enum class frictionCombine {

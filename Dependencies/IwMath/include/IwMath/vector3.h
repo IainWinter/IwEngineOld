@@ -2,7 +2,6 @@
 
 #include <ostream>
 #include "iwmath.h"
-#include "vector4.h"
 
 namespace iwmath {
 	struct vector4;

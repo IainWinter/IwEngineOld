@@ -1,6 +1,7 @@
-#include "IwMath\vector4.h"
 #include <exception>
 #include <cmath>
+#include "IwMath\vector3.h"
+#include "IwMath\vector4.h"
 
 using namespace iwmath;
 
@@ -67,6 +68,12 @@ void vector4::normalizeFast() {
 float vector4::dot(const vector4& other) const {
 	return x * other.x + y * other.y + z * other.z + w * other.w;
 }
+
+vector3 iwmath::vector4::asVector3() const {
+	return vector3(x, y, z);
+}
+
+
 
 float& iwmath::vector4::operator[](std::size_t index) {
 	if (index == 0) return x;

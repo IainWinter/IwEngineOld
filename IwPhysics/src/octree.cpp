@@ -1,7 +1,9 @@
 #include "IwPhysics\octree.h"
 
-iwphysics::octree::octree(const AABB& bounds, unsigned int level) : m_bounds(bounds), m_level(level) {
-	m_items = std::vector<collider*>(m_capacity + 1);
+iwphysics::octree::octree(const AABB& bounds, unsigned int level) 
+	: m_bounds(AABB(bounds)), m_level(level) {
+	m_items = std::vector<collider*>();
+	m_items.reserve(m_capacity + 1);
 }
 
 iwphysics::octree::~octree() {
@@ -14,15 +16,26 @@ iwphysics::octree::~octree() {
 
 bool iwphysics::octree::insert(collider* collider) {
 	if (m_bounds.fits(collider->bounds())) {
-		m_items.push_back(collider);
-		if (m_items.size() > m_capacity) {
-			split();
+		if (m_children != nullptr) {
+			for (size_t i = 0; i < 8; i++) {
+				bool added = m_children[i].insert(collider);
+				if (!added) {
+					m_items.push_back(collider);
+					if (m_items.size() > m_capacity) {
+						split();
+					}
+				}
+			}
 		}
 
 		return true;
 	}
 
 	return false;
+}
+
+void iwphysics::octree::clear() {
+	m_items.clear();
 }
 
 void iwphysics::octree::split() {
@@ -53,8 +66,18 @@ void iwphysics::octree::split() {
 		octree(AABB(iwmath::vector3(mid.x, mid.y, min.z), iwmath::vector3(max.x, max.y, mid.z)), m_level + 1),
 		octree(AABB(mid, max),																	 m_level + 1),
 	};
+
+	std::vector<collider*> items = m_items;
+	clear();
+	for (size_t i = 0; i < items.size(); i++) {
+		insert(items[i]);
+	}
 }
 
 iwphysics::octree& iwphysics::octree::getChild(unsigned int x, unsigned int y, unsigned int z) {
 	return m_children[x + 2 * (y + 2 * z)];
+}
+
+IWPHYSICS_API std::ostream& iwphysics::operator<<(std::ostream& stream, const octree & octree) {
+	return stream << octree.m_items.size();
 }

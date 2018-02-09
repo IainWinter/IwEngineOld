@@ -5,7 +5,6 @@
 #include "vector3.h"
 
 namespace iwmath {
-	struct vector3;
 	struct IWMATH_API vector4 {
 		static const vector4 zero;
 		static const vector4 one;
@@ -30,6 +29,7 @@ namespace iwmath {
 		void normalize();
 		void normalizeFast();
 		float dot(const vector4& other) const;
+		vector3 asVector3() const;
 
 		float& operator[](std::size_t index);
 		vector4 operator+(const vector4& other) const;

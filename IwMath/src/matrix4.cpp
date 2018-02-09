@@ -197,7 +197,7 @@ matrix4 matrix4::clearedRotation() const {
 }
 
 vector3 matrix4::extractTranslation() const {
-	return rows[3];
+	return rows[3].asVector3();
 }
 
 vector4 matrix4::extractScale() const {
@@ -209,9 +209,9 @@ vector4 matrix4::extractProjection() const {
 }
 
 quaternion matrix4::extractRotation() const {
-	vector3 r0 = rows[0].normalized();
-	vector3 r1 = rows[1].normalized();
-	vector3 r2 = rows[2].normalized();
+	vector3 r0 = rows[0].asVector3().normalized();
+	vector3 r1 = rows[1].asVector3().normalized();
+	vector3 r2 = rows[2].asVector3().normalized();
 
 	quaternion q = quaternion::identity;
 
