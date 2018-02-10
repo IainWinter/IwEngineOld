@@ -9,7 +9,7 @@ namespace iwphysics {
 		iwmath::vector3 max;
 
 		AABB();
-		AABB(iwmath::vector3 min, iwmath::vector3 max);
+		AABB(iwmath::vector3 center, iwmath::vector3 scale);
 
 		bool intersects(const AABB& other) const;
 		bool fits(const AABB& other) const;

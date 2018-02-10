@@ -8,9 +8,9 @@ namespace iwphysics {
 		iwmath::vector3 m_min;
 		iwmath::vector3 m_max;
 	public:
-		boxCollider(const iwmath::vector3 center, const iwmath::vector3 scale);
+		boxCollider(iwmath::vector3 center, iwmath::vector3 scale);
 
 		iwmath::vector3 support(const iwmath::vector3& direction, const iwmath::vector3& position, const iwmath::quaternion& rotation);
-		float volume();
+		float volume() const;
 	};
 }

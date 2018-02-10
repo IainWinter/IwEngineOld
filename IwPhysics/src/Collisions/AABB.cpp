@@ -3,8 +3,8 @@
 iwphysics::AABB::AABB() 
 	: min(0), max(0) {}
 
-iwphysics::AABB::AABB(iwmath::vector3 min, iwmath::vector3 max)
-	: min(min), max(max) {}
+iwphysics::AABB::AABB(iwmath::vector3 center, iwmath::vector3 scale)
+	: min(center - scale / 2), max(center + scale / 2) {}
 
 bool iwphysics::AABB::intersects(const AABB& other) const {
 	return (min.x <= other.max.x && min.x >= other.max.x) &&
