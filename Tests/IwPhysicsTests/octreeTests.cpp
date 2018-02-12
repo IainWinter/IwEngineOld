@@ -19,6 +19,8 @@ namespace IwPhysicsTests {
 				iwphysics::boxCollider* boxCollider = new iwphysics::boxCollider(iwmath::vector3(x, y, z), iwmath::vector3::one);
 				octree.insert(boxCollider);
 			}
+
+			std::cout << "Done!";
 		}
 	};
 }
