@@ -2,9 +2,9 @@
 
 #include <ostream>
 #include "iwmath.h"
-#include "vector3.h"
 
 namespace iwmath {
+	struct vector3;
 	struct IWMATH_API vector4 {
 		static const vector4 zero;
 		static const vector4 one;
@@ -22,14 +22,14 @@ namespace iwmath {
 		vector4(float x, float y, float z, float w);
 		
 		float length() const;
-		float lengthSquared() const;
+		float length_squared() const;
 		float lengthFast() const;
 		vector4 normalized() const;
-		vector4 normalizedFast() const;
+		vector4 normalized_fast() const;
 		void normalize();
-		void normalizeFast();
+		void normalize_fast();
 		float dot(const vector4& other) const;
-		vector3 asVector3() const;
+		vector3 as_vector3() const;
 
 		float& operator[](std::size_t index);
 		vector4 operator+(const vector4& other) const;

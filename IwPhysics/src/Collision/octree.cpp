@@ -1,4 +1,6 @@
-#include "IwPhysics\octree.h"
+#include "IwPhysics\Collision\octree.h"
+#include <string>
+#include <sstream>
 
 iwphysics::octree::octree(const AABB& bounds, unsigned int level) : m_bounds(AABB(bounds)), m_level(level) {
 	m_items = std::vector<collider*>();
@@ -139,4 +141,42 @@ void iwphysics::octree::split() {
 	for (size_t i = 0; i < items.size(); i++) {
 		insert(items[i]);
 	}
+}
+
+bool iwphysics::octree::isLeaf() const {
+	return m_children == nullptr;
+}
+
+std::ostream& iwphysics::operator<<(std::ostream& stream, const octree& octree) {
+	std::string indent = std::string(octree.m_level, '-');
+
+	stream << indent << octree.m_level << ":" << std::endl;
+	for (size_t j = 0; j < octree.size(); j++) {
+		stream << indent << octree.m_items[j] << std::endl;
+	}
+
+	if (!octree.isLeaf()) {
+		for (size_t i = 0; i < 8; i++) {
+			stream << octree.m_children[i];
+		}
+	}
+
+	return stream;
+}
+
+std::stringstream& iwphysics::operator<<(std::stringstream& stream, const octree& octree) {
+	std::string indent = std::string(octree.m_level*2, '-');
+
+	stream << indent << octree.m_level << ":" << std::endl;
+	for (size_t j = 0; j < octree.size(); j++) {
+		stream << indent << octree.m_items[j] << std::endl;
+	}
+
+	if (!octree.isLeaf()) {
+		for (size_t i = 0; i < 8; i++) {
+			stream << octree.m_children[i];
+		}
+	}
+
+	return stream;
 }

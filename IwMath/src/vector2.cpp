@@ -21,7 +21,7 @@ float vector2::length() const {
 	return sqrtf(x * x + y * y);
 }
 
-float vector2::lengthSquared() const {
+float vector2::length_squared() const {
 	return x * x + y * y;
 }
 
@@ -29,11 +29,11 @@ float vector2::lengthFast() const {
 	return 1 / invSqrt(x * x + y * y);
 }
 
-vector2 vector2::normalRight() const {
+vector2 vector2::normal_right() const {
 	return vector2(x, -y);
 }
 
-vector2 vector2::normalLeft() const {
+vector2 vector2::normal_left() const {
 	return vector2(-x, y);
 }
 
@@ -42,7 +42,7 @@ vector2 vector2::normalized() const {
 	return vector2(x / scale, y / scale);
 }
 
-vector2 vector2::normalizedFast() const {
+vector2 vector2::normalized_fast() const {
 	float scale = lengthFast();
 	return vector2(x / scale, y / scale);
 }
@@ -53,7 +53,7 @@ void vector2::normalize() {
 	y /= scale;
 }
 
-void vector2::normalizeFast() {
+void vector2::normalize_fast() {
 	float scale = lengthFast();
 	x /= scale;
 	y /= scale;
@@ -63,7 +63,7 @@ float vector2::dot(const vector2 & other) const {
 	return x * other.x + y * other.y;
 }
 
-float vector2::crossLength(const vector2 & other) const {
+float vector2::cross_length(const vector2 & other) const {
 	return x * other.y - y * other.x;
 }
 

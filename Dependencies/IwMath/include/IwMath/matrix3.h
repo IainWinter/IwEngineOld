@@ -32,10 +32,10 @@ namespace iwmath {
 		matrix3 inverted() const;
 		void normalize();
 		matrix3 normalized() const;
-		void clearRotation();
-		matrix3 clearedRotation() const;
-		vector3 extractScale() const;
-		quaternion extractRotation() const;
+		void clear_rotation();
+		matrix3 cleared_rotation() const;
+		vector3 extract_scale() const;
+		quaternion extract_rotation() const;
 
 		float& operator()(int row, int col);
 		matrix3 operator+(const matrix3& other) const;
@@ -57,17 +57,17 @@ namespace iwmath {
 		bool operator!=(const matrix3& other) const;
 		bool equals(const matrix3& other) const;
 
-		static matrix3 createFromAxisAngle(float x, float y, float z, float angle);
-		static matrix3 createFromAxisAngle(const vector3& axis, float angle);
-		static matrix3 createFromQuaternion(const quaternion& quaternion);
-		static matrix3 createRoatationX(float angle);
-		static matrix3 createRoatationY(float angle);
-		static matrix3 createRoatationZ(float angle);
-		static matrix3 createRoatation(const vector3& angles);
-		static matrix3 createRoatation(float x, float y, float z);
-		static matrix3 createScale(float scale);
-		static matrix3 createScale(const vector3& scale);
-		static matrix3 createScale(float x, float y, float z);
+		static matrix3 create_from_axis_angle(float x, float y, float z, float angle);
+		static matrix3 create_from_axis_angle(const vector3& axis, float angle);
+		static matrix3 create_from_quaternion(const quaternion& quaternion);
+		static matrix3 create_roatation_x(float angle);
+		static matrix3 create_roatation_y(float angle);
+		static matrix3 create_roatation_z(float angle);
+		static matrix3 create_roatation(const vector3& angles);
+		static matrix3 create_roatation(float x, float y, float z);
+		static matrix3 create_scale(float scale);
+		static matrix3 create_scale(const vector3& scale);
+		static matrix3 create_scale(float x, float y, float z);
 
 		friend IWMATH_API std::ostream& operator<<(std::ostream& stream, const matrix3 &a);
 		friend IWMATH_API matrix3 operator+(const float& left, const matrix3& right);

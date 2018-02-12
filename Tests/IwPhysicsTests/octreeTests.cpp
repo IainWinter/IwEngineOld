@@ -16,11 +16,13 @@ namespace IwPhysicsTests {
 				float x = (rand() / (float)RAND_MAX - .5f) * 9999.0f;
 				float y = (rand() / (float)RAND_MAX - .5f) * 9999.0f;
 				float z = (rand() / (float)RAND_MAX - .5f) * 9999.0f;
-				iwphysics::boxCollider* boxCollider = new iwphysics::boxCollider(iwmath::vector3(x, y, z), iwmath::vector3::one);
-				octree.insert(boxCollider);
+				iwphysics::box_collider* box_collider = new iwphysics::box_collider(iwmath::vector3(x, y, z), iwmath::vector3::one);
+				octree.insert(box_collider);
 			}
 
-			std::cout << "Done!";
+			std::stringstream ss = std::stringstream();
+			ss << octree;
+			Logger::WriteMessage(ss.str().c_str());
 		}
 	};
 }

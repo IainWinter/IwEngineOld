@@ -137,24 +137,24 @@ matrix3 matrix3::normalized() const {
 	return *this / det;
 }
 
-void matrix3::clearRotation() {
+void matrix3::clear_rotation() {
 	rows[0] = vector3(rows[0].length(), 0, 0);
 	rows[1] = vector3(0, rows[1].length(), 0);
 	rows[2] = vector3(0, 0, rows[2].length());
 }
 
-matrix3 matrix3::clearedRotation() const {
+matrix3 matrix3::cleared_rotation() const {
 	matrix3 tmp = *this;
-	tmp.clearRotation();
+	tmp.clear_rotation();
 
 	return tmp;
 }
 
-vector3 matrix3::extractScale() const {
+vector3 matrix3::extract_scale() const {
 	return vector3(rows[0].length(), rows[1].length(), rows[2].length());
 }
 
-quaternion matrix3::extractRotation() const {
+quaternion matrix3::extract_rotation() const {
 	vector3 r0 = rows[0].normalized();
 	vector3 r1 = rows[1].normalized();
 	vector3 r2 = rows[2].normalized();
@@ -315,11 +315,11 @@ bool matrix3::equals(const matrix3& other) const {
 	return rows[0] == other.rows[0] && rows[1] == other.rows[1] && rows[2] == other.rows[2];
 }
 
-matrix3 matrix3::createFromAxisAngle(float x, float y, float z, float angle) {
-	return createFromAxisAngle(vector3(x, y, z), angle);
+matrix3 matrix3::create_from_axis_angle(float x, float y, float z, float angle) {
+	return create_from_axis_angle(vector3(x, y, z), angle);
 }
 
-matrix3 matrix3::createFromAxisAngle(const vector3& axis, float angle) {
+matrix3 matrix3::create_from_axis_angle(const vector3& axis, float angle) {
 	vector3 a = axis.normalized();
 	float axisX = a.x;
 	float axisY = a.y;
@@ -347,12 +347,12 @@ matrix3 matrix3::createFromAxisAngle(const vector3& axis, float angle) {
 	);
 }
 
-matrix3 matrix3::createFromQuaternion(const quaternion& quaternion) {
-	vector4 aa = quaternion.toAxisAngle();
-	return createFromAxisAngle(aa.x, aa.y, aa.z, aa.w);
+matrix3 matrix3::create_from_quaternion(const quaternion& quaternion) {
+	vector4 aa = quaternion.to_axis_angle();
+	return create_from_axis_angle(aa.x, aa.y, aa.z, aa.w);
 }
 
-matrix3 matrix3::createRoatationX(float angle) {
+matrix3 matrix3::create_roatation_x(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
@@ -365,7 +365,7 @@ matrix3 matrix3::createRoatationX(float angle) {
 	return out;
 }
 
-matrix3 matrix3::createRoatationY(float angle) {
+matrix3 matrix3::create_roatation_y(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
@@ -378,7 +378,7 @@ matrix3 matrix3::createRoatationY(float angle) {
 	return out;
 }
 
-matrix3 matrix3::createRoatationZ(float angle) {
+matrix3 matrix3::create_roatation_z(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
@@ -391,23 +391,23 @@ matrix3 matrix3::createRoatationZ(float angle) {
 	return out;
 }
 
-matrix3 matrix3::createRoatation(const vector3& angles) {
-	return matrix3::createRoatation(angles.x, angles.y, angles.z);
+matrix3 matrix3::create_roatation(const vector3& angles) {
+	return matrix3::create_roatation(angles.x, angles.y, angles.z);
 }
 
-matrix3 matrix3::createRoatation(float x, float y, float z) {
-	return matrix3::createRoatationX(x).createRoatationY(y).createRoatationZ(z);
+matrix3 matrix3::create_roatation(float x, float y, float z) {
+	return matrix3::create_roatation_x(x).create_roatation_y(y).create_roatation_z(z);
 }
 
-matrix3 matrix3::createScale(float scale) {
-	return createScale(scale, scale, scale);
+matrix3 matrix3::create_scale(float scale) {
+	return create_scale(scale, scale, scale);
 }
 
-matrix3 matrix3::createScale(const vector3& scale) {
-	return createScale(scale.x, scale.y, scale.z);
+matrix3 matrix3::create_scale(const vector3& scale) {
+	return create_scale(scale.x, scale.y, scale.z);
 }
 
-matrix3 matrix3::createScale(float x, float y, float z) {
+matrix3 matrix3::create_scale(float x, float y, float z) {
 	return matrix3(
 		x, 0, 0,
 		0, y, 0,

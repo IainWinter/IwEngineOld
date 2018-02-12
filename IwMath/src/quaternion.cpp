@@ -21,7 +21,7 @@ float quaternion::length() const {
 	return sqrtf(x * x + y * y + z * z + w * w);
 }
 
-float quaternion::lengthSquared() const {
+float quaternion::length_squared() const {
 	return x * x + y * y + z * z + w * w;
 }
 
@@ -34,7 +34,7 @@ quaternion quaternion::normalized() const {
 	return quaternion(x / scale, y / scale, z / scale, w / scale);
 }
 
-quaternion quaternion::normalizedFast() const {
+quaternion quaternion::normalized_fast() const {
 	float scale = 1.0f / lengthFast();
 	return quaternion(x / scale, y / scale, z / scale, w / scale);
 }
@@ -47,7 +47,7 @@ void quaternion::normalize() {
 	w /= scale;
 }
 
-void quaternion::normalizeFast() {
+void quaternion::normalize_fast() {
 	float scale = 1.0f / lengthFast();
 	x /= scale;
 	y /= scale;
@@ -73,7 +73,7 @@ void quaternion::conjugate() {
 	z = -z;
 }
 
-vector3 iwmath::quaternion::getAxis() const {
+vector3 iwmath::quaternion::get_axis() const {
 	float x = 1.0f - w * w;
 	if (x < 0.000001f) {
 		return vector3::unitX;
@@ -83,17 +83,17 @@ vector3 iwmath::quaternion::getAxis() const {
 	return iwmath::vector3(x, y, z) / x2;
 }
 
-vector4 quaternion::toAxisAngle() const {
+vector4 quaternion::to_axis_angle() const {
 	quaternion q = *this;
 	if (q.w > 1) {
 		q.normalize();
 	}
 
-	vector3 axis = getAxis();
+	vector3 axis = get_axis();
 	return vector4(axis, 2 * acos(q.w));
 }
 
-vector3 quaternion::toEulerAngles() const {
+vector3 quaternion::to_euler_angles() const {
 	return vector3(
 		atan2(2 * x * w - 2 * y * z, 1 - 2 * x * x - 2 * z * z),
 		atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z),
@@ -151,8 +151,8 @@ bool quaternion::equals(const quaternion& other) const {
 		&& w == other.w;
 }
 
-quaternion quaternion::fromAxisAngle(const vector3& axis, const float& angle) {
-	if (axis.lengthSquared() == 0) {
+quaternion quaternion::from_axis_angle(const vector3& axis, const float& angle) {
+	if (axis.length_squared() == 0) {
 		return identity;
 	}
 
@@ -161,11 +161,11 @@ quaternion quaternion::fromAxisAngle(const vector3& axis, const float& angle) {
 	return quaternion(axis.normalized() * sin(a), cos(a));
 }
 
-quaternion quaternion::fromAxisAngle(const vector4& axisAngle) {
-	return fromAxisAngle(vector3(axisAngle.x, axisAngle.y, axisAngle.z), axisAngle.w);
+quaternion quaternion::from_axis_angle(const vector4& axisAngle) {
+	return from_axis_angle(vector3(axisAngle.x, axisAngle.y, axisAngle.z), axisAngle.w);
 }
 
-quaternion quaternion::fromEulerAngles(const float& pitch, const float& yaw, const float& roll) {
+quaternion quaternion::from_euler_angles(const float& pitch, const float& yaw, const float& roll) {
 	float p = pitch / 2;
 	float y = yaw / 2;
 	float r = roll / 2;
@@ -184,8 +184,8 @@ quaternion quaternion::fromEulerAngles(const float& pitch, const float& yaw, con
 		cr * cp * cy + sr * sp * sy);
 }
 
-quaternion quaternion::fromEulerAngles(const vector3& eulerAngles) {
-	return fromEulerAngles(eulerAngles.x, eulerAngles.y, eulerAngles.z);
+quaternion quaternion::from_euler_angles(const vector3& eulerAngles) {
+	return from_euler_angles(eulerAngles.x, eulerAngles.y, eulerAngles.z);
 }
 
 std::ostream & iwmath::operator<<(std::ostream & ostream, const quaternion & quaternion) {

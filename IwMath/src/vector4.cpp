@@ -31,7 +31,7 @@ float vector4::length() const {
 	return sqrtf(x * x + y * y + z * z + w * w);
 }
 
-float vector4::lengthSquared() const {
+float vector4::length_squared() const {
 	return x * x + y * y + z * z + w * w;
 }
 
@@ -44,7 +44,7 @@ vector4 vector4::normalized() const {
 	return vector4(x / scale, y / scale, z / scale, w / scale);
 }
 
-vector4 vector4::normalizedFast() const {
+vector4 vector4::normalized_fast() const {
 	float scale = lengthFast();
 	return vector4(x / scale, y / scale, z / scale, w / scale);
 }
@@ -57,7 +57,7 @@ void vector4::normalize() {
 	w /= scale;
 }
 
-void vector4::normalizeFast() {
+void vector4::normalize_fast() {
 	float scale = lengthFast();
 	x /= scale;
 	y /= scale;
@@ -69,7 +69,7 @@ float vector4::dot(const vector4& other) const {
 	return x * other.x + y * other.y + z * other.z + w * other.w;
 }
 
-vector3 iwmath::vector4::asVector3() const {
+vector3 iwmath::vector4::as_vector3() const {
 	return vector3(x, y, z);
 }
 

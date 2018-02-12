@@ -18,33 +18,33 @@
     <ClInclude Include="include\IwPhysics\iwphysics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwPhysics\Collisions\AABB.h">
+    <ClInclude Include="include\IwPhysics\Collision\AABB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwPhysics\Collisions\boxCollider.h">
+    <ClInclude Include="include\IwPhysics\Collision\collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwPhysics\Collisions\collider.h">
+    <ClInclude Include="src\Collision\GJK.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwPhysics\Collisions\physicsMaterial.h">
+    <ClInclude Include="include\IwPhysics\Collision\box_collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwPhysics\octree.h">
+    <ClInclude Include="include\IwPhysics\Collision\physics_material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IwPhysics\Collision\octree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Collisions\AABB.cpp">
+    <ClCompile Include="src\Collision\AABB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Collisions\boxCollider.cpp">
+    <ClCompile Include="src\Collision\box_collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\octree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Collisions\collider.cpp">
+    <ClCompile Include="src\Collision\octree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

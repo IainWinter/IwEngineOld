@@ -1,4 +1,4 @@
-#include "IwPhysics\Collisions\AABB.h"
+#include "IwPhysics\Collision\AABB.h"
 
 iwphysics::AABB::AABB() 
 	: min(0), max(0) {}

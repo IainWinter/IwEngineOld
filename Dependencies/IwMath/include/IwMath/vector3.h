@@ -4,7 +4,6 @@
 #include "iwmath.h"
 
 namespace iwmath {
-	struct vector4;
 	struct IWMATH_API vector3 {
 		static const vector3 zero;
 		static const vector3 one;
@@ -16,18 +15,17 @@ namespace iwmath {
 
 		vector3();
 		vector3(float xyz);
-		vector3(const vector4& xyzw);
 		vector3(float x, float y, float z);
 
 		float length() const;
-		float lengthSquared() const;
+		float length_squared() const;
 		float lengthFast() const;
 		vector3 normalized() const;
-		vector3 normalizedFast() const;
+		vector3 normalized_fast() const;
 		vector3 normalized();
-		vector3 normalizedFast();
+		vector3 normalized_fast();
 		void normalize();
-		void normalizeFast();
+		void normalize_fast();
 		float dot(const vector3& other) const;
 		vector3 cross(const vector3& other) const;
 

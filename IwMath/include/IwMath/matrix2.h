@@ -51,10 +51,10 @@ namespace iwmath {
 		bool operator!=(const matrix2& other) const;
 		bool Equals(const matrix2& other) const;
 
-		static matrix2 createRoatation(float angle);
-		static matrix2 createScale(float scale);
-		static matrix2 createScale(const vector2& scale);
-		static matrix2 createScale(float x, float y);
+		static matrix2 create_roatation(float angle);
+		static matrix2 create_scale(float scale);
+		static matrix2 create_scale(const vector2& scale);
+		static matrix2 create_scale(float x, float y);
 
 		friend IWMATH_API std::ostream& operator<<(std::ostream& stream, const matrix2& a);
 		friend IWMATH_API matrix2 operator+(const float& left, const matrix2& right);

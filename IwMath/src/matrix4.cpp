@@ -182,25 +182,25 @@ matrix4 matrix4::normalized() const {
 	return *this / det;
 }
 
-void matrix4::clearRotation() {
+void matrix4::clear_rotation() {
 	rows[0] = vector4(rows[0].length(), 0, 0, 0);
 	rows[1] = vector4(0, rows[1].length(), 0, 0);
 	rows[2] = vector4(0, 0, rows[2].length(), 0);
 	rows[3] = vector4(0, 0, 0, rows[3].length());
 }
 
-matrix4 matrix4::clearedRotation() const {
+matrix4 matrix4::cleared_rotation() const {
 	matrix4 tmp = *this;
-	tmp.clearRotation();
+	tmp.clear_rotation();
 
 	return tmp;
 }
 
 vector3 matrix4::extractTranslation() const {
-	return rows[3].asVector3();
+	return rows[3].as_vector3();
 }
 
-vector4 matrix4::extractScale() const {
+vector4 matrix4::extract_scale() const {
 	return vector4(rows[0].length(), rows[1].length(), rows[2].length(), rows[3].length());
 }
 
@@ -208,10 +208,10 @@ vector4 matrix4::extractProjection() const {
 	return vector4(rows[0].w, rows[1].w, rows[2].w, rows[3].w);
 }
 
-quaternion matrix4::extractRotation() const {
-	vector3 r0 = rows[0].asVector3().normalized();
-	vector3 r1 = rows[1].asVector3().normalized();
-	vector3 r2 = rows[2].asVector3().normalized();
+quaternion matrix4::extract_rotation() const {
+	vector3 r0 = rows[0].as_vector3().normalized();
+	vector3 r1 = rows[1].as_vector3().normalized();
+	vector3 r2 = rows[2].as_vector3().normalized();
 
 	quaternion q = quaternion::identity;
 
@@ -414,11 +414,11 @@ bool matrix4::equals(const matrix4& other) const {
 	return rows[0] == other.rows[0] && rows[1] == other.rows[1] && rows[2] == other.rows[2] && rows[3] == other.rows[3];
 }
 
-matrix4 matrix4::createFromAxisAngle(float x, float y, float z, float angle) {
-	return createFromAxisAngle(vector3(x, y, z), angle);
+matrix4 matrix4::create_from_axis_angle(float x, float y, float z, float angle) {
+	return create_from_axis_angle(vector3(x, y, z), angle);
 }
 
-matrix4 matrix4::createFromAxisAngle(const vector3& axis, float angle) {
+matrix4 matrix4::create_from_axis_angle(const vector3& axis, float angle) {
 	vector3 a = axis.normalized();
 	float axisX = a.x;
 	float axisY = a.y;
@@ -447,12 +447,12 @@ matrix4 matrix4::createFromAxisAngle(const vector3& axis, float angle) {
 	);
 }
 
-matrix4 matrix4::createFromQuaternion(const quaternion& quaternion) {
-	vector4 aa = quaternion.toAxisAngle();
-	return createFromAxisAngle(aa.x, aa.y, aa.z, aa.w);
+matrix4 matrix4::create_from_quaternion(const quaternion& quaternion) {
+	vector4 aa = quaternion.to_axis_angle();
+	return create_from_axis_angle(aa.x, aa.y, aa.z, aa.w);
 }
 
-matrix4 matrix4::createRoatationX(float angle) {
+matrix4 matrix4::create_roatation_x(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
@@ -465,7 +465,7 @@ matrix4 matrix4::createRoatationX(float angle) {
 	return out;
 }
 
-matrix4 matrix4::createRoatationY(float angle) {
+matrix4 matrix4::create_roatation_y(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
@@ -478,7 +478,7 @@ matrix4 matrix4::createRoatationY(float angle) {
 	return out;
 }
 
-matrix4 matrix4::createRoatationZ(float angle) {
+matrix4 matrix4::create_roatation_z(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
@@ -491,21 +491,21 @@ matrix4 matrix4::createRoatationZ(float angle) {
 	return out;
 }
 
-matrix4 matrix4::createRoatation(const vector3& angles) {
-	return matrix4::createRoatation(angles.x, angles.y, angles.z);
+matrix4 matrix4::create_roatation(const vector3& angles) {
+	return matrix4::create_roatation(angles.x, angles.y, angles.z);
 }
 
-matrix4 matrix4::createRoatation(float x, float y, float z) {
-	return matrix4::createRoatationX(x)
-		* matrix4::createRoatationY(y)
-		* matrix4::createRoatationZ(z);
+matrix4 matrix4::create_roatation(float x, float y, float z) {
+	return matrix4::create_roatation_x(x)
+		* matrix4::create_roatation_y(y)
+		* matrix4::create_roatation_z(z);
 }
 
-matrix4 matrix4::createTranslation(const vector3& translation) {
-	return createTranslation(translation.x, translation.y, translation.z);
+matrix4 matrix4::create_translation(const vector3& translation) {
+	return create_translation(translation.x, translation.y, translation.z);
 }
 
-matrix4 matrix4::createTranslation(float x, float y, float z) {
+matrix4 matrix4::create_translation(float x, float y, float z) {
 	return matrix4(
 		1, 0, 0, 0,
 		0, 1, 0, 0,
@@ -514,15 +514,15 @@ matrix4 matrix4::createTranslation(float x, float y, float z) {
 	);
 }
 
-matrix4 matrix4::createScale(float scale) {
-	return createScale(scale, scale, scale);
+matrix4 matrix4::create_scale(float scale) {
+	return create_scale(scale, scale, scale);
 }
 
-matrix4 matrix4::createScale(const vector3& scale) {
-	return createScale(scale.x, scale.y, scale.z);
+matrix4 matrix4::create_scale(const vector3& scale) {
+	return create_scale(scale.x, scale.y, scale.z);
 }
 
-matrix4 matrix4::createScale(float x, float y, float z) {
+matrix4 matrix4::create_scale(float x, float y, float z) {
 	return matrix4(
 		x, 0, 0, 0,
 		0, y, 0, 0,
@@ -531,11 +531,11 @@ matrix4 matrix4::createScale(float x, float y, float z) {
 	);
 }
 
-matrix4 matrix4::createOrthographic(float width, float height, float zNear, float zFar) {
-	return createOrthographicOffCenter(-width / 2, width / 2, -height / 2, height / 2, zNear, zFar);
+matrix4 matrix4::create_orthographic(float width, float height, float zNear, float zFar) {
+	return create_orthographic_off_center(-width / 2, width / 2, -height / 2, height / 2, zNear, zFar);
 }
 
-matrix4 matrix4::createOrthographicOffCenter(float left, float right, float bottom, float top, float zNear, float zFar) {
+matrix4 matrix4::create_orthographic_off_center(float left, float right, float bottom, float top, float zNear, float zFar) {
 	matrix4 out = matrix4::identity;
 
 	float invRL = 1.0f / (right - left);
@@ -552,7 +552,7 @@ matrix4 matrix4::createOrthographicOffCenter(float left, float right, float bott
 	return out;
 }
 
-matrix4 matrix4::createPerspectiveFieldOfView(float fov, float aspect, float zNear, float zFar) {
+matrix4 matrix4::create_perspective_field_of_view(float fov, float aspect, float zNear, float zFar) {
 	if (fov <= 0 || fov > PI) {
 		throw std::invalid_argument("fovy");
 	}
@@ -574,10 +574,10 @@ matrix4 matrix4::createPerspectiveFieldOfView(float fov, float aspect, float zNe
 	float xMin = yMin * aspect;
 	float xMax = yMax * aspect;
 
-	return createPerspectiveOffCenter(xMin, xMax, yMin, yMax, zNear, zFar);
+	return create_perspective_off_center(xMin, xMax, yMin, yMax, zNear, zFar);
 }
 
-matrix4 matrix4::createPerspectiveOffCenter(float left, float right, float bottom, float top, float zNear, float zFar) {
+matrix4 matrix4::create_perspective_off_center(float left, float right, float bottom, float top, float zNear, float zFar) {
 	if (zNear <= 0 || zNear >= zFar) {
 		throw std::invalid_argument("zNear");
 	}
@@ -601,7 +601,7 @@ matrix4 matrix4::createPerspectiveOffCenter(float left, float right, float botto
 	);
 }
 
-matrix4 matrix4::lookAt(const vector3& eye, const vector3& target, const vector3& up) {
+matrix4 matrix4::look_at(const vector3& eye, const vector3& target, const vector3& up) {
 	vector3 z = (eye - target).normalized();
 	vector3 x = up.cross(z).normalized();
 	vector3 y = z.cross(x).normalized();

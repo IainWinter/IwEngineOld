@@ -17,19 +17,19 @@ namespace iwmath {
 		quaternion(const vector4& xyzw);
 
 		float length() const;
-		float lengthSquared() const;
+		float length_squared() const;
 		float lengthFast() const;
 		quaternion normalized() const;
-		quaternion normalizedFast() const;
+		quaternion normalized_fast() const;
 		void normalize();
-		void normalizeFast();
+		void normalize_fast();
 		quaternion inverted() const;
 		void invert();
 		quaternion conjugated() const;
 		void conjugate();
-		vector3 getAxis() const;
-		vector4 toAxisAngle() const;
-		vector3 toEulerAngles() const;
+		vector3 get_axis() const;
+		vector4 to_axis_angle() const;
+		vector3 to_euler_angles() const;
 
 		quaternion operator+(const quaternion& other) const;
 		quaternion operator-(const quaternion& other) const;
@@ -43,10 +43,10 @@ namespace iwmath {
 		bool operator!=(const quaternion& other) const;
 		bool equals(const quaternion& other) const;
 
-		static quaternion fromAxisAngle(const vector3& axis, const float& angle);
-		static quaternion fromAxisAngle(const vector4& axisAngle);
-		static quaternion fromEulerAngles(const float& pitch, const float& yaw, const float& roll);
-		static quaternion fromEulerAngles(const vector3& eulerAngles);
+		static quaternion from_axis_angle(const vector3& axis, const float& angle);
+		static quaternion from_axis_angle(const vector4& axisAngle);
+		static quaternion from_euler_angles(const float& pitch, const float& yaw, const float& roll);
+		static quaternion from_euler_angles(const vector3& eulerAngles);
 
 		friend IWMATH_API std::ostream& operator<<(std::ostream& stream, const quaternion& a);
 		friend IWMATH_API quaternion operator*(const float& left, const quaternion& right);

@@ -186,7 +186,7 @@ bool matrix2::Equals(const matrix2 & other) const {
 	return rows[0] == other.rows[0] && rows[1] == other.rows[1];
 }
 
-matrix2 matrix2::createRoatation(float angle) {
+matrix2 matrix2::create_roatation(float angle) {
 	float cos = cosf(angle);
 	float sin = sinf(angle);
 
@@ -196,15 +196,15 @@ matrix2 matrix2::createRoatation(float angle) {
 	);
 }
 
-matrix2 matrix2::createScale(float scale) {
-	return createScale(scale, scale);
+matrix2 matrix2::create_scale(float scale) {
+	return create_scale(scale, scale);
 }
 
-matrix2 matrix2::createScale(const vector2& scale) {
-	return createScale(scale.x, scale.y);
+matrix2 matrix2::create_scale(const vector2& scale) {
+	return create_scale(scale.x, scale.y);
 }
 
-matrix2 matrix2::createScale(float x, float y) {
+matrix2 matrix2::create_scale(float x, float y) {
 	return matrix2(
 		x, 0,
 		0, y

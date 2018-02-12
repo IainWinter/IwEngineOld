@@ -2,9 +2,11 @@
 
 #include <vector>
 #include <ostream>
-#include "iwphysics.h"
-#include "Collisions\AABB.h"
-#include "Collisions\collider.h"
+#include "IwPhysics\iwphysics.h"
+#include "AABB.h"
+#include "collider.h"
+
+#define OCTREE_MAX_LEVEL 8
 
 namespace iwphysics {
 	class IWPHYSICS_API octree {
@@ -25,9 +27,13 @@ namespace iwphysics {
 		size_t size() const;
 		bool insert(collider* collider);
 		void split();
+		bool isLeaf() const;
 
 		inline std::vector<collider*> items() const {
 			return m_items;
 		}
+
+		friend IWPHYSICS_API std::ostream& operator<<(std::ostream& stream, const octree& octree);
+		friend IWPHYSICS_API std::stringstream& operator<<(std::stringstream& stream, const octree& octree);
 	};
 }

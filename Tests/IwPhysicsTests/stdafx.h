@@ -12,7 +12,8 @@
 
 // TODO: reference additional headers your program requires here
 #include <iostream>
+#include <sstream>
 #include <time.h>
 #include "IwMath\vector3.h"
-#include "IwPhysics\octree.h"
-#include "IwPhysics\Collisions\boxCollider.h"
+#include "IwPhysics\Collision\octree.h"
+#include "IwPhysics\Collision\box_collider.h"

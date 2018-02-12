@@ -1,8 +1,8 @@
 #pragma once
 
-#include "..\iwphysics.h"
+#include "IwPhysics\iwphysics.h"
 #include "AABB.h"
-#include "physicsMaterial.h"
+#include "physics_material.h"
 #include "IwMath\vector3.h"
 #include "IwMath\quaternion.h"
 

@@ -3,7 +3,7 @@
 #include "..\iwphysics.h"
 
 namespace iwphysics {
-	enum class frictionCombine {
+	enum class friction_combine {
 		ADD,
 		SUBTRACT,
 		MULTIPLY,
@@ -11,7 +11,7 @@ namespace iwphysics {
 		MIN
 	};
 
-	enum class bounceCombine {
+	enum class bounce_combine {
 		ADD,
 		SUBTRACT,
 		MULTIPLY,
@@ -19,10 +19,10 @@ namespace iwphysics {
 		MIN
 	};
 
-	struct physicsMaterial {
+	struct physics_material {
 		float friction;
 		float bounce;
-		frictionCombine frictionCombine;
-		bounceCombine bounceCombine;
+		friction_combine friction_combine;
+		bounce_combine bounce_combine;
 	};
 }

@@ -17,16 +17,16 @@ namespace iwmath {
 		vector2(float x, float y);
 
 		float length() const;
-		float lengthSquared() const;
+		float length_squared() const;
 		float lengthFast() const;
-		vector2 normalRight() const;
-		vector2 normalLeft() const;
+		vector2 normal_right() const;
+		vector2 normal_left() const;
 		vector2 normalized() const;
-		vector2 normalizedFast() const;
+		vector2 normalized_fast() const;
 		void normalize();
-		void normalizeFast();
+		void normalize_fast();
 		float dot(const vector2& other) const;
-		float crossLength(const vector2& other) const;
+		float cross_length(const vector2& other) const;
 
 		float& operator[](std::size_t index);
 		vector2 operator+(const vector2& other) const;

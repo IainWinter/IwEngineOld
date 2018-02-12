@@ -22,7 +22,7 @@ float vector3::length() const {
 	return sqrtf(x * x + y * y + z * z);
 }
 
-float vector3::lengthSquared() const {
+float vector3::length_squared() const {
 	return x * x + y * y + z * z;
 }
 
@@ -35,7 +35,7 @@ vector3 vector3::normalized() const {
 	return vector3(x / scale, y / scale, z / scale);
 }
 
-vector3 vector3::normalizedFast() const {
+vector3 vector3::normalized_fast() const {
 	float scale = lengthFast();
 	return vector3(x / scale, y / scale, z / scale);
 }
@@ -45,7 +45,7 @@ vector3 iwmath::vector3::normalized() {
 	return vector3(x / scale, y / scale, z / scale);
 }
 
-vector3 iwmath::vector3::normalizedFast() {
+vector3 iwmath::vector3::normalized_fast() {
 	float scale = lengthFast();
 	return vector3(x / scale, y / scale, z / scale);
 }
@@ -57,7 +57,7 @@ void vector3::normalize() {
 	z /= scale;
 }
 
-void vector3::normalizeFast() {
+void vector3::normalize_fast() {
 	float scale = lengthFast();
 	x /= scale;
 	y /= scale;
