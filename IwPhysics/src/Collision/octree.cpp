@@ -18,7 +18,7 @@ iwphysics::octree::~octree() {
 	}
 }
 
-unsigned int iwphysics::octree::childToInsert(const AABB& aabb) {
+unsigned int iwphysics::octree::child_to_insert(const AABB& aabb) {
 	iwmath::vector3 aabbMid = aabb.mid();
 	iwmath::vector3 mid = m_bounds.mid();
 
@@ -73,11 +73,11 @@ unsigned int iwphysics::octree::childToInsert(const AABB& aabb) {
 	}
 }
 
-void iwphysics::octree::insertIntoNode(collider* collider) {
+void iwphysics::octree::insert_into_node(collider* collider) {
 	if (m_children != nullptr) {
-		unsigned int childIndex = childToInsert(collider->bounds());
+		unsigned int childIndex = child_to_insert(collider->bounds());
 		if (childIndex != -1) {
-			m_children[childIndex].insertIntoNode(collider);
+			m_children[childIndex].insert_into_node(collider);
 		}
 	} else {
 		m_items.push_back(collider);
@@ -97,7 +97,7 @@ size_t iwphysics::octree::size() const {
 
 bool iwphysics::octree::insert(collider* collider) {
 	if (m_bounds.fits(collider->bounds())) {
-		insertIntoNode(collider);
+		insert_into_node(collider);
 		return true;
 	}
 

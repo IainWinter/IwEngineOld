@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="src\Collision\AABB.cpp" />
     <ClCompile Include="src\Collision\box_collider.cpp" />
+    <ClCompile Include="src\Collision\GJK.cpp" />
     <ClCompile Include="src\Collision\octree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

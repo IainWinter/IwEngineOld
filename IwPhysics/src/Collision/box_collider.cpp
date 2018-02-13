@@ -6,8 +6,10 @@ iwphysics::box_collider::box_collider(iwmath::vector3 center, iwmath::vector3 sc
 	m_bounds = AABB(center, scale);
 }
 
-iwmath::vector3 iwphysics::box_collider::support(const iwmath::vector3& direction, 
-	const iwmath::vector3& position, const iwmath::quaternion& rotation)
+iwmath::vector3 iwphysics::box_collider::support(
+	const iwmath::vector3& direction, 
+	const iwmath::vector3& position, 
+	const iwmath::quaternion& rotation) const
 {
 	iwmath::vector3 verts[8]{
 		m_min,

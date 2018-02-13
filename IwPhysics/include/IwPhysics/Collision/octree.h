@@ -17,8 +17,8 @@ namespace iwphysics {
 		octree* m_children;
 		AABB m_bounds;
 
-		unsigned int childToInsert(const AABB& aabb);
-		void insertIntoNode(collider* collider);
+		unsigned int child_to_insert(const AABB& aabb);
+		void insert_into_node(collider* collider);
 	public:
 		octree(const AABB& m_bounds, unsigned int m_level = 0);
 		~octree();
