@@ -135,11 +135,13 @@
     <ClInclude Include="include\IwPhysics\Collision\box_collider.h" />
     <ClInclude Include="include\IwPhysics\Collision\collider.h" />
     <ClInclude Include="include\IwPhysics\Collision\octree.h" />
+    <ClInclude Include="include\IwPhysics\Collision\sphere_collider.h" />
     <ClInclude Include="src\Collision\GJK.h" />
     <ClInclude Include="include\IwPhysics\iwphysics.h" />
     <ClInclude Include="include\IwPhysics\Collision\physics_material.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Collision\sphere_collider.cpp" />
     <ClCompile Include="src\Collision\AABB.cpp" />
     <ClCompile Include="src\Collision\box_collider.cpp" />
     <ClCompile Include="src\Collision\GJK.cpp" />

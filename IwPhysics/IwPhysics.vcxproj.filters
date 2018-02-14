@@ -36,6 +36,9 @@
     <ClInclude Include="include\IwPhysics\Collision\octree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\IwPhysics\Collision\sphere_collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Collision\AABB.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Collision\GJK.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collision\sphere_collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
