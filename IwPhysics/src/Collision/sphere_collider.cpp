@@ -13,5 +13,5 @@ iwmath::vector3 iwphysics::sphere_collider::support(
 	const iwmath::vector3& position, 
 	const iwmath::quaternion& rotation) const
 {
-	return (m_center + position) * direction * m_radius;
+	return direction.normalized_fast() * m_radius + m_center + position;
 }
