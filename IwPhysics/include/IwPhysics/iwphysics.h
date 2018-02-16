@@ -19,11 +19,11 @@ struct IWPHYSICS_API transformation {
 			* iwmath::matrix4::create_from_quaternion(rotation);
 	}
 
-	inline iwmath::vector3 translation() {
+	inline iwmath::vector3 translation() const {
 		return matrix.extractTranslation();
 	}
 
-	inline iwmath::quaternion rotation() {
+	inline iwmath::quaternion rotation() const {
 		return matrix.extract_rotation();
 	}
 };

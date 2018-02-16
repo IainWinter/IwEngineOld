@@ -33,10 +33,10 @@
     <ClInclude Include="include\IwPhysics\Collision\physics_material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwPhysics\Collision\octree.h">
+    <ClInclude Include="include\IwPhysics\Collision\sphere_collider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\IwPhysics\Collision\sphere_collider.h">
+    <ClInclude Include="include\IwPhysics\rigidbody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -45,9 +45,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Collision\box_collider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Collision\octree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Collision\GJK.cpp">
